@@ -37,7 +37,7 @@ const postFavouriteFolder = async (req, res) => {
 
 
 // route:  GET /api/favouritesFolder/folder/:id
-// desc:   sending a single folder by folder id
+// desc:   reading a single folder by folder id
 const getSingleFavouriteFolder = async (req, res) => {
     try {
         const folder = await favouritesFolderModel.findOne({ _id: req.params.id });
@@ -58,7 +58,7 @@ const getSingleFavouriteFolder = async (req, res) => {
 
 
 // route:  GET /api/favouritesFolder/all_folders/:id
-// desc:   sending all user folders by user id
+// desc:   reading all user folders by user id
 const getAllFavouriteFolder = async (req, res) => {
     try {
         const allFolders = await favouritesFolderModel.find({ userId: req.params.id });
