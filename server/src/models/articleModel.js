@@ -50,9 +50,7 @@ const getAllWithDateFacet = (offset) => {
 };
 
 
-const searchBy_Language = async (language) => {
-    await consle.log(language);    
-    return (language) };
+const searchBy_Language = (language) => {return (language)};
 
 
 const searchBy_Category = (category) => { return (category) };
