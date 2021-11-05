@@ -17,9 +17,9 @@ import {
   searchBy_SearchTerm_Date,
   searchBy_searchTerm_Date_Language,
   searchBy_searchTerm_Date_Category,
-  searchBy_searchTerm_Date_Category_Language
+  searchBy_searchTerm_Date_Category_Language,
 } from "../../models/searchModel.js";
-import {body, validationResult} from "express-validator"
+import { body, validationResult } from "express-validator";
 
 const router = express.Router();
 const REDIS_PORT = process.env.PORT || 6379;
@@ -32,15 +32,14 @@ const redisMiddleware = (req, res, next) => {
       if (err) console.log("error occoured while fetching datat from redis");
 
       if (data !== null) {
-        console.log("inside  redis middleware")
-        res.status(200).json(JSON.parse(data))
-      }
-      else {
+        console.log("inside  redis middleware");
+        res.status(200).json(JSON.parse(data));
+      } else {
         next();
       }
     });
   } catch (error) {
-    console.log("error occoured while fetching datat from redis", error)
+    console.log("error occoured while fetching datat from redis", error);
     res.status(404).json("getCategory went wrong");
   }
 };
@@ -54,17 +53,13 @@ router.get("/category", redisMiddleware, async (req, res) => {
 
     res.status(200).json(elk);
   } catch (error) {
-    console.log("ELASTIC SEARCH CATEGORY FETCHING ERROR", error)
+    console.log("ELASTIC SEARCH CATEGORY FETCHING ERROR", error);
     res.status(404).json("getCategory went wrong");
   }
-
 });
-
-
 
 // router.get("/getall", async (req, res) => {
 //   try {
-
 
 //     let suggestionsArray = [];
 //     const elk = await getAllWithDateFacet(req.params.val);
@@ -81,89 +76,212 @@ router.get("/category", redisMiddleware, async (req, res) => {
 // }
 // );
 
+router.post("/", async (req, res) => {
+  const { searchTerm, language, category, offset, startDate, endDate } =
+    req.body;
 
-
-router.post("/", (req, res) => {
-
-  const { searchTerm, language, category, offset, startDate, endDate } = req.body;
-
-  if (searchTerm == "notset" && startDate == "notset" && category == "notset" && language !== "notset") {
-    const data = searchBy_Language(language);
+  if (
+    searchTerm == "notset" &&
+    startDate == "notset" &&
+    category == "notset" &&
+    language !== "notset"
+  ) {
+    const data = await searchBy_Language(language, offset);
     res.status(200).json(data);
   }
 
-  if (searchTerm == "notset" && startDate == "notset" && category !== "notset" && language == "notset") {
-    const data = searchBy_Category(category);
+  if (
+    searchTerm == "notset" &&
+    startDate == "notset" &&
+    category !== "notset" &&
+    language == "notset"
+  ) {
+    const data = await searchBy_Category(category, offset);
     res.status(200).json(data);
   }
 
-  if (searchTerm == "notset" && startDate == "notset" && category !== "notset" && language !== "notset") {
-    const data = searchBy_Category_Language(category, language);
+  if (
+    searchTerm == "notset" &&
+    startDate == "notset" &&
+    category !== "notset" &&
+    language !== "notset"
+  ) {
+    const data = await searchBy_Category_Language(category, language, offset);
     res.status(200).json(data);
   }
 
-  if (searchTerm == "notset" && startDate !== "notset" && category == "notset" && language == "notset") {
-    const data = searchBy_Date(startDate, endDate);
+  if (
+    searchTerm == "notset" &&
+    startDate !== "notset" &&
+    category == "notset" &&
+    language == "notset"
+  ) {
+    const data = await searchBy_Date(startDate, endDate, offset);
     res.status(200).json(data);
   }
 
-  if (searchTerm == "notset" && startDate !== "notset" && category == "notset" && language !== "notset") {
-    const data = searchBy_Date_language(startDate, endDate, language);
+  if (
+    searchTerm == "notset" &&
+    startDate !== "notset" &&
+    category == "notset" &&
+    language !== "notset"
+  ) {
+    const data = await searchBy_Date_language(
+      startDate,
+      endDate,
+      language,
+      offset
+    );
     res.status(200).json(data);
   }
 
-  if (searchTerm == "notset" && startDate !== "notset" && category !== "notset" && language == "notset") {
-    const data = searchBy_Date_Category(startDate, endDate, category);
+  if (
+    searchTerm == "notset" &&
+    startDate !== "notset" &&
+    category !== "notset" &&
+    language == "notset"
+  ) {
+    const data = await searchBy_Date_Category(
+      startDate,
+      endDate,
+      category,
+      offset
+    );
     res.status(200).json(data);
   }
 
-  if (searchTerm == "notset" && startDate !== "notset" && category !== "notset" && language !== "notset") {
-    const data = searchBy_Date_Category_language(startDate, endDate, category, language);
+  if (
+    searchTerm == "notset" &&
+    startDate !== "notset" &&
+    category !== "notset" &&
+    language !== "notset"
+  ) {
+    const data = await searchBy_Date_Category_language(
+      startDate,
+      endDate,
+      category,
+      language,
+      offset
+    );
     res.status(200).json(data);
   }
 
-  if (searchTerm !== "notset" && startDate == "notset" && category == "notset" && language == "notset") {
-    const data = searchBy_SearchTerm(searchTerm);
+  if (
+    searchTerm !== "notset" &&
+    startDate == "notset" &&
+    category == "notset" &&
+    language == "notset"
+  ) {
+    const data = await searchBy_SearchTerm(searchTerm, offset);
     res.status(200).json(data);
   }
 
-  if (searchTerm !== "notset" && startDate == "notset" && category == "notset" && language !== "notset") {
-    const data = searchBy_searchTerm_Language(searchTerm, language);
+  if (
+    searchTerm !== "notset" &&
+    startDate == "notset" &&
+    category == "notset" &&
+    language !== "notset"
+  ) {
+    const data = await searchBy_searchTerm_Language(
+      searchTerm,
+      language,
+      offset
+    );
     res.status(200).json(data);
   }
 
-  if (searchTerm !== "notset" && startDate == "notset" && category !== "notset" && language == "notset") {
-    const data = searchBy_SearchTerm_Category(searchTerm, category);
+  if (
+    searchTerm !== "notset" &&
+    startDate == "notset" &&
+    category !== "notset" &&
+    language == "notset"
+  ) {
+    const data = await searchBy_SearchTerm_Category(
+      searchTerm,
+      category,
+      offset
+    );
     res.status(200).json(data);
   }
 
-  if (searchTerm !== "notset" && startDate == "notset" && category !== "notset" && language !== "notset") {
-    const data = searchBy_SearchTerm_Category_language(searchTerm, category, language);
+  if (
+    searchTerm !== "notset" &&
+    startDate == "notset" &&
+    category !== "notset" &&
+    language !== "notset"
+  ) {
+    const data = await searchBy_SearchTerm_Category_language(
+      searchTerm,
+      category,
+      language,
+      offset
+    );
     res.status(200).json(data);
   }
 
-  if (searchTerm !== "notset" && startDate !== "notset" && category == "notset" && language == "notset") {
-    const data = searchBy_SearchTerm_Date(searchTerm, startDate, endDate);
+  if (
+    searchTerm !== "notset" &&
+    startDate !== "notset" &&
+    category == "notset" &&
+    language == "notset"
+  ) {
+    const data = await searchBy_SearchTerm_Date(
+      searchTerm,
+      startDate,
+      endDate,
+      offset
+    );
     res.status(200).json(data);
   }
 
-  if (searchTerm !== "notset" && startDate !== "notset" && category == "notset" && language !== "notset") {
-    const data = searchBy_searchTerm_Date_Language(searchTerm, startDate, endDate, language);
+  if (
+    searchTerm !== "notset" &&
+    startDate !== "notset" &&
+    category == "notset" &&
+    language !== "notset"
+  ) {
+    const data = await searchBy_searchTerm_Date_Language(
+      searchTerm,
+      startDate,
+      endDate,
+      language,
+      offset
+    );
     res.status(200).json(data);
   }
 
-  if (searchTerm !== "notset" && startDate !== "notset" && category !== "notset" && language == "notset") {
-    const data = searchBy_searchTerm_Date_Category(searchTerm, endDate, startDate, category);
+  if (
+    searchTerm !== "notset" &&
+    startDate !== "notset" &&
+    category !== "notset" &&
+    language == "notset"
+  ) {
+    const data = await searchBy_searchTerm_Date_Category(
+      searchTerm,
+      endDate,
+      startDate,
+      category,
+      offset
+    );
     res.status(200).json(data);
   }
 
-  if (searchTerm !== "notset" && startDate !== "notset" && category !== "notset" && language !== "notset") {
-    const data = searchBy_searchTerm_Date_Category_Language(searchTerm, category, language, endDate, startDate);
+  if (
+    searchTerm !== "notset" &&
+    startDate !== "notset" &&
+    category !== "notset" &&
+    language !== "notset"
+  ) {
+    const data = await searchBy_searchTerm_Date_Category_Language(
+      searchTerm,
+      category,
+      language,
+      endDate,
+      startDate,
+      offset
+    );
     res.status(200).json(data);
   }
-
-
 });
-
 
 export default router;
