@@ -284,6 +284,7 @@ const searchBy_searchTerm_Language = (searchTerm, language, offset) => {
 };
 
 const searchBy_SearchTerm_Category = (searchTerm, category, offset) => {
+  
   let body = {
     size: 20,
     from: offset,
