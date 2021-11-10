@@ -26,7 +26,7 @@ const postFavouriteFolder = async (req, res) => {
             res.status(201).json({ successMsg: "Folder created successfully" }); //201 for created
         } catch (err) {
             console.log("ERROR OCCOURED WHILE CREATING FAVOURITE FOLDER", err);
-            res.status(409).json({ msgError: "Folder not created" }); //409 for conflict
+            res.status(500).json({ errorMsg: "Server Error" });
         }
     }
 
@@ -45,12 +45,13 @@ const getSingleFavouriteFolder = async (req, res) => {
         if (!folder) {
             res.status(404).json({ errorMsg: "Folder not found" })
         }
-
-        res.status(200).json(folder);
+        else {
+            res.status(200).json(folder);
+        }
 
     } catch (err) {
+        res.status(500).json({ errorMsg: "Server Error" }) // 500 for server error
         console.log("ERROR OCCOURED WHILE GETTING FOLDER", err);
-        res.status(500).json({ errorMsg: "Server error" }) // server error
     }
 };
 
@@ -64,14 +65,15 @@ const getAllFavouriteFolder = async (req, res) => {
         const allFolders = await favouritesFolderModel.find({ userId: req.params.id });
 
         if (!allFolders) {
-            res.status(404).json({ errorMsg: "Folder not found" })
+            res.status(404).json({ errorMsg: "Folders not found" })
+        }
+        else {
+            res.status(200).json(allFolders);
         }
 
-        res.status(200).json(allFolders);
-
     } catch (err) {
+        res.status(500).json({ errorMsg: "Server Error" }) // server error
         console.log("ERROR OCCOURED WHILE GETTING FOLDER", err);
-        res.status(500).json({ errorMsg: "Server error" }) // server error
     }
 };
 
@@ -85,8 +87,8 @@ const deleteSingleFolder = async (req, res) => {
         await favouritesFolderModel.deleteOne({ _id: req.params.id })
         res.status(200).json({ successMsg: "Folder deleted successfully" });
     } catch (err) {
+        res.status(500).json({ errorMsg: "Server Error" }) // server error
         console.log("ERROR OCCOURED WHILE DELETING FOLDER", err);
-        res.status(500).json({ errorMsg: "Server error" }) // server error
     }
 };
 
@@ -99,8 +101,8 @@ const deleteAllfavouritesFolder = async (req, res) => {
         await favouritesFolderModel.deleteMany({ userId: req.params.id })
         res.status(200).json({ successMsg: "Folders deleted successfully" });
     } catch (err) {
+        res.status(500).json({ errorMsg: "Server Error" }) // server error
         console.log("ERROR OCCOURED WHILE DELETING FOLDER", err);
-        res.status(500).json({ errorMsg: "Server error" }) // server error
     }
 };
 
@@ -116,25 +118,25 @@ const updateFavouriteFolder = async (req, res) => {
         res.status(400).json(validationErrors.array()[0])
     }
     else {
-
-        const folderName = req.body.folderName;
         try {
+            const folderName = req.body.folderName;
             await favouritesFolderModel.updateOne({ _id: req.params.id },
                 { $set: { folderName: folderName } });
             res.status(200).json({ successMsg: "Folder Updated Successfully" });
         } catch (err) {
-
+            res.status(500).json({ errorMsg: "Server Error" }) // server error
+            console.log("ERROR OCCOURED WHILE DELETING FOLDER", err);
         }
     }
 };
 
 
 
-export { 
-    postFavouriteFolder, 
-    getSingleFavouriteFolder, 
+export {
+    postFavouriteFolder,
+    getSingleFavouriteFolder,
     getAllFavouriteFolder,
     deleteSingleFolder,
     deleteAllfavouritesFolder,
     updateFavouriteFolder
- };
+};
