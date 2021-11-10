@@ -6,6 +6,8 @@ import favouritesFolder from "./src/routes/api/favouritesFolder.js";
 import favouritePosts from "./src/routes/api/favouritePosts.js";
 import article from "./src/routes/api/articles.js"
 import customTopics from "./src/routes/api/customTopics.js"
+// cache
+import {clearHash} from "./src/controllers/redisController.js";
 
 const port = process.env.PORT || 7777;
 

@@ -3,6 +3,8 @@ import customTopicsModel from "../models/customTopicsModel.js"
 
 
 
+
+
 //route: POST api/customTopics/createcustomtopic
 //desc:  creating a custom topic by user id.
 const createCustomTopic = async (req, res) => {
@@ -90,8 +92,8 @@ const createCustomTopic = async (req, res) => {
 };
 
 
-//route: GET api/customTopics/getcustomtopic/:id
-//desc:  reading a custom topic by topic id.
+// route: GET api/customTopics/getcustomtopic/:id
+// desc:  reading a custom topic by topic id.
 const getCustomTopic = async (req, res) => {
     try {
         const customTopic = await customTopicsModel.findById(req.params.id);
@@ -110,6 +112,12 @@ const getCustomTopic = async (req, res) => {
 };
 
 
+
+
+
+
+
+
 //route: GET api/customTopics/getcustomtopics
 //desc:  reading all custom topics by user id.
 const getCustomTopics = async (req, res) => {
@@ -117,7 +125,10 @@ const getCustomTopics = async (req, res) => {
     try {
         // id = req.userId; 
         const id = "617bcd2b666de38527fe3a94";
-        const customTopics = await customTopicsModel.find({ userId: id });
+        const customTopics = await customTopicsModel.find({ userId: id }).cache({
+            // key: req.user.id
+            key: id
+          });
 
         if (customTopics.length == 0) {
             res.status(404).json({ errorMsg: "topics not found" });
