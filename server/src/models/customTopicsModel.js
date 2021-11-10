@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 
-const CustomTopicsSchema = new Schema({
+const customTopicsSchema = new Schema({
 
     userId: {
         type: Schema.Types.ObjectId,
@@ -46,10 +46,8 @@ const CustomTopicsSchema = new Schema({
         any_keywords: [String],
         must_also_keywords: [String],
         must_not_contains_keywords: [String],
-
         include_domains: [String],
         exclude_domains: [String],
-
         limit_domains_results: [String],
     },
 
@@ -59,5 +57,5 @@ const CustomTopicsSchema = new Schema({
     },
 });
 
-const customTopicsModel = mongoose.model("customTopic", CustomTopicsSchema); 
+const customTopicsModel = mongoose.model("customTopic", customTopicsSchema); 
 export default customTopicsModel;
