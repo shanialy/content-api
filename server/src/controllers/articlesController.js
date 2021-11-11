@@ -17,7 +17,10 @@ import {
     searchBy_searchTerm_Date_Category,
     searchBy_searchTerm_Date_Category_Language,
 } from "../models/articleModel.js";
-import client from "../config/redisConfig.js";
+import client, {
+    esRedisGlobalKey,
+    esRedisExpireTime
+} from "../config/redisConfig.js";
 
 
 
@@ -93,19 +96,12 @@ const postData = async (req, res) => {
         language !== "notset"
     ) {
         try {
-
-            client.get("articlesBy_" + language + offset,
-                async (err, redisData) => {
-
-                    if (redisData !== null) {
-                        res.status(200).json(JSON.parse(redisData));
-                    } else {
-                        const data1 = await searchBy_Language(language, offset);
-                        client.setex("articlesBy_" + language + offset, 3600, JSON.stringify(data1));
-                        res.status(200).json(data1);
-                    }
-                });
-        } catch (err) {
+            const data = await searchBy_Language(language, offset);
+            client.hset(esRedisGlobalKey, JSON.stringify(req.body), JSON.stringify(data));
+            client.expire(esRedisGlobalKey, esRedisExpireTime);
+            res.status(200).json(data);
+        }
+        catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
             console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
         }
@@ -122,18 +118,12 @@ const postData = async (req, res) => {
         language == "notset"
     ) {
         try {
-            client.get("articlesBy_" + category + offset,
-                async (err, data) => {
-                    if (err) console.log("error occoured while fetching datat from redis");
-                    if (data !== null) {
-                        res.status(200).json(JSON.parse(data));
-                    } else {
-                        const data1 = await searchBy_Category(category, offset);
-                        client.setex("articlesBy_" + category + offset, 3600, JSON.stringify(data1));
-                        res.status(200).json(data1);
-                    }
-                });
-        } catch (err) {
+            const data = await searchBy_Category(category, offset);
+            client.hset(esRedisGlobalKey, JSON.stringify(req.body), JSON.stringify(data));
+            client.expire(esRedisGlobalKey, esRedisExpireTime);
+            res.status(200).json(data);
+        }
+        catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
             console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
         }
@@ -150,22 +140,10 @@ const postData = async (req, res) => {
         language !== "notset"
     ) {
         try {
-
-            client.get("articlesBy_" + category + language + offset,
-                async (err, data) => {
-                    if (err) console.log("error occoured while fetching datat from redis");
-                    if (data !== null) {
-                        res.status(200).json(JSON.parse(data));
-                    } else {
-                        const data1 = await searchBy_Category_Language(category, language, offset);
-                        client.setex(
-                            "articlesBy_" + category + language + offset,
-                            3600,
-                            JSON.stringify(data1)
-                        );
-                        res.status(200).json(data1);
-                    }
-                });
+            const data = await searchBy_Category_Language(category, language, offset);
+            client.hset(esRedisGlobalKey, JSON.stringify(req.body), JSON.stringify(data));
+            client.expire(esRedisGlobalKey, esRedisExpireTime);
+            res.status(200).json(data);
         } catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
             console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
@@ -183,19 +161,12 @@ const postData = async (req, res) => {
         language == "notset"
     ) {
         try {
-
-            client.get("articlesBy_" + startDate + offset,
-                async (err, data) => {
-                    if (err) console.log("error occoured while fetching datat from redis");
-                    if (data !== null) {
-                        res.status(200).json(JSON.parse(data));
-                    } else {
-                        const data1 = await searchBy_Date(startDate, endDate, + offset);
-                        client.setex("articlesBy_" + startDate + offset, 3600, JSON.stringify(data1));
-                        res.status(200).json(data1);
-                    }
-                });
-        } catch (err) {
+            const data = await searchBy_Date(startDate, endDate, + offset);
+            client.hset(esRedisGlobalKey, JSON.stringify(req.body), JSON.stringify(data));
+            client.expire(esRedisGlobalKey, esRedisExpireTime);
+            res.status(200).json(data);
+        }
+        catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
             console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
         }
@@ -213,19 +184,12 @@ const postData = async (req, res) => {
         language !== "notset"
     ) {
         try {
-
-            client.get("articlesBy_" + startDate + language + offset,
-                async (err, data) => {
-                    if (err) console.log("error occoured while fetching datat from redis");
-                    if (data !== null) {
-                        res.status(200).json(JSON.parse(data));
-                    } else {
-                        const data1 = await searchBy_Date_language(startDate, endDate, language, offset);
-                        client.setex("articlesBy_" + startDate + language + offset, 3600, JSON.stringify(data1));
-                        res.status(200).json(data1);
-                    }
-                });
-        } catch (err) {
+            const data = await searchBy_Date_language(startDate, endDate, language, offset);
+            client.hset(esRedisGlobalKey, JSON.stringify(req.body), JSON.stringify(data));
+            client.expire(esRedisGlobalKey, esRedisExpireTime);
+            res.status(200).json(data);
+        }
+        catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
             console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
         }
@@ -243,18 +207,12 @@ const postData = async (req, res) => {
     ) {
         try {
 
-            client.get("articlesBy_" + startDate + category + offset,
-                async (err, data) => {
-                    if (err) console.log("error occoured while fetching datat from redis");
-                    if (data !== null) {
-                        res.status(200).json(JSON.parse(data));
-                    } else {
-                        const data1 = await searchBy_Date_Category(startDate, endDate, category, offset);
-                        client.setex("articlesBy_" + startDate + category + offset, 3600, JSON.stringify(data1));
-                        res.status(200).json(data1);
-                    }
-                });
-        } catch (err) {
+            const data = await searchBy_Date_Category(startDate, endDate, category, offset);
+            client.hset(esRedisGlobalKey, JSON.stringify(req.body), JSON.stringify(data));
+            client.expire(esRedisGlobalKey, esRedisExpireTime);
+            res.status(200).json(data);
+        }
+        catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
             console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
         }
@@ -273,28 +231,18 @@ const postData = async (req, res) => {
     ) {
         try {
 
-            client.get("articlesBy_" + startDate + category + language + offset,
-                async (err, data) => {
-                    if (err) console.log("error occoured while fetching datat from redis");
-                    if (data !== null) {
-                        res.status(200).json(JSON.parse(data));
-                    } else {
-                        const data1 = await searchBy_Date_Category_language(
-                            startDate,
-                            endDate,
-                            category,
-                            language,
-                            offset
-                        );
-                        client.setex(
-                            "articlesBy_" + startDate + category + language + offset,
-                            3600,
-                            JSON.stringify(data1)
-                        );
-                        res.status(200).json(data1);
-                    }
-                });
-        } catch (err) {
+            const data = await searchBy_Date_Category_language(
+                startDate,
+                endDate,
+                category,
+                language,
+                offset
+            );
+            client.hset(esRedisGlobalKey, JSON.stringify(req.body), JSON.stringify(data));
+            client.expire(esRedisGlobalKey, esRedisExpireTime);
+            res.status(200).json(data);
+        }
+         catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
             console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
         }
@@ -464,7 +412,7 @@ const postData = async (req, res) => {
         category !== "notset" &&
         language !== "notset"
     ) {
-        try{
+        try {
 
             const data = await searchBy_searchTerm_Date_Category_Language(
                 searchTerm,
@@ -473,12 +421,12 @@ const postData = async (req, res) => {
                 endDate,
                 startDate,
                 offset
-                );
-                res.status(200).json(data);
-            }catch(err){
-                res.status(500).json({ errorMsg: "Server Error" });
-                console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
-            }
+            );
+            res.status(200).json(data);
+        } catch (err) {
+            res.status(500).json({ errorMsg: "Server Error" });
+            console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
+        }
     }
 };
 
