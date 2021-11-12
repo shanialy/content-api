@@ -16,7 +16,7 @@ import {
     searchBy_searchTerm_Date_Language,
     searchBy_searchTerm_Date_Category,
     searchBy_searchTerm_Date_Category_Language,
-} from "../../models/articleSearchModel/articleSearch.Model.js";
+} from "../../services/articleSearchServices/articleSearch.Service.js";
 import client, {
     esRedisGlobalKey,
     esRedisExpireTime

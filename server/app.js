@@ -1,11 +1,11 @@
 import express from "express";
 import connectDatabase from "./src/config/databaseConnection.js";
 import { checkConnection } from "./src/config/elasticSearchConnection.js";
-import user from "./src/routes/api/userRoutes/user.Routes.js";
+import user from "./src/routes/api/userRoutes/user.Route.js";
 import favouritesFolder from "./src/routes/api/addToFavouriteRoutes/favouritesFolder.Route.js";
-import favouritePosts from "./src/routes/api/addToFavouriteRoutes/favouritePost.Routes.js";
+import favouritePosts from "./src/routes/api/addToFavouriteRoutes/favouritePost.Route.js";
 import articleSearch from "./src/routes/api/articleSearchRoutes/articleSearch.Routes.js"
-import customTopicSearch from "./src/routes/api/customTopicSearchRoutes/customTopicSearch.Routes.js"
+import customTopicSearch from "./src/routes/api/customTopicSearchRoutes/customTopicSearch.Route.js"
 // cache
 import {clearHash} from "./src/controllers/cachingControllers/redis.Controller.js";
 

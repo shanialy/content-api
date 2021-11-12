@@ -5,10 +5,13 @@ import {
   deleteCustomTopic,
   getCustomTopics,
   getCustomTopic,
-  createCustomTopic
+  createCustomTopic,
+  getContentByCustomTopic
 } from "../../../controllers/customTopicSearchControllers/customTopicSearch.Controller.js"
 import customTopicSearchModel from "../../../models/customTopicSearchModel/customTopicSearch.Model.js";
+import {getByCustomTopics} from "../../../services/customTopicSearchServices/customTopicSearch.Service.js"
 const router = express.Router();
+
 
 
 
@@ -39,19 +42,6 @@ router.patch('/updatecustomtopic/:id', patchvalidation, updateCustomTopic);
 
 
 
-
-export const getContentByCustomTopic = async (req, res) => {
-  try {
-    const topic = await customTopicSearchModel.findById(req.params.id)
-    const data = await getByCustomTopics(topic, req.params.offset); // elastic search query function
-
-    res.status(200).json(data);
-  } catch (err) {
-    res.status(500).json({ errorMsg: "Server Error" });
-    console.log(err.message);
-    console.log("ERROR OCCOURED WHILE FETCHING DATA FROM ELASTIC SEARCH", err);
-  }
-};
 // route:  /api/customTopicSearch/:id/:offset 
 // desc:   reading data from elastic_search by getting query from customTopicsSearch.model by topic id
 router.get("/getcontetbycustomtopic/:id/:offset", getContentByCustomTopic);

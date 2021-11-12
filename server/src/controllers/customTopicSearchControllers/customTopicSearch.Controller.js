@@ -1,6 +1,6 @@
-import { validationResult} from "express-validator";
-import customTopicsModel from "../../models/customTopicSearchModel/customTopicSearch.Model.js"
-
+import { validationResult } from "express-validator";
+import customTopicSearchModel from "../../models/customTopicSearchModel/customTopicSearch.Model.js"
+import {getByCustomTopics} from "../../services/customTopicSearchServices/customTopicSearch.Service.js"
 
 
 
@@ -13,7 +13,6 @@ const createCustomTopic = async (req, res) => {
         if (!validationErrors.isEmpty()) {
             res.status(400).json(validationErrors.array()[0]);
         }
-
 
         else {
 
@@ -74,7 +73,7 @@ const createCustomTopic = async (req, res) => {
 
 
             try {
-                const newCustomTopic = new customTopicsModel(topicsFields);
+                const newCustomTopic = new customTopicSearchModel(topicsFields);
                 const result = await newCustomTopic.save();
                 console.log(result)
                 res.status(201).json({ successMsg: "Topic created successfully" });
@@ -96,7 +95,7 @@ const createCustomTopic = async (req, res) => {
 // desc:  reading a custom topic by topic id.
 const getCustomTopic = async (req, res) => {
     try {
-        const customTopic = await customTopicsModel.findById(req.params.id);
+        const customTopic = await customTopicSearchModel.findById(req.params.id);
 
         if (!customTopic) {
             res.status(404).json({ errorMsg: "topic not found" });
@@ -125,10 +124,10 @@ const getCustomTopics = async (req, res) => {
     try {
         // id = req.userId; 
         const id = "617bcd2b666de38527fe3a94";
-        const customTopics = await customTopicsModel.find({ userId: id }).cache({
+        const customTopics = await customTopicSearchModel.find({ userId: id }).cache({
             // key: req.user.id
             key: id
-          });
+        });
 
         if (customTopics.length == 0) {
             res.status(404).json({ errorMsg: "topics not found" });
@@ -150,7 +149,7 @@ const getCustomTopics = async (req, res) => {
 //desc:  deleting a custom topic by topic id.
 const deleteCustomTopic = async (req, res) => {
     try {
-        await customTopicsModel.deleteOne({ _id: req.params.id });
+        await customTopicSearchModel.deleteOne({ _id: req.params.id });
         res.status(200).json({ successMsg: "Topic deleted successfully." });
     } catch (err) {
         return res.status(500).json({ errorMsg: "Server Error" });
@@ -211,7 +210,7 @@ const updateCustomTopic = async (req, res) => {
         if (req.body.engagement != undefined) topicsFields.filters.engagement = req.body.engagement;
 
         try {
-            await customTopicsModel.findOneAndUpdate(
+            await customTopicSearchModel.findOneAndUpdate(
                 { _id: req.params.id },
                 { $set: topicsFields }
             );
@@ -228,6 +227,25 @@ const updateCustomTopic = async (req, res) => {
 };
 
 
+// route:  /api/customTopicSearch/:id/:offset 
+// desc:   reading data from elastic_search by getting query from customTopicsSearch.model by topic id
+const getContentByCustomTopic = async (req, res) => {
+    try {
+        const topic = await customTopicSearchModel.findById(req.params.id)
+        if (!topic) {
+            return res.status(404).json({ errorMsg: "Topic Not Found" });
+        }
+        const data = await getByCustomTopics(topic, req.params.offset); // elastic search query function
+        res.status(200).json(data);
+    } catch (err) {
+        res.status(500).json({ errorMsg: "Server Error" });
+        console.log(err.message);
+        console.log("ERROR OCCOURED WHILE FETCHING DATA FROM ELASTIC SEARCH", err);
+    }
+};
+
+
+
 // EXPORTS 
 
 export {
@@ -235,5 +253,6 @@ export {
     deleteCustomTopic,
     getCustomTopics,
     getCustomTopic,
-    createCustomTopic
+    createCustomTopic,
+    getContentByCustomTopic
 };
