@@ -1,4 +1,4 @@
-import favouritePostsModel from "../models/favouritePostsModel.js";
+import favouritePostsModel from "../../models/addToFavouriteModels/favouritePost.Model.js";
 import { validationResult } from "express-validator";
 
 

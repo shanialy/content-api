@@ -1,4 +1,4 @@
-import favouritesFolderModel from "../models/favouritesFolderModel.js"
+import favouritesFolderModel from "../../models/addToFavouriteModels/favouritesFolder.Model.js"
 import { validationResult } from "express-validator";
 
 

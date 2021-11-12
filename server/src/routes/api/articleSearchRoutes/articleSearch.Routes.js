@@ -1,6 +1,6 @@
 import express from "express";
-import {getCategories , postData} from "../../controllers/articlesController.js"
-import esRedisMiddleware from "../../middlewares/esRedisMiddleware.js"
+import {getCategories , postData} from "../../../controllers/articleSearchControllers/articlesSearch.Controller.js"
+import esRedisMiddleware from "../../../middlewares/esRedisMiddleware.js"
 
 
 const router = express.Router();

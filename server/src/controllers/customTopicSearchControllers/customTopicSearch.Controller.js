@@ -1,5 +1,5 @@
 import { validationResult} from "express-validator";
-import customTopicsModel from "../models/customTopicsModel.js"
+import customTopicsModel from "../../models/customTopicSearchModel/customTopicSearch.Model.js"
 
 
 

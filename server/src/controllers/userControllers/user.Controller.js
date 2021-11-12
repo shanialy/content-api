@@ -1,4 +1,4 @@
-import userModel from "../models/userModel.js";
+import userModel from "../../models/userModel/user.Model.js";
 import { validationResult } from "express-validator";
 
 // route:  GET /api/user/

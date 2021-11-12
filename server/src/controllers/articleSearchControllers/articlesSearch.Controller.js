@@ -16,11 +16,11 @@ import {
     searchBy_searchTerm_Date_Language,
     searchBy_searchTerm_Date_Category,
     searchBy_searchTerm_Date_Category_Language,
-} from "../models/articleModel.js";
+} from "../../models/articleSearchModel/articleSearch.Model.js";
 import client, {
     esRedisGlobalKey,
     esRedisExpireTime
-} from "../config/redisConfig.js";
+} from "../../config/redisConfig.js";
 
 
 
@@ -67,18 +67,12 @@ const postData = async (req, res) => {
         language == "notset"
     ) {
         try {
-            client.get("all_data" + offset,
-                async (err, redisData) => {
-                    if (err) console.log("error occoured while fetching datat from redis");
-                    if (redisData !== null) {
-                        res.status(200).json(JSON.parse(redisData));
-                    } else {
-                        const data = await getAllWithDateFacet(offset);
-                        client.setex("all_data" + offset, 3600, JSON.stringify(data));
-                        res.status(200).json(data);
-                    }
-                });
-        } catch (err) {
+            const data = await getAllWithDateFacet(offset);
+            client.hset(esRedisGlobalKey, JSON.stringify(req.body), JSON.stringify(data));
+            client.expire(esRedisGlobalKey, esRedisExpireTime);
+            res.status(200).json(data);
+        }
+        catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
             console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
         }
@@ -242,7 +236,7 @@ const postData = async (req, res) => {
             client.expire(esRedisGlobalKey, esRedisExpireTime);
             res.status(200).json(data);
         }
-         catch (err) {
+        catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
             console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
         }

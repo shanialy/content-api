@@ -1,6 +1,6 @@
 // for practice
 import mongoose from "mongoose";
-import client from "../config/redisConfig.js"
+import client from "../../config/redisConfig.js"
 import util from "util"
 
 client.hget = util.promisify(client.hget);

@@ -1,5 +1,5 @@
-import { getUsers, postUser, updateUser, deleteUser } from "../../controllers/userController.js"
-import {postValidation, patchValidation} from "../validations/userValidation.js"
+import { getUsers, postUser, updateUser, deleteUser } from "../../../controllers/userControllers/user.Controller.js"
+import {postValidation, patchValidation} from "../../../validations/userValidation/user.Validation.js"
 import express from "express";
 const router = express.Router();
 
