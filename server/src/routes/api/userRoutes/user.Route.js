@@ -1,28 +1,16 @@
-import { getUsers, postUser, updateUser, deleteUser } from "../../../controllers/userControllers/user.Controller.js"
-import {postValidation, patchValidation} from "../../../validations/userValidation/user.Validation.js"
-import express from "express";
-const router = express.Router();
-
-// route:  GET /api/user/
-// desc:   reading users 
-router.get("/", getUsers);
-
-
-// route:  POST /api/user/
-// desc:   creating user data
-router.post("/", postValidation , postUser);
+import express from "express"; 
+import {
+    register,
+    verifyEmail,
+    authenticate
+}from "../../../controllers/userControllers/user.Controller.js"
+const router =  express.Router();
 
 
-
-// route:  PATCH /api/user/:id
-// desc:   updating user data
-router.patch("/:id", patchValidation , updateUser);
+router.post('/register', register);
+router.post('/verify-email', verifyEmail);
+router.post('/authenticate', authenticate);
 
 
 
-// route:  DELETE /api/user/:id
-// desc:   deleting user data
-router.delete("/:id", deleteUser);
-
-
-export default router;
+export default router

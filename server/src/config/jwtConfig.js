@@ -1,0 +1,1 @@
+export const jwt_secret_key = "123456789abcdefghijklmnopqrstuvwxyz";
