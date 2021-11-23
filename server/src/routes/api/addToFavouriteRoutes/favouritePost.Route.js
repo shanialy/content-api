@@ -6,11 +6,11 @@ import {
     deleteSinglePost,
     deleteAllPosts,
     updatePost
-} from "../../controllers/favouritePostsController.js"
+} from "../../../controllers/addToFavouriteControllers/favouritePost.Controller.js"
 import {
     postValidation,
     updateValidation
-} from "../validations/favouritePostsValidation.js"
+} from "../../../validations/addToFavouritesValidation/favouritePost.Validation.js"
 
 const router = express.Router();
 

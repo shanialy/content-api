@@ -1,4 +1,4 @@
-import { client, index } from "../config/elasticSearchConnection.js";
+import { client, index } from "../../config/elasticSearchConnection.js";
 
 const getCategory = () => {
   return client.search({

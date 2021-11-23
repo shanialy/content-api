@@ -7,11 +7,11 @@ import {
     deleteSingleFolder,
     deleteAllfavouritesFolder,
     updateFavouriteFolder
-} from "../../controllers/favouritesFolderController.js"
+} from "../../../controllers/addToFavouriteControllers/favouritesFolder.Controller.js"
 import {
     postFavouritesFolderValidation,
     updateFavouriteFolderValidation
-} from "../validations/favouritesFolderValidation.js";
+} from "../../../validations/addToFavouritesValidation/favouritesFolder.Validation.js";
 
 
 

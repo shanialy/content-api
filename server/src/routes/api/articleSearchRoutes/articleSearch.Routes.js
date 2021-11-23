@@ -1,5 +1,6 @@
 import express from "express";
-import {getCategories , postData} from "../../controllers/articlesController.js"
+import {getCategories , postData} from "../../../controllers/articleSearchControllers/articlesSearch.Controller.js"
+import esRedisMiddleware from "../../../middlewares/esRedisMiddleware.js"
 
 
 const router = express.Router();
@@ -11,6 +12,6 @@ router.get("/category", getCategories);
 
 // route: POST /api/article/
 // desc:  getting filers from user and returning articles and caching. 
-router.post("/", postData);
+router.post("/", esRedisMiddleware, postData);
 
 export default router;

@@ -1,0 +1,35 @@
+# registering a user
+post http://localhost:7777/api/user/register
+Content-Type: application/json
+
+{
+    "email":"saad@gmail21.com",
+    "password":"saad",
+    "firstName": "Shaikh Muhammad ",
+    "lastName": "Saad",
+    "title": " hello im Saad"
+}
+
+###
+
+# Verifying a user by email
+POST http://localhost:7777/api/user/verify-email
+Content-Type:  application/json
+
+{
+    "token": "26dfec94699c6583e691db83330284f5d966a388d93b6306e463b1355d1db053fee1cdbc2e4bc622"
+}
+
+###
+
+# user sign in / authenticate
+post http://localhost:7777/api/user/authenticate
+Content-Type:  application/json
+
+{
+    "email":"saad@gmail20.com",
+    "password":"saad"
+}
+
+
+

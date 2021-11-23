@@ -1,4 +1,4 @@
-import favouritePostsModel from "../models/favouritePostsModel.js";
+import favouritePostsModel from "../../models/addToFavouriteModels/favouritePost.Model.js";
 import { validationResult } from "express-validator";
 
 
@@ -48,7 +48,7 @@ const postFavouritePost = async (req, res) => {
             await post.save();
             res.status(201).json({ successMsg: "Added to favourite folder" }); //201 for created
         } catch (err) {
-            res.status(409).json({ msgError: "Post not added to the favourities folder" }); //409 for conflict
+            res.status(500).json({ errorMsg: "Server Error" }); //409 for conflict
             console.log("ERROR OCCOURED WHILE ADDING POST TO FAVOURITES FOLDER", err);
         }
     }
@@ -66,12 +66,13 @@ const getSinglePost = async (req, res) => {
         if (!post) {
             res.status(404).json({ errorMsg: "Post does not exist" })
         }
-
-        res.status(200).json(post);
+        else {
+            res.status(200).json(post);
+        }
 
     } catch (err) {
+        res.status(500).json({ errorMsg: "Server Error" }) //500 for server error
         console.log("ERROR OCCOURED WHILE GETTING POST", err);
-        res.status(500).json({ errorMsg: "Server error" }) //500 for server error
     }
 };
 
@@ -83,28 +84,31 @@ const getAllPosts = async (req, res,) => {
     try {
         const posts = await favouritePostsModel.find({ folderId: folderId });
 
-        if (!posts) res.status(404).json({ errorMsg: "Posts does not exist" })
-
-        res.status(200).json(posts);
+        if (!posts) {
+            res.status(404).json({ errorMsg: "Posts does not exist" })
+        }
+        else {
+            res.status(200).json(posts);
+        }
 
     } catch (err) {
-        console.log("ERROR OCCOURED WHILE GETTING POSTs", err);
         res.status(500).json({ errorMsg: "Server error" }) //500 for server error
+        console.log("ERROR OCCOURED WHILE GETTING POSTs", err);
     }
 };
 
 
 // route:  DELETE /api/favouritePosts/post/:id
 // desc:   Deleting a post by post id
-const deleteSinglePost =  async (req, res) => {
+const deleteSinglePost = async (req, res) => {
     const postId = req.params.id;
     try {
         await favouritePostsModel.deleteOne({ _id: postId });
         res.status(200).json({ successMsg: "Post deleted successfully" });
 
     } catch (err) {
+        res.status(500).json({ errorMsg: "Server Error" }) //500 for server error
         console.log("ERROR OCCOURED WHILE DELETING POST", err);
-        res.status(500).json({ errorMsg: "Server error" }) //500 for server error
     }
 };
 
@@ -119,8 +123,8 @@ const deleteAllPosts = async (req, res) => {
         res.status(200).json({ successMsg: "Posts deleted successfully" });
 
     } catch (err) {
+        res.status(500).json({ errorMsg: "Server Error" }) //500 for server error
         console.log("ERROR OCCOURED WHILE DELETING POST", err);
-        res.status(500).json({ errorMsg: "Server error" }) //500 for server error
     }
 };
 
