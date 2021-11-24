@@ -2,7 +2,10 @@ import userService from "../../services/userServices/user.Service.js"
 export {
     register,
     verifyEmail,
-    authenticate
+    authenticate,
+    revokeToken,
+    forgotPassword,
+    resetPassword
 }
 
 function register(req, res, next) {
@@ -30,13 +33,49 @@ function authenticate(req, res, next) {
         .catch(next);
 }
 
+function revokeToken(req, res, next) {
+    console.log("6")
+    // accept token from request body or cookie
+    const token = req.body.token || req.cookies.refreshToken;
+    console.log("7")
+    const ipAddress = req.ip;
+    console.log(req.body.token)
+    console.log(req.cookies.refreshToken)
+
+    if (!token) return res.status(400).json({ message: 'Token is required' });
+
+    // users can revoke their own tokens and admins can revoke any tokens
+    if (!req.user.ownsToken(token) && req.user.role !== "Admin") {
+        return res.status(401).json({ message: 'Unauthorized 2' });
+    }
+
+    userService.revokeToken({ token, ipAddress })
+        .then(() => res.json({ message: 'Token revoked' }))
+        .catch(next);
+}
+
+
+function forgotPassword(req, res, next) {
+    const origin = req.hostname;
+    userService.forgotPassword(req.body, origin )
+        .then(() => res.json({ message: 'Please check your email for password reset instructions' }))
+        .catch(next);
+}
+
+
+function resetPassword(req, res, next) {
+    userService.resetPassword(req.body)
+        .then(() => res.json({ message: 'Password reset successful, you can now login' }))
+        .catch(next);
+}
+
 // helper functions
 
 function setTokenCookie(res, token) {
     // create cookie with refresh token that expires in 7 days
     const cookieOptions = {
         httpOnly: true,
-        expires: new Date(Date.now() + 7*24*60*60*1000)
+        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
     };
     res.cookie('refreshToken', token, cookieOptions);
 }

@@ -3,7 +3,7 @@ post http://localhost:7777/api/user/register
 Content-Type: application/json
 
 {
-    "email":"saad@gmail21.com",
+    "email":"saad@gmail22.com",
     "password":"saad",
     "firstName": "Shaikh Muhammad ",
     "lastName": "Saad",
@@ -17,7 +17,7 @@ POST http://localhost:7777/api/user/verify-email
 Content-Type:  application/json
 
 {
-    "token": "26dfec94699c6583e691db83330284f5d966a388d93b6306e463b1355d1db053fee1cdbc2e4bc622"
+    "token": "cde2ae7780902e527580af13121c2b1596b9b97b2d36062ae9b80914e8be18a8950a8d14a55ef105"
 }
 
 ###
@@ -27,9 +27,39 @@ post http://localhost:7777/api/user/authenticate
 Content-Type:  application/json
 
 {
-    "email":"saad@gmail20.com",
+    "email":"saad@gmail22.com",
     "password":"saad"
 }
 
+###
+# revoking token
+post http://localhost:7777/api/user/verify-email
+Content-Type:  application/json
 
+{
+
+}
+
+
+###
+#forget password route
+post http://localhost:7777/api/user/forgot-password
+Content-Type:  application/json
+
+{
+    "email":"saad@gmail22.com"
+}
+
+
+###
+#Reset password route
+post http://localhost:7777/api/user/reset-password
+Content-Type:  application/json
+
+{
+
+"token" : "70814680b9443e6a462c5fd73dad2079774302d119b525bb378a208502f74de242edb673832d1d6b", 
+"password": "saad01"
+
+}
 
