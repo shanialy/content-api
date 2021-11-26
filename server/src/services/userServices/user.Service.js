@@ -1,3 +1,4 @@
+import mongoose from "mongoose"
 import userModel from "../../models/userModel/user.Model.js";
 import refreshTokenModel from "../../models/userModel/refreshToken.Model.js"
 import { jwt_secret_key } from "../../config/jwtConfig.js"
@@ -12,11 +13,15 @@ const userService = {
     forgotPassword,
     resetPassword,
     refreshToken,
-    update
+    update,
+    delete: _delete,
+    getAll,
+    getById,
 }
 export default userService;
 
 async function register(params, origin) {
+
     // validate
     if (await userModel.findOne({ email: params.email })) {
         // send already registered error in email to prevent user enumeration
@@ -26,6 +31,7 @@ async function register(params, origin) {
 
     // create user object
     const user = new userModel(params);
+    console.log(user);
 
     // first registered user is an admin
     const isFirstUser = (await userModel.countDocuments({})) === 0;
@@ -86,10 +92,8 @@ async function verifyEmail({ token }) {
 
 async function authenticate({ email, password, ipAddress }) {
     const user = await userModel.findOne({ email });
-    console.log(user);
 
-    if (!user || !user.isVerified
-        || !bcrypt.compareSync(password, user.passwordHash)) {
+    if (!user || !user.isVerified || !bcrypt.compareSync(password, user.passwordHash)) {
         throw 'Email or password is incorrect';
     }
 
@@ -163,7 +167,7 @@ async function resetPassword({ token, password }) {
 
 async function refreshToken({ token, ipAddress }) {
     const refreshToken = await getRefreshToken(token);
-    
+
     const user = refreshToken.userId;
     // replace old refresh token with a new one and save
     const newRefreshToken = generateRefreshToken(user, ipAddress);
@@ -187,7 +191,6 @@ async function refreshToken({ token, ipAddress }) {
 
 async function update(id, params) {
     const user = await getUser(id);
-
     // validate (if email was changed)
     if (params.email && user.email !== params.email && await userModel.findOne({ email: params.email })) {
         throw 'Email "' + params.email + '" is already taken';
@@ -198,11 +201,29 @@ async function update(id, params) {
         params.passwordHash = hash(params.password);
     }
 
+
     // copy params to user and save
     Object.assign(user, params);
     user.updated = Date.now();
-    await user.save();s
+    await user.save();
 
+    return basicDetails(user);
+}
+
+
+async function _delete(id) {
+    const account = await getUser(id);
+    await account.remove();
+}
+
+
+async function getAll() {
+    const users = await userModel.find();
+    return users.map(x => basicDetails(x));
+}
+
+async function getById(id) {
+    const user = await getUser(id);
     return basicDetails(user);
 }
 
@@ -277,8 +298,13 @@ async function sendPasswordResetEmail(user, origin) {
 }
 
 async function getUser(id) {
-    if (!db.isValidId(id)) throw 'user not found';
+    if (!isValidId(id)) throw 'user not found';
+
     const user = await userModel.findById(id);
     if (!user) throw 'user not found';
     return user;
+}
+
+function isValidId(id) {
+    return mongoose.Types.ObjectId.isValid(id);
 }

@@ -7,7 +7,10 @@ export {
     forgotPassword,
     resetPassword,
     refreshToken,
-    update
+    update,
+    _delete,
+    getAll,
+    getById
 }
 
 function register(req, res, next) {
@@ -36,7 +39,7 @@ function authenticate(req, res, next) {
 }
 
 function revokeToken(req, res, next) {
-    
+
     // accept token from request body or cookie
     const token = req.body.token || req.cookies.refreshToken;
     console.log("7")
@@ -57,7 +60,7 @@ function revokeToken(req, res, next) {
 
 function forgotPassword(req, res, next) {
     const origin = req.hostname;
-    userService.forgotPassword(req.body, origin )
+    userService.forgotPassword(req.body, origin)
         .then(() => res.json({ message: 'Please check your email for password reset instructions' }))
         .catch(next);
 }
@@ -92,6 +95,37 @@ function update(req, res, next) {
         .then(user => res.json(user))
         .catch(next);
 }
+
+
+function _delete(req, res, next) {
+    // users can delete their own account and admins can delete any account
+    if (req.params.id !== req.user.id && req.user.role !== Role.Admin) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    userService.delete(req.params.id)
+        .then(() => res.json({ message: 'Account deleted successfully' }))
+        .catch(next);
+}
+
+
+function getAll(req, res, next) {
+    userService.getAll()
+        .then(users => res.json(users))
+        .catch(next);
+}
+
+function getById(req, res, next) {
+    // users can get their own account and admins can get any account
+    if (req.params.id !== req.user.id && req.user.role !== "Admin") {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    userService.getById(req.params.id)
+        .then(user => user ? res.json(user) : res.sendStatus(404))
+        .catch(next);
+}
+
 
 // helper functions
 
