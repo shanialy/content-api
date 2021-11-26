@@ -5,7 +5,9 @@ export {
     authenticate,
     revokeToken,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    refreshToken,
+    update
 }
 
 function register(req, res, next) {
@@ -34,13 +36,11 @@ function authenticate(req, res, next) {
 }
 
 function revokeToken(req, res, next) {
-    console.log("6")
+    
     // accept token from request body or cookie
     const token = req.body.token || req.cookies.refreshToken;
     console.log("7")
     const ipAddress = req.ip;
-    console.log(req.body.token)
-    console.log(req.cookies.refreshToken)
 
     if (!token) return res.status(400).json({ message: 'Token is required' });
 
@@ -66,6 +66,30 @@ function forgotPassword(req, res, next) {
 function resetPassword(req, res, next) {
     userService.resetPassword(req.body)
         .then(() => res.json({ message: 'Password reset successful, you can now login' }))
+        .catch(next);
+}
+
+
+function refreshToken(req, res, next) {
+    const token = req.cookies.refreshToken;
+    const ipAddress = req.ip;
+    userService.refreshToken({ token, ipAddress })
+        .then(({ refreshToken, ...user }) => {
+            setTokenCookie(res, refreshToken);
+            res.json(user);
+        })
+        .catch(next);
+}
+
+
+function update(req, res, next) {
+    // users can update their own account and admins can update any account
+    if (req.params.id !== req.user.id && req.user.role !== "Admin") {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    userService.update(req.params.id, req.body)
+        .then(user => res.json(user))
         .catch(next);
 }
 

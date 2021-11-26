@@ -10,7 +10,9 @@ const userService = {
     authenticate,
     revokeToken,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    refreshToken,
+    update
 }
 export default userService;
 
@@ -159,6 +161,51 @@ async function resetPassword({ token, password }) {
 }
 
 
+async function refreshToken({ token, ipAddress }) {
+    const refreshToken = await getRefreshToken(token);
+    
+    const user = refreshToken.userId;
+    // replace old refresh token with a new one and save
+    const newRefreshToken = generateRefreshToken(user, ipAddress);
+    refreshToken.revoked = Date.now();
+    refreshToken.revokedByIp = ipAddress;
+    refreshToken.replacedByToken = newRefreshToken.token;
+    await refreshToken.save();
+    await newRefreshToken.save();
+
+    // generate new jwt
+    const jwtToken = generateJwtToken(user);
+
+    // return basic details and tokens
+    return {
+        ...basicDetails(user),
+        jwtToken,
+        refreshToken: newRefreshToken.token
+    };
+}
+
+
+async function update(id, params) {
+    const user = await getUser(id);
+
+    // validate (if email was changed)
+    if (params.email && user.email !== params.email && await userModel.findOne({ email: params.email })) {
+        throw 'Email "' + params.email + '" is already taken';
+    }
+
+    // hash password if it was entered
+    if (params.password) {
+        params.passwordHash = hash(params.password);
+    }
+
+    // copy params to user and save
+    Object.assign(user, params);
+    user.updated = Date.now();
+    await user.save();s
+
+    return basicDetails(user);
+}
+
 
 // helper functoins
 
@@ -184,6 +231,7 @@ function generateRefreshToken(user, ipAddress) {
         createdByIp: ipAddress
     });
 }
+
 
 function basicDetails(user) {
     const { id, title, firstName, lastName, email, role, created, updated, isVerified } = user;
@@ -226,4 +274,11 @@ async function sendPasswordResetEmail(user, origin) {
         html: `<h4>Reset Password Email</h4>
                ${message}`
     });
+}
+
+async function getUser(id) {
+    if (!db.isValidId(id)) throw 'user not found';
+    const user = await userModel.findById(id);
+    if (!user) throw 'user not found';
+    return user;
 }
