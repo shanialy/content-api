@@ -12,8 +12,16 @@ export {
     getAll,
     getById
 }
+import { validationResult } from "express-validator";
+
 
 function register(req, res, next) {
+
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+        return res.status(400).json(validationErrors.array()[0]) // 400 for bad request
+    }
+    console.log(req.body.firstName);
     userService.register(req.body, req.hostname)
         .then(() => res.json({ message: 'Registration successful, please check your email for verification instructions' }))
         .catch(next);
@@ -28,6 +36,11 @@ function verifyEmail(req, res, next) {
 
 
 function authenticate(req, res, next) {
+
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+        return res.status(400).json(validationErrors.array()[0]) // 400 for bad request
+    }
     const { email, password } = req.body;
     const ipAddress = req.ip;
     userService.authenticate({ email, password, ipAddress })
@@ -42,14 +55,13 @@ function revokeToken(req, res, next) {
 
     // accept token from request body or cookie
     const token = req.body.token || req.cookies.refreshToken;
-    console.log("7")
     const ipAddress = req.ip;
 
     if (!token) return res.status(400).json({ message: 'Token is required' });
 
     // users can revoke their own tokens and admins can revoke any tokens
     if (!req.user.ownsToken(token) && req.user.role !== "Admin") {
-        return res.status(401).json({ message: 'Unauthorized 2' });
+        return res.status(401).json({ message: 'Unauthorized' });
     }
 
     userService.revokeToken({ token, ipAddress })
@@ -59,6 +71,11 @@ function revokeToken(req, res, next) {
 
 
 function forgotPassword(req, res, next) {
+
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+        return res.status(400).json(validationErrors.array()[0]) // 400 for bad request
+    }
     const origin = req.hostname;
     userService.forgotPassword(req.body, origin)
         .then(() => res.json({ message: 'Please check your email for password reset instructions' }))
@@ -67,6 +84,11 @@ function forgotPassword(req, res, next) {
 
 
 function resetPassword(req, res, next) {
+
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+        return res.status(400).json(validationErrors.array()[0]) // 400 for bad request
+    }
     userService.resetPassword(req.body)
         .then(() => res.json({ message: 'Password reset successful, you can now login' }))
         .catch(next);
@@ -86,6 +108,11 @@ function refreshToken(req, res, next) {
 
 
 function update(req, res, next) {
+
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+        return res.status(400).json(validationErrors.array()[0]) // 400 for bad request
+    }
     // users can update their own account and admins can update any account
     if (req.params.id !== req.user.id && req.user.role !== "Admin") {
         return res.status(401).json({ message: 'Unauthorized' });

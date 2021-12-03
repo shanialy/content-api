@@ -12,12 +12,12 @@ import {
     postFavouritesFolderValidation,
     updateFavouriteFolderValidation
 } from "../../../validations/addToFavouritesValidation/favouritesFolder.Validation.js";
-
+import authorize from "../../../middlewares/authorize.js"
 
 
 // route:  POST /api/favouritesFolder/
 // desc:   creating favourites folder by user id
-router.post("/", postFavouritesFolderValidation , postFavouriteFolder);
+router.post("/", authorize(), postFavouritesFolderValidation , postFavouriteFolder);
 
 
 

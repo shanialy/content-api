@@ -9,27 +9,24 @@ const postFavouriteFolder = async (req, res) => {
 
     const validationErrors = validationResult(req);
     if (!validationErrors.isEmpty()) {
-        res.status(400).json(validationErrors.array()[0]) // 400 for bad request
+        return res.status(400).json(validationErrors.array()[0]) // 400 for bad request
     }
 
-    else {
+    const folderName = req.body.folderName;
+    // const userId = "617bcd2b666de38527fe3a94";
+    const userId = req.user.id;
 
-        const folderName = req.body.folderName;
-        const userId = "617bcd2b666de38527fe3a94";
-
-        try {
-            const favouritesFolder = new favouritesFolderModel({
-                userId: userId,
-                folderName: folderName
-            });
-            await favouritesFolder.save();
-            res.status(201).json({ successMsg: "Folder created successfully" }); //201 for created
-        } catch (err) {
-            console.log("ERROR OCCOURED WHILE CREATING FAVOURITE FOLDER", err);
-            res.status(500).json({ errorMsg: "Server Error" });
-        }
+    try {
+        const favouritesFolder = new favouritesFolderModel({
+            userId: userId,
+            folderName: folderName
+        });
+        await favouritesFolder.save();
+        res.status(201).json({ successMsg: "Folder created successfully" }); //201 for created
+    } catch (err) {
+        console.log("ERROR OCCOURED WHILE CREATING FAVOURITE FOLDER", err);
+        res.status(500).json({ errorMsg: "Server Error" });
     }
-
 };
 
 
