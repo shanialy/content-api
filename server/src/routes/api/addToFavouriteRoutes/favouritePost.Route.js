@@ -11,39 +11,45 @@ import {
     postValidation,
     updateValidation
 } from "../../../validations/addToFavouritesValidation/favouritePost.Validation.js"
-
+import authorize from "../../../middlewares/authorize.js"
 const router = express.Router();
 
 
 // route:  POST /api/favouritePosts/:id
 // desc:   creating post by favourites folder id
-router.post("/:id", postValidation , postFavouritePost);
+// access: PROTECTED
+router.post("/:id", authorize(), postValidation , postFavouritePost);
 
 
 // route:  GET /api/favouritePosts/post/:id
 // desc:   reading a single post by post id
-router.get("/post/:id", getSinglePost);
+// access: PROTECTED
+router.get("/post/:id", authorize(), getSinglePost);
 
 
 // route:  GET /api/favouritePosts/all_posts/:id
 // desc:   reading all posts in favourites folder by folder id
-router.get("/all_posts/:id", getAllPosts);
+// access: PROTECTED
+router.get("/all_posts/:id", authorize(), getAllPosts);
 
 
 
 // route:  DELETE /api/favouritePosts/post/:id
 // desc:   Deleting a post by post id
-router.delete("/post/:id", deleteSinglePost);
+// access: PROTECTED
+router.delete("/post/:id", authorize(), deleteSinglePost);
 
 
 
 // route:  DELETE /api/favouritePosts/all_posts/:id
 // desc:   Deleting all posts in favourites folder by folder id
-router.delete("/all_posts/:id", deleteAllPosts);
+// access: PROTECTED
+router.delete("/all_posts/:id", authorize(), deleteAllPosts);
 
 
 // route:  PATCH /api/favouritePosts/:id
 // desc:   Updating a post by post id
-router.patch("/:id", updateValidation , updatePost);
+// access: PROTECTED
+router.patch("/:id", authorize(), updateValidation , updatePost);
 
 export default router;

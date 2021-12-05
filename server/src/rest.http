@@ -98,3 +98,16 @@ Content-Type:  application/json
 }
 
 
+
+###
+# get Favourites Folder
+get http://localhost:7777/api/favouritesFolder/
+Content-Type: application/json
+
+{
+    
+}
+
+
+
+

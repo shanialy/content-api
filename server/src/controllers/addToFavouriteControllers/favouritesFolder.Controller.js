@@ -5,6 +5,7 @@ import { validationResult } from "express-validator";
 
 // route:  POST /api/favouritesFolder/
 // desc:   creating favourites folder by user id
+// access: PROTECTED
 const postFavouriteFolder = async (req, res) => {
 
     const validationErrors = validationResult(req);
@@ -22,7 +23,7 @@ const postFavouriteFolder = async (req, res) => {
             folderName: folderName
         });
         await favouritesFolder.save();
-        res.status(201).json({ successMsg: "Folder created successfully" }); //201 for created
+        return res.status(201).json({ successMsg: "Folder created successfully" }); //201 for created
     } catch (err) {
         console.log("ERROR OCCOURED WHILE CREATING FAVOURITE FOLDER", err);
         res.status(500).json({ errorMsg: "Server Error" });
@@ -35,16 +36,16 @@ const postFavouriteFolder = async (req, res) => {
 
 // route:  GET /api/favouritesFolder/folder/:id
 // desc:   reading a single folder by folder id
+// access: PROTECTED
 const getSingleFavouriteFolder = async (req, res) => {
     try {
         const folder = await favouritesFolderModel.findOne({ _id: req.params.id });
 
         if (!folder) {
-            res.status(404).json({ errorMsg: "Folder not found" })
+            return res.status(404).json({ errorMsg: "Folder not found" })
         }
-        else {
-            res.status(200).json(folder);
-        }
+
+        return res.status(200).json(folder);
 
     } catch (err) {
         res.status(500).json({ errorMsg: "Server Error" }) // 500 for server error
@@ -57,16 +58,17 @@ const getSingleFavouriteFolder = async (req, res) => {
 
 // route:  GET /api/favouritesFolder/all_folders/:id
 // desc:   reading all user folders by user id
+// access: PROTECTED
 const getAllFavouriteFolder = async (req, res) => {
     try {
-        const allFolders = await favouritesFolderModel.find({ userId: req.params.id });
+        const allFolders = await favouritesFolderModel.find({ userId: req.user.id });
 
         if (!allFolders) {
-            res.status(404).json({ errorMsg: "Folders not found" })
+            return res.status(404).json({ errorMsg: "Folders not found" })
         }
-        else {
-            res.status(200).json(allFolders);
-        }
+
+        return res.status(200).json(allFolders);
+
 
     } catch (err) {
         res.status(500).json({ errorMsg: "Server Error" }) // server error
@@ -79,10 +81,11 @@ const getAllFavouriteFolder = async (req, res) => {
 
 // route:  DELETE /api/favouritesFolder/folder/:id
 // desc:   deleting a single folders by folder id
+// access: PROTECTED
 const deleteSingleFolder = async (req, res) => {
     try {
         await favouritesFolderModel.deleteOne({ _id: req.params.id })
-        res.status(200).json({ successMsg: "Folder deleted successfully" });
+        return res.status(200).json({ successMsg: "Folder deleted successfully" });
     } catch (err) {
         res.status(500).json({ errorMsg: "Server Error" }) // server error
         console.log("ERROR OCCOURED WHILE DELETING FOLDER", err);
@@ -93,10 +96,11 @@ const deleteSingleFolder = async (req, res) => {
 
 // route:  DELETE /api/favouritesFolder/all_folders/:id
 // desc:   deleting all folders by user id
+// access: PROTECTED
 const deleteAllfavouritesFolder = async (req, res) => {
     try {
-        await favouritesFolderModel.deleteMany({ userId: req.params.id })
-        res.status(200).json({ successMsg: "Folders deleted successfully" });
+        await favouritesFolderModel.deleteMany({ userId: req.user.id })
+        return res.status(200).json({ successMsg: "Folders deleted successfully" });
     } catch (err) {
         res.status(500).json({ errorMsg: "Server Error" }) // server error
         console.log("ERROR OCCOURED WHILE DELETING FOLDER", err);
@@ -108,23 +112,23 @@ const deleteAllfavouritesFolder = async (req, res) => {
 
 // route:  PATCH /api/favouritesFolder/:id
 // desc:   updating a folders by folder id
+// access: PROTECTED
 const updateFavouriteFolder = async (req, res) => {
 
     const validationErrors = validationResult(req);
     if (!validationErrors.isEmpty()) {
-        res.status(400).json(validationErrors.array()[0])
+        return res.status(400).json(validationErrors.array()[0])
     }
-    else {
-        try {
-            const folderName = req.body.folderName;
-            await favouritesFolderModel.updateOne({ _id: req.params.id },
-                { $set: { folderName: folderName } });
-            res.status(200).json({ successMsg: "Folder Updated Successfully" });
-        } catch (err) {
-            res.status(500).json({ errorMsg: "Server Error" }) // server error
-            console.log("ERROR OCCOURED WHILE DELETING FOLDER", err);
-        }
+    try {
+        const folderName = req.body.folderName;
+        await favouritesFolderModel.updateOne({ _id: req.params.id },
+            { $set: { folderName: folderName } });
+        return res.status(200).json({ successMsg: "Folder Updated Successfully" });
+    } catch (err) {
+        res.status(500).json({ errorMsg: "Server Error" }) // server error
+        console.log("ERROR OCCOURED WHILE DELETING FOLDER", err);
     }
+
 };
 
 
