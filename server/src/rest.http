@@ -3,11 +3,11 @@ post http://localhost:7777/api/user/register
 Content-Type: application/json
 
 {
-    "email":"saad@gmail24.com",
-    "password":"saad",
-    "firstName": "Shaikh Muhammad ",
-    "lastName": "Saad",
-    "title": " hello im Saad"
+    "email" : "saad@gmail24.com",
+    "password" : "saad01",
+    "firstName" : "saadR Idrees",
+    "lastName" : "saad i drees",
+    "title" : "hello im Saad"
 }
 
 ###
@@ -33,7 +33,7 @@ Content-Type:  application/json
 
 ###
 # revoking token
-post http://localhost:7777/api/user/verify-email
+post http://localhost:7777/api/user/revoke-token
 Content-Type:  application/json
 
 {
@@ -59,7 +59,7 @@ Content-Type:  application/json
 {
 
 "token" : "802387052954d6a3a6f888f531149867a1bbf842f20498c5d9b1db76e46c130fbe0d5146b42d3abf", 
-"password": "saad"
+"password": "saad01"
 
 }
 
@@ -80,9 +80,9 @@ Content-Type:  application/json
 
 {
     "email":"saad@gmail22.com",
-    "password":"saad",
+    "password":"saad01",
     "firstName": "Shaikh Muhammad",
-    "lastName": "Saad",
+    "lastName": "Sad",
     "title": " hello im Saad"
 }
 
@@ -96,5 +96,18 @@ Content-Type:  application/json
 {
     
 }
+
+
+
+###
+# get Favourites Folder
+get http://localhost:7777/api/favouritesFolder/
+Content-Type: application/json
+
+{
+    
+}
+
+
 
 

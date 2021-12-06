@@ -1,17 +1,19 @@
 import express from "express";
 import {getCategories , postData} from "../../../controllers/articleSearchControllers/articlesSearch.Controller.js"
 import esRedisMiddleware from "../../../middlewares/esRedisMiddleware.js"
-
+import authorize from "../../../middlewares/authorize.js"
 
 const router = express.Router();
 
-// route: GET /api/article/category
+// route: GET /api/articleSearch/category
 // desc:  getting all categories from ES and caching. 
-router.get("/category", getCategories);
+// access: PROTECTED
+router.get("/category", authorize(),  getCategories);
 
 
-// route: POST /api/article/
+// route: POST /api/articleSearch/
 // desc:  getting filers from user and returning articles and caching. 
-router.post("/", esRedisMiddleware, postData);
+// access: PROTECTED
+router.post("/", authorize(), esRedisMiddleware, postData);
 
 export default router;

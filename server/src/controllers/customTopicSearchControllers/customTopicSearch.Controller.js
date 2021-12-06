@@ -1,12 +1,23 @@
 import { validationResult } from "express-validator";
 import customTopicSearchModel from "../../models/customTopicSearchModel/customTopicSearch.Model.js"
-import {getByCustomTopics} from "../../services/customTopicSearchServices/customTopicSearch.Service.js"
+import { getByCustomTopics } from "../../services/customTopicSearchServices/customTopicSearch.Service.js"
+
+// EXPORTS >>
+export {
+    updateCustomTopic,
+    deleteCustomTopic,
+    getCustomTopics,
+    getCustomTopic,
+    createCustomTopic,
+    getContentByCustomTopic
+};
 
 
+// ROUTES >>
 
-
-//route: POST api/customTopics/createcustomtopic
+//route: POST api/customTopicSearch/createcustomtopic
 //desc:  creating a custom topic by user id.
+// access: PROTECTED 
 const createCustomTopic = async (req, res) => {
     try {
         const validationErrors = validationResult(req);
@@ -14,75 +25,72 @@ const createCustomTopic = async (req, res) => {
             res.status(400).json(validationErrors.array()[0]);
         }
 
-        else {
+        const topicsFields = {};
+        topicsFields.selection = {};
+        topicsFields.filters = {};
 
-            const topicsFields = {};
-            topicsFields.selection = {};
-            topicsFields.filters = {};
+        topicsFields.userId = req.user.id;
 
-            // topicsFields.user_id = req.userId;
-            topicsFields.userId = "617bcd2b666de38527fe3a94";
-
-            if (req.body.name != undefined) {
-                topicsFields.name = req.body.name;
-            }
-
-            if (req.body.match_type != undefined) {
-                topicsFields.selection.match_type = req.body.match_type;
-            }
-
-
-            if (req.body.sources != undefined) {
-                topicsFields.selection.sources = req.body.sources; // ignore for now
-            }
-
-            if (req.body.any_keywords != undefined) {
-                topicsFields.selection.any_keywords = req.body.any_keywords;
-            }
-
-
-            if (req.body.must_also_keywords != undefined) {
-                topicsFields.selection.must_also_keywords = req.body.must_also_keywords;
-            }
-
-
-            if (req.body.must_not_contains_keywords != undefined) {
-                topicsFields.selection.must_not_contains_keywords =
-                    req.body.must_not_contains_keywords;
-            }
-
-            if (req.body.include_domains != undefined) {
-                topicsFields.selection.include_domains = req.body.include_domains;
-            }
-
-            if (req.body.exclude_domains != undefined) {
-                topicsFields.selection.exclude_domains = req.body.exclude_domains;
-            }
-
-            if (req.body.limit_domains_results != undefined) {
-                topicsFields.selection.limit_domains_results =
-                    req.body.limit_domains_results;
-            }
-
-            if (req.body.type != undefined) topicsFields.filters.type = req.body.type; // ignore for now
-            if (req.body.sort != undefined) topicsFields.filters.sort = req.body.sort; // ignore for now
-            if (req.body.enddate != undefined) topicsFields.filters.enddate = req.body.enddate;
-            if (req.body.startdate != undefined) topicsFields.filters.startdate = req.body.startdate;
-            if (req.body.language != undefined) topicsFields.filters.language = req.body.language;
-            if (req.body.engagement != undefined) topicsFields.filters.engagement = req.body.engagement; // ignore for now
-
-
-            try {
-                const newCustomTopic = new customTopicSearchModel(topicsFields);
-                const result = await newCustomTopic.save();
-                console.log(result)
-                res.status(201).json({ successMsg: "Topic created successfully" });
-
-            } catch (err) {
-                res.status(500).json({ errorMsg: "Server Error" });
-                console.log("ERROR OCCOURED WHILE CREATING A CUSTOM TOPIC", err);
-            }
+        if (req.body.name != undefined) {
+            topicsFields.name = req.body.name;
         }
+
+        if (req.body.match_type != undefined) {
+            topicsFields.selection.match_type = req.body.match_type;
+        }
+
+
+        if (req.body.sources != undefined) {
+            topicsFields.selection.sources = req.body.sources; // ignore for now
+        }
+
+        if (req.body.any_keywords != undefined) {
+            topicsFields.selection.any_keywords = req.body.any_keywords;
+        }
+
+
+        if (req.body.must_also_keywords != undefined) {
+            topicsFields.selection.must_also_keywords = req.body.must_also_keywords;
+        }
+
+
+        if (req.body.must_not_contains_keywords != undefined) {
+            topicsFields.selection.must_not_contains_keywords =
+                req.body.must_not_contains_keywords;
+        }
+
+        if (req.body.include_domains != undefined) {
+            topicsFields.selection.include_domains = req.body.include_domains;
+        }
+
+        if (req.body.exclude_domains != undefined) {
+            topicsFields.selection.exclude_domains = req.body.exclude_domains;
+        }
+
+        if (req.body.limit_domains_results != undefined) {
+            topicsFields.selection.limit_domains_results =
+                req.body.limit_domains_results;
+        }
+
+        if (req.body.type != undefined) topicsFields.filters.type = req.body.type; // ignore for now
+        if (req.body.sort != undefined) topicsFields.filters.sort = req.body.sort; // ignore for now
+        if (req.body.enddate != undefined) topicsFields.filters.enddate = req.body.enddate;
+        if (req.body.startdate != undefined) topicsFields.filters.startdate = req.body.startdate;
+        if (req.body.language != undefined) topicsFields.filters.language = req.body.language;
+        if (req.body.engagement != undefined) topicsFields.filters.engagement = req.body.engagement; // ignore for now
+
+
+        try {
+            const newCustomTopic = new customTopicSearchModel(topicsFields);
+            const result = await newCustomTopic.save();
+            console.log(result)
+            res.status(201).json({ successMsg: "Topic created successfully" });
+
+        } catch (err) {
+            res.status(500).json({ errorMsg: "Server Error" });
+            console.log("ERROR OCCOURED WHILE CREATING A CUSTOM TOPIC", err);
+        }
+
     } catch (err) {
         return res.status(500).json({ errorMsg: err.message });
         console.log("ERROR OCCOURED WHILE CREATING A CUSTOM TOPIC", err);
@@ -91,18 +99,19 @@ const createCustomTopic = async (req, res) => {
 };
 
 
-// route: GET api/customTopics/getcustomtopic/:id
-// desc:  reading a custom topic by topic id.
+// route:  GET api/customTopicSearch/getcustomtopic/:id
+// desc:   reading a custom topic by topic id.
+// access: PROTECTED
 const getCustomTopic = async (req, res) => {
     try {
         const customTopic = await customTopicSearchModel.findById(req.params.id);
 
         if (!customTopic) {
-            res.status(404).json({ errorMsg: "topic not found" });
+            return res.status(404).json({ errorMsg: "topic not found" });
         }
-        else {
-            res.status(200).json(customTopic)
-        }
+
+        return res.status(200).json(customTopic)
+
 
     } catch (err) {
         return res.status(500).json({ errorMsg: "Server Error" });
@@ -117,24 +126,22 @@ const getCustomTopic = async (req, res) => {
 
 
 
-//route: GET api/customTopics/getcustomtopics
-//desc:  reading all custom topics by user id.
+//route:  GET api/customTopicSearch/getcustomtopics
+//desc:   reading all custom topics by user id.
+//access: PROTECTED
 const getCustomTopics = async (req, res) => {
 
     try {
-        // id = req.userId; 
-        const id = "617bcd2b666de38527fe3a94";
-        const customTopics = await customTopicSearchModel.find({ userId: id }).cache({
-            // key: req.user.id
-            key: id
+        const userId = req.user.id;
+        const customTopics = await customTopicSearchModel.find({ userId: userId }).cache({
+            key: userId
         });
 
         if (customTopics.length == 0) {
-            res.status(404).json({ errorMsg: "topics not found" });
+            return res.status(404).json({ errorMsg: "topics not found" });
         }
-        else {
-            res.status(200).json(customTopics);
-        }
+
+        return res.status(200).json(customTopics);
 
     } catch (err) {
         res.status(500).json({ errorMsg: "Server Error" });
@@ -145,12 +152,13 @@ const getCustomTopics = async (req, res) => {
 
 
 
-//route: DELETE api/customTopics/deletecustomtopic/:id
+//route: DELETE api/customTopicSearch/deletecustomtopic/:id
 //desc:  deleting a custom topic by topic id.
+//access: PROTECTED
 const deleteCustomTopic = async (req, res) => {
     try {
         await customTopicSearchModel.deleteOne({ _id: req.params.id });
-        res.status(200).json({ successMsg: "Topic deleted successfully." });
+        return res.status(200).json({ successMsg: "Topic deleted successfully." });
     } catch (err) {
         return res.status(500).json({ errorMsg: "Server Error" });
         console.log("ERROR OCCOURED WHILE DELETING CUSTOM TOPIC", err);
@@ -159,8 +167,9 @@ const deleteCustomTopic = async (req, res) => {
 
 
 
-//route: PATCH api/customTopics/updatecustomtopic/:id
+//route: PATCH api/customTopicSearch/updatecustomtopic/:id
 //desc:  updating a custom topic by topic id.
+//access: PROTECTED
 const updateCustomTopic = async (req, res) => {
     try {
 
@@ -229,6 +238,7 @@ const updateCustomTopic = async (req, res) => {
 
 // route:  /api/customTopicSearch/:id/:offset 
 // desc:   reading data from elastic_search by getting query from customTopicsSearch.model by topic id
+//access: PROTECTED  
 const getContentByCustomTopic = async (req, res) => {
     try {
         const topic = await customTopicSearchModel.findById(req.params.id)
@@ -236,7 +246,7 @@ const getContentByCustomTopic = async (req, res) => {
             return res.status(404).json({ errorMsg: "Topic Not Found" });
         }
         const data = await getByCustomTopics(topic, req.params.offset); // elastic search query function
-        res.status(200).json(data);
+        return res.status(200).json(data);
     } catch (err) {
         res.status(500).json({ errorMsg: "Server Error" });
         console.log(err.message);
@@ -246,13 +256,3 @@ const getContentByCustomTopic = async (req, res) => {
 
 
 
-// EXPORTS 
-
-export {
-    updateCustomTopic,
-    deleteCustomTopic,
-    getCustomTopics,
-    getCustomTopic,
-    createCustomTopic,
-    getContentByCustomTopic
-};

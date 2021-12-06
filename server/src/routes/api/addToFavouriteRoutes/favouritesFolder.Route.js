@@ -12,44 +12,50 @@ import {
     postFavouritesFolderValidation,
     updateFavouriteFolderValidation
 } from "../../../validations/addToFavouritesValidation/favouritesFolder.Validation.js";
-
+import authorize from "../../../middlewares/authorize.js"
 
 
 // route:  POST /api/favouritesFolder/
 // desc:   creating favourites folder by user id
-router.post("/", postFavouritesFolderValidation , postFavouriteFolder);
+// access: PROTECTED
+router.post("/", authorize(), postFavouritesFolderValidation , postFavouriteFolder);
 
 
 
-// route:  GET /api/favouritesFolder/folder/:id
+// route:  GET /api/favouritesFolder/:id
 // desc:   sending a single folder by folder id
-router.get("/folder/:id", getSingleFavouriteFolder);
+// access: PROTECTED
+router.get("/:id", authorize(), getSingleFavouriteFolder);
 
 
 
 
-// route:  GET /api/favouritesFolder/all_folders/:id
+// route:  GET /api/favouritesFolder/
 // desc:   sending all user folders by user id
-router.get("/all_folders/:id", getAllFavouriteFolder);
+// access: PROTECTED
+router.get("/", authorize(), getAllFavouriteFolder);
 
 
 
 
-// route:  DELETE /api/favouritesFolder/folder/:id
+// route:  DELETE /api/favouritesFolder/:id
 // desc:   deleting a single folders by folder id
-router.delete("/folder/:id", deleteSingleFolder);
+// access: PROTECTED
+router.delete("/:id", authorize(), deleteSingleFolder);
 
 
 
 
-// route:  DELETE /api/favouritesFolder/all_folders/:id
+// route:  DELETE /api/favouritesFolder/
 // desc:   deleting all folders by user id
-router.delete("/all_folders/:id", deleteAllfavouritesFolder);
+// access: PROTECTED
+router.delete("/", authorize(), deleteAllfavouritesFolder);
 
 
 
 // route:  PATCH /api/favouritesFolder/:id
 // desc:   updating a folders by folder id
-router.patch("/:id",updateFavouriteFolderValidation ,updateFavouriteFolder);
+// access: PROTECTED
+router.patch("/:id", authorize(), updateFavouriteFolderValidation ,updateFavouriteFolder);
 
 export default router;

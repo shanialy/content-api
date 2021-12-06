@@ -1,33 +1,165 @@
-import { body } from "express-validator"
+import { body, oneOf } from "express-validator"
+export {
+    registerValidation,
+    authenticateValidation,
+    forgotPasswordValidation,
+    resetPasswordValidation,
+    updateValidation
+};
 
-const postValidation = [
+const registerValidation = [
     body("email")
         .trim()
-        .notEmpty().withMessage("Email field is required")
-        .isEmail().withMessage("Invalid email address"),
+        .notEmpty().withMessage("Email is required")
+        .isEmail().withMessage("Email field must be a valid email"),
+
     body("password")
         .trim()
-        .notEmpty().withMessage("Password Field is required")
-        .isLength({ min: 8, }).withMessage("password must be greater than 8 characters"),
-    body("name")
+        .notEmpty().withMessage("Password is required")
+        .isLength({ max: 20, min: 6 }).withMessage("Password must be minimum of 6 characters and maximum of 16 characters")
+        .custom(value => {
+            if (value.includes("  ")) {
+                throw new Error("Password field must be a proper password")
+            }
+            return true;
+        }),
+
+    body("firstName")
         .trim()
-        .notEmpty().withMessage("name field is required")
-        .isLength({ min: 6 }).withMessage("must be greater than 6 characters")
+        .isString()
+        .notEmpty().withMessage("First name is required")
+        .isLength({ max: 20, min: 4 }).withMessage("First name must be minimum of 4 characters and maximum of 20 characters")
+        .custom(value => {
+            if (value.includes("  ")) {
+                throw new Error("Name field must be a proper name")
+            }
+            if (!value.match(/^[a-zA-Z0-9 ]+$/)) {
+                throw new Error("Name field allowed characters A-Z, a-z, 0-9")
+            }
+            return true;
+        }),
+
+    body("lastName")
+        .trim()
+        .notEmpty().withMessage("Last name is required")
+        .isLength({ max: 20, min: 4 }).withMessage("Last name must be minimum of 4 characters and maximum of 20 characters")
+        .custom(value => {
+            if (value.includes("  ")) {
+                throw new Error("Name field must be a proper name")
+            }
+            if (!value.match(/^[a-zA-Z0-9 ]+$/)) {
+                throw new Error("Name field allowed characters A-Z, a-z, 0-9")
+            }
+            return true;
+        }),
+
+    body("title")
+        .trim()
+        .notEmpty().withMessage("Title is required")
+        .isLength({ max: 100, min: 5 }).withMessage("Password must be minimum of 5 characters and maximum of 100 characters")
+        .custom(value => {
+            if (!value.match(/^[a-zA-Z0-9 ]+$/)) {
+                throw new Error("Title field allowed characters A-Z, a-z, 0-9")
+            }
+            if (value.includes("  ")) {
+                throw new Error("Title field must be a proper title")
+            }
+            return true;
+        }),
 ];
 
-const patchValidation = [
+
+const authenticateValidation = [
     body("email")
         .trim()
-        .notEmpty().withMessage("Email field is required")
-        .isEmail().withMessage("Invalid email address"),
+        .notEmpty().withMessage("Email is required")
+        .isEmail().withMessage("Email field must be a valid email"),
+
     body("password")
         .trim()
-        .notEmpty().withMessage("Password Field is required")
-        .isLength({ min: 8, }).withMessage("password must be greater than 8 characters"),
-    body("name")
-        .trim()
-        .notEmpty().withMessage("name field is required")
-        .isLength({ min: 6 }).withMessage("must be greater than 6 characters")
+        .notEmpty().withMessage("Password is required")
+
 ];
 
-export { postValidation, patchValidation };
+const forgotPasswordValidation = [
+    body("email")
+        .trim()
+        .notEmpty().withMessage("Email is required")
+        .isEmail().withMessage("Email field must be a valid email"),
+
+];
+
+const resetPasswordValidation = [
+    body("password")
+        .trim()
+        .notEmpty().withMessage("Password is required")
+        .isLength({ max: 20, min: 6 }).withMessage("Password must be minimum of 6 characters and maximum of 16 characters")
+        .custom(value => {
+            if (value.includes("  ")) {
+                throw new Error("Password field must be a proper password")
+            }
+            return true;
+        }),
+
+];
+
+const updateValidation = [
+    body("email")
+        .trim()
+        .notEmpty().withMessage("Email is required")
+        .isEmail().withMessage("Email field must be a valid email"),
+
+    body("password")
+        .trim()
+        .notEmpty().withMessage("Password is required")
+        .isLength({ max: 20, min: 6 }).withMessage("Password must be minimum of 6 characters and maximum of 16 characters")
+        .custom(value => {
+            if (value.includes("  ")) {
+                throw new Error("Password field must be a proper password")
+            }
+            return true;
+        }),
+
+    body("firstName")
+        .trim()
+        .isString()
+        .notEmpty().withMessage("First name is required")
+        .isLength({ max: 20, min: 4 }).withMessage("First name must be minimum of 4 characters and maximum of 20 characters")
+        .custom(value => {
+            if (value.includes("  ")) {
+                throw new Error("Name field must be a proper name")
+            }
+            if (!value.match(/^[a-zA-Z0-9 ]+$/)) {
+                throw new Error("Name field allowed characters A-Z, a-z, 0-9")
+            }
+            return true;
+        }),
+
+    body("lastName")
+        .trim()
+        .notEmpty().withMessage("Last name is required")
+        .isLength({ max: 20, min: 4 }).withMessage("Last name must be minimum of 4 characters and maximum of 20 characters")
+        .custom(value => {
+            if (value.includes("  ")) {
+                throw new Error("Name field must be a proper name")
+            }
+            if (!value.match(/^[a-zA-Z0-9 ]+$/)) {
+                throw new Error("Name field allowed characters A-Z, a-z, 0-9")
+            }
+            return true;
+        }),
+
+    body("title")
+        .trim()
+        .notEmpty().withMessage("Title is required")
+        .isLength({ max: 100, min: 5 }).withMessage("Password must be minimum of 5 characters and maximum of 100 characters")
+        .custom(value => {
+            if (!value.match(/^[a-zA-Z0-9 ]+$/)) {
+                throw new Error("Title field allowed characters A-Z, a-z, 0-9")
+            }
+            if (value.includes("  ")) {
+                throw new Error("Title field must be a proper title")
+            }
+            return true;
+        }),
+];

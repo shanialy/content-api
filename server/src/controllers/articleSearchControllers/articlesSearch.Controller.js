@@ -25,8 +25,9 @@ import client, {
 
 
 
-// route: GET /api/article/category
+// route: GET /api/articleSearch/category
 // desc:  getting all categories from ES and caching.
+// access: PROTECTED
 const getCategories = async (req, res) => {
     const categories = "categories";
     try {
@@ -35,12 +36,12 @@ const getCategories = async (req, res) => {
             if (err) console.log("error occoured while fetching datat from redis");
 
             if (redisData !== null) {
-                res.status(200).json(JSON.parse(redisData));
-            } else {
-                const elk = await getCategory();
-                client.setex(categories, 3600, JSON.stringify(elk));
-                res.status(200).json(elk);
+                return res.status(200).json(JSON.parse(redisData));
             }
+            const elk = await getCategory();
+            client.setex(categories, 3600, JSON.stringify(elk));
+            return res.status(200).json(elk);
+
         });
 
     } catch (error) {
@@ -52,8 +53,9 @@ const getCategories = async (req, res) => {
 
 
 
-// route: POST /api/article/
+// route: POST /api/articleSearch/
 // desc:  getting filers from user and returning articles and caching.
+// access: PROTECTED
 const postData = async (req, res) => {
     const { searchTerm, language, category, offset, startDate, endDate } =
         req.body;
@@ -70,7 +72,7 @@ const postData = async (req, res) => {
             const data = await getAllWithDateFacet(offset);
             client.hset(esRedisGlobalKey, JSON.stringify(req.body), JSON.stringify(data));
             client.expire(esRedisGlobalKey, esRedisExpireTime);
-            res.status(200).json(data);
+            return res.status(200).json(data);
         }
         catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
@@ -93,7 +95,7 @@ const postData = async (req, res) => {
             const data = await searchBy_Language(language, offset);
             client.hset(esRedisGlobalKey, JSON.stringify(req.body), JSON.stringify(data));
             client.expire(esRedisGlobalKey, esRedisExpireTime);
-            res.status(200).json(data);
+            return res.status(200).json(data);
         }
         catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
@@ -115,7 +117,7 @@ const postData = async (req, res) => {
             const data = await searchBy_Category(category, offset);
             client.hset(esRedisGlobalKey, JSON.stringify(req.body), JSON.stringify(data));
             client.expire(esRedisGlobalKey, esRedisExpireTime);
-            res.status(200).json(data);
+            return res.status(200).json(data);
         }
         catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
@@ -137,7 +139,7 @@ const postData = async (req, res) => {
             const data = await searchBy_Category_Language(category, language, offset);
             client.hset(esRedisGlobalKey, JSON.stringify(req.body), JSON.stringify(data));
             client.expire(esRedisGlobalKey, esRedisExpireTime);
-            res.status(200).json(data);
+            return res.status(200).json(data);
         } catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
             console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
@@ -158,7 +160,7 @@ const postData = async (req, res) => {
             const data = await searchBy_Date(startDate, endDate, + offset);
             client.hset(esRedisGlobalKey, JSON.stringify(req.body), JSON.stringify(data));
             client.expire(esRedisGlobalKey, esRedisExpireTime);
-            res.status(200).json(data);
+            return res.status(200).json(data);
         }
         catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
@@ -181,7 +183,7 @@ const postData = async (req, res) => {
             const data = await searchBy_Date_language(startDate, endDate, language, offset);
             client.hset(esRedisGlobalKey, JSON.stringify(req.body), JSON.stringify(data));
             client.expire(esRedisGlobalKey, esRedisExpireTime);
-            res.status(200).json(data);
+            return res.status(200).json(data);
         }
         catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
@@ -204,7 +206,7 @@ const postData = async (req, res) => {
             const data = await searchBy_Date_Category(startDate, endDate, category, offset);
             client.hset(esRedisGlobalKey, JSON.stringify(req.body), JSON.stringify(data));
             client.expire(esRedisGlobalKey, esRedisExpireTime);
-            res.status(200).json(data);
+            return res.status(200).json(data);
         }
         catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
@@ -234,7 +236,7 @@ const postData = async (req, res) => {
             );
             client.hset(esRedisGlobalKey, JSON.stringify(req.body), JSON.stringify(data));
             client.expire(esRedisGlobalKey, esRedisExpireTime);
-            res.status(200).json(data);
+            return res.status(200).json(data);
         }
         catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
@@ -254,7 +256,7 @@ const postData = async (req, res) => {
     ) {
         try {
             const data = await searchBy_SearchTerm(searchTerm, offset);
-            res.status(200).json(data);
+            return res.status(200).json(data);
         } catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
             console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
@@ -274,7 +276,7 @@ const postData = async (req, res) => {
         try {
 
             const data = await searchBy_searchTerm_Language(searchTerm, language, offset);
-            res.status(200).json(data);
+            return res.status(200).json(data);
         } catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
             console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
@@ -294,7 +296,7 @@ const postData = async (req, res) => {
         try {
 
             const data = await searchBy_SearchTerm_Category(searchTerm, category, offset);
-            res.status(200).json(data);
+            return res.status(200).json(data);
         } catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
             console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
@@ -319,7 +321,7 @@ const postData = async (req, res) => {
                 category,
                 language, offset
             );
-            res.status(200).json(data);
+            return res.status(200).json(data);
         } catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
             console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
@@ -339,7 +341,7 @@ const postData = async (req, res) => {
         try {
 
             const data = await searchBy_SearchTerm_Date(searchTerm, startDate, endDate, offset);
-            res.status(200).json(data);
+            return res.status(200).json(data);
         } catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
             console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
@@ -364,7 +366,7 @@ const postData = async (req, res) => {
                 language,
                 offset
             );
-            res.status(200).json(data);
+            return res.status(200).json(data);
         } catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
             console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
@@ -390,7 +392,7 @@ const postData = async (req, res) => {
                 category,
                 offset
             );
-            res.status(200).json(data);
+            return res.status(200).json(data);
         } catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
             console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
@@ -416,7 +418,7 @@ const postData = async (req, res) => {
                 startDate,
                 offset
             );
-            res.status(200).json(data);
+            return res.status(200).json(data);
         } catch (err) {
             res.status(500).json({ errorMsg: "Server Error" });
             console.log("ELASTIC SEARCH DATA FETCHING ERROR", err);
