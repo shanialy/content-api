@@ -17,6 +17,7 @@ import { validationResult } from "express-validator";
 
 function register(req, res, next) {
 
+    console.log(req.body)
     const validationErrors = validationResult(req);
     if (!validationErrors.isEmpty()) {
         return res.status(400).json(validationErrors.array()[0]) // 400 for bad request
@@ -37,6 +38,7 @@ function verifyEmail(req, res, next) {
 
 function authenticate(req, res, next) {
 
+    console.log(req.body)
     const validationErrors = validationResult(req);
     if (!validationErrors.isEmpty()) {
         return res.status(400).json(validationErrors.array()[0]) // 400 for bad request

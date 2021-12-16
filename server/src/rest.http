@@ -3,7 +3,7 @@ post http://localhost:7777/api/user/register
 Content-Type: application/json
 
 {
-    "email" : "saad@gmail24.com",
+    "email" : "saad@gmail30.com",
     "password" : "saad01",
     "firstName" : "saadR Idrees",
     "lastName" : "saad i drees",
@@ -17,7 +17,7 @@ POST http://localhost:7777/api/user/verify-email
 Content-Type:  application/json
 
 {
-    "token": "6f82d215a5a14bdd0a24c23b11f74bce75a86a269516cf23e4fe18ed77d358174d6580d5c808807f"
+    "token": "5d39e00638974a8d64da217d41e85d56c4cb4014a8cd36400f83268cebb5c1e43140ae41ce76b51f"
 }
 
 ###
