@@ -11,6 +11,7 @@ const userService = {
     authenticate,
     revokeToken,
     forgotPassword,
+    validateResetToken,
     resetPassword,
     refreshToken,
     update,
@@ -25,7 +26,7 @@ async function register(params, origin) {
     // validate
     if (await userModel.findOne({ email: params.email })) {
         // send already registered error in email to prevent user enumeration
-        throw "Email alredy exist"
+        throw "Email already exist"
         // return await sendAlreadyRegisteredEmail(params.email, origin);// comment it
     }
 
@@ -141,6 +142,22 @@ async function forgotPassword({ email }, origin) {
         console.log(err)
     }
 
+}
+
+
+async function validateResetToken({ token }) {
+    try {
+
+        const user = await userModel.findOne({
+            'resetToken.token': token,
+            'resetToken.expires': { $gt: Date.now() }
+        });
+
+        if (!user) throw 'Invalid token';
+
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 
@@ -274,7 +291,7 @@ async function getRefreshToken(token) {
 async function sendPasswordResetEmail(user, origin) {
     let message;
     if (origin) {
-        const resetUrl = `${origin}/account/reset-password?token=${user.resetToken.token}`;
+        const resetUrl = `${origin}/user/reset-password?token=${user.resetToken.token}`;
         message = `<p>Please click the below link to reset your password, the link will be valid for 1 day:</p>
                    <p><a href="${resetUrl}">${resetUrl}</a></p>`;
     } else {

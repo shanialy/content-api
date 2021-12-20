@@ -5,6 +5,7 @@ import {
     authenticate,
     revokeToken,
     forgotPassword,
+    validateResetToken,
     resetPassword,
     refreshToken,
     update,
@@ -28,6 +29,7 @@ router.post('/verify-email', verifyEmail);
 router.post('/authenticate', authenticateValidation, authenticate);
 router.post('/revoke-token', authorize(), revokeToken);
 router.post('/forgot-password', forgotPasswordValidation, forgotPassword);
+router.post('/validate-reset-token', validateResetToken);
 router.post('/reset-password', resetPasswordValidation, resetPassword);
 router.post('/refresh-token', refreshToken);
 router.put('/:id', authorize(), updateValidation, update);

@@ -9,7 +9,7 @@ import { VerifyEmail } from './VerifyEmail';
 import { ForgotPassword } from './ForgotPassword';
 import { ResetPassword } from './ResetPassword';
 
-function Account({ history, match }) {
+function User({ history, match }) {
     const { path } = match;
 
     useEffect(() => {
@@ -38,4 +38,4 @@ function Account({ history, match }) {
     );
 }
 
-export { Account };
+export { User };

@@ -7,7 +7,7 @@ import { Nav, PrivateRoute, Alert } from '@/_components';
 import { Home } from '@/home';
 import { Profile } from '@/profile';
 import { Admin } from '@/admin';
-import { Account } from '@/account';
+import { User } from '@/user';
 
 function App() {
     const { pathname } = useLocation();  
@@ -27,7 +27,7 @@ function App() {
                 <PrivateRoute exact path="/" component={Home} />
                 <PrivateRoute path="/profile" component={Profile} />
                 <PrivateRoute path="/admin" roles={[Role.Admin]} component={Admin} />
-                <Route path="/account" component={Account} />
+                <Route path="/user" component={User} />
                 <Redirect from="*" to="/" />
             </Switch>
         </div>

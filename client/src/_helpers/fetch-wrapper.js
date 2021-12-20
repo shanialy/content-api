@@ -17,7 +17,7 @@ function get(url) {
 }
 
 function post(url, body) {
-    console.log(url)
+    // console.log(url)
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...authHeader(url) },
@@ -69,7 +69,7 @@ function handleResponse(response) {
                 accountService.logout();
             }
 
-            const error = (data && data.message) || response.statusText;
+            const error = (data && data.message || data.msg) || response.statusText;
             return Promise.reject(error);
         }
 

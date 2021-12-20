@@ -27,7 +27,7 @@ function ResetPassword({ history }) {
                 setToken(token);
                 setTokenStatus(TokenStatus.Valid);
             })
-            .catch(() => {
+            .catch((err) => {
                 setTokenStatus(TokenStatus.Invalid);
             });
     }, []);

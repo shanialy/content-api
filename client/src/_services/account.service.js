@@ -48,6 +48,7 @@ function refreshToken() {
             // publish user to subscribers and start timer to refresh token
             userSubject.next(user);
             startRefreshTokenTimer();
+            console.log(user)
             return user;
         });
 }
@@ -65,6 +66,7 @@ function forgotPassword(email) {
 }
 
 function validateResetToken(token) {
+    console.log(fetchWrapper.post(`${baseUrl}/validate-reset-token`, { token }))
     return fetchWrapper.post(`${baseUrl}/validate-reset-token`, { token });
 }
 
