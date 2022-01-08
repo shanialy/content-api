@@ -5,6 +5,7 @@ export {
     authenticate,
     revokeToken,
     forgotPassword,
+    validateResetToken,
     resetPassword,
     refreshToken,
     update,
@@ -17,11 +18,12 @@ import { validationResult } from "express-validator";
 
 function register(req, res, next) {
 
+    console.log(req.body)
     const validationErrors = validationResult(req);
     if (!validationErrors.isEmpty()) {
         return res.status(400).json(validationErrors.array()[0]) // 400 for bad request
     }
-    console.log(req.body.firstName);
+
     userService.register(req.body, req.hostname)
         .then(() => res.json({ message: 'Registration successful, please check your email for verification instructions' }))
         .catch(next);
@@ -81,6 +83,15 @@ function forgotPassword(req, res, next) {
         .then(() => res.json({ message: 'Please check your email for password reset instructions' }))
         .catch(next);
 }
+
+
+
+function validateResetToken(req, res, next) {
+    userService.validateResetToken(req.body)
+        .then(() => res.json({ message: 'Token is valid' }))
+        .catch(next);
+}
+
 
 
 function resetPassword(req, res, next) {

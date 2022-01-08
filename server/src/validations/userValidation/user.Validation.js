@@ -56,16 +56,16 @@ const registerValidation = [
     body("title")
         .trim()
         .notEmpty().withMessage("Title is required")
-        .isLength({ max: 100, min: 5 }).withMessage("Password must be minimum of 5 characters and maximum of 100 characters")
-        .custom(value => {
-            if (!value.match(/^[a-zA-Z0-9 ]+$/)) {
-                throw new Error("Title field allowed characters A-Z, a-z, 0-9")
-            }
-            if (value.includes("  ")) {
-                throw new Error("Title field must be a proper title")
-            }
-            return true;
-        }),
+        // .isLength({ max: 100, min: 5 }).withMessage("title must be minimum of 5 characters and maximum of 100 characters")
+        // .custom(value => {
+        //     if (!value.match(/^[a-zA-Z0-9 ]+$/)) {
+        //         throw new Error("Title field allowed characters A-Z, a-z, 0-9")
+        //     }
+        //     if (value.includes("  ")) {
+        //         throw new Error("Title field must be a proper title")
+        //     }
+        //     return true;
+        // }),
 ];
 
 
@@ -111,8 +111,6 @@ const updateValidation = [
 
     body("password")
         .trim()
-        .notEmpty().withMessage("Password is required")
-        .isLength({ max: 20, min: 6 }).withMessage("Password must be minimum of 6 characters and maximum of 16 characters")
         .custom(value => {
             if (value.includes("  ")) {
                 throw new Error("Password field must be a proper password")
@@ -152,7 +150,6 @@ const updateValidation = [
     body("title")
         .trim()
         .notEmpty().withMessage("Title is required")
-        .isLength({ max: 100, min: 5 }).withMessage("Password must be minimum of 5 characters and maximum of 100 characters")
         .custom(value => {
             if (!value.match(/^[a-zA-Z0-9 ]+$/)) {
                 throw new Error("Title field allowed characters A-Z, a-z, 0-9")
