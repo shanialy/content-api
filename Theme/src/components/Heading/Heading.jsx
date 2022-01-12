@@ -1,14 +1,14 @@
-import NextPrev from "components/NextPrev/NextPrev";
-import React, { HTMLAttributes, ReactNode } from "react";
+import NextPrev from "../../components/NextPrev/NextPrev";
+import React from "react";
 
-export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
-  fontClass?: string;
-  desc?: ReactNode;
-  hasNextPrev?: boolean;
-  isCenter?: boolean;
-}
+// export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
+//   fontClass?: string;
+//   desc?: ReactNode;
+//   hasNextPrev?: boolean;
+//   isCenter?: boolean;
+// }
 
-const Heading: React.FC<HeadingProps> = ({
+const Heading = ({
   children,
   desc = "Discover the most outstanding articles in all topics of life. ",
   className = "mb-12 md:mb-16 text-neutral-900 dark:text-neutral-50",

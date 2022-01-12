@@ -1,33 +1,33 @@
 import React, { FC, useState } from "react";
-import { DEMO_POSTS } from "data/posts";
-import { PostDataType } from "data/types";
+import { DEMO_POSTS } from "../../data/posts";
+// import { PostDataType } from "data/types";
 import Pagination from "components/Pagination/Pagination";
-import ButtonPrimary from "components/Button/ButtonPrimary";
-import Nav from "components/Nav/Nav";
-import NavItem from "components/NavItem/NavItem";
-import ArchiveFilterListBox from "components/ArchiveFilterListBox/ArchiveFilterListBox";
-import Input from "components/Input/Input";
+import ButtonPrimary from "../../components/Button/ButtonPrimary";
+import Nav from "../../components/Nav/Nav";
+import NavItem from "../../components/NavItem/NavItem";
+import ArchiveFilterListBox from "../../components/ArchiveFilterListBox/ArchiveFilterListBox";
+import Input from "../../components/Input/Input";
 import { Helmet } from "react-helmet";
-import SectionSubscribe2 from "components/SectionSubscribe2/SectionSubscribe2";
-import NcImage from "components/NcImage/NcImage";
-import NcLink from "components/NcLink/NcLink";
-import SectionSliderNewAuthors from "components/SectionSliderNewAthors/SectionSliderNewAuthors";
-import { DEMO_AUTHORS } from "data/authors";
-import ButtonSecondary from "components/Button/ButtonSecondary";
-import { DEMO_CATEGORIES } from "data/taxonomies";
-import SectionGridCategoryBox from "components/SectionGridCategoryBox/SectionGridCategoryBox";
-import BackgroundSection from "components/BackgroundSection/BackgroundSection";
+import SectionSubscribe2 from "../../components/SectionSubscribe2/SectionSubscribe2";
+import NcImage from "../../components/NcImage/NcImage";
+import NcLink from "../../components/NcLink/NcLink";
+import SectionSliderNewAuthors from "../../components/SectionSliderNewAthors/SectionSliderNewAuthors";
+import { DEMO_AUTHORS } from "../../data/authors";
+import ButtonSecondary from "../../components/Button/ButtonSecondary";
+import { DEMO_CATEGORIES } from "../../data/taxonomies";
+import SectionGridCategoryBox from "../../components/SectionGridCategoryBox/SectionGridCategoryBox";
+import BackgroundSection from "../../components/BackgroundSection/BackgroundSection";
 import Card11 from "components/Card11/Card11";
 import ButtonCircle from "components/Button/ButtonCircle";
 import CardCategory2 from "components/CardCategory2/CardCategory2";
 import Tag from "components/Tag/Tag";
 import CardAuthorBox2 from "components/CardAuthorBox2/CardAuthorBox2";
 
-export interface PageSearchProps {
-  className?: string;
-}
+// export interface PageSearchProps {
+//   className?: string;
+// }
 
-const posts: PostDataType[] = DEMO_POSTS.filter((_, i) => i < 12);
+const posts = DEMO_POSTS.filter((_, i) => i < 12);
 const cats = DEMO_CATEGORIES.filter((_, i) => i < 15);
 const tags = DEMO_CATEGORIES.filter((_, i) => i < 32);
 const authors = DEMO_AUTHORS.filter((_, i) => i < 12);
@@ -42,12 +42,12 @@ const FILTERS = [
 
 const TABS = ["Articles", "Categories", "Tags", "Authors"];
 
-const PageSearch: FC<PageSearchProps> = ({ className = "" }) => {
+const PageSearch = ({ className = "" }) => {
   let s = "Technology";
 
   const [tabActive, setTabActive] = useState<typeof TABS[number]>(TABS[0]);
 
-  const handleClickTab = (item: string) => {
+  const handleClickTab = (item) => {
     if (item === tabActive) {
       return;
     }

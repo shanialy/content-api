@@ -1,12 +1,12 @@
 import React, { ButtonHTMLAttributes } from "react";
-import twFocusClass from "utils/twFocusClass";
+import twFocusClass from "../../utils/twFocusClass";
 
-export interface ButtonCircleProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
-  size?: string;
-}
+// export interface ButtonCircleProps
+//   extends ButtonHTMLAttributes<HTMLButtonElement> {
+//   size?: string;
+// }
 
-const ButtonCircle: React.FC<ButtonCircleProps> = ({
+const ButtonCircle = ({
   className = " ",
   size = " w-9 h-9 ",
   ...args

@@ -1,15 +1,15 @@
-import { avatarColors } from "contains/contants";
+import { avatarColors } from "../../contains/contants";
 import React, { FC } from "react";
 
-export interface AvatarProps {
-  containerClassName?: string;
-  sizeClass?: string;
-  radius?: string;
-  imgUrl?: string;
-  userName?: string;
-}
+// export interface AvatarProps {
+//   containerClassName?: string;
+//   sizeClass?: string;
+//   radius?: string;
+//   imgUrl?: string;
+//   userName?: string;
+// }
 
-const Avatar: FC<AvatarProps> = ({
+const Avatar = ({
   containerClassName = "ring-1 ring-white dark:ring-neutral-900",
   sizeClass = "h-6 w-6 text-sm",
   radius = "rounded-md",
@@ -18,7 +18,7 @@ const Avatar: FC<AvatarProps> = ({
 }) => {
   const url = imgUrl || "";
   const name = userName || "John Doe";
-  const _setBgColor = (name: string) => {
+  const _setBgColor = (name) => {
     const backgroundIndex = Math.floor(
       name.charCodeAt(0) % avatarColors.length
     );

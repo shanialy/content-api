@@ -1,18 +1,18 @@
-import NcBookmark, { NcBookmarkProps } from "components/NcBookmark/NcBookmark";
+import NcBookmark from "../../components/NcBookmark/NcBookmark";
 import React from "react";
-import { useAppSelector, useAppDispatch } from "app/hooks";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import {
   addNewSavedByPostId,
   removeSavedByPostId,
   selectRecentSaveds,
   selectRecentRemoveds,
-} from "app/bookmarks/bookmarksSlice";
+} from "../../app/bookmarks/bookmarksSlice";
 
-export type BookmarkContainerProps = Omit<NcBookmarkProps, "isBookmarked"> & {
-  initBookmarked: boolean;
-};
+// export type BookmarkContainerProps = Omit<NcBookmarkProps, "isBookmarked"> & {
+//   initBookmarked: boolean;
+// };
 
-const BookmarkContainer: React.FC<BookmarkContainerProps> = (props) => {
+const BookmarkContainer = (props) => {
   const { postId, initBookmarked } = props;
   const recentSaveds = useAppSelector(selectRecentSaveds);
   const recentRemoveds = useAppSelector(selectRecentRemoveds);
