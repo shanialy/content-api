@@ -6,7 +6,7 @@ import Footer from "../components/Footer/Footer";
 // import Page404 from "containers/Page404/Page404";
 // import PageArchive from "containers/PageArchive/PageArchive";
 // import PageAuthor from "containers/PageAuthor/PageAuthor";
-// import PageSearch from "../containers/PageSearch/PageSearch";
+import PageSearch from "../containers/PageSearch/PageSearch";
 // import PageSingle from "containers/PageSingle/PageSingle";
 // import PageSingleHasSidebar from "containers/PageSingle/PageSingleHasSidebar";
 // import PageSingleTemplate2 from "containers/PageSingle/PageSingleTemp2";
@@ -26,7 +26,7 @@ import PageDashboard from "../containers/PageDashboard/PageDashboard";
 // import PageHomeDemo3 from "containers/PageHome/PageHomeDemo3";
 // import PageAuthorV2 from "containers/PageAuthor/PageAuthorV2";
 // import PageHomeDemo4 from "containers/PageHome/PageHomeDemo4";
-// import PageSearchV2 from "containers/PageSearch/PageSearchV2";
+import PageSearchV2 from "../containers/PageSearch/PageSearchV2";
 // import MediaRunningContainer from "containers/MediaRunningContainer/MediaRunningContainer";
 // import PageSingleGallery from "containers/PageSingleGallery/PageSingleGallery";
 // import PageSingleAudio from "containers/PageSingleAudio/PageSingleAudio";
@@ -124,7 +124,8 @@ const Routes = () => {
       <Route path={"/signup"} component={PageSignUp} /> 
       <Route path={"/forgot-pass"} component={PageForgotPass} /> 
       <Route path={"/dashboard"} component={PageDashboard} />
-      {/* <Route path={"/search"} component={PageSearch} /> */}
+      <Route path={"/search"} component={PageSearch} />
+      <Route path={"/search-v2"} component={PageSearchV2} />
 
         {/* {pages.map(({ component, path, exact }) => {
           return (

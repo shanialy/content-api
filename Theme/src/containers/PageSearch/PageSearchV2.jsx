@@ -1,31 +1,31 @@
 import React, { FC, useState } from "react";
-import { DEMO_POSTS } from "data/posts";
-import { PostDataType } from "data/types";
-import Pagination from "components/Pagination/Pagination";
-import ButtonPrimary from "components/Button/ButtonPrimary";
-import Nav from "components/Nav/Nav";
-import NavItem from "components/NavItem/NavItem";
-import ArchiveFilterListBox from "components/ArchiveFilterListBox/ArchiveFilterListBox";
-import Input from "components/Input/Input";
-import HeadBackgroundCommon from "components/HeadBackgroundCommon/HeadBackgroundCommon";
+import { DEMO_POSTS } from "../../data/posts";
+// import { PostDataType } from "data/types";
+import Pagination from "../../components/Pagination/Pagination";
+import ButtonPrimary from "../../components/Button/ButtonPrimary";
+import Nav from "../../components/Nav/Nav";
+import NavItem from "../../components/NavItem/NavItem";
+import ArchiveFilterListBox from "../../components/ArchiveFilterListBox/ArchiveFilterListBox";
+import Input from "../../components/Input/Input";
+import HeadBackgroundCommon from "../../components/HeadBackgroundCommon/HeadBackgroundCommon";
 import { Helmet } from "react-helmet";
-import SectionSubscribe2 from "components/SectionSubscribe2/SectionSubscribe2";
-import ButtonSecondary from "components/Button/ButtonSecondary";
-import SectionGridCategoryBox from "components/SectionGridCategoryBox/SectionGridCategoryBox";
-import { DEMO_CATEGORIES } from "data/taxonomies";
-import BackgroundSection from "components/BackgroundSection/BackgroundSection";
-import SectionSliderNewAuthors from "components/SectionSliderNewAthors/SectionSliderNewAuthors";
-import { DEMO_AUTHORS } from "data/authors";
-import Card11 from "components/Card11/Card11";
-import CardCategory2 from "components/CardCategory2/CardCategory2";
-import Tag from "components/Tag/Tag";
-import CardAuthorBox2 from "components/CardAuthorBox2/CardAuthorBox2";
+import SectionSubscribe2 from "../../components/SectionSubscribe2/SectionSubscribe2";
+import ButtonSecondary from "../../components/Button/ButtonSecondary";
+import SectionGridCategoryBox from "../../components/SectionGridCategoryBox/SectionGridCategoryBox";
+import { DEMO_CATEGORIES } from "../../data/taxonomies";
+import BackgroundSection from "../../components/BackgroundSection/BackgroundSection";
+import SectionSliderNewAuthors from "../../components/SectionSliderNewAthors/SectionSliderNewAuthors";
+import { DEMO_AUTHORS } from "../../data/authors";
+import Card11 from "../../components/Card11/Card11";
+import CardCategory2 from "../../components/CardCategory2/CardCategory2";
+import Tag from "../../components/Tag/Tag";
+import CardAuthorBox2 from "../../components/CardAuthorBox2/CardAuthorBox2";
 
-export interface PageSearchV2Props {
-  className?: string;
-}
+// export interface PageSearchV2Props {
+//   className?: string;
+// }
 
-const posts: PostDataType[] = DEMO_POSTS.filter((_, i) => i < 12);
+const posts = DEMO_POSTS.filter((_, i) => i < 12);
 const cats = DEMO_CATEGORIES.filter((_, i) => i < 15);
 const tags = DEMO_CATEGORIES.filter((_, i) => i < 32);
 const authors = DEMO_AUTHORS.filter((_, i) => i < 12);
@@ -39,12 +39,12 @@ const FILTERS = [
 ];
 const TABS = ["Articles", "Categories", "Tags", "Authors"];
 
-const PageSearchV2: FC<PageSearchV2Props> = ({ className = "" }) => {
+const PageSearchV2 = ({ className = "" }) => {
   let s = "Ui Design";
 
-  const [tabActive, setTabActive] = useState<string>(TABS[0]);
+  const [tabActive, setTabActive] = useState(TABS[0]);
 
-  const handleClickTab = (item: string) => {
+  const handleClickTab = (item) => {
     if (item === tabActive) {
       return;
     }

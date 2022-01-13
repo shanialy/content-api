@@ -1,4 +1,4 @@
-export default function convertNumbThousand(number: number): string {
+export default function convertNumbThousand(number) {
   let str = "";
   if (number < 1000) {
     str = String(number);

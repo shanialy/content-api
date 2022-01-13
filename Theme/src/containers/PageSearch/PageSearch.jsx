@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import { DEMO_POSTS } from "../../data/posts";
 // import { PostDataType } from "data/types";
-import Pagination from "components/Pagination/Pagination";
+import Pagination from "../../components/Pagination/Pagination";
 import ButtonPrimary from "../../components/Button/ButtonPrimary";
 import Nav from "../../components/Nav/Nav";
 import NavItem from "../../components/NavItem/NavItem";
@@ -17,11 +17,11 @@ import ButtonSecondary from "../../components/Button/ButtonSecondary";
 import { DEMO_CATEGORIES } from "../../data/taxonomies";
 import SectionGridCategoryBox from "../../components/SectionGridCategoryBox/SectionGridCategoryBox";
 import BackgroundSection from "../../components/BackgroundSection/BackgroundSection";
-import Card11 from "components/Card11/Card11";
-import ButtonCircle from "components/Button/ButtonCircle";
-import CardCategory2 from "components/CardCategory2/CardCategory2";
-import Tag from "components/Tag/Tag";
-import CardAuthorBox2 from "components/CardAuthorBox2/CardAuthorBox2";
+import Card11 from "../../components/Card11/Card11";
+import ButtonCircle from "../../components/Button/ButtonCircle";
+import CardCategory2 from "../../components/CardCategory2/CardCategory2";
+import Tag from "../../components/Tag/Tag";
+import CardAuthorBox2 from "../../components/CardAuthorBox2/CardAuthorBox2";
 
 // export interface PageSearchProps {
 //   className?: string;
@@ -45,7 +45,7 @@ const TABS = ["Articles", "Categories", "Tags", "Authors"];
 const PageSearch = ({ className = "" }) => {
   let s = "Technology";
 
-  const [tabActive, setTabActive] = useState<typeof TABS[number]>(TABS[0]);
+  const [tabActive, setTabActive] = useState(TABS[0]);
 
   const handleClickTab = (item) => {
     if (item === tabActive) {

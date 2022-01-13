@@ -3,9 +3,9 @@ import PostCardSaveAction from "../../components/PostCardSaveAction/PostCardSave
 // import { PostDataType } from "data/types";
 import { Link } from "react-router-dom";
 import CategoryBadgeList from "../../components/CategoryBadgeList/CategoryBadgeList";
-import PostCardLikeAndComment from "components/PostCardLikeAndComment/PostCardLikeAndComment";
-import PostCardMeta from "components/PostCardMeta/PostCardMeta";
-import PostFeaturedMedia from "components/PostFeaturedMedia/PostFeaturedMedia";
+import PostCardLikeAndComment from "../../components/PostCardLikeAndComment/PostCardLikeAndComment";
+import PostCardMeta from "../../components/PostCardMeta/PostCardMeta";
+import PostFeaturedMedia from "../../components/PostFeaturedMedia/PostFeaturedMedia";
 
 // export interface Card11Props {
 //   className?: string;

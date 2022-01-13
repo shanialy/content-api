@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import PostCardCommentBtn from "../../components/PostCardCommentBtn/PostCardCommentBtn";
-import PostCardLikeContainer from "containers/PostCardLikeContainer/PostCardLikeContainer";
-import { PostDataType } from "data/types";
+import PostCardLikeContainer from "../../containers/PostCardLikeContainer/PostCardLikeContainer";
+// import { PostDataType } from "data/types";
 
 // export interface PostCardLikeAndCommentProps {
 //   className?: string;

@@ -27,7 +27,7 @@ const DEMO_PAGINATION = [
 // }
 
 const Pagination = ({ className = "" }) => {
-  const renderItem = (pag, indexumber) => {
+  const renderItem = (pag, index) => {
     if (index === 0) {
       // RETURN ACTIVE PAGINATION
       return (
@@ -59,5 +59,6 @@ const Pagination = ({ className = "" }) => {
     </nav>
   );
 };
+
 
 export default Pagination;

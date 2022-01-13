@@ -10,7 +10,7 @@ import {
 // import { PostDataType } from "data/types";
 import PostCardLikeAction, {
   PostCardLikeActionProps,
-} from "components/PostCardLikeAction/PostCardLikeAction";
+} from "../../components/PostCardLikeAction/PostCardLikeAction";
 
 // export interface PostCardLikeContainerProps
 //   extends Omit<PostCardLikeActionProps, "isLiked" | "likeCount"> {
