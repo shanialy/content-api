@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Switch, Route} from "react-router-dom";
 // import { Page } from "./types";
 import ScrollToTop from "./ScrollToTop";
 import Footer from "../components/Footer/Footer";
@@ -119,7 +119,7 @@ const Routes = () => {
       
       {/* <HeaderContainer /> */}
       <Switch>
-        
+
       <Route path={"/login"} component={PageLogin} /> 
       <Route path={"/signup"} component={PageSignUp} /> 
       <Route path={"/forgot-pass"} component={PageForgotPass} /> 
