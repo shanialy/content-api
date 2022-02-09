@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { DEMO_POSTS } from "../../data/posts";
+import Index from './Index'
 // import { PostDataType } from "data/types";
 // import Pagination from "../../components/Pagination/Pagination";
 // import ButtonPrimary from "../../components/Button/ButtonPrimary";
@@ -24,6 +25,12 @@ import ButtonCircle from "../../components/Button/ButtonCircle";
 // import CardCategory2 from "../../components/CardCategory2/CardCategory2";
 // import Tag from "../../components/Tag/Tag";
 // import CardAuthorBox2 from "../../components/CardAuthorBox2/CardAuthorBox2";
+import {  gql, useQuery } from '@apollo/client';
+import { useSearchkitVariables, useSearchkit, withSearchkit, withSearchkitRouting } from '@searchkit/client'
+
+
+
+
 
 export const PageSearchProps = {
   className: String
@@ -34,6 +41,120 @@ export const PageSearchProps = {
 // const tags = DEMO_CATEGORIES.filter((_, i) => i < 32);
 // const authors = DEMO_AUTHORS.filter((_, i) => i < 12);
 
+/////////////////////////////////////////adding query//////////////////////////////////////////////////////////////
+
+const query = gql`
+query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $sortBy: String) {
+  results(query: $query, filters: $filters) {
+    summary {
+      total
+      appliedFilters {
+        id
+        identifier
+        display
+        label
+        ... on DateRangeSelectedFilter {
+          dateMin
+          dateMax
+          __typename
+        }
+
+        ... on ValueSelectedFilter {
+          value
+          __typename
+        }
+        __typename
+      }
+      sortOptions {
+        id
+        label
+        __typename
+      }
+      query
+      __typename
+    }
+    hits(page: $page, sortBy: $sortBy) {
+      page {
+        total
+        totalPages
+        pageNumber
+        from
+        size
+        __typename
+      }
+      sortedBy
+
+      items {
+        ... on ResultHit {
+          id
+          fields {
+              article_length
+              category
+              authors
+              date_download
+              language
+              facebook_shares
+              twitter_shares
+              maintext
+              source_domain
+              title
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    facets {
+          identifier
+          type
+          label
+          display
+      entries {
+          label
+          count
+          __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+`
+
+
+///////////////////////////////////////////////////facet/////////////////////////////////////
+
+const Facet = ({facet}) =>{
+  const api = useSearchkit()
+
+  return (
+    <div>
+            <h1>All facets</h1>
+
+      <h3>{facet.label}</h3>
+      <h3>{facet.identifier}</h3>
+    <ul>
+      {facet.entries ? facet.entries.map((entry) => (
+        <li 
+        onClick={() => {
+          api.toggleFilter({ identifier: facet.identifier, value: entry.label })
+          api.search()
+        }}
+        
+        >{entry.label} - {entry.count}</li>
+      )): "waiting..."}
+    </ul>
+    </div>
+  )
+}
+
+///////////////////////////////////////////////////////Sorting
+
+
+
+//////////////////////////////////////////////
 const FILTERS = [
   { name: "Most Recent" },
   { name: "Curated by Admin" },
@@ -47,6 +168,23 @@ const posts = DEMO_POSTS.filter((_, i) => i < 16);
 
 const PageSearch = ({ className = "" }) => {
 
+  ////////////////////////////////graph ql work////////////////////////////
+
+  const variables = useSearchkitVariables()
+  const { data, error ,loading } = useQuery(query, { variables })
+
+  if(error){console.log("An error Occured")}
+     
+  if(loading){console.log("Data is loading")}
+
+ // console.log(data.results.facets[0].entries)
+  
+
+  const authorSet  = data.results.facets[0].entries
+
+  console.log(authorSet)
+  /////////////////////////////////////////////////////////////////////
+
   let s = "Technology";
 
   // Tag and category have same data type - we will use one demo data
@@ -54,13 +192,7 @@ const PageSearch = ({ className = "" }) => {
 
    const [tabActive, setTabActive] = useState(TABS[0]);
 
-  // const handleClickTab = (item) => {
-  //   if (item === tabActive) {
-  //     return;
-  //   }
-  //   setTabActive(item);
-  // };
-
+ 
   return (
     <div className={`nc-PageSearch ${className}`} data-nc-id="PageSearch">
       <Helmet>
@@ -153,11 +285,18 @@ const PageSearch = ({ className = "" }) => {
       <div className="container py-16 lg:py-28 space-y-16 lg:space-y-28">
         <main>
           {/* TABS FILTER */}
+          {/* {data.results.facets.map((facet,index) => (
+        
+        console.log(<Facet facet={facet}/>)
+
+     ))} */}
        {/* Here i applied Models */}
+
           <div className="flex flex-col sm:items-center sm:justify-between sm:flex-row">
             <div className="flex space-x-2.5">
               <ModalCategories categories={DEMO_CATEGORIES} />
               <ModalTags tags={DEMO_TAGS} />
+           
             </div>
             <div className="block my-4 border-b w-full border-neutral-100 sm:hidden"></div>
             <div className="flex justify-end">
@@ -174,62 +313,13 @@ const PageSearch = ({ className = "" }) => {
               ))}
             </div>
           )}
-          {/* LOOP ITEMS CATEGORIES */}
-          {/* {tabActive === "Categories" && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {cats.map((cat) => (
-                <CardCategory2 key={cat.id} taxonomy={cat} />
-              ))}
-            </div>
-          )} */}
-          {/* LOOP ITEMS TAGS */}
-          {/* {tabActive === "Tags" && (
-            <div className="flex flex-wrap mt-12 ">
-              {tags.map((tag) => (
-                <Tag className="mb-3 mr-3" key={tag.id} tag={tag} />
-              ))}
-            </div>
-          )} */}
-          {/* LOOP ITEMS POSTS */}
-          {/* {tabActive === "Authors" && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {authors.map((author) => (
-                <CardAuthorBox2 key={author.id} author={author} />
-              ))}
-            </div>
-          )} */}
-
-          {/* PAGINATION */}
-          {/* <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
-            <Pagination />
-            <ButtonPrimary>Show me more</ButtonPrimary>
-          </div> */}
         </main>
 
-        {/* MORE SECTIONS */}
-        {/* === SECTION 5 === */}
-        {/* <div className="relative py-16">
-          <BackgroundSection />
-          <SectionGridCategoryBox
-            categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
-          />
-          <div className="text-center mx-auto mt-10 md:mt-16">
-            <ButtonSecondary>Show me more</ButtonSecondary>
-          </div>
-        </div> */}
-
-        {/* === SECTION 5 === */}
-        {/* <SectionSliderNewAuthors
-          heading="Top elite authors"
-          subHeading="Discover our elite writers"
-          authors={DEMO_AUTHORS.filter((_, i) => i < 10)}
-        /> */}
-
-        {/* SUBCRIBES */}
         <SectionSubscribe2 />
       </div>
     </div>
   );
 };
 
-export default PageSearch;
+export default withSearchkit(withSearchkitRouting(PageSearch));
+
