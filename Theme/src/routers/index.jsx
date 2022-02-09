@@ -21,7 +21,7 @@ import PageForgotPass from "../containers/PageForgotPass/PageForgotPass";
 import PageDashboard from "../containers/PageDashboard/PageDashboard";
 // import PageSubcription from "containers/PageSubcription/PageSubcription";
 // import HeaderContainer from "containers/HeaderContainer/HeaderContainer";
-// import PageHome from "containers/PageHome/PageHome";
+import PageHome from "../containers/PageHome/PageHome";
 // import PageHomeDemo2 from "containers/PageHome/PageHomeDemo2";
 // import PageHomeDemo3 from "containers/PageHome/PageHomeDemo3";
 // import PageAuthorV2 from "containers/PageAuthor/PageAuthorV2";
@@ -119,7 +119,7 @@ const Routes = () => {
       
       {/* <HeaderContainer /> */}
       <Switch>
-
+      <Route exact path={"/"} component={PageHome}/>
       <Route path={"/login"} component={PageLogin} /> 
       <Route path={"/signup"} component={PageSignUp} /> 
       <Route path={"/forgot-pass"} component={PageForgotPass} /> 
