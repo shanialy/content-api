@@ -22,6 +22,7 @@ import ButtonCircle from "../../components/Button/ButtonCircle";
 import CardCategory2 from "../../components/CardCategory2/CardCategory2";
 import Tag from "../../components/Tag/Tag";
 import CardAuthorBox2 from "../../components/CardAuthorBox2/CardAuthorBox2";
+import AutoCompleteSearch from "./autoCompleteSearch";
 
 // export interface PageSearchProps {
 //   className?: string;
@@ -73,7 +74,10 @@ const PageSearch = ({ className = "" }) => {
         <div className="relative container -mt-20 lg:-mt-48">
           <div className=" bg-white dark:bg-neutral-900 dark:border dark:border-neutral-700 p-5 lg:p-16 rounded-[40px] shadow-2xl flex items-center">
             <header className="w-full max-w-3xl mx-auto text-center flex flex-col items-center">
-              <h2 className="text-2xl sm:text-4xl font-semibold">{s}</h2>
+              
+              <AutoCompleteSearch/>
+              
+              {/* <h2 className="text-2xl sm:text-4xl font-semibold">{s}</h2>
               <span className="block text-xs sm:text-sm mt-4 text-neutral-500 dark:text-neutral-300">
                 We found{" "}
                 <strong className="font-medium text-neutral-800 dark:text-neutral-100">
@@ -119,7 +123,7 @@ const PageSearch = ({ className = "" }) => {
                     </svg>
                   </span>
                 </label>
-              </form>
+              </form> */}
               <div className="w-full text-sm text-left mt-4 text-neutral-500 dark:text-neutral-300">
                 <div className="inline-block">
                   <span className="mr-2.5">Related:</span>
