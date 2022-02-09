@@ -15,7 +15,7 @@ import { Helmet } from "react-helmet";
 //   DEMO_POSTS_GALLERY,
 //   DEMO_POSTS_VIDEO,
 // } from "data/posts";
-import { DEMO_CATEGORIES } from "../../data/taxonomies";
+// import { DEMO_CATEGORIES } from "../../data/taxonomies";
 // import { DEMO_AUTHORS } from "data/authors";
 // import SectionBecomeAnAuthor from "components/SectionBecomeAnAuthor/SectionBecomeAnAuthor";
 import SectionSliderNewCategories from "../../components/SectionSliderNewCategories/SectionSliderNewCategories";
@@ -72,7 +72,7 @@ const PageHome = () => {
             className="py-16 lg:py-28"
             heading="Top trending topics"
             subHeading="Discover 233 topics"
-            categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
+            // categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
             categoryCardType="card4"
           />
 
