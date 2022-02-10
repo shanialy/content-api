@@ -18,6 +18,7 @@ const CardCategory4  = ({
   index,
 }) => {
   const href = "/";
+  const categories = "Follow"
   console.log(label,count)
   // const color;
   // const {count , label } = taxonomy;
@@ -59,6 +60,13 @@ const CardCategory4  = ({
           className="object-cover w-full h-full rounded-2xl"
         />
         <div>
+        <button className= "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <Badge
+            name={categories}
+            href="/categories"
+            className="absolute top-0 left-0"
+            />
+          </button>
           {/* {index && (
             <Badge
               name={index}
