@@ -60,9 +60,8 @@ const PageSearch = ({ className = "" }) => {
       <Helmet>
         <title>Nc || Search Page Template</title>
       </Helmet>
-
-      {/* HEADER */}
-      <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
+ 
+      {/* <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
         <div className="rounded-3xl relative aspect-w-16 aspect-h-16 sm:aspect-h-9 lg:aspect-h-5 overflow-hidden ">
           <NcImage
             containerClassName="absolute inset-0"
@@ -71,9 +70,9 @@ const PageSearch = ({ className = "" }) => {
           />
         </div>
         {/* CONTENT */}
-        <div className="relative container -mt-20 lg:-mt-48">
+        {/* <div className="relative container -mt-20 lg:-mt-48">
           <div className=" bg-white dark:bg-neutral-900 dark:border dark:border-neutral-700 p-5 lg:p-16 rounded-[40px] shadow-2xl flex items-center">
-            <header className="w-full max-w-3xl mx-auto text-center flex flex-col items-center">
+            <header className="w-full max-w-3xl mx-auto text-center flex flex-col items-center"> */}
               
               <AutoCompleteSearch/>
               
@@ -141,10 +140,10 @@ const PageSearch = ({ className = "" }) => {
                   </NcLink>
                 </div>
               </div>
-            </header>
+            {/* </header>
           </div>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
       {/* ====================== END HEADER ====================== */}
 
       <div className="container py-16 lg:py-28 space-y-16 lg:space-y-28">

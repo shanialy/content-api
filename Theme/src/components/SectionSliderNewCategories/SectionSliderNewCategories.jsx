@@ -93,50 +93,50 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
 }
 `
 
-const Facet = ({facet}) =>{
-  const api = useSearchkit()
+// const Facet = ({facet}) =>{
+//   const api = useSearchkit()
 
-  return (
-<div>
-            <h1>All facets</h1>
+//   return (
+// <div>
+//             <h1>All facets</h1>
 
-      <h3>{facet.label}</h3>
-      <h3>{facet.identifier}</h3>
-    <ul>
-      {facet.entries ? facet.entries.map((entry) => (
-        <li 
-        onClick={() => {
-          api.toggleFilter({ identifier: facet.identifier, value: entry.label })
-          api.search()
-        }}
+//       <h3>{facet.label}</h3>
+//       <h3>{facet.identifier}</h3>
+//     <ul>
+//       {facet.entries ? facet.entries.map((entry) => (
+//         <li 
+//         onClick={() => {
+//           api.toggleFilter({ identifier: facet.identifier, value: entry.label })
+//           api.search()
+//         }}
         
-        >{entry.label} - {entry.count}</li>
-      )): "waiting..."}
-    </ul>
-    </div>
-  )
-}
+//         >{entry.label} - {entry.count}</li>
+//       )): "waiting..."}
+//     </ul>
+//     </div>
+//   )
+// }
 
-const Sort = ({sort}) =>{
-  const api = useSearchkit()
-  // console.log(sort)
+// const Sort = ({sort}) =>{
+//   const api = useSearchkit()
+//   // console.log(sort)
 
-  return (
-    <div>
-            <h1>All Sorting</h1>
+//   return (
+//     <div>
+//             <h1>All Sorting</h1>
 
-      <h4
-              onClick={() => {
-                api.setSortBy( sort.id )
-                api.search()
-              }}
+//       <h4
+//               onClick={() => {
+//                 api.setSortBy( sort.id )
+//                 api.search()
+//               }}
       
       
-      >{sort.id}</h4>
+//       >{sort.id}</h4>
 
 
 
-    <ul>
+//     <ul>
       {/* {facet.entries ? facet.entries.map((entry) => (
         <li 
         onClick={() => {
@@ -147,10 +147,10 @@ const Sort = ({sort}) =>{
         
         >{entry.label} - {entry.count}</li>
       )): "waiting..."} */}
-    </ul>
+    {/* </ul>
     </div>
   )
-}
+} */}
 
 // export interface SectionSliderNewCategoriesProps {
 //   className?: string;
@@ -178,23 +178,32 @@ const SectionSliderNewCategories = ({
 
   if(error){console.log("Error")}
  if(loading){console.log("Loading....")}
+//  if(!loading){console.log(data.results)
 //  console.log(data)
+const renderCard = (entry,index) => {
 
-  const renderCard = (items) => {
-    if(items.identifier == "category"){
-      console.log(items)
-      return(
-        <div>
-      {items.entries.map((entry) => {
-         return(
-          <CardCategory4 taxonomy={entry} />
-           )
-      })}
-      </div>
-      )}
+  return(
+    <>
+    <CardCategory4 label={entry.label} count={entry.count} index={index} />
+    </>
+    )
+
+}
+  // const renderCard = (items) => {
+  //   if(items.identifier == "category"){
+  //     console.log(items)
+  //     return(
+  //       <div>
+  //     {items.entries.map((entry) => {
+  //        return(
+  //         <CardCategory4 taxonomy={entry} />
+  //          )
+  //     })}
+  //     </div>
+  //     )}
      
       
-    }
+  //   }
   // const UNIQUE_CLASS = ncNanoId("sliderNewCategories_");
 
   // const MY_GLIDE = new Glide(`.${UNIQUE_CLASS}`, {
@@ -235,7 +244,6 @@ const SectionSliderNewCategories = ({
 
   // const renderCard = (item,index) => {
   //   const topIndex = index < 3 ? `#${index + 1}` : undefined;
-  //   // <CardCategory4/>
   //   switch (categoryCardType) {
   //     case "card1":
   //       return <CardCategory1 taxonomy={item} />;
@@ -258,59 +266,32 @@ const SectionSliderNewCategories = ({
           {heading}
          </Heading>
 
-         {/* {data.results.facets.map((facet,index) => (
-        // <li key={index}>{facet}</li>
-        <Facet facet={facet} />
-      ))}
 
-    {data.results.summary.sortOptions.map((sort,index) => (
-        // <li key={index}>{facet}</li>
-        <Sort sort={sort} />
-      ))} */}
-<div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {data.results.facets.map((items,index) => (
-                <li key={index}>
-                  {renderCard(items)}
-               </li>
-              ))}
+         {!loading ? 
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
+              { data.results.facets.map((items) => {
+                if(items.identifier == "category"){
+                  return(
+ 
+                  items.entries.map((entry,index)=>{
+// console.log(entry.label)
+               return( <li key={index}>
+                  {/* {entry.label} */}
+                  {renderCard(entry,index)}
+                </li>
+               )
+                }))
+                }
+                
+})}
+
+ 
             </div>
-
-
-
-      </>
+  :<h1>loading..</h1>         }
+</>
       );
     }
-          
-         {/* <Heading desc={subHeading} hasNextPrev>
-          {heading}
-         </Heading>
-<div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {DEMO_CATEGORIES.map((item,index) => (
-                <li key={index}>
-                  {renderCard(item,index)}
-                </li>
-              ))}
-            </div> */}
 
 
-    {/* <div className={`nc-SectionSliderNewCategories ${className}`}>
-      <div className={`${UNIQUE_CLASS} flow-root`}>
-        <Heading desc={subHeading} hasNextPrev>
-          {heading}
-        </Heading>
-        <div className="glide__track" data-glide-el="track">
-          <ul className="flex flex-wrap"> */}
-              {/* {renderCard} */}
-              {/* {renderCard(<CardCategory4 />)} */}
-            {/* {DEMO_CATEGORIES.map((item, index) => (
-              
-              <div><li key={index} className={`${itemClassName}`}>
-                 {renderCard(item, index)}
-              </li></div>
-            ))} */}
-          {/* </ul>
-        </div>
-        </div>
-      </div> */}
       
 export default withSearchkit(withSearchkitRouting(SectionSliderNewCategories));

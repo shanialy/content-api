@@ -122,7 +122,7 @@ function AutoCompleteSearch() {
           }
           return (
             <div className="item">
-              <div className="item__content-wrapper">
+              {/* <div className="item__content-wrapper">
                 {getIcon(item.type)()}
                 <span
                   dangerouslySetInnerHTML={{
@@ -146,7 +146,7 @@ function AutoCompleteSearch() {
                     <path d="M8 17v-7.586l8.293 8.293c0.391 0.391 1.024 0.391 1.414 0s0.391-1.024 0-1.414l-8.293-8.293h7.586c0.552 0 1-0.448 1-1s-0.448-1-1-1h-10c-0.552 0-1 0.448-1 1v10c0 0.552 0.448 1 1 1s1-0.448 1-1z"></path>
                   </svg>
                 </button>
-              </div>
+              </div> */}
             </div>
           );
         },
@@ -220,7 +220,7 @@ function AutoCompleteSearch() {
           {`Displaying ${state?.hits?.hits.length} results, of ${state?.hits?.total?.value} results found in ${state?.took} ms`}
         </span>
       ) : null}
-      {state?.hits?.hits && Object.keys(state?.hits?.hits).length ? (
+      {/* {state?.hits?.hits && Object.keys(state?.hits?.hits).length ? (
         <div className="response-json">
           <JSONTree
             theme={jsonTreeTheme}
@@ -230,7 +230,7 @@ function AutoCompleteSearch() {
             keyPath={["products"]}
           />
         </div>
-      ) : null}
+      ) : null} */}
     </div>
   );
 }

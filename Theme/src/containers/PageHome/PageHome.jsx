@@ -26,7 +26,7 @@ import SectionSliderNewCategories from "../../components/SectionSliderNewCategor
 // import SectionMagazine7 from "./SectionMagazine7";
 // import SectionMagazine8 from "./SectionMagazine8";
 // import SectionMagazine9 from "./SectionMagazine9";
-import BgGlassmorphism from "../../components/BgGlassmorphism/BgGlassmorphism";
+// import BgGlassmorphism from "../../components/BgGlassmorphism/BgGlassmorphism";
 
 //
 // const POSTS: PostDataType[] = DEMO_POSTS;
@@ -46,7 +46,7 @@ const PageHome = () => {
       {/* ======== ALL SECTIONS ======== */}
       <div className="relative overflow-hidden">
         {/* ======== BG GLASS ========  */}
-         <BgGlassmorphism />
+         {/* <BgGlassmorphism /> */}
          <div className="container relative">
         {/* ======= START CONTAINER ============= */}
         {/* <div className="container relative">
