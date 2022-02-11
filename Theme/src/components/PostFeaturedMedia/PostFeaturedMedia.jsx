@@ -21,7 +21,7 @@ const PostFeaturedMedia = ({
   post,
   isHover = false,
 }) => {
-  const { featuredImage, postType, videoUrl, galleryImgs, audioUrl } = post;
+  const { source_domain , facebook_shares } = post;
 
   const videoRef = useRef(null);
 
@@ -42,56 +42,56 @@ const PostFeaturedMedia = ({
     (cardIntersectionObserver?.intersectionRatio || -1) > PREV_RATIO;
   PREV_RATIO = cardIntersectionObserver?.intersectionRatio || 0;
 
-  const isPostMedia = () => postType === "video" || postType === "audio";
+  //const isPostMedia = () => postType === "video" || postType === "audio";
 
-  const renderGallerySlider = () => {
-    if (!galleryImgs) return null;
-    return <GallerySlider galleryImgs={galleryImgs} />;
-  };
+  // const renderGallerySlider = () => {
+  //   if (!galleryImgs) return null;
+  //   return <GallerySlider galleryImgs={galleryImgs} />;
+  // };
 
-  const renderContent = () => {
-    // GALLERY
-    if (postType === "gallery") {
-      return renderGallerySlider();
-    }
+  // const renderContent = () => {
+  //   // GALLERY
+  //   // if (postType === "gallery") {
+  //   //   return renderGallerySlider();
+  //   // }
 
-    // VIDEO
-    if (
-      postType === "video" &&
-      !!videoUrl &&
-      (!IS_MOBILE ? isHover : !!IN_VIEW)
-    ) {
-      return <MediaVideo isHover videoUrl={videoUrl} />;
-    }
+  //   // VIDEO
+  //   // if (
+  //   //   postType === "video" &&
+  //   //   !!videoUrl &&
+  //   //   (!IS_MOBILE ? isHover : !!IN_VIEW)
+  //   // ) {
+  //   //   return <MediaVideo isHover videoUrl={videoUrl} />;
+  //   // }
 
-    // AUDIO
-    if (postType === "audio" && !!audioUrl) {
-      return <MediaAudio post={post} />;
-    }
+  //   // AUDIO
+  //   // if (postType === "audio" && !!audioUrl) {
+  //   //   return <MediaAudio post={post} />;
+  //   // }
 
-    // ICON
-    return (
-      <div className="absolute inset-0">
-        {isPostMedia() && (
-          <span className="absolute inset-0 flex items-center justify-center ">
-            <PostTypeFeaturedIcon
-              className="hover:scale-105 transform cursor-pointer transition-transform nc-will-change-transform"
-              postType={postType}
-            />
-          </span>
-        )}
-      </div>
-    );
-  };
+  //   // ICON
+  //   return (
+  //     <div className="absolute inset-0">
+  //       {
+  //         <span className="absolute inset-0 flex items-center justify-center ">
+  //           <PostTypeFeaturedIcon
+  //             className="hover:scale-105 transform cursor-pointer transition-transform nc-will-change-transform"
+  //             postType={"https://picsum.photos/200/300"}
+  //           />
+  //         </span>
+  //       }
+  //     </div>
+  //   );
+  // };
 
   return (
     <div
       className={`nc-PostFeaturedMedia relative ${className}`}
       data-nc-id="PostFeaturedMedia"
-      ref={videoRef}
+     // ref={videoRef}
     >
-      <NcImage containerClassName="absolute inset-0" src={featuredImage} />
-      {renderContent()}
+      <NcImage containerClassName="absolute inset-0" src={"https://picsum.photos/200/300"} />
+     {/* // {renderContent()} */}
     </div>
   );
 };

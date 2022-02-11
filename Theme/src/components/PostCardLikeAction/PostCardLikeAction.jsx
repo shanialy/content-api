@@ -13,26 +13,23 @@ import twFocusClass from "../../utils/twFocusClass";
 
 const PostCardLikeAction = ({
   className = "px-3 h-8 text-xs",
-  id,
+  //id,
   twitter_shares,
-  isLiked = true,
-  onClickLike = () => {},
+  //isLiked = true,
+//  onClickLike = () => {},
 }) => {
+  console.log(twitter_shares + "in the action")
   return (
     <button
-      className={`nc-PostCardLikeAction relative min-w-[68px] flex items-center rounded-full leading-none group transition-colors ${className} ${twFocusClass()} ${
-        isLiked
-          ? "text-rose-600 bg-rose-50 dark:bg-rose-100"
-          : "text-neutral-700 bg-neutral-50 dark:text-neutral-200 dark:bg-neutral-800 hover:bg-rose-50 dark:hover:bg-rose-100 hover:text-rose-600 dark:hover:text-rose-500"
-      }`}
-      onClick={() => onClickLike(id)}
+      className={`nc-PostCardLikeAction relative min-w-[68px] flex items-center rounded-full leading-none group transition-colors ${className}`}
+     // onClick={() => onClickLike(id)}
       title="Liked"
       data-nc-id="PostCardLikeAction"
     >
       <svg
         width="24"
         height="24"
-        fill={isLiked ? "currentColor" : "none"}
+        fill={ "currentColor" }
         viewBox="0 0 24 24"
       >
         <path
@@ -47,10 +44,9 @@ const PostCardLikeAction = ({
       </svg>
 
       <span
-        className={`ml-1 ${
-          isLiked ? "text-rose-600" : "text-neutral-900 dark:text-neutral-200"
-        }`}
+        className={`ml-1`}
       >
+      
         {convertNumbThousand(twitter_shares)}
       </span>
     </button>

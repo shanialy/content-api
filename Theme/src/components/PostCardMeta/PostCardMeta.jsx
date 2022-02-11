@@ -16,7 +16,7 @@ const PostCardMeta = ({
   hiddenAvatar = false,
   size = "normal",
 }) => {
-  const { date, author } = meta;
+  const {title, category, date_download ,twitter_shares ,facebook_shares } = meta;
   const href = "/"
   return (
     <div
@@ -45,7 +45,7 @@ const PostCardMeta = ({
           ·
         </span>
         <span className="text-neutral-500 dark:text-neutral-400 font-normal">
-          {date}
+          {date_download}
         </span>
       </>
     </div>

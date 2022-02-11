@@ -20,15 +20,14 @@ const CategoryBadgeList = ({
       className={`nc-CategoryBadgeList ${className}`}
       data-nc-id="CategoryBadgeList"
     >
-      {/* {categories.map((item, index) => (
+    
         <Badge
           className={itemClass}
-          key={index}
-          name={item.name}
+          name={categories}
           href={href}
-          color={item.color }
+          color="#808080"
         />
-      ))} */}
+    
     </div>
   );
 };
