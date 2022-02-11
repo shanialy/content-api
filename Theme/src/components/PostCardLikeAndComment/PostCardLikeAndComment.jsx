@@ -18,6 +18,7 @@ const PostCardLikeAndComment = ({
   postData,
   onClickLike = () => {},
 }) => {
+  const href = "/"
   return (
     <div
       className={`nc-PostCardLikeAndComment flex items-center space-x-2 ${className}`}
@@ -25,13 +26,13 @@ const PostCardLikeAndComment = ({
     >
       <PostCardLikeContainer
         className={itemClass}
-        like={postData.like}
+        like={postData.twitter_shares}
         onClickLike={onClickLike}
-        postId={postData.id}
+        // postId={postData.id}
       />
       <PostCardCommentBtn
-        href={postData.href}
-        commentCount={postData.commentCount}
+        href={href}
+        commentCount={postData.facebook_shares}
         className={`${
           hiddenCommentOnMobile ? "hidden sm:flex" : "flex"
         }  ${itemClass}`}

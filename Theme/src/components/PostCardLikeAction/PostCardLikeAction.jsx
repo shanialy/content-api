@@ -5,7 +5,7 @@ import twFocusClass from "../../utils/twFocusClass";
 
 // export interface PostCardLikeActionProps {
 //   className?: string;
-//   postId: PostDataType["id"];
+//   id: PostDataType["id"];
 //   likeCount: number;
 //   isLiked: boolean;
 //   onClickLike?: (id: PostDataType["id"]) => void;
@@ -13,9 +13,9 @@ import twFocusClass from "../../utils/twFocusClass";
 
 const PostCardLikeAction = ({
   className = "px-3 h-8 text-xs",
-  postId,
-  likeCount,
-  isLiked,
+  id,
+  twitter_shares,
+  isLiked = true,
   onClickLike = () => {},
 }) => {
   return (
@@ -25,7 +25,7 @@ const PostCardLikeAction = ({
           ? "text-rose-600 bg-rose-50 dark:bg-rose-100"
           : "text-neutral-700 bg-neutral-50 dark:text-neutral-200 dark:bg-neutral-800 hover:bg-rose-50 dark:hover:bg-rose-100 hover:text-rose-600 dark:hover:text-rose-500"
       }`}
-      onClick={() => onClickLike(postId)}
+      onClick={() => onClickLike(id)}
       title="Liked"
       data-nc-id="PostCardLikeAction"
     >
@@ -51,7 +51,7 @@ const PostCardLikeAction = ({
           isLiked ? "text-rose-600" : "text-neutral-900 dark:text-neutral-200"
         }`}
       >
-        {convertNumbThousand(likeCount)}
+        {convertNumbThousand(twitter_shares)}
       </span>
     </button>
   );

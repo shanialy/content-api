@@ -25,7 +25,7 @@ import ButtonCircle from "../../components/Button/ButtonCircle";
 // import CardCategory2 from "../../components/CardCategory2/CardCategory2";
 // import Tag from "../../components/Tag/Tag";
 // import CardAuthorBox2 from "../../components/CardAuthorBox2/CardAuthorBox2";
-import {  gql, useQuery } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 import { useSearchkitVariables, useSearchkit, withSearchkit, withSearchkitRouting } from '@searchkit/client'
 
 
@@ -35,13 +35,6 @@ import { useSearchkitVariables, useSearchkit, withSearchkit, withSearchkitRoutin
 export const PageSearchProps = {
   className: String
 }
-
-// const posts = DEMO_POSTS.filter((_, i) => i < 12);
-// const cats = DEMO_CATEGORIES.filter((_, i) => i < 15);
-// const tags = DEMO_CATEGORIES.filter((_, i) => i < 32);
-// const authors = DEMO_AUTHORS.filter((_, i) => i < 12);
-
-/////////////////////////////////////////adding query//////////////////////////////////////////////////////////////
 
 const query = gql`
 query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $sortBy: String) {
@@ -88,16 +81,16 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
         ... on ResultHit {
           id
           fields {
-              article_length
-              category
-              authors
-              date_download
-              language
-              facebook_shares
-              twitter_shares
-              maintext
-              source_domain
-              title
+  article_length
+  category
+  authors
+  date_download
+  language
+  facebook_shares
+  twitter_shares
+  maintext
+  source_domain
+  title
             __typename
           }
           __typename
@@ -107,14 +100,14 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
       __typename
     }
     facets {
-          identifier
-          type
-          label
-          display
+      identifier
+      type
+      label
+      display
       entries {
-          label
-          count
-          __typename
+        label
+        count
+        __typename
       }
       __typename
     }
@@ -123,32 +116,12 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
 }
 `
 
+// const posts = DEMO_POSTS.filter((_, i) => i < 12);
+// const cats = DEMO_CATEGORIES.filter((_, i) => i < 15);
+// const tags = DEMO_CATEGORIES.filter((_, i) => i < 32);
+// const authors = DEMO_AUTHORS.filter((_, i) => i < 12);
 
-///////////////////////////////////////////////////facet/////////////////////////////////////
 
-const Facet = ({facet}) =>{
-  const api = useSearchkit()
-
-  return (
-    <div>
-            <h1>All facets</h1>
-
-      <h3>{facet.label}</h3>
-      <h3>{facet.identifier}</h3>
-    <ul>
-      {facet.entries ? facet.entries.map((entry) => (
-        <li 
-        onClick={() => {
-          api.toggleFilter({ identifier: facet.identifier, value: entry.label })
-          api.search()
-        }}
-        
-        >{entry.label} - {entry.count}</li>
-      )): "waiting..."}
-    </ul>
-    </div>
-  )
-}
 
 ///////////////////////////////////////////////////////Sorting
 
@@ -164,7 +137,8 @@ const FILTERS = [
 ];
 
 const TABS = ["Articles", "Categories", "Tags", "Authors"];
-const posts = DEMO_POSTS.filter((_, i) => i < 16);
+
+//const posts = DEMO_POSTS.filter((_, i) => i < 16);
 
 const PageSearch = ({ className = "" }) => {
 
@@ -173,25 +147,35 @@ const PageSearch = ({ className = "" }) => {
   const variables = useSearchkitVariables()
   const { data, error ,loading } = useQuery(query, { variables })
 
-  if(error){console.log("An error Occured")}
+  if(error){console.log("An error Occured" + error)}
      
   if(loading){console.log("Data is loading")}
 
- // console.log(data.results.facets[0].entries)
-  
+  if(!loading){console.log(data.results.hits.items[0].fields.twitter_shares)}
 
-  const authorSet  = data.results.facets[0].entries
 
-  console.log(authorSet)
+// const dataSet = data.results.hits.items 
   /////////////////////////////////////////////////////////////////////
+
+
+
+
+  ////////////////////////////////////////////////creating a render function /////////////////////////
+
+
+  // const renderCard=(item ,index)=>{
+  //   return(
+  //     console.log(item.fie)
+  //     //<Card11 key={item.id} post={item} />
+  //   )
+  // }
 
   let s = "Technology";
 
   // Tag and category have same data type - we will use one demo data
 
 
-   const [tabActive, setTabActive] = useState(TABS[0]);
-
+  
  
   return (
     <div className={`nc-PageSearch ${className}`} data-nc-id="PageSearch">
@@ -285,11 +269,8 @@ const PageSearch = ({ className = "" }) => {
       <div className="container py-16 lg:py-28 space-y-16 lg:space-y-28">
         <main>
           {/* TABS FILTER */}
-          {/* {data.results.facets.map((facet,index) => (
-        
-        console.log(<Facet facet={facet}/>)
+         
 
-     ))} */}
        {/* Here i applied Models */}
 
           <div className="flex flex-col sm:items-center sm:justify-between sm:flex-row">
@@ -306,13 +287,26 @@ const PageSearch = ({ className = "" }) => {
 
           {/* LOOP ITEMS */}
           {/* LOOP ITEMS POSTS */}
-          {tabActive === "Articles" && (
+          {/* //////////////////////////////////////////////////////Cards */}
+
+
+          {!loading ? 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {posts.map((post) => (
-                <Card11 key={post.id} post={post} />
-              ))}
+              {data.results? data.results.hits.items.map((value , index) => {
+        
+                  return(
+                  //console.log(value.fields)
+        
+                      <Card11 key={index} post={value.fields} />
+                  
+                 )
+                }
+          
+
+              ) : <h1>Error in Debugging</h1>}
+              
             </div>
-          )}
+          : <h1>There occured an error on line 309</h1>}
         </main>
 
         <SectionSubscribe2 />
@@ -321,5 +315,5 @@ const PageSearch = ({ className = "" }) => {
   );
 };
 
-export default withSearchkit(withSearchkitRouting(PageSearch));
+export default PageSearch;
 

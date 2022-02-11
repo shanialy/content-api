@@ -11,9 +11,10 @@ import twFocusClass from "../../utils/twFocusClass";
 
 const PostCardCommentBtn = ({
   className = "flex px-3 h-8 text-xs",
-  href,
-  commentCount,
+  facebook_shares,
 }) => {
+
+  const href = "/"
   return (
     <Link
       to={href + "#comments"}
@@ -50,7 +51,7 @@ const PostCardCommentBtn = ({
       </svg>
 
       <span className="ml-1 text-neutral-900 dark:text-neutral-200">
-        {commentCount}
+        {facebook_shares}
       </span>
     </Link>
   );

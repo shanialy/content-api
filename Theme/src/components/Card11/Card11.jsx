@@ -7,12 +7,7 @@ import PostCardLikeAndComment from "../../components/PostCardLikeAndComment/Post
 import PostCardMeta from "../../components/PostCardMeta/PostCardMeta";
 import PostFeaturedMedia from "../../components/PostFeaturedMedia/PostFeaturedMedia";
 
-// export interface Card11Props {
-//   className?: string;
-//   post: PostDataType;
-//   ratio?: string;
-//   hiddenAuthor?: boolean;
-// }
+
 
 const Card11 = ({
   className = "h-full",
@@ -20,7 +15,8 @@ const Card11 = ({
   hiddenAuthor = false,
   ratio = "aspect-w-4 aspect-h-3",
 }) => {
-  const { title, href, categories, date } = post;
+  const { title, category, date_download ,twitter_shares ,facebook_shares } = post;
+  const href = "/"
 
   const [isHover, setIsHover] = useState(false);
 
@@ -41,14 +37,14 @@ const Card11 = ({
       </div>
       <Link to={href} className="absolute inset-0"></Link>
       <span className="absolute top-3 inset-x-3">
-        <CategoryBadgeList categories={categories} />
+        <CategoryBadgeList categories={category} />
       </span>
 
       <div className="p-4 flex flex-col flex-grow space-y-3">
         {!hiddenAuthor ? (
           <PostCardMeta meta={post} />
         ) : (
-          <span className="text-xs text-neutral-500">{date}</span>
+          <span className="text-xs text-neutral-500">{date_download}</span>
         )}
         <h2 className="nc-card-title block text-base font-semibold text-neutral-900 dark:text-neutral-100 ">
           <Link to={href} className="line-clamp-2" title={title}>

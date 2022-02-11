@@ -13,20 +13,22 @@ const CategoryBadgeList = ({
   itemClass,
   categories,
 }) => {
+
+  const href = "/"
   return (
     <div
       className={`nc-CategoryBadgeList ${className}`}
       data-nc-id="CategoryBadgeList"
     >
-      {categories.map((item, index) => (
+      {/* {categories.map((item, index) => (
         <Badge
           className={itemClass}
           key={index}
           name={item.name}
-          href={item.href}
+          href={href}
           color={item.color }
         />
-      ))}
+      ))} */}
     </div>
   );
 };
