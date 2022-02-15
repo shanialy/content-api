@@ -5,10 +5,10 @@ import { accountService } from "../_services/account.Service";
 import { Nav } from "../_components/Nav";
 import { Alert } from "../_components/Alert";
 import { PrivateRoute } from "../_components/PrivateRoute";
-import { Home } from "../home";
-import { Profile } from "../profile";
-import { Admin } from "../admin";
-import { User } from "../user";
+import { Home } from "../home/Index";
+import { Profile } from "../profile/Index";
+import { Admin } from "../admin/Index";
+import { User } from "../user/Index";
 
 function App() {
   const { pathname } = useLocation();
