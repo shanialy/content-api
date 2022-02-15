@@ -86,6 +86,7 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
   authors
   date_download
   language
+  image_url
   facebook_shares
   twitter_shares
   maintext
@@ -153,6 +154,8 @@ const PageSearch = ({ className = "" }) => {
 
   if(!loading){console.log(data.results.hits.items[0].fields.twitter_shares)}
 
+
+  console.log(data)
 
 // const dataSet = data.results.hits.items 
   /////////////////////////////////////////////////////////////////////

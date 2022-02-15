@@ -21,7 +21,7 @@ const PostFeaturedMedia = ({
   post,
   isHover = false,
 }) => {
-  const { source_domain , facebook_shares } = post;
+  const { source_domain , facebook_shares  ,image_url} = post;
 
   const videoRef = useRef(null);
 
@@ -90,7 +90,7 @@ const PostFeaturedMedia = ({
       data-nc-id="PostFeaturedMedia"
      // ref={videoRef}
     >
-      <NcImage containerClassName="absolute inset-0" src={"https://picsum.photos/200/300"} />
+      <NcImage containerClassName="absolute inset-0" src={image_url} />
      {/* // {renderContent()} */}
     </div>
   );

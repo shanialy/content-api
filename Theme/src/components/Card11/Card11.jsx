@@ -15,7 +15,7 @@ const Card11 = ({
   hiddenAuthor = false,
   ratio = "aspect-w-4 aspect-h-3",
 }) => {
-  const { title, category, date_download ,twitter_shares ,facebook_shares } = post;
+  const { title, category, date_download , image_url ,twitter_shares ,facebook_shares } = post;
   const href = "/"
 
   const [isHover, setIsHover] = useState(false);

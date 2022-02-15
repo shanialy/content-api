@@ -9,20 +9,20 @@ import Badge from "../../components/Badge/Badge";
 // }
 
 const CategoryBadgeList = ({
-  className = "flex flex-wrap space-x-2",
-  itemClass,
+  className = "flex flex-wrap space-x-4 ",
   categories,
 }) => {
 
-  const href = "/"
+  const href = ""
+ 
   return (
+   
     <div
       className={`nc-CategoryBadgeList ${className}`}
       data-nc-id="CategoryBadgeList"
     >
     
         <Badge
-          className={itemClass}
           name={categories}
           href={href}
           color="#808080"
