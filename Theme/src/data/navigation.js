@@ -178,52 +178,52 @@ const archviePageChildrenMenus = [
     href: "/archive/the-demo-archive-slug",
     name: "Archive Page",
   },
-  {
-    id: ncNanoId(),
-    href: "/archive-audio/the-demo-archive-slug",
-    name: "Archive Audio",
-  },
-  {
-    id: ncNanoId(),
-    href: "/archive-video/the-demo-archive-slug",
-    name: "Archive Video",
-  },
-  {
-    id: ncNanoId(),
-    href: "/author/the-demo-author-slug",
-    name: "Author Page",
-    type: "dropdown",
-    children: [
-      {
-        id: ncNanoId(),
-        href: "/author/the-demo-author-slug",
-        name: "Author Page 1",
-      },
-      {
-        id: ncNanoId(),
-        href: "/author-v2/the-demo-author-slug",
-        name: "Author Page 2",
-      },
-    ],
-  },
-  {
-    id: ncNanoId(),
-    href: "/search",
-    name: "Search Page",
-    type: "dropdown",
-    children: [
-      {
-        id: ncNanoId(),
-        href: "/search",
-        name: "Seach Page 1",
-      },
-      {
-        id: ncNanoId(),
-        href: "/search-v2",
-        name: "Search Page 2",
-      },
-    ],
-  },
+  // {
+  //   id: ncNanoId(),
+  //   href: "/archive-audio/the-demo-archive-slug",
+  //   name: "Archive Audio",
+  // },
+  // {
+  //   id: ncNanoId(),
+  //   href: "/archive-video/the-demo-archive-slug",
+  //   name: "Archive Video",
+  // },
+  // {
+  //   id: ncNanoId(),
+  //   href: "/author/the-demo-author-slug",
+  //   name: "Author Page",
+  //   type: "dropdown",
+  //   children: [
+  //     {
+  //       id: ncNanoId(),
+  //       href: "/author/the-demo-author-slug",
+  //       name: "Author Page 1",
+  //     },
+  //     {
+  //       id: ncNanoId(),
+  //       href: "/author-v2/the-demo-author-slug",
+  //       name: "Author Page 2",
+  //     },
+  //   ],
+  // },
+  // {
+  //   id: ncNanoId(),
+  //   href: "/search",
+  //   name: "Search Page",
+  //   type: "dropdown",
+  //   children: [
+  //     {
+  //       id: ncNanoId(),
+  //       href: "/search",
+  //       name: "Seach Page 1",
+  //     },
+  //     {
+  //       id: ncNanoId(),
+  //       href: "/search-v2",
+  //       name: "Search Page 2",
+  //     },
+  //   ],
+  // },
 ];
 
 const singleChildrenMenus = {
@@ -314,53 +314,69 @@ const demoChildMenus = [
 
 const templateChilds = [
   ...archviePageChildrenMenus,
-  singleChildrenMenus,
+  // singleChildrenMenus,
+  // {
+  //   id: ncNanoId(),
+  //   href: "/single-gallery/this-is-single-slug",
+  //   name: "Single Gallery",
+  // },
+  // {
+  //   id: ncNanoId(),
+  //   href: "/single-audio/this-is-single-slug",
+  //   name: "Single Audio",
+  // },
+  // {
+  //   id: ncNanoId(),
+  //   href: "/single-video/this-is-single-slug",
+  //   name: "Single Video",
+  // },
+];
+
+const discoveryDropdwonItems = [
   {
     id: ncNanoId(),
-    href: "/single-gallery/this-is-single-slug",
-    name: "Single Gallery",
-  },
-  {
-    id: ncNanoId(),
-    href: "/single-audio/this-is-single-slug",
-    name: "Single Audio",
-  },
-  {
-    id: ncNanoId(),
-    href: "/single-video/this-is-single-slug",
-    name: "Single Video",
+    href: "/content-feed",
+    name: "Content Feed",
   },
 ];
+
 
 export const NAVIGATION_DEMO = [
   {
     id: ncNanoId(),
     href: "/",
     name: "Home",
-    type: "dropdown",
-    children: demoChildMenus,
+    // type: "dropdown",
+    // children: demoChildMenus,
   },
-  {
-    id: ncNanoId(),
-    href: "#",
-    name: "Five cols",
-    type: "megaMenu",
-    megaMenu: megaMenuDemo,
-  },
+  // {
+  //   id: ncNanoId(),
+  //   href: "#",
+  //   name: "Five cols",
+  //   type: "megaMenu",
+  //   megaMenu: megaMenuDemo,
+  // },
 
-  {
-    id: ncNanoId(),
-    href: "#",
-    name: "Fewer cols",
-    type: "megaMenu",
-    megaMenu: megaMenu3ItemDemo,
-  },
+  // {
+  //   id: ncNanoId(),
+  //   href: "#",
+  //   name: "Fewer cols",
+  //   type: "megaMenu",
+  //   megaMenu: megaMenu3ItemDemo,
+  // },
   {
     id: ncNanoId(),
     href: "#",
     name: "Templates",
     type: "dropdown",
     children: templateChilds,
+  },
+  {
+    id: ncNanoId(),
+    href: "#",
+    name: "discovery",
+    type: "dropdown",
+    children: discoveryDropdwonItems,
   },
   {
     id: ncNanoId(),

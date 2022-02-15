@@ -12,7 +12,7 @@ import DarkModeContainer from "../../containers/DarkModeContainer/DarkModeContai
 
 const MainNav1 = ({ isTop }) => {
   return (
-    <div
+    <div 
       className={`nc-MainNav1 relative z-10 ${
         isTop ? "onTop " : "notOnTop backdrop-filter"
       }`}
@@ -23,13 +23,13 @@ const MainNav1 = ({ isTop }) => {
           <Navigation />
         </div>
         <div className="flex-shrink-0 flex items-center justify-end text-neutral-700 dark:text-neutral-100 space-x-1">
-          <div className="hidden items-center xl:flex space-x-1">
-            <DarkModeContainer />
-            <SearchDropdown />
+          <div className="hidden items-center xl:flex space-x-1" >
+            {/* <DarkModeContainer /> */}
+            {/* <SearchDropdown /> */}
             <div className="px-1" />
             <ButtonPrimary href="/login">Sign up</ButtonPrimary>
           </div>
-          <div className="flex items-center xl:hidden">
+          <div className="flex items-center xl:hidden"  > 
             <ButtonPrimary href="/login">Sign up</ButtonPrimary>
             <div className="px-1" />
             <MenuBar />

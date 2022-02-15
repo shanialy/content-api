@@ -1,9 +1,9 @@
 import React from "react";
-import Input from "components/Input/Input";
-import ButtonPrimary from "components/Button/ButtonPrimary";
-import Select from "components/Select/Select";
-import Textarea from "components/Textarea/Textarea";
-import Label from "components/Label/Label";
+import Input from "../../components/Input/Input";
+import ButtonPrimary from "../../components/Button/ButtonPrimary";
+import Select from "../../components/Select/Select";
+import Textarea from "../../components/Textarea/Textarea";
+import Label from "../../components/Label/Label";
 
 const DashboardSubmitPost = () => {
   return (

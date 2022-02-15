@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from "react";
 import Heading from "../Heading/Heading";
-import {  gql, useQuery } from '@apollo/client';
-import { useSearchkitVariables, useSearchkit } from '@searchkit/client'
-import { withSearchkit, withSearchkitRouting } from '@searchkit/client'
+import { gql, useQuery } from "@apollo/client";
+import { useSearchkitVariables, useSearchkit } from "@searchkit/client";
+import { withSearchkit, withSearchkitRouting } from "@searchkit/client";
 // import Glide from "@glidejs/glide";
 // import { PostDataType, TaxonomyType } from "data/types";
 // import {DEMO_CATEGORIES  } from "../../data/taxonomies";
@@ -14,84 +14,89 @@ import CardCategory4 from "../CardCategory4/CardCategory4";
 // import CardCategory5 from "../CardCategory5/CardCategory5";
 
 const query = gql`
-query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $sortBy: String) {
-  results(query: $query, filters: $filters) {
-    summary {
-      total
-      appliedFilters {
-        id
-        identifier
-        display
-        label
-        ... on DateRangeSelectedFilter {
-          dateMin
-          dateMax
-          __typename
-        }
-
-        ... on ValueSelectedFilter {
-          value
-          __typename
-        }
-        __typename
-      }
-      sortOptions {
-        id
-        label
-        __typename
-      }
-      query
-      __typename
-    }
-    hits(page: $page, sortBy: $sortBy) {
-      page {
+  query resultSet(
+    $query: String
+    $filters: [SKFiltersSet]
+    $page: SKPageInput
+    $sortBy: String
+  ) {
+    results(query: $query, filters: $filters) {
+      summary {
         total
-        totalPages
-        pageNumber
-        from
-        size
+        appliedFilters {
+          id
+          identifier
+          display
+          label
+          ... on DateRangeSelectedFilter {
+            dateMin
+            dateMax
+            __typename
+          }
+
+          ... on ValueSelectedFilter {
+            value
+            __typename
+          }
+          __typename
+        }
+        sortOptions {
+          id
+          label
+          __typename
+        }
+        query
         __typename
       }
-      sortedBy
+      hits(page: $page, sortBy: $sortBy) {
+        page {
+          total
+          totalPages
+          pageNumber
+          from
+          size
+          __typename
+        }
+        sortedBy
 
-      items {
-        ... on ResultHit {
-          id
-          fields {
-  article_length
-  category
-  authors
-  date_download
-  language
-  facebook_shares
-  twitter_shares
-  maintext
-  source_domain
-  title
+        items {
+          ... on ResultHit {
+            id
+            fields {
+              article_length
+              category
+              authors
+              date_download
+              language
+              facebook_shares
+              twitter_shares
+              maintext
+              source_domain
+              title
+              __typename
+            }
             __typename
           }
           __typename
         }
         __typename
       }
-      __typename
-    }
-    facets {
-      identifier
-      type
-      label
-      display
-      entries {
+      facets {
+        identifier
+        type
         label
-        count
+        display
+        entries {
+          label
+          count
+          __typename
+        }
         __typename
       }
       __typename
     }
-    __typename
   }
-}
-`
+`;
 
 // const Facet = ({facet}) =>{
 //   const api = useSearchkit()
@@ -104,12 +109,12 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
 //       <h3>{facet.identifier}</h3>
 //     <ul>
 //       {facet.entries ? facet.entries.map((entry) => (
-//         <li 
+//         <li
 //         onClick={() => {
 //           api.toggleFilter({ identifier: facet.identifier, value: entry.label })
 //           api.search()
 //         }}
-        
+
 //         >{entry.label} - {entry.count}</li>
 //       )): "waiting..."}
 //     </ul>
@@ -130,14 +135,12 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
 //                 api.setSortBy( sort.id )
 //                 api.search()
 //               }}
-      
-      
+
 //       >{sort.id}</h4>
 
-
-
 //     <ul>
-      {/* {facet.entries ? facet.entries.map((entry) => (
+{
+  /* {facet.entries ? facet.entries.map((entry) => (
         <li 
         onClick={() => {
           api.toggleFilter({ identifier: facet.identifier, value: entry.label })
@@ -146,11 +149,14 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
       }
         
         >{entry.label} - {entry.count}</li>
-      )): "waiting..."} */}
-    {/* </ul>
+      )): "waiting..."} */
+}
+{
+  /* </ul>
     </div>
   )
-} */}
+} */
+}
 
 // export interface SectionSliderNewCategoriesProps {
 //   className?: string;
@@ -170,25 +176,25 @@ const SectionSliderNewCategories = ({
   categories,
   itemPerRow = 5,
   categoryCardType = "card3",
-}
-) => {
-  const variables = useSearchkitVariables()
-  const { data, error,loading } = useQuery(query, { variables })
+}) => {
+  const variables = useSearchkitVariables();
+  const { data, error, loading } = useQuery(query, { variables });
 
-
-  if(error){console.log("Error")}
- if(loading){console.log("Loading....")}
-//  if(!loading){console.log(data.results)
-//  console.log(data)
-const renderCard = (entry,index) => {
-
-  return(
-    <>
-    <CardCategory4 label={entry.label} count={entry.count} index={index} />
-    </>
-    )
-
-}
+  if (error) {
+    console.log("Error");
+  }
+  if (loading) {
+    console.log("Loading....");
+  }
+  //  if(!loading){console.log(data.results)
+  //  console.log(data)
+  const renderCard = (entry, index) => {
+    return (
+      <>
+        <CardCategory4 label={entry.label} count={entry.count} index={index} />
+      </>
+    );
+  };
   // const renderCard = (items) => {
   //   if(items.identifier == "category"){
   //     console.log(items)
@@ -201,8 +207,7 @@ const renderCard = (entry,index) => {
   //     })}
   //     </div>
   //     )}
-     
-      
+
   //   }
   // const UNIQUE_CLASS = ncNanoId("sliderNewCategories_");
 
@@ -262,36 +267,31 @@ const renderCard = (entry,index) => {
 
   return (
     <>
-        <Heading desc={subHeading} hasNextPrev>
-          {heading}
-         </Heading>
+      <Heading desc={subHeading} hasNextPrev>
+        {heading}
+      </Heading>
 
+      {!loading ? (
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
+          {data.results.facets.map((items) => {
+            if (items.identifier == "category") {
+              return items.entries.map((entry, index) => {
+                // console.log(entry.label)
+                return (
+                  <li key={index}>
+                    {/* {entry.label} */}
+                    {renderCard(entry, index)}
+                  </li>
+                );
+              });
+            }
+          })}
+        </div>
+      ) : (
+        <h1>loading..</h1>
+      )}
+    </>
+  );
+};
 
-         {!loading ? 
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
-              { data.results.facets.map((items) => {
-                if(items.identifier == "category"){
-                  return(
- 
-                  items.entries.map((entry,index)=>{
-// console.log(entry.label)
-               return( <li key={index}>
-                  {/* {entry.label} */}
-                  {renderCard(entry,index)}
-                </li>
-               )
-                }))
-                }
-                
-})}
-
- 
-            </div>
-  :<h1>loading..</h1>         }
-</>
-      );
-    }
-
-
-      
 export default withSearchkit(withSearchkitRouting(SectionSliderNewCategories));
