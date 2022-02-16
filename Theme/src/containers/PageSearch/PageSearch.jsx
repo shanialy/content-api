@@ -1,9 +1,4 @@
 import React, {useState} from "react";
-import { DEMO_POSTS } from "../../data/posts";
-import Index from './Index'
-// import { PostDataType } from "data/types";
-// import Pagination from "../../components/Pagination/Pagination";
-// import ButtonPrimary from "../../components/Button/ButtonPrimary";
 import ModalCategories from "./ModalCategories";
 import { DEMO_CATEGORIES, DEMO_TAGS } from "../../data/taxonomies";
 import ModalTags from "./ModalTags";
@@ -15,16 +10,8 @@ import { Helmet } from "react-helmet";
 import SectionSubscribe2 from "../../components/SectionSubscribe2/SectionSubscribe2";
 import NcImage from "../../components/NcImage/NcImage";
 import NcLink from "../../components/NcLink/NcLink";
-//import SectionSliderNewAuthors from "../../components/SectionSliderNewAthors/SectionSliderNewAuthors";
-// import { DEMO_AUTHORS } from "../../data/authors";
-// import ButtonSecondary from "../../components/Button/ButtonSecondary";
-// import SectionGridCategoryBox from "../../components/SectionGridCategoryBox/SectionGridCategoryBox";
-// import BackgroundSection from "../../components/BackgroundSection/BackgroundSection";
  import Card11 from "../../components/Card11/Card11";
 import ButtonCircle from "../../components/Button/ButtonCircle";
-// import CardCategory2 from "../../components/CardCategory2/CardCategory2";
-// import Tag from "../../components/Tag/Tag";
-// import CardAuthorBox2 from "../../components/CardAuthorBox2/CardAuthorBox2";
 import { gql, useQuery } from '@apollo/client';
 import { useSearchkitVariables, useSearchkit, withSearchkit, withSearchkitRouting } from '@searchkit/client'
 
@@ -87,6 +74,7 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
   date_download
   language
   image_url
+  source_domain
   facebook_shares
   twitter_shares
   maintext
@@ -278,7 +266,9 @@ const PageSearch = ({ className = "" }) => {
 
           <div className="flex flex-col sm:items-center sm:justify-between sm:flex-row">
             <div className="flex space-x-2.5">
+
               <ModalCategories categories={DEMO_CATEGORIES} />
+
               <ModalTags tags={DEMO_TAGS} />
            
             </div>
@@ -288,18 +278,18 @@ const PageSearch = ({ className = "" }) => {
             </div>
           </div>
 
-          {/* LOOP ITEMS */}
-          {/* LOOP ITEMS POSTS */}
-          {/* //////////////////////////////////////////////////////Cards */}
+          
 
+               {/* passing our data in Card11 through map */}
 
           {!loading ? 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-8 mt-8 lg:mt-10">
+
               {data.results? data.results.hits.items.map((value , index) => {
         
                   return(
-                  //console.log(value.fields)
-        
+                  
+         
                       <Card11 key={index} post={value.fields} />
                   
                  )
@@ -309,7 +299,7 @@ const PageSearch = ({ className = "" }) => {
               ) : <h1>Error in Debugging</h1>}
               
             </div>
-          : <h1>There occured an error on line 309</h1>}
+          : <h1>There occured an error on line 309 in PageSearch</h1>}
         </main>
 
         <SectionSubscribe2 />

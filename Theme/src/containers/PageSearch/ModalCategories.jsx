@@ -15,20 +15,21 @@ export const ModalCategoriesProps = {
 
 const ModalCategories= () => {
 
+  // getting guery from index file 
+
   const variables = useSearchkitVariables()
   const { data, error ,loading } = useQuery(query, { variables })
 
   if(error){console.log("An error Occured" + error)}
      
   if(loading ){console.log("Data is loading")}
-
-
   
-  if(!loading){console.log(data.results)}
+  // if(!loading){console.log(data.results)}
   
-
+ 
 
   const renderModalContent = () => {
+    //passing Data to CardCategory1 throught map
     return (
       <div className="grid gap-6 sm:grid-cols-2 sm:py-2 md:gap-8 md:grid-cols-3 lg:grid-cols-4 xl:md:grid-cols-5">
         {data ?  data.results.facets[0].entries.map((cat) => (
@@ -42,6 +43,7 @@ const ModalCategories= () => {
 
   return (
     <div className="nc-ModalCategories">
+    {/* passing the renderContentfunction to NcModal */}
       <NcModal
         triggerText={
           <span>

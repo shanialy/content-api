@@ -7,6 +7,8 @@ import React, {
 } from "react";
 import checkInViewIntersectionObserver from "../../utils/isInViewPortIntersectionObserver";
 import PlaceIcon from "./PlaceIcon";
+import moment from 'moment'
+import dateFormat from 'dateformat';
 
 // export interface NcImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 //   containerClassName?: string;
@@ -17,11 +19,35 @@ const NcImage = ({
   alt = "nc-imgs",
   src = "",
   className = "object-cover w-full h-full",
+  source_domain,
+  date_download,
   ...args
 }) => {
+
+  //getting source_domain and date_download from PostFeaturedMedia
+
+
   let isMounted = false;
   const _containerRef = useRef(null);
   let _imageEl = null;
+
+  // making a function on date_download so that we can get the time  (need to import moment and dateFormat if you want to perform the function) we also used this in Card11 component
+
+ function relativeTime(date_download) {
+    try {
+      let ddate = dateFormat(date_download, "isoDateTime");
+      ddate = ddate.split("T");
+      let datePart = ddate[0];
+      let timePart = ddate[1].split("+")[0];
+
+      return moment(datePart + " " + timePart).fromNow();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  //console.log(relativeTime())
+
   // const darkmodeState = useAppSelector(selectDarkmodeState);
 
   const [__src, set__src] = useState("");
@@ -86,6 +112,23 @@ const NcImage = ({
       data-nc-id="NcImage"
       ref={_containerRef}
     >
+
+    {/* ///Rendring source_domain and time  */}
+        <span 
+        className="text-neutral-500 dark:text-neutral-400 font-normal"
+        style={{
+          height: "18px",
+          width: "100%",
+          backgroundColor: "#4f4f4f",
+          position: "absolute",
+          bottom: "1px",
+          opacity: "0.8",
+        }}
+      >
+        <p style={{fontSize: "12px" , paddingLeft :"10px", color : "#d2d2d2" }}>{source_domain} . {relativeTime(date_download)} </p>
+      </span>
+
+      
       {__src && imageLoaded ? (
         <img src={__src} className={className} alt={alt} {...args} />
       ) : (

@@ -11,15 +11,14 @@ import twFocusClass from "../../utils/twFocusClass";
 
 const PostCardCommentBtn = ({
   className = "flex px-3 h-8 text-xs",
-  commentCount,
+  facebook_shares,
 }) => {
 
-  const href = ""
+ //getting facebook_shares from  postCardlikeandComment
 
   return (
     <button
       className={`nc-PostCardLikeAction relative min-w-[68px] flex items-center rounded-full leading-none group transition-colors ${className}`}
-     // onClick={() => onClickLike(id)}
       title="Facebook_shares"
       data-nc-id="PostCardLikeAction"
     >
@@ -39,7 +38,7 @@ const PostCardCommentBtn = ({
 
 
       <span className="ml-1 text-neutral-900 dark:text-neutral-200">
-        {commentCount}
+        {facebook_shares}
       </span>
     </button>
   );

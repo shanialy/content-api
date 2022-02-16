@@ -16,6 +16,8 @@ const Avatar = ({
   imgUrl,
   userName,
 }) => {
+  // we are gettting the imgUrl and userName from PostCartMeta
+  
   const url = imgUrl || "";
   const name = userName || "John Doe";
   const _setBgColor = (name) => {

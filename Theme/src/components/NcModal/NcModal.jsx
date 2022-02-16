@@ -24,6 +24,10 @@ const NcModal = ({
   isOpenProp,
   onCloseModal,
 }) => {
+
+  //getting modalTitle , triggerText and renderContent from ModalCategories line 47
+
+
   let [isOpen, setIsOpen] = useState(!!isOpenProp);
 
   function closeModal() {

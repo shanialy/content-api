@@ -18,45 +18,14 @@ import PostCardLikeAction, {
 // }
 
 const PostCardLikeContainer = ({
-  like,
+  twitter_shares,
   // postId,
   // onClickLike,
   // ...args
 }) => {
-  console.log(like + "CArdlikecontainer")
-  // const recentLikeds = useAppSelector(selectRecentLikeds);
-  // const recentRemoveds = useAppSelector(selectRecentRemoveds);
-  // const dispatch = useAppDispatch();
 
-  // const isLiked = () => {
-  //   if (recentLikeds.includes(postId)) {
-  //     return true;
-  //   }
-  //   if (like.isLiked && !recentRemoveds.includes(postId)) {
-  //     return true;
-  //   }
-  //   return false;
-  // };
-
-  // const getLikeCount = () => {
-  //   // Recent Liked
-  //   if (recentLikeds.includes(postId)) {
-  //     return like.count + 1;
-  //   }
-  //   if (like.isLiked && recentRemoveds.includes(postId)) {
-  //     return like.count - 1;
-  //   }
-  //   return like.count;
-  // };
-
-  // const handleClickLike = () => {
-  //   if (isLiked()) {
-  //     dispatch(removeLikedByPostId(postId));
-  //   } else {
-  //     dispatch(addNewLikedByPostId(postId));
-  //   }
-  //   onClickLike && onClickLike(postId);
-  // };
+  //getting twitter_shares from postCartlikeandcomment component
+  
 
   return (
     <PostCardLikeAction
@@ -64,7 +33,7 @@ const PostCardLikeContainer = ({
       // isLiked={isLiked()}
       // likeCount={getLikeCount()}
      // postId={postId}
-     twitter_shares={like}
+     twitter_shares={twitter_shares}
     />
   );
 };

@@ -14,7 +14,13 @@ const CardCategory1 = ({
   size = "normal",
   taxonomy,
 }) => {
-  const { count, label, href = "/", thumbnail } = taxonomy;
+  //getting taxonomy from ModalCategories  line 36
+
+  const { count, label,thumbnail } = taxonomy;
+
+  const  href = "/"
+
+  
   return (
     <NavLink
       to={href}

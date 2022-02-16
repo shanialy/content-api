@@ -25,7 +25,7 @@ const CategoryBadgeList = ({
         <Badge
           name={categories}
           href={href}
-          color="#808080"
+          color="gray"
         />
     
     </div>
