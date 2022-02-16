@@ -9,6 +9,8 @@ import { withSearchkit, withSearchkitRouting } from '@searchkit/client'
 // import ncNanoId from "../../utils/ncNanoId";
 // import CardCategory3 from "../CardCategory3/CardCategory3";
 import CardCategory4 from "../CardCategory4/CardCategory4";
+import {CategoryImage} from "../../data/CategoryImages";
+import "./Removedot.css";
 // import CardCategory1 from "../CardCategory1/CardCategory1";
 // import CardCategory2 from "../CardCategory2/CardCategory2";
 // import CardCategory5 from "../CardCategory5/CardCategory5";
@@ -182,11 +184,19 @@ const SectionSliderNewCategories = ({
 //  console.log(data)
 const renderCard = (entry,index) => {
 
+  let categoryimage =  CategoryImage(entry.label);
   return(
     <>
-    <CardCategory4 label={entry.label} count={entry.count} index={index} />
-    </>
+    <CardCategory4 label={entry.label} count={entry.count} index={index}  
+    categoryimage={categoryimage} />
+   </>
     )
+
+  // return(
+  //   <>
+  //   <CardCategory4 label={entry.label} count={entry.count} index={index} />
+  //   </>
+  //   )
 
 }
   // const renderCard = (items) => {
@@ -275,10 +285,13 @@ const renderCard = (entry,index) => {
  
                   items.entries.map((entry,index)=>{
 // console.log(entry.label)
-               return( <li key={index}>
+               return( 
+               <ul className="rem">
+               <li key={index}>
                   {/* {entry.label} */}
                   {renderCard(entry,index)}
                 </li>
+                </ul>
                )
                 }))
                 }
