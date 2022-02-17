@@ -7,6 +7,7 @@ import Footer from "../components/Footer/Footer";
 // import PageArchive from "containers/PageArchive/PageArchive";
 // import PageAuthor from "containers/PageAuthor/PageAuthor";
 import PageSearch from "../containers/PageSearch/PageSearch";
+import CategoryCardShow from "../components/CategoryCardShow/CategoryCardShow";
 // import PageSingle from "containers/PageSingle/PageSingle";
 // import PageSingleHasSidebar from "containers/PageSingle/PageSingleHasSidebar";
 // import PageSingleTemplate2 from "containers/PageSingle/PageSingleTemp2";
@@ -126,7 +127,7 @@ const Routes = () => {
       <Route path={"/dashboard"} component={PageDashboard} />
       <Route path={"/search"} component={PageSearch} />
       <Route path={"/search-v2"} component={PageSearchV2} />
-
+      <Route path={"/category/:label"} component={CategoryCardShow}/>
         {/* {pages.map(({ component, path, exact }) => {
           return (
             <Route

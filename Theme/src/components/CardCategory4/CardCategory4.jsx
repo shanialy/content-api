@@ -16,9 +16,8 @@ const CardCategory4  = ({
   label,
   count,
   index,
+  categoryimage
 }) => {
-  const href = "/";
-  const categories = "Follow"
   console.log(label,count)
   // const color;
   // const {count , label } = taxonomy;
@@ -48,7 +47,7 @@ const CardCategory4  = ({
 
   return (
     <Link
-      to={href}
+      to={"/category/"+label}
       className={`nc-CardCategory4 flex flex-col ${className}`}
       data-nc-id="CardCategory4"
     >
@@ -56,17 +55,17 @@ const CardCategory4  = ({
         className={`flex-shrink-0 relative w-full aspect-w-7 aspect-h-5 h-0 rounded-3xl overflow-hidden group`}
       >
         <NcImage
-          src="https://source.unsplash.com/user/c_v_r"
+          src={categoryimage}
           className="object-cover w-full h-full rounded-2xl"
         />
         <div>
-        <button className= "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        {/* <button className= "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             <Badge
             name={categories}
             href="/categories"
             className="absolute top-0 left-0"
             />
-          </button>
+          </button> */}
           {/* {index && (
             <Badge
               name={index}
