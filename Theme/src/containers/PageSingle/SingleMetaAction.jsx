@@ -1,16 +1,15 @@
-import React, { FC } from "react";
-import PostActionDropdown from "components/PostActionDropdown/PostActionDropdown";
-import PostCardLikeAndComment from "components/PostCardLikeAndComment/PostCardLikeAndComment";
-import SocialsShare from "components/SocialsShare/SocialsShare";
-import BookmarkContainer from "containers/BookmarkContainer/BookmarkContainer";
-import { PostDataType } from "data/types";
+import React from "react";
+import PostCardLikeAndComment from "../../components/PostCardLikeAndComment/PostCardLikeAndComment";
+import SocialsShare from "../../components/SocialsShare/SocialsShare";
+import BookmarkContainer from "../BookmarkContainer/BookmarkContainer";
+import { PostDataType } from "../../data/types";
 
-export interface SingleMetaActionProps {
-  className?: string;
-  meta: PostDataType;
+export const SingleMetaActionProps =  {
+  className: String,
+  meta: PostDataType
 }
 
-const SingleMetaAction: FC<SingleMetaActionProps> = ({
+const SingleMetaAction = ({
   className = "mt-5 sm:mt-8",
   meta,
 }) => {
@@ -39,11 +38,6 @@ const SingleMetaAction: FC<SingleMetaActionProps> = ({
               postId={String(id)}
               containerClassName="h-9 w-9 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700"
               iconClass="h-5 w-5"
-            />
-            <PostActionDropdown
-              containerClassName="h-9 w-9 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700"
-              iconClass="h-5 w-5"
-              postData={meta}
             />
           </div>
         </div>

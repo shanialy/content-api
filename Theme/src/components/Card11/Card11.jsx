@@ -14,17 +14,22 @@ import dateFormat from 'dateformat';
 const Card11 = ({
   className = "h-full",
   post,
+  cardvalue,
   hiddenAuthor = false,
   ratio = "aspect-w-4 aspect-h-3",
 }) => {
 
+//getting id from Page search
+  console.log(cardvalue)
+ const{id} = cardvalue
+  
   //destructuring the post that  we are getting form  PageSearch component
 
   const { title, date_download ,source_domain} = post;
 
   // Giving a static value to herf 
 
-  const href = "/"
+  const href = `/${id}`
 
   // making a function on date_download so that we can get the time  (need to import moment and dateFormat if you want to perform the function) we also used this in NcImage component
 
@@ -58,11 +63,13 @@ const Card11 = ({
       <div
         className={`block flex-shrink-0 relative w-full rounded-t-xl overflow-hidden ${ratio}`}
       >
-        <div>
-          <PostFeaturedMedia post={post} isHover={isHover} />
-        </div>
+
+      <Link to={href} className="absolute inset-0">
+             <PostFeaturedMedia post={post} isHover={isHover} />
+      </Link>
+        
       </div>
-      <Link to={href} className="absolute inset-0"></Link>
+      
 
       {/* COMMENTING THE BADGE COMPONENT  */}
 
