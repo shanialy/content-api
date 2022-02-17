@@ -300,7 +300,7 @@ const PageSearch = ({ className = "" }) => {
                   return(
                   
          
-                      <Card11 key={index} post={value.fields} />
+                      <Card11 key={index} post={value.fields} cardvalue={value} />
                   
                  )
                 }
