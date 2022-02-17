@@ -282,14 +282,11 @@ const renderCard = (entry,index) => {
               { data.results.facets.map((items) => {
                 if(items.identifier == "category"){
                   return(
- 
-                  items.entries.map((entry,index)=>{
-// console.log(entry.label)
+                   items.entries.map((entry,index)=>{
                return( 
                <ul className="rem">
                <li key={index}>
-                  {/* {entry.label} */}
-                  {renderCard(entry,index)}
+                {renderCard(entry,index)}
                 </li>
                 </ul>
                )
