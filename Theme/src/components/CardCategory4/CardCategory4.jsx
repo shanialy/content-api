@@ -12,31 +12,38 @@ import Badge from "../../components/Badge/Badge";
 
 const CardCategory4  = ({
   className = "",
-  taxonomy,
+  // taxonomy,
+  label,
+  count,
   index,
 }) => {
-  const { count, name, href = "/", thumbnail, color } = taxonomy;
+  const href = "/";
+  const categories = "Follow"
+  console.log(label,count)
+  // const color;
+  // const {count , label } = taxonomy;
+  // console.log(taxonomy)
+  // const { count, name, href = "/", thumbnail, color } = taxonomy;
   const getColorClass = () => {
-    switch (color) {
-      case "pink":
-        return "bg-pink-500";
-      case "red":
-        return "bg-red-500";
-      case "gray":
-        return "bg-gray-500";
-      case "green":
-        return "bg-green-500";
-      case "purple":
-        return "bg-purple-500";
-      case "indigo":
-        return "bg-indigo-500";
-      case "yellow":
-        return "bg-yellow-500";
-      case "blue":
+    // switch (color) {
+        // return "bg-pink-500";
+      // case "red":
+      //   return "bg-red-500";
+      // case "gray":
+      //   return "bg-gray-500";
+      // case "green":
+      //   return "bg-green-500";
+      // case "purple":
+      //   return "bg-purple-500";
+      // case "indigo":
+      //   return "bg-indigo-500";
+      // case "yellow":
+      //   return "bg-yellow-500";
+      // case "blue":
         return "bg-blue-500";
-      default:
-        return "bg-pink-500";
-    }
+      // default:
+      //   return "bg-pink-500";
+    // }
   };
 
   return (
@@ -49,17 +56,23 @@ const CardCategory4  = ({
         className={`flex-shrink-0 relative w-full aspect-w-7 aspect-h-5 h-0 rounded-3xl overflow-hidden group`}
       >
         <NcImage
-          src={thumbnail}
+          src="https://source.unsplash.com/user/c_v_r"
           className="object-cover w-full h-full rounded-2xl"
         />
         <div>
-          {index && (
+        <button className= "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             <Badge
-              color={color}
+            name={categories}
+            href="/categories"
+            className="absolute top-0 left-0"
+            />
+          </button>
+          {/* {index && (
+            <Badge
               name={index}
               className="absolute top-3 left-3"
             />
-          )}
+          )} */}
         </div>
         <span className="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black bg-opacity-10 transition-opacity"></span>
       </div>
@@ -70,7 +83,8 @@ const CardCategory4  = ({
           <h2
             className={`text-base sm:text-lg text-neutral-900 dark:text-neutral-100 font-medium truncate`}
           >
-            {name}
+            {/* {name} */}
+            {label}
           </h2>
           <span
             className={`block mt-1 text-sm text-neutral-6000 dark:text-neutral-400`}
