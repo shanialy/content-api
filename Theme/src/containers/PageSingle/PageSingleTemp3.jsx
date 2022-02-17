@@ -1,25 +1,23 @@
 import React, { FC, ReactNode, useEffect } from "react";
-import { PostDataType, TaxonomyType } from "data/types";
-import { SINGLE } from "data/single";
+//import { PostDataType, TaxonomyType } from "../../data/types";
+import { SINGLE } from "../../data/single";
 import SingleContent from "./SingleContent";
-import { CommentType } from "components/CommentCard/CommentCard";
-import SingleRelatedPosts from "./SingleRelatedPosts";
-import { useAppDispatch } from "app/hooks";
-import { changeCurrentPage } from "app/pages/pages";
-import { Sidebar } from "./Sidebar";
+//import { CommentType } from "../../components/CommentCard/CommentCard";
+import { useAppDispatch } from "../../app/hooks";
+import { changeCurrentPage } from "../../app/pages/pages";
 import SingleHeader from "./SingleHeader";
 
-export interface PageSingleTemp3SidebarProps {
-  className?: string;
+export const PageSingleTemplate3Props = {
+  className: String
 }
 
-export interface SinglePageType extends PostDataType {
-  tags: TaxonomyType[];
-  content: string | ReactNode;
-  comments: CommentType[];
-}
+// export interface SinglePageType extends PostDataType {
+//   tags: TaxonomyType[];
+//   content: string | ReactNode;
+//   comments: CommentType[];
+// }
 
-const PageSingleTemp3Sidebar: FC<PageSingleTemp3SidebarProps> = ({
+const PageSingleTemplate3= ({
   className = "",
 }) => {
   const dispatch = useAppDispatch();
@@ -35,8 +33,8 @@ const PageSingleTemp3Sidebar: FC<PageSingleTemp3SidebarProps> = ({
   return (
     <>
       <div
-        className={`nc-PageSingleTemp3Sidebar ${className}`}
-        data-nc-id="PageSingleTemp3Sidebar"
+        className={`nc-PageSingleTemplate3 ${className}`}
+        data-nc-id="PageSingleTemplate3"
       >
         <header className="relative pt-16 z-10 md:py-20 lg:py-28 bg-neutral-900 dark:bg-black">
           {/* SINGLE HEADER */}
@@ -62,20 +60,14 @@ const PageSingleTemp3Sidebar: FC<PageSingleTemp3SidebarProps> = ({
         </header>
 
         {/* SINGLE MAIN CONTENT */}
-        <div className="container flex flex-col my-10 lg:flex-row ">
-          <div className="w-full lg:w-3/5 xl:w-2/3 xl:pr-20">
-            <SingleContent data={SINGLE} />
-          </div>
-          <div className="w-full mt-12 lg:mt-0 lg:w-2/5 lg:pl-10 xl:pl-0 xl:w-1/3">
-            <Sidebar />
-          </div>
+        <div className="container mt-10">
+          <SingleContent data={SINGLE} />
         </div>
 
-        {/* RELATED POSTS */}
-        <SingleRelatedPosts />
+        
       </div>
     </>
   );
 };
 
-export default PageSingleTemp3Sidebar;
+export default PageSingleTemplate3;

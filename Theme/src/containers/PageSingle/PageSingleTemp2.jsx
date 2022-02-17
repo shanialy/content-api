@@ -1,25 +1,24 @@
 import React, { FC, ReactNode, useEffect } from "react";
-import { PostDataType, TaxonomyType } from "data/types";
-import NcImage from "components/NcImage/NcImage";
-import { SINGLE } from "data/single";
+//import { PostDataType, TaxonomyType } from "../../data/types";
+import NcImage from "../../components/NcImage/NcImage";
+import { SINGLE } from "../../data/single";
 import SingleContent from "./SingleContent";
-import { CommentType } from "components/CommentCard/CommentCard";
-import { useAppDispatch } from "app/hooks";
-import { changeCurrentPage } from "app/pages/pages";
-import SingleRelatedPosts from "./SingleRelatedPosts";
+//import { CommentType } from "../../components/CommentCard/CommentCard";
+import { useAppDispatch } from "../../app/hooks";
+import { changeCurrentPage } from "../../app/pages/pages";
 import SingleHeader from "./SingleHeader";
 
-export interface PageSingleTemplate2Props {
-  className?: string;
+export const PageSingleTemplate2Props = {
+  className: String
 }
 
-export interface SinglePageType extends PostDataType {
-  tags: TaxonomyType[];
-  content: string | ReactNode;
-  comments: CommentType[];
-}
+// export interface SinglePageType extends PostDataType {
+//   tags: TaxonomyType[];
+//   content: string | ReactNode;
+//   comments: CommentType[];
+// }
 
-const PageSingleTemplate2: FC<PageSingleTemplate2Props> = ({
+const PageSingleTemplate2 = ({
   className = "",
 }) => {
   const dispatch = useAppDispatch();
@@ -58,8 +57,7 @@ const PageSingleTemplate2: FC<PageSingleTemplate2Props> = ({
           <SingleContent data={SINGLE} />
         </div>
 
-        {/* RELATED POSTS */}
-        <SingleRelatedPosts />
+     
       </div>
     </>
   );

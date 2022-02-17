@@ -78,7 +78,7 @@ const SingleContentDemo = () => {
         What I've written here is probably long enough, but adding this final
         sentence can't hurt.
       </p>
-      <pre>
+      {/* <pre>
         <code className="language-js">
           {`function tick() {
   const element = (
@@ -90,7 +90,7 @@ const SingleContentDemo = () => {
   ReactDOM.render(element, document.getElementById('root'));
 } `}
         </code>
-      </pre>
+      </pre> */}
       <p>Hopefully that looks good enough to you.</p>
       <h3>We still need to think about stacked headings though.</h3>
       <h4>
