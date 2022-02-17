@@ -7,7 +7,7 @@ import DashboardEditProfile from "./DashboardEditProfile";
 // import DashboardPosts from "./DashboardPosts";
 import DashboardRoot from "./DashboardRoot";
 // import DashboardSubcription from "./DashboardSubcription";
-// import DashboardSubmitPost from "./DashboardSubmitPost";
+import DashboardSubmitPost from "./DashboardSubmitPost";
 import { Helmet } from "react-helmet";
 
 // export interface PageDashboardProps {
@@ -58,12 +58,12 @@ const subPages = [
   //   emoij: "✈",
   //   pageName: "Billing address",
   // },
-  // {
-  //   sPath: "/submit-post",
-  //   component: DashboardSubmitPost,
-  //   emoij: "✍",
-  //   pageName: "Submit post",
-  // },
+  {
+    sPath: "/submit-post",
+    component: DashboardSubmitPost,
+    emoij: "✍",
+    pageName: "Submit post",
+  },
   // {
   //   sPath: "/posts",
   //   component: DashboardPosts,
@@ -76,7 +76,7 @@ const PageDashboard = ({ className = "" }) => {
   let { path, url } = useRouteMatch();
 
   return (
-    <div className={`nc-PageDashboard ${className}`} data-nc-id="PageDashboard">
+    <div  className={`nc-PageDashboard ${className}`} data-nc-id="PageDashboard">
       <Helmet>
         <title>Dashboard || Blog Magazine React Template</title>
       </Helmet>
@@ -88,7 +88,7 @@ const PageDashboard = ({ className = "" }) => {
         <div className="flex flex-col space-y-8 xl:space-y-0 xl:flex-row">
           {/* SIDEBAR */}
 
-          <div className="flex-shrink-0 max-w-xl xl:w-80 xl:pr-8">
+          <div  className="flex-shrink-0 max-w-xl xl:w-80 xl:pr-8">
             <ul className="text-base space-y-1 text-neutral-6000 dark:text-neutral-400">
               {subPages.map(({ sPath, pageName, emoij }, index) => {
                 return (

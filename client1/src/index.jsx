@@ -4,7 +4,7 @@ import { Router, } from "react-router-dom";
 import { render } from 'react-dom';
 import { history } from "./_helpers/history";
 import {accountService} from "./_services/account.Service"
-import {App} from "./app"
+import {App} from "./app/Index"
 
 
 

@@ -10,8 +10,6 @@ import { Helmet } from "react-helmet";
 import SectionSubscribe2 from "../../components/SectionSubscribe2/SectionSubscribe2";
 import NcImage from "../../components/NcImage/NcImage";
 import NcLink from "../../components/NcLink/NcLink";
-import Card11 from "../../components/Card11/Card11";
-import ButtonCircle from "../../components/Button/ButtonCircle";
 import { gql, useQuery } from '@apollo/client';
 import { useSearchkitVariables, useSearchkit, withSearchkit, withSearchkitRouting } from '@searchkit/client'
 //import SectionSliderNewAuthors from "../../components/SectionSliderNewAthors/SectionSliderNewAuthors";
