@@ -10,11 +10,21 @@ import { Helmet } from "react-helmet";
 import SectionSubscribe2 from "../../components/SectionSubscribe2/SectionSubscribe2";
 import NcImage from "../../components/NcImage/NcImage";
 import NcLink from "../../components/NcLink/NcLink";
- import Card11 from "../../components/Card11/Card11";
+import Card11 from "../../components/Card11/Card11";
 import ButtonCircle from "../../components/Button/ButtonCircle";
 import { gql, useQuery } from '@apollo/client';
 import { useSearchkitVariables, useSearchkit, withSearchkit, withSearchkitRouting } from '@searchkit/client'
-
+//import SectionSliderNewAuthors from "../../components/SectionSliderNewAthors/SectionSliderNewAuthors";
+// import { DEMO_AUTHORS } from "../../data/authors";
+// import ButtonSecondary from "../../components/Button/ButtonSecondary";
+// import SectionGridCategoryBox from "../../components/SectionGridCategoryBox/SectionGridCategoryBox";
+// import BackgroundSection from "../../components/BackgroundSection/BackgroundSection";
+import Card11 from "../../components/Card11/Card11";
+import ButtonCircle from "../../components/Button/ButtonCircle";
+import CardCategory2 from "../../components/CardCategory2/CardCategory2";
+import Tag from "../../components/Tag/Tag";
+import CardAuthorBox2 from "../../components/CardAuthorBox2/CardAuthorBox2";
+import AutoCompleteSearch from "./autoCompleteSearch";
 
 
 
@@ -173,9 +183,8 @@ const PageSearch = ({ className = "" }) => {
       <Helmet>
         <title>Nc || Search Page Template</title>
       </Helmet>
-
-      {/* HEADER */}
-      <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
+ 
+      {/* <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
         <div className="rounded-3xl relative aspect-w-16 aspect-h-16 sm:aspect-h-9 lg:aspect-h-5 overflow-hidden ">
           <NcImage
             containerClassName="absolute inset-0"
@@ -184,10 +193,13 @@ const PageSearch = ({ className = "" }) => {
           />
         </div>
         {/* CONTENT */}
-        <div className="relative container -mt-20 lg:-mt-48">
+        {/* <div className="relative container -mt-20 lg:-mt-48">
           <div className=" bg-white dark:bg-neutral-900 dark:border dark:border-neutral-700 p-5 lg:p-16 rounded-[40px] shadow-2xl flex items-center">
-            <header className="w-full max-w-3xl mx-auto text-center flex flex-col items-center">
-              <h2 className="text-2xl sm:text-4xl font-semibold">{s}</h2>
+            <header className="w-full max-w-3xl mx-auto text-center flex flex-col items-center"> */}
+              
+              <AutoCompleteSearch/>
+              
+              {/* <h2 className="text-2xl sm:text-4xl font-semibold">{s}</h2>
               <span className="block text-xs sm:text-sm mt-4 text-neutral-500 dark:text-neutral-300">
                 We found{" "}
                 <strong className="font-medium text-neutral-800 dark:text-neutral-100">
@@ -233,7 +245,7 @@ const PageSearch = ({ className = "" }) => {
                     </svg>
                   </span>
                 </label>
-              </form>
+              </form> */}
               <div className="w-full text-sm text-left mt-4 text-neutral-500 dark:text-neutral-300">
                 <div className="inline-block">
                   <span className="mr-2.5">Related:</span>
@@ -251,10 +263,10 @@ const PageSearch = ({ className = "" }) => {
                   </NcLink>
                 </div>
               </div>
-            </header>
+            {/* </header>
           </div>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
       {/* ====================== END HEADER ====================== */}
 
       <div className="container py-16 lg:py-28 space-y-16 lg:space-y-28">

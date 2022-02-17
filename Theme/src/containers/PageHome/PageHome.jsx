@@ -15,7 +15,7 @@ import { Helmet } from "react-helmet";
 //   DEMO_POSTS_GALLERY,
 //   DEMO_POSTS_VIDEO,
 // } from "data/posts";
-import { DEMO_CATEGORIES } from "../../data/taxonomies";
+// import { DEMO_CATEGORIES } from "../../data/taxonomies";
 // import { DEMO_AUTHORS } from "data/authors";
 // import SectionBecomeAnAuthor from "components/SectionBecomeAnAuthor/SectionBecomeAnAuthor";
 import SectionSliderNewCategories from "../../components/SectionSliderNewCategories/SectionSliderNewCategories";
@@ -26,7 +26,7 @@ import SectionSliderNewCategories from "../../components/SectionSliderNewCategor
 // import SectionMagazine7 from "./SectionMagazine7";
 // import SectionMagazine8 from "./SectionMagazine8";
 // import SectionMagazine9 from "./SectionMagazine9";
-import BgGlassmorphism from "../../components/BgGlassmorphism/BgGlassmorphism";
+// import BgGlassmorphism from "../../components/BgGlassmorphism/BgGlassmorphism";
 
 //
 // const POSTS: PostDataType[] = DEMO_POSTS;
@@ -46,7 +46,7 @@ const PageHome = () => {
       {/* ======== ALL SECTIONS ======== */}
       <div className="relative overflow-hidden">
         {/* ======== BG GLASS ========  */}
-         <BgGlassmorphism />
+         {/* <BgGlassmorphism /> */}
          <div className="container relative">
         {/* ======= START CONTAINER ============= */}
         {/* <div className="container relative">
@@ -72,7 +72,7 @@ const PageHome = () => {
             className="py-16 lg:py-28"
             heading="Top trending topics"
             subHeading="Discover 233 topics"
-            categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
+            // categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
             categoryCardType="card4"
           />
 
