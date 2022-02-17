@@ -9,7 +9,7 @@ import { withSearchkit, withSearchkitRouting } from "@searchkit/client";
 // import ncNanoId from "../../utils/ncNanoId";
 // import CardCategory3 from "../CardCategory3/CardCategory3";
 import CardCategory4 from "../CardCategory4/CardCategory4";
-import {CategoryImage} from "../../data/CategoryImages";
+import { CategoryImage } from "../../data/CategoryImages";
 import "./Removedot.css";
 // import CardCategory1 from "../CardCategory1/CardCategory1";
 // import CardCategory2 from "../CardCategory2/CardCategory2";
@@ -182,9 +182,8 @@ const SectionSliderNewCategories = ({
   const variables = useSearchkitVariables();
   const { data, error, loading } = useQuery(query, { variables });
 
-<<<<<<< HEAD
   if (error) {
-    console.log("Error");
+    console.log("Error "+ error);
   }
   if (loading) {
     console.log("Loading....");
@@ -192,35 +191,24 @@ const SectionSliderNewCategories = ({
   //  if(!loading){console.log(data.results)
   //  console.log(data)
   const renderCard = (entry, index) => {
+    let categoryimage = CategoryImage(entry.label);
     return (
       <>
-        <CardCategory4 label={entry.label} count={entry.count} index={index} />
+        <CardCategory4
+          label={entry.label}
+          count={entry.count}
+          index={index}
+          categoryimage={categoryimage}
+        />
       </>
     );
+
+    // return(
+    //   <>
+    //   <CardCategory4 label={entry.label} count={entry.count} index={index} />
+    //   </>
+    //   )
   };
-=======
-  if(error){console.log("Error")}
- if(loading){console.log("Loading....")}
-//  if(!loading){console.log(data.results)
-//  console.log(data)
-const renderCard = (entry,index) => {
-
-  let categoryimage =  CategoryImage(entry.label);
-  return(
-    <>
-    <CardCategory4 label={entry.label} count={entry.count} index={index}  
-    categoryimage={categoryimage} />
-   </>
-    )
-
-  // return(
-  //   <>
-  //   <CardCategory4 label={entry.label} count={entry.count} index={index} />
-  //   </>
-  //   )
-
-}
->>>>>>> f420240db9b36b9259220a32067177250000beea
   // const renderCard = (items) => {
   //   if(items.identifier == "category"){
   //     console.log(items)
@@ -293,53 +281,19 @@ const renderCard = (entry,index) => {
 
   return (
     <>
-<<<<<<< HEAD
       <Heading desc={subHeading} hasNextPrev>
         {heading}
       </Heading>
-=======
-        <Heading desc={subHeading} hasNextPrev>
-          {heading}
-         </Heading>
-
-
-         {!loading ? 
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
-              { data.results.facets.map((items) => {
-                if(items.identifier == "category"){
-                  return(
-                   items.entries.map((entry,index)=>{
-               return( 
-               <ul className="rem">
-               <li key={index}>
-                {renderCard(entry,index)}
-                </li>
-                </ul>
-               )
-                }))
-                }
-                
-})}
-
- 
-            </div>
-  :<h1>loading..</h1>         }
-</>
-      );
-    }
->>>>>>> f420240db9b36b9259220a32067177250000beea
 
       {!loading ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
           {data.results.facets.map((items) => {
             if (items.identifier == "category") {
               return items.entries.map((entry, index) => {
-                // console.log(entry.label)
                 return (
-                  <li key={index}>
-                    {/* {entry.label} */}
-                    {renderCard(entry, index)}
-                  </li>
+                  <ul className="rem">
+                    <li key={index}>{renderCard(entry, index)}</li>
+                  </ul>
                 );
               });
             }
