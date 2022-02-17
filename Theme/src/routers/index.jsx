@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route} from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 // import { Page } from "./types";
 // import Page404 from "containers/Page404/Page404";
 // import PageArchive from "containers/PageArchive/PageArchive";
 // import PageAuthor from "containers/PageAuthor/PageAuthor";
+<<<<<<< HEAD
+=======
+import PageSearch from "../containers/PageSearch/PageSearch";
+import CategoryCardShow from "../components/CategoryCardShow/CategoryCardShow";
+>>>>>>> f420240db9b36b9259220a32067177250000beea
 // import PageSingle from "containers/PageSingle/PageSingle";
 // import PageSingleHasSidebar from "containers/PageSingle/PageSingleHasSidebar";
 // import PageSingleTemplate2 from "containers/PageSingle/PageSingleTemp2";
@@ -119,7 +124,7 @@ const Routes = () => {
       
       
       {/* <HeaderContainer /> */}
-      <Switch>
+      <Switch>        
       <Route exact path={"/"} component={PageHome}/>
       <Route path={"/login"} component={PageLogin} /> 
       <Route path={"/signup"} component={PageSignUp} /> 
@@ -127,8 +132,12 @@ const Routes = () => {
       <Route path={"/dashboard"} component={PageDashboard} />
       <Route path={"/search"} component={PageSearch} />
       <Route path={"/search-v2"} component={PageSearchV2} />
+<<<<<<< HEAD
       <Route path={"/content-feed"} component={PageContentFeed} />
       
+=======
+      <Route path={"/category/:label"} component={CategoryCardShow}/>
+>>>>>>> f420240db9b36b9259220a32067177250000beea
         {/* {pages.map(({ component, path, exact }) => {
           return (
             <Route

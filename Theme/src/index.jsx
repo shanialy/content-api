@@ -5,10 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+<<<<<<< HEAD
 import { store, persistor } from "./app/store.js";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { SearchkitProvider, SearchkitClient } from "@searchkit/client";
 import { ErrorBoundary } from "react-error-boundary";
+=======
+import { store, persistor } from "./app/store.js"
+//import Error boundry
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { SearchkitProvider, SearchkitClient } from '@searchkit/client';
+import {ErrorBoundary} from 'react-error-boundary'
+>>>>>>> f420240db9b36b9259220a32067177250000beea
 
 // styles
 import "./styles/index.scss";
@@ -32,10 +40,34 @@ function ErrorFallback({ error, resetErrorBoundary }) {
   );
 }
 
+<<<<<<< HEAD
+=======
+const client = new ApolloClient({
+  uri: 'http://localhost:5001/graphql',
+  cache: new InMemoryCache()
+});
+
+const skClient = new SearchkitClient({
+  itemsPerPage: 20
+})
+
+function ErrorFallback({error, resetErrorBoundary}) {
+  return (
+    <div role="alert">
+      <p>Something went wrong:</p>
+      <pre>{error.message}</pre>
+      <button onClick={resetErrorBoundary}>Try again</button>
+    </div>
+  )
+}
+
+
+>>>>>>> f420240db9b36b9259220a32067177250000beea
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <SearchkitProvider client={skClient}>
+<<<<<<< HEAD
         <Provider store={store}>
           <PersistGate persistor={persistor} loading={null}>
             <ErrorBoundary FallbackComponent={ErrorFallback}>
@@ -44,6 +76,26 @@ ReactDOM.render(
           </PersistGate>
         </Provider>
       </SearchkitProvider>
+=======
+    <Provider store={store}>
+      <PersistGate persistor={persistor} loading={null}>
+      <ApolloProvider client={client} >
+      <SearchkitProvider client={skClient}>
+      <ErrorBoundary 
+        FallbackComponent={ErrorFallback}
+        // onError={(error, errorInfo) => console.log({ error, errorInfo })}
+    >
+        <App/>
+        
+        </ErrorBoundary>
+
+      </SearchkitProvider>
+    </ApolloProvider>
+
+      </PersistGate>
+    </Provider>
+    </SearchkitProvider>
+>>>>>>> f420240db9b36b9259220a32067177250000beea
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")

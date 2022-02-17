@@ -1,12 +1,12 @@
-import React, { FC } from "react";
+import React from "react";
 
-export interface SingleTitleProps {
-  title: string;
-  className?: string;
-  mainClass?: string;
+export const SingleTitleProps = {
+  title: String,
+  className: String,
+  mainClass: String,
 }
 
-const SingleTitle: FC<SingleTitleProps> = ({
+const SingleTitle = ({
   mainClass = "text-neutral-900 font-semibold text-3xl md:text-4xl md:!leading-[120%] lg:text-5xl dark:text-neutral-100",
   className = "",
   title,

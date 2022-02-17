@@ -1,19 +1,22 @@
 import React from "react";
 import NcModal from "../../components/NcModal/NcModal";
 import Tag from "../../components/Tag/Tag";
-import { TaxonomyType } from "../../data/types";
+// import { TaxonomyType } from "../../data/types";
 
-export const ModalTagsProps = {
-  tags: TaxonomyType
-}
+// export const ModalTagsProps = {
+//   tags: TaxonomyType
+// }
 
 const ModalTags = ({ tags }) => {
   const renderModalContent = () => {
     return (
       <div className="flex flex-wrap dark:text-neutral-200">
         {tags.map((tag) => (
+          <>
           <Tag key={tag.id} tag={tag} className="mr-2 mb-2" />
+          </>
         ))}
+       
       </div>
     );
   };
