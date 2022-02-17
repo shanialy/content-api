@@ -15,6 +15,8 @@ import "./Removedot.css";
 // import CardCategory2 from "../CardCategory2/CardCategory2";
 // import CardCategory5 from "../CardCategory5/CardCategory5";
 
+// Saad
+
 const query = gql`
   query resultSet(
     $query: String
