@@ -19,7 +19,11 @@ const PostCardSaveAction = ({
   readingTime,
   postData,
 }) => {
-  const { bookmark, id } = postData;
+
+  // getting postData from Card11
+
+
+  const bookmark = true
 
   return (
     <div
@@ -33,7 +37,6 @@ const PostCardSaveAction = ({
       <BookmarkContainer
         initBookmarked={bookmark.isBookmarked}
         containerClassName={classBgIcon}
-        postId={id}
       />
     </div>
   );

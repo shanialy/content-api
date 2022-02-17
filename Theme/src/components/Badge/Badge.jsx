@@ -55,7 +55,7 @@ const Badge = ({
   };
 
   const CLASSES =
-    "nc-Badge relative inline-flex px-2.5 py-1 rounded-full font-medium text-xs " +
+    "nc-Badge relative inline-flex object-left-top px-2.5 py-1 rounded-full font-medium text-xs " +
     className;
   return !!href ? (
     <Link

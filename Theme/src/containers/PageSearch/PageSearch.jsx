@@ -1,8 +1,4 @@
 import React, {useState} from "react";
-import { DEMO_POSTS } from "../../data/posts";
-// import { PostDataType } from "data/types";
-// import Pagination from "../../components/Pagination/Pagination";
-// import ButtonPrimary from "../../components/Button/ButtonPrimary";
 import ModalCategories from "./ModalCategories";
 import { DEMO_CATEGORIES, DEMO_TAGS } from "../../data/taxonomies";
 import ModalTags from "./ModalTags";
@@ -14,6 +10,10 @@ import { Helmet } from "react-helmet";
 import SectionSubscribe2 from "../../components/SectionSubscribe2/SectionSubscribe2";
 import NcImage from "../../components/NcImage/NcImage";
 import NcLink from "../../components/NcLink/NcLink";
+import Card11 from "../../components/Card11/Card11";
+import ButtonCircle from "../../components/Button/ButtonCircle";
+import { gql, useQuery } from '@apollo/client';
+import { useSearchkitVariables, useSearchkit, withSearchkit, withSearchkitRouting } from '@searchkit/client'
 //import SectionSliderNewAuthors from "../../components/SectionSliderNewAthors/SectionSliderNewAuthors";
 // import { DEMO_AUTHORS } from "../../data/authors";
 // import ButtonSecondary from "../../components/Button/ButtonSecondary";
@@ -33,11 +33,100 @@ export const PageSearchProps = {
   className: String
 }
 
+const query = gql`
+query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $sortBy: String) {
+  results(query: $query, filters: $filters) {
+    summary {
+      total
+      appliedFilters {
+        id
+        identifier
+        display
+        label
+        ... on DateRangeSelectedFilter {
+          dateMin
+          dateMax
+          __typename
+        }
+
+        ... on ValueSelectedFilter {
+          value
+          __typename
+        }
+        __typename
+      }
+      sortOptions {
+        id
+        label
+        __typename
+      }
+      query
+      __typename
+    }
+    hits(page: $page, sortBy: $sortBy) {
+      page {
+        total
+        totalPages
+        pageNumber
+        from
+        size
+        __typename
+      }
+      sortedBy
+
+      items {
+        ... on ResultHit {
+          id
+          fields {
+  article_length
+  category
+  authors
+  date_download
+  language
+  image_url
+  source_domain
+  facebook_shares
+  twitter_shares
+  maintext
+  source_domain
+  title
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    facets {
+      identifier
+      type
+      label
+      display
+      entries {
+        label
+        count
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+`
+
 // const posts = DEMO_POSTS.filter((_, i) => i < 12);
 // const cats = DEMO_CATEGORIES.filter((_, i) => i < 15);
 // const tags = DEMO_CATEGORIES.filter((_, i) => i < 32);
 // const authors = DEMO_AUTHORS.filter((_, i) => i < 12);
 
+
+
+///////////////////////////////////////////////////////Sorting
+
+
+
+//////////////////////////////////////////////
 const FILTERS = [
   { name: "Most Recent" },
   { name: "Curated by Admin" },
@@ -47,24 +136,48 @@ const FILTERS = [
 ];
 
 const TABS = ["Articles", "Categories", "Tags", "Authors"];
-const posts = DEMO_POSTS.filter((_, i) => i < 16);
+
+//const posts = DEMO_POSTS.filter((_, i) => i < 16);
 
 const PageSearch = ({ className = "" }) => {
+
+  ////////////////////////////////graph ql work////////////////////////////
+
+  const variables = useSearchkitVariables()
+  const { data, error ,loading } = useQuery(query, { variables })
+
+  if(error){console.log("An error Occured" + error)}
+     
+  if(loading){console.log("Data is loading")}
+
+  if(!loading){console.log(data.results.hits.items[0].fields.twitter_shares)}
+
+
+  console.log(data)
+
+// const dataSet = data.results.hits.items 
+  /////////////////////////////////////////////////////////////////////
+
+
+
+
+  ////////////////////////////////////////////////creating a render function /////////////////////////
+
+
+  // const renderCard=(item ,index)=>{
+  //   return(
+  //     console.log(item.fie)
+  //     //<Card11 key={item.id} post={item} />
+  //   )
+  // }
 
   let s = "Technology";
 
   // Tag and category have same data type - we will use one demo data
 
 
-   const [tabActive, setTabActive] = useState(TABS[0]);
-
-  // const handleClickTab = (item) => {
-  //   if (item === tabActive) {
-  //     return;
-  //   }
-  //   setTabActive(item);
-  // };
-
+  
+ 
   return (
     <div className={`nc-PageSearch ${className}`} data-nc-id="PageSearch">
       <Helmet>
@@ -159,11 +272,17 @@ const PageSearch = ({ className = "" }) => {
       <div className="container py-16 lg:py-28 space-y-16 lg:space-y-28">
         <main>
           {/* TABS FILTER */}
+         
+
        {/* Here i applied Models */}
+
           <div className="flex flex-col sm:items-center sm:justify-between sm:flex-row">
             <div className="flex space-x-2.5">
+
               <ModalCategories categories={DEMO_CATEGORIES} />
+
               <ModalTags tags={DEMO_TAGS} />
+           
             </div>
             <div className="block my-4 border-b w-full border-neutral-100 sm:hidden"></div>
             <div className="flex justify-end">
@@ -171,67 +290,30 @@ const PageSearch = ({ className = "" }) => {
             </div>
           </div>
 
-          {/* LOOP ITEMS */}
-          {/* LOOP ITEMS POSTS */}
-          {tabActive === "Articles" && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {posts.map((post) => (
-                <Card11 key={post.id} post={post} />
-              ))}
-            </div>
-          )}
-          {/* LOOP ITEMS CATEGORIES */}
-          {/* {tabActive === "Categories" && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {cats.map((cat) => (
-                <CardCategory2 key={cat.id} taxonomy={cat} />
-              ))}
-            </div>
-          )} */}
-          {/* LOOP ITEMS TAGS */}
-          {/* {tabActive === "Tags" && (
-            <div className="flex flex-wrap mt-12 ">
-              {tags.map((tag) => (
-                <Tag className="mb-3 mr-3" key={tag.id} tag={tag} />
-              ))}
-            </div>
-          )} */}
-          {/* LOOP ITEMS POSTS */}
-          {/* {tabActive === "Authors" && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {authors.map((author) => (
-                <CardAuthorBox2 key={author.id} author={author} />
-              ))}
-            </div>
-          )} */}
+          
 
-          {/* PAGINATION */}
-          {/* <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
-            <Pagination />
-            <ButtonPrimary>Show me more</ButtonPrimary>
-          </div> */}
+               {/* passing our data in Card11 through map */}
+
+          {!loading ? 
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-8 mt-8 lg:mt-10">
+
+              {data.results? data.results.hits.items.map((value , index) => {
+        
+                  return(
+                  
+         
+                      <Card11 key={index} post={value.fields} />
+                  
+                 )
+                }
+          
+
+              ) : <h1>Error in Debugging</h1>}
+              
+            </div>
+          : <h1>There occured an error on line 309 in PageSearch</h1>}
         </main>
 
-        {/* MORE SECTIONS */}
-        {/* === SECTION 5 === */}
-        {/* <div className="relative py-16">
-          <BackgroundSection />
-          <SectionGridCategoryBox
-            categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
-          />
-          <div className="text-center mx-auto mt-10 md:mt-16">
-            <ButtonSecondary>Show me more</ButtonSecondary>
-          </div>
-        </div> */}
-
-        {/* === SECTION 5 === */}
-        {/* <SectionSliderNewAuthors
-          heading="Top elite authors"
-          subHeading="Discover our elite writers"
-          authors={DEMO_AUTHORS.filter((_, i) => i < 10)}
-        /> */}
-
-        {/* SUBCRIBES */}
         <SectionSubscribe2 />
       </div>
     </div>
@@ -239,3 +321,4 @@ const PageSearch = ({ className = "" }) => {
 };
 
 export default PageSearch;
+

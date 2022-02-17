@@ -14,7 +14,13 @@ const CardCategory1 = ({
   size = "normal",
   taxonomy,
 }) => {
-  const { count, name, href = "/", thumbnail } = taxonomy;
+  //getting taxonomy from ModalCategories  line 36
+
+  const { count, label,thumbnail } = taxonomy;
+
+  const  href = "/"
+
+  
   return (
     <NavLink
       to={href}
@@ -33,7 +39,7 @@ const CardCategory1 = ({
             size === "large" ? "text-lg" : "text-base"
           } nc-card-title text-neutral-900 dark:text-neutral-100 font-semibold`}
         >
-          {name}
+          {label}
         </h2>
         <span
           className={`${

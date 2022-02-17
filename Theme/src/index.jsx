@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./app/store.js"
+//import Error boundry
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { SearchkitProvider, SearchkitClient } from '@searchkit/client';
 import {ErrorBoundary} from 'react-error-boundary'
@@ -32,6 +33,24 @@ function ErrorFallback({error, resetErrorBoundary}) {
   )
 }
 
+const client = new ApolloClient({
+  uri: 'http://localhost:5001/graphql',
+  cache: new InMemoryCache()
+});
+
+const skClient = new SearchkitClient({
+  itemsPerPage: 20
+})
+
+function ErrorFallback({error, resetErrorBoundary}) {
+  return (
+    <div role="alert">
+      <p>Something went wrong:</p>
+      <pre>{error.message}</pre>
+      <button onClick={resetErrorBoundary}>Try again</button>
+    </div>
+  )
+}
 
 
 ReactDOM.render(
@@ -40,10 +59,19 @@ ReactDOM.render(
       <SearchkitProvider client={skClient}>
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={null}>
+      <ApolloProvider client={client} >
+      <SearchkitProvider client={skClient}>
       <ErrorBoundary 
-        FallbackComponent={ErrorFallback}>
-        <App />
+        FallbackComponent={ErrorFallback}
+        // onError={(error, errorInfo) => console.log({ error, errorInfo })}
+    >
+        <App/>
+        
         </ErrorBoundary>
+
+      </SearchkitProvider>
+    </ApolloProvider>
+
       </PersistGate>
     </Provider>
     </SearchkitProvider>
