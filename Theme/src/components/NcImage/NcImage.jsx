@@ -33,18 +33,18 @@ const NcImage = ({
 
   // making a function on date_download so that we can get the time  (need to import moment and dateFormat if you want to perform the function) we also used this in Card11 component
 
- function relativeTime(date_download) {
-    try {
-      let ddate = dateFormat(date_download, "isoDateTime");
-      ddate = ddate.split("T");
-      let datePart = ddate[0];
-      let timePart = ddate[1].split("+")[0];
+//  function relativeTime(date_download) {
+//     try {
+//       let ddate = dateFormat(date_download, "isoDateTime");
+//       ddate = ddate.split("T");
+//       let datePart = ddate[0];
+//       let timePart = ddate[1].split("+")[0];
 
-      return moment(datePart + " " + timePart).fromNow();
-    } catch (err) {
-      console.log(err);
-    }
-  }
+//       return moment(datePart + " " + timePart).fromNow();
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   }
 
   //console.log(relativeTime())
 
@@ -114,7 +114,7 @@ const NcImage = ({
     >
 
     {/* ///Rendring source_domain and time  */}
-        <span 
+        {/* <span 
         className="text-neutral-500 dark:text-neutral-400 font-normal"
         style={{
           height: "18px",
@@ -126,7 +126,7 @@ const NcImage = ({
         }}
       >
         <p style={{fontSize: "12px" , paddingLeft :"10px", color : "#d2d2d2" }}>{source_domain} . {relativeTime(date_download)} </p>
-      </span>
+      </span> */}
 
       
       {__src && imageLoaded ? (
