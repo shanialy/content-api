@@ -23,6 +23,8 @@ import CardCategory2 from "../../components/CardCategory2/CardCategory2";
 import Tag from "../../components/Tag/Tag";
 import CardAuthorBox2 from "../../components/CardAuthorBox2/CardAuthorBox2";
 import AutoCompleteSearch from "./autoCompleteSearch";
+import "./autoCompleteSearch.css"
+import Pagination from "../../components/Pagination/Pagination";
 
 
 
@@ -181,7 +183,7 @@ const PageSearch = ({ className = "" }) => {
       <Helmet>
         <title>Nc || Search Page Template</title>
       </Helmet>
- 
+      <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
       {/* <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
         <div className="rounded-3xl relative aspect-w-16 aspect-h-16 sm:aspect-h-9 lg:aspect-h-5 overflow-hidden ">
           <NcImage
@@ -244,8 +246,9 @@ const PageSearch = ({ className = "" }) => {
                   </span>
                 </label>
               </form> */}
-              <div className="w-full text-sm text-left mt-4 text-neutral-500 dark:text-neutral-300">
-                <div className="inline-block">
+              {/* <div className="w-full text-sm text-left mt-4 text-neutral-500 dark:text-neutral-300">
+                <div className="inline-block"> */}
+                <div className="margin">
                   <span className="mr-2.5">Related:</span>
                   <NcLink className="mr-2.5 inline-block font-normal" to="/#">
                     Design
@@ -259,10 +262,11 @@ const PageSearch = ({ className = "" }) => {
                   <NcLink className="mr-2.5 inline-block font-normal" to="/#">
                     Frontend
                   </NcLink>
-                </div>
-              </div>
+                {/* </div>
+              </div> */}
+              </div></div>
             {/* </header>
-          </div>
+          // </div>
         </div> */}
       {/* </div> */}
       {/* ====================== END HEADER ====================== */}
@@ -300,7 +304,7 @@ const PageSearch = ({ className = "" }) => {
                   return(
                   
          
-                      <Card11 key={index} post={value.fields} />
+                      <Card11 key={index} post={value.fields} cardvalue={value} />
                   
                  )
                 }
@@ -309,8 +313,13 @@ const PageSearch = ({ className = "" }) => {
               ) : <h1>Error in Debugging</h1>}
               
             </div>
-          : <h1>There occured an error on line 309 in PageSearch</h1>}
-        </main>
+          : <h1>Loading</h1>}
+
+<div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
+            <Pagination />
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Show more</button>
+          </div>
+</main>
 
         <SectionSubscribe2 />
       </div>
