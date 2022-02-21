@@ -1,9 +1,9 @@
 import React, { FC, useRef } from "react";
-import NcImage from "../../components/NcImage/NcImage";
+import NcImageCardSearch from "../NcImage/NcImageCardSearch";
 // import { PostDataType } from "data/types";
 import GallerySlider from "./GallerySlider";
 import MediaVideo from "./MediaVideo";
-import PostTypeFeaturedIcon from "../../components/PostTypeFeaturedIcon/PostTypeFeaturedIcon";
+import PostTypeFeaturedIcon from "../PostTypeFeaturedIcon/PostTypeFeaturedIcon";
 import MediaAudio from "./MediaAudio";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 
@@ -53,7 +53,7 @@ const PostFeaturedMedia = ({
      // ref={videoRef}
     >
 
-      <NcImage containerClassName="absolute inset-0" src={image_url} source_domain={source_domain} date_download={date_download} />
+      <NcImageCardSearch containerClassName="absolute inset-0" src={image_url} source_domain={source_domain} date_download={date_download} />
      {/* // {renderContent()} */}
     </div>
   );

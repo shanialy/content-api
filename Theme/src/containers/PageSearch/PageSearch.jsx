@@ -23,6 +23,8 @@ import CardCategory2 from "../../components/CardCategory2/CardCategory2";
 import Tag from "../../components/Tag/Tag";
 import CardAuthorBox2 from "../../components/CardAuthorBox2/CardAuthorBox2";
 import AutoCompleteSearch from "./autoCompleteSearch";
+import DateRangeCalender from "../../components/DateRangeCalender/DateRangeCalender";
+import DateRangeDropDown from "../../components/DateRangeCalender/DateRangeDropDown";
 import "./autoCompleteSearch.css"
 import Pagination from "../../components/Pagination/Pagination";
 
@@ -88,6 +90,7 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
   facebook_shares
   twitter_shares
   maintext
+  sentiment
   source_domain
   title
             __typename
@@ -115,14 +118,6 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
 }
 `
 
-// const posts = DEMO_POSTS.filter((_, i) => i < 12);
-// const cats = DEMO_CATEGORIES.filter((_, i) => i < 15);
-// const tags = DEMO_CATEGORIES.filter((_, i) => i < 32);
-// const authors = DEMO_AUTHORS.filter((_, i) => i < 12);
-
-
-
-///////////////////////////////////////////////////////Sorting
 
 
 
@@ -153,27 +148,7 @@ const PageSearch = ({ className = "" }) => {
   if(!loading){console.log(data.results.hits.items[0].fields.twitter_shares)}
 
 
-  console.log(data)
-
-// const dataSet = data.results.hits.items 
-  /////////////////////////////////////////////////////////////////////
-
-
-
-
-  ////////////////////////////////////////////////creating a render function /////////////////////////
-
-
-  // const renderCard=(item ,index)=>{
-  //   return(
-  //     console.log(item.fie)
-  //     //<Card11 key={item.id} post={item} />
-  //   )
-  // }
-
-  let s = "Technology";
-
-  // Tag and category have same data type - we will use one demo data
+  //console.log(data.results)
 
 
   
@@ -183,6 +158,8 @@ const PageSearch = ({ className = "" }) => {
       <Helmet>
         <title>Nc || Search Page Template</title>
       </Helmet>
+              
+              
       <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
       {/* <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
         <div className="rounded-3xl relative aspect-w-16 aspect-h-16 sm:aspect-h-9 lg:aspect-h-5 overflow-hidden ">
@@ -288,8 +265,15 @@ const PageSearch = ({ className = "" }) => {
             </div>
             <div className="block my-4 border-b w-full border-neutral-100 sm:hidden"></div>
             <div className="flex justify-end">
+            
+            <DateRangeCalender/>
+
+          <DateRangeDropDown />    &nbsp;
+ 
               <ArchiveFilterListBox lists={FILTERS} />
+              
             </div>
+            
           </div>
 
           

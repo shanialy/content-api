@@ -5,6 +5,7 @@ import { SinglePageType } from "./PageSingleTemp3Sidebar";
 //import PostMeta2 from "../../components/PostMeta2/PostMeta2";
 import SingleMetaAction2 from "./SingleMetaAction2";
 import { Helmet } from "react-helmet";
+import {useSelector} from 'react-redux'
 
 export const SingleHeaderProps =  {
   pageData: SinglePageType,
@@ -22,6 +23,7 @@ const SingleHeader = ({
   metaActionStyle = "style1",
 }) => {
   const { categories, desc, title } = pageData;
+  //const cvalue =  useSelector(state => state.cvalue)
   //  const title = "computer"
   //  const desc ="Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore beatae, voluptates et officia tenetur accusantium eaque dolor impedit enim, nostrum iste placeat amet in possimus repellendus commodi obcaecati! Tenetur, cumque?"
   //  const categories = "IT"
