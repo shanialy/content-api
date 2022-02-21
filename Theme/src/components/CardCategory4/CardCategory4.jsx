@@ -67,7 +67,7 @@ const CardCategory4  = ({
             <Badge
             name={categories}
             href="/categories"
-            className="absolute top--10 left-0"
+            className="absolute top-0 left-0"
             />
           {/* </button> */}
           {/* {index && (
