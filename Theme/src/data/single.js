@@ -1,33 +1,32 @@
-import { SinglePageType } from "containers/PageSingle/PageSingle";
+import { SinglePageType } from "../containers/PageSingle/PageSingle";
 import { DEMO_TAGS } from "./taxonomies";
 import __comments from "./jsons/__comments.json";
 import a10 from "./avatars/11.jpg";
 import { DEMO_AUTHORS } from "./authors";
-import { CommentType } from "components/CommentCard/CommentCard";
-import podcastImg from "images/podcast.jpg";
+//import { CommentType } from "../components/CommentCard/CommentCard";
+import podcastImg from "../images/podcast.jpg";
 
 // function nested the comment child -- make tree comment
-const nest = (
-  items: CommentType[],
-  id: number | null | undefined
-): CommentType[] => {
-  return items
-    .filter((item) => item.parentId === id)
-    .map((item) => ({
-      ...item,
-      children: nest(items, item.id as number | null),
-    }));
-};
+// const nest =(
+//   id= Number|| null ||undefined)=>{
+//     return items
+//     .filter((item) => item.parentId === id)
+//     .map((item) => ({
+//       ...item,
+//       children: nest(items, item.id || null),
+//     }));
+// }
+
 
 // AUTHOR RANDOM FOR DEMO
-const commentHasAuthor = __comments.map((item) => ({
-  ...item,
-  author: DEMO_AUTHORS[Math.floor(Math.random() * 10)],
-}));
+// const commentHasAuthor = __comments.map((item) => ({
+//   ...item,
+//   author: DEMO_AUTHORS[Math.floor(Math.random() * 10)],
+// }));
 
 //
-export const DEMO_COMMENTS = nest(commentHasAuthor, null);
-export const SINGLE: SinglePageType = {
+//export const DEMO_COMMENTS = nest(commentHasAuthor, null);
+export const SINGLE = {
   id: "eae0212192f63287e0c212",
   featuredImage:
     "https://images.unsplash.com/photo-1605487903301-a1dff2e6bbbe?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1957&q=80",
@@ -75,12 +74,12 @@ export const SINGLE: SinglePageType = {
     },
   ],
   postType: "standard",
-  tags: [DEMO_TAGS[0], DEMO_TAGS[1], DEMO_TAGS[3]],
+  //tags: [DEMO_TAGS[0], DEMO_TAGS[1], DEMO_TAGS[3]],
   content: "",
-  comments: DEMO_COMMENTS,
+  //comments: DEMO_COMMENTS,
 };
 
-export const SINGLE_AUDIO: SinglePageType = {
+export const SINGLE_AUDIO= {
   id: "ea21212f687e0c",
   featuredImage: podcastImg,
   title: "Programming Languages",
@@ -118,12 +117,12 @@ export const SINGLE_AUDIO: SinglePageType = {
   ],
   postType: "audio",
   audioUrl: "https://soundcloud.com/tacongtung/2a-6-co-don-danh-cho-ai-remix",
-  tags: [DEMO_TAGS[0], DEMO_TAGS[1], DEMO_TAGS[3]],
+ // tags: [DEMO_TAGS[0], DEMO_TAGS[1], DEMO_TAGS[3]],
   content: "",
-  comments: DEMO_COMMENTS,
+  //comments: DEMO_COMMENTS,
 };
 
-export const SINGLE_VIDEO: SinglePageType = {
+export const SINGLE_VIDEO = {
   id: "ea21ac32ds-6c192f68dscx7e0c212",
   featuredImage:
     "https://images.pexels.com/photos/326900/pexels-photo-326900.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
@@ -162,12 +161,12 @@ export const SINGLE_VIDEO: SinglePageType = {
   ],
   postType: "video",
   videoUrl: "https://www.youtube.com/watch?v=a6roH6RffnA",
-  tags: [DEMO_TAGS[0], DEMO_TAGS[1], DEMO_TAGS[3]],
+  //tags: [DEMO_TAGS[0], DEMO_TAGS[1], DEMO_TAGS[3]],
   content: "",
-  comments: DEMO_COMMENTS,
+  //comments: DEMO_COMMENTS,
 };
 
-export const SINGLE_GALLERY: SinglePageType = {
+export const SINGLE_GALLERY = {
   id: "eae0e85fd226c192f68dscx7e220c",
   featuredImage:
     "https://images.pexels.com/photos/326900/pexels-photo-326900.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
@@ -212,7 +211,7 @@ export const SINGLE_GALLERY: SinglePageType = {
     "https://images.pexels.com/photos/7354753/pexels-photo-7354753.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     "https://images.pexels.com/photos/7354665/pexels-photo-7354665.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
   ],
-  tags: [DEMO_TAGS[0], DEMO_TAGS[1], DEMO_TAGS[3]],
+  //tags: [DEMO_TAGS[0], DEMO_TAGS[1], DEMO_TAGS[3]],
   content: "",
-  comments: DEMO_COMMENTS,
+  //comments: DEMO_COMMENTS,
 };

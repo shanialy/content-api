@@ -2,7 +2,6 @@ import React from "react";
 import { TaxonomyType } from "../../data/types";
 import CardCategory1 from "../../components/CardCategory1/CardCategory1";
 import NcModal from "../../components/NcModal/NcModal";
-
 import {  useQuery } from '@apollo/client';
 import query from "./Index";
 import { useSearchkitVariables, useSearchkit, withSearchkit, withSearchkitRouting } from '@searchkit/client'
