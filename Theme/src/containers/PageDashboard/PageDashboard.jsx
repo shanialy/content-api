@@ -76,7 +76,7 @@ const PageDashboard = ({ className = "" }) => {
   let { path, url } = useRouteMatch();
 
   return (
-    <div  className={`nc-PageDashboard ${className}`} data-nc-id="PageDashboard">
+    <div className={`nc-PageDashboard ${className}`} data-nc-id="PageDashboard">
       <Helmet>
         <title>Dashboard || Blog Magazine React Template</title>
       </Helmet>
@@ -88,15 +88,17 @@ const PageDashboard = ({ className = "" }) => {
         <div className="flex flex-col space-y-8 xl:space-y-0 xl:flex-row">
           {/* SIDEBAR */}
 
-          <div  className="flex-shrink-0 max-w-xl xl:w-80 xl:pr-8">
+          <div className="flex-shrink-0 max-w-xl xl:w-70 xl:pr-8">
             <ul className="text-base space-y-1 text-neutral-6000 dark:text-neutral-400">
+            <h1>curated</h1>
+
               {subPages.map(({ sPath, pageName, emoij }, index) => {
                 return (
                   <li key={index}>
                     <NavLink
                       className="flex px-6 py-2.5 font-medium rounded-lg hover:text-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
                       to={`${url}${sPath}`}
-                      activeClassName="bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100"
+                      activeClassName="bg-indigo-500 dark:bg-neutral-800 text-white dark:text-neutral-100"
                     >
                       <span className="w-8 mr-1">{emoij}</span>
                       {pageName}

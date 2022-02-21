@@ -1,0 +1,23 @@
+# create a poster
+post http://localhost:7777/api/favouritesFolder/
+Content-Type: application/json
+
+{
+    "folderName": "Crypto currency"
+}
+
+###
+
+# get a single folder by folder id
+GET http://localhost:7777/api/favouritesFolder/6213c26202d9fe10c46dc498
+
+
+###
+
+# get a all favourites folder by user id
+GET http://localhost:7777/api/favouritesFolder/
+
+###
+
+
+ 

@@ -37,7 +37,7 @@ const LayoutPage = ({
 
         {/* CONTENT */}
         <div
-          className="p-5 mx-auto bg-white rounded-[40px] shadow-lg sm:p-10 dark:bg-neutral-900"
+          className="p-5 mx-auto bg-white rounded-[40px] shadow-lg sm:p-5 dark:bg-neutral-900"
         >
           {children}
         </div>

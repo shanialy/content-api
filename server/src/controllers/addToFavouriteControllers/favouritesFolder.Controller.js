@@ -14,8 +14,8 @@ const postFavouriteFolder = async (req, res) => {
     }
 
     const folderName = req.body.folderName;
-    // const userId = "617bcd2b666de38527fe3a94";
-    const userId = req.user.id;
+    const userId = "6213bf62597993895ebb1666";
+    // const userId = req.user.id;
 
     try {
         const favouritesFolder = new favouritesFolderModel({
@@ -61,7 +61,10 @@ const getSingleFavouriteFolder = async (req, res) => {
 // access: PROTECTED
 const getAllFavouriteFolder = async (req, res) => {
     try {
-        const allFolders = await favouritesFolderModel.find({ userId: req.user.id });
+        const userId = "6213bf62597993895ebb1666";
+        // const userId = req.user.id;
+        
+        const allFolders = await favouritesFolderModel.find({ userId: userId });
 
         if (!allFolders) {
             return res.status(404).json({ errorMsg: "Folders not found" })
