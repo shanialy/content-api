@@ -4,11 +4,22 @@ import ButtonPrimary from "../../components/Button/ButtonPrimary";
 import Select from "../../components/Select/Select";
 import Textarea from "../../components/Textarea/Textarea";
 import Label from "../../components/Label/Label";
+import WidgetPosts from "../../components/WidgetPosts/WidgetPosts";
+import { DEMO_POSTS } from "../../data/posts";
+
+const widgetPostsDemo = DEMO_POSTS.filter((_, i) => i > 2 && i < 7);
 
 const DashboardSubmitPost = () => {
   return (
-    <div className="rounded-xl md:border md:border-neutral-100 dark:border-neutral-800 md:p-6">
-      <form className="grid md:grid-cols-2 gap-6" action="#" method="post">
+    <div
+      className="flex lg:flex-row flex-col gap-6 rounded-xl md:border md:border-neutral-100 dark:border-neutral-800 md:p-6"
+    >
+      {/* form container */}
+      <form
+        className="basis-2/3  grid md:grid-cols-2 gap-6"
+        action="#"
+        method="post"
+      >
         <label className="block md:col-span-2">
           <Label>Post Title *</Label>
 
@@ -88,6 +99,11 @@ const DashboardSubmitPost = () => {
           Submit post
         </ButtonPrimary>
       </form>
+
+      {/* CONTENT FEED CONTAINER */}
+      <div className="basis-1/3	" >
+        <WidgetPosts posts={widgetPostsDemo} />
+      </div>
     </div>
   );
 };

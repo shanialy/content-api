@@ -9,6 +9,7 @@ import customTopicSearch from "./src/routes/api/customTopicSearchRoutes/customTo
 import errorHandler from "./src/middlewares/errorHandler.js"
 import cookieParser from "cookie-parser" ;
 import cors from "cors";
+
 // cache
 import {clearHash} from "./src/controllers/cachingControllers/redis.Controller.js";
 

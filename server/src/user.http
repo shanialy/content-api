@@ -3,11 +3,12 @@ post http://localhost:7777/api/user/register
 Content-Type: application/json
 
 {
-    "email" : "smsidrees33@gmail.com",
-    "password" : "saad01",
-    "firstName" : "saad Idrees",
-    "lastName" : "saad idrees",
-    "title" : "hello im Saad"
+    "email":"saad_idrees@gmail.com",
+    "password":"saad_idrees",
+    "firstName":"Saad", 
+    "lastName":"Idrees",
+    "title":"Mr"
+
 }
 
 ###
@@ -17,7 +18,7 @@ POST http://localhost:7777/api/user/verify-email
 Content-Type:  application/json
 
 {
-    "token": "c81b595c79598dd5ae8482be0c75f4423addb54e1e5014eface535b8bd3eeea17fae5046c690e764"
+    "token": "5aa2f21b7641ad0260dae6911b135a0af7eb7299a03c8fce0470c81403777434058f2d6ea38fcc21"
 }
 
 ###
@@ -27,8 +28,9 @@ post http://localhost:7777/api/user/authenticate
 Content-Type:  application/json
 
 {
-    "email":"smsidrees30@gmail.com",
-    "password":"saad01"
+    "email":"saad_idrees@gmail.com",
+    "password":"saad_idrees"
+
 }
 
 ###
