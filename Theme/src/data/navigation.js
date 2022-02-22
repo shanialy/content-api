@@ -335,8 +335,8 @@ const templateChilds = [
 const discoveryDropdwonItems = [
   {
     id: ncNanoId(),
-    href: "/content-feed",
-    name: "Content Feed",
+    href: "/search",
+    name: "Search",
   },
 ];
 
@@ -374,7 +374,7 @@ export const NAVIGATION_DEMO = [
   {
     id: ncNanoId(),
     href: "#",
-    name: "discovery",
+    name: "Discovery",
     type: "dropdown",
     children: discoveryDropdwonItems,
   },

@@ -32,6 +32,8 @@ const NavigationItem = ({
   menuItem,
   history,
 }) => {
+  //console.log(menuItem , "menuitem")
+  //console.log(history , "history")
   const [menuCurrentHovers, setMenuCurrentHovers] = useState([]);
 
   // CLOSE ALL MENU OPENING WHEN CHANGE HISTORY

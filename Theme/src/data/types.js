@@ -1,9 +1,62 @@
 //  ######  CustomLink  ######## //
-// export interface CustomLink {
-//   label: string;
-//   href: string;
-//   targetBlank?: boolean;
-// }
+export const CustomLink = {
+  label: String,
+  href: String,
+  targetBlank: Boolean,
+}
+
+
+
+
+
+export const PostAuthorType = {
+  id: String| Number,
+  firstName: String,
+  lastName: String,
+  displayName: String,
+  avatar: String,
+  bgImage: String,
+  email: String,
+  count: Number,
+  desc: String,
+  jobName: String,
+  href: String,
+}
+
+export const PostDataType = {
+  id: String | Number,
+  author: PostAuthorType,
+  date: String,
+  href: String,
+  //categories: TaxonomyType,
+  title: String,
+  featuredImage: String,
+  desc: String,
+  like: {
+    count: Number,
+    isLiked: Boolean,
+  },
+  bookmark: {
+    count: Number,
+    isBookmarked: Boolean,
+  },
+  commentCount: Number,
+  viewdCount: Number,
+  readingTime: Number,
+  postType: "standard" | "video" | "gallery" | "audio",
+  videoUrl: String,
+  audioUrl: String,
+  galleryImgs: String,
+}
+
+
+
+export const VideoType = {
+  id: String,
+  title: String,
+  thumbnail: String,
+}
+
 
 //  ##########  PostDataType ######## //
 export const TwMainColor = "gray";
@@ -19,53 +72,3 @@ export const TaxonomyType = {
   color: TwMainColor | String,
   taxonomy: "category" | "tag",
 }
-
-
-
-// export interface PostAuthorType {
-//   id: string | number;
-//   firstName: string;
-//   lastName: string;
-//   displayName: string;
-//   avatar: string;
-//   bgImage?: string;
-//   email?: string;
-//   count: number;
-//   desc: string;
-//   jobName: string;
-//   href: string;
-// }
-
-// export interface PostDataType {
-//   id: string | number;
-//   author: PostAuthorType;
-//   date: string;
-//   href: string;
-//   categories: TaxonomyType[];
-//   title: string;
-//   featuredImage: string;
-//   desc?: string;
-//   like: {
-//     count: number;
-//     isLiked: boolean;
-//   };
-//   bookmark: {
-//     count: number;
-//     isBookmarked: boolean;
-//   };
-//   commentCount: number;
-//   viewdCount: number;
-//   readingTime: number;
-//   postType: "standard" | "video" | "gallery" | "audio";
-//   videoUrl?: string;
-//   audioUrl?: string;
-//   galleryImgs?: string[];
-// }
-
-
-
-// export interface VideoType {
-//   id: string;
-//   title: string;
-//   thumbnail: string;
-// }
