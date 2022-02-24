@@ -4,18 +4,18 @@ Content-Type: application/json
 
 {
     "index":"4",
-        "title":"bitcoin folder post number 5",
-        "maintext":"this is the main text this is the main text this is the main text this is the main text",
-        "category":"ENTERTAINMENT",
-        "language":"English",
-        "source_domain":"abc",
-        "readtime": 1,
-        "facebook": 1,
-        "twitter": "1",
-        "image_url":" www.saad-Idrees.com",
-        "url":"www.google.com",
-        "post_id": "1",
-        "date_publish":"2002-12-09"
+    "title":"bitcoin folder post number 5",
+    "maintext":"this is the main text this is the main text this is the main text this is the main text",
+    "category":"ENTERTAINMENT",
+    "language":"English",
+    "source_domain":"abc",
+    "readtime": 1,
+    "facebook": 1,
+    "twitter": "1",
+    "image_url":" www.saad-Idrees.com",
+    "url":"www.google.com",
+    "post_id": "1",
+    "date_publish":"2002-12-09"
 }
 
 
@@ -31,3 +31,4 @@ GET http://localhost:7777/api/favouritePosts/all_posts/6213c26202d9fe10c46dc498
 
 
 ###
+

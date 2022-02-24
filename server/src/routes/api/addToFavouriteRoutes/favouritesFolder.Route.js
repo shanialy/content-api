@@ -31,7 +31,7 @@ router.get("/:id", authorize(), getSingleFavouriteFolder);
 
 
 // route:  GET /api/favouritesFolder/
-// desc:   sending all user folders by user id
+// desc:   getting all user folders by user id
 // access: PROTECTED
 router.get("/", authorize(), getAllFavouriteFolder);
 

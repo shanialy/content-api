@@ -20,4 +20,19 @@ GET http://localhost:7777/api/favouritesFolder/
 ###
 
 
+# delete folder by folder id 
+DELETE http://localhost:7777/api/favouritesFolder/:id
+
+
+###
+# updating folder by folder id
+PATCH http://localhost:7777/api/favouritesFolder/6213c28f02d9fe10c46dc49a
+Content-Type: application/json
+
+{
+  "folderName": "Crypto currency"
+}
+
+
+
  
