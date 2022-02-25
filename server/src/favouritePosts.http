@@ -1,10 +1,10 @@
 # create post by favoutites folder id
-post http://localhost:7777/api/favouritePosts/6213c26202d9fe10c46dc498
+post http://localhost:7777/api/favouritePosts/6215629d8559c8eb7b99deff
 Content-Type: application/json
 
 {
     "index":"4",
-    "title":"bitcoin folder post number 5",
+    "title":"Pilitics folder post number 4",
     "maintext":"this is the main text this is the main text this is the main text this is the main text",
     "category":"ENTERTAINMENT",
     "language":"English",

@@ -5,49 +5,32 @@ import ButtonPrimary from "../Button/ButtonPrimary";
 import ButtonSecondary from "../Button/ButtonSecondary";
 import { RadioGroup } from "@headlessui/react";
 import twFocusClass from "../../utils/twFocusClass";
+import { useCreateFolderMutation } from "../../app/Api/contentApi";
 
-
-const problemPlansDemo = [
-  { name: "Violence", id: "Violence", label: "Violence" },
-  { name: "Trouble", id: "Trouble", label: "Trouble" },
-  { name: "Spam", id: "Spam", label: "Spam" },
-  { name: "Other", id: "Other", label: "Other" },
-];
-
-const CreateFolderModal = ({
-  problemPlans = problemPlansDemo,
-  id,
-  show,
-  onCloseModalReportItem,
-}) => {
+const CreateFolderModal = ({ id, show, onCloseModalReportItem }) => {
   const textareaRef = useRef(null);
-
-  const [problemSelected, setProblemSelected] = useState(problemPlans[0]);
+  const [folderName, setFolderName] = useState();
+  const [createFolder, createFolderObj] = useCreateFolderMutation();
+  console.log(folderName);
 
   useEffect(() => {
     if (show) {
       setTimeout(() => {
         const element = textareaRef.current;
         if (element) {
-          (element).focus();
+          element.focus();
         }
       }, 400);
     }
   }, [show]);
 
   const handleClickSubmitForm = () => {
-    console.log({
-      id,
-      problem: problemSelected,
-      message: (textareaRef.current).value,
-    });
+     createFolder({folderName: folderName});
   };
 
-  
   const renderContent = () => {
     return (
       <form action="#">
-
         {/* TEXAREA MESSAGER */}
         <div className="mt-4">
           <h4 className="text-lg font-semibold text-neutral-700 dark:text-neutral-200">
@@ -64,6 +47,7 @@ const CreateFolderModal = ({
             required={true}
             rows={4}
             id="report-message"
+            onChange={(e) => setFolderName(e.target.value)}
           />
         </div>
         <div className="mt-4 space-x-3">
