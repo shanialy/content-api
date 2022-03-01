@@ -41,20 +41,7 @@ dispatch({
 
   const href = `/${id}`
 
-  // making a function on date_download so that we can get the time  (need to import moment and dateFormat if you want to perform the function) we also used this in NcImage component
 
-  // function relativeTime(date_download) {
-  //   try {
-  //     let ddate = dateFormat(date_download, "isoDateTime");
-  //     ddate = ddate.split("T");
-  //     let datePart = ddate[0];
-  //     let timePart = ddate[1].split("+")[0];
-
-  //     return moment(datePart + " " + timePart).fromNow();
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
 
   //useState hook from the theme  
   const [isHover, setIsHover] = useState(false);

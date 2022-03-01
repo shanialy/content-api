@@ -11,11 +11,7 @@ export const PageSingleTemplate3Props = {
   className: String
 }
 
-// export interface SinglePageType extends PostDataType {
-//   tags: TaxonomyType[];
-//   content: string | ReactNode;
-//   comments: CommentType[];
-// }
+
 
 const PageSingleTemplate3= ({
   className = "",
