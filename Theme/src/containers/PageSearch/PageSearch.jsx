@@ -310,7 +310,7 @@ const PageSearch = ({ className = "" }) => {
               ) : <h1>Error in Debugging</h1>}
               
             </div>
-          : <h1>Loading</h1>} */}
+          ): <h1>Loading</h1>}
 
           <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
             <Pagination />
