@@ -9,7 +9,7 @@
     "@appbaseio/autocomplete-suggestions-plugin": "^1.1.1-alpha",
     "@elastic/eui": "^48.1.1",
     "@glidejs/glide": "^3.5.2",
-    "@headlessui/react": "^1.4.3",
+    "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.5",
     "@reduxjs/toolkit": "^1.7.2",
     "@searchkit/client": "^3.0.0-canary.47",
@@ -24,7 +24,6 @@
     "date-fns": "^2.28.0",
     "dateformat": "^5.0.2",
     "font-awesome": "^4.7.0",
-
     "graphql": "^16.3.0",
     "moment": "^2.29.1",
     "node-sass": "^7.0.1",

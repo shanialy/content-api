@@ -3,7 +3,7 @@ post http://localhost:7777/api/favouritesFolder/
 Content-Type: application/json
 
 {
-    "folderName": "Crypto currency"
+    "folderName": "Articles"
 }
 
 ###
@@ -19,5 +19,22 @@ GET http://localhost:7777/api/favouritesFolder/
 
 ###
 
+
+# delete folder by folder id 
+DELETE http://localhost:7777/api/favouritesFolder/6218beb3aad0e01feeae46c2
+
+
+###
+# updating folder by folder id
+PATCH http://localhost:7777/api/favouritesFolder/6213c28f02d9fe10c46dc49a
+Content-Type: application/json
+
+{
+  "folderName": "Crypto currency"
+}
+
+###
+# delet all folders by user ID
+DELETE http://localhost:7777/api/favouritesFolder/6213bf62597993895ebb1666
 
  

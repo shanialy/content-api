@@ -338,6 +338,11 @@ const discoveryDropdwonItems = [
     href: "/search",
     name: "Search",
   },
+  {
+    id: ncNanoId(),
+    href: "/topics",
+    name: "Topics",
+  },
 ];
 
 
