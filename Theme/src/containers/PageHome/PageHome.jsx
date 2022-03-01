@@ -19,6 +19,8 @@ import { Helmet } from "react-helmet";
 // import { DEMO_AUTHORS } from "data/authors";
 // import SectionBecomeAnAuthor from "components/SectionBecomeAnAuthor/SectionBecomeAnAuthor";
 import SectionSliderNewCategories from "../../components/SectionSliderNewCategories/SectionSliderNewCategories";
+// import Card1Large from "../../components/Card1Large/Card1Large";
+import SectionLargeSlider from "../../components/Card1Large/SectionLargeSlider";
 // import SectionSliderNewAuthors from "components/SectionSliderNewAthors/SectionSliderNewAuthors";
 // import SectionMagazine4 from "./SectionMagazine4";
 // import SectionAds from "./SectionAds";
@@ -26,7 +28,7 @@ import SectionSliderNewCategories from "../../components/SectionSliderNewCategor
 // import SectionMagazine7 from "./SectionMagazine7";
 // import SectionMagazine8 from "./SectionMagazine8";
 // import SectionMagazine9 from "./SectionMagazine9";
-// import BgGlassmorphism from "../../components/BgGlassmorphism/BgGlassmorphism";
+import BgGlassmorphism from "../../components/BgGlassmorphism/BgGlassmorphism";
 
 //
 // const POSTS: PostDataType[] = DEMO_POSTS;
@@ -46,16 +48,16 @@ const PageHome = () => {
       {/* ======== ALL SECTIONS ======== */}
       <div className="relative overflow-hidden">
         {/* ======== BG GLASS ========  */}
-         {/* <BgGlassmorphism /> */}
-         <div className="container relative">
-        {/* ======= START CONTAINER ============= */}
-        {/* <div className="container relative">
+        {/* <BgGlassmorphism /> */}
+        <div className="container relative">
+          {/* ======= START CONTAINER ============= */}
+          {/* <div className="container relative">
           {/* === SECTION  === */}
-          {/* <SectionLargeSlider
+          <BgGlassmorphism />
+          <SectionLargeSlider
             className="pt-10 pb-16 md:py-16 lg:pb-28 lg:pt-24 "
-            posts={POSTS.filter((_, i) => i < 3)}
-          />  */}
-
+            // posts={POSTS.filter((_, i) => i < 3)}
+          />
           {/* === SECTION  === */}
           {/* <div className="relative py-16">
             <BackgroundSection />
@@ -65,17 +67,15 @@ const PageHome = () => {
               authors={DEMO_AUTHORS.filter((_, i) => i < 10)}
             />
           </div> */}
-
           {/* === SECTION 5 === */}
           {/* <h1>Top Trending</h1> */}
-          <SectionSliderNewCategories 
+          <SectionSliderNewCategories
             className="py-16 lg:py-28"
             heading="Top trending topics"
-            subHeading="Discover 233 topics"
+            subHeading=""
             // categories={DEMO_CATEGORIES.filter((_, i) => i < 10)}
             categoryCardType="card4"
           />
-
           {/* === SECTION 6 === */}
           {/* <div className="relative py-16">
             <BackgroundSection />
@@ -87,26 +87,22 @@ const PageHome = () => {
               posts={DEMO_POSTS_AUDIO.filter((_, i) => i > 3 && i < 10)}
             />
           </div> */}
-
           {/* === SECTION 4 === */}
           {/* <SectionMagazine1
             className="py-16 lg:py-28"
             posts={MAGAZINE1_POSTS}
             tabs={MAGAZINE1_TABS}
           /> */}
-
           {/* === SECTION 3 === */}
           {/* <SectionAds /> */}
-
           {/* === SECTION 7 === */}
           {/* <SectionMagazine7
             className="py-16 lg:py-28"
             posts={DEMO_POSTS_GALLERY.filter((_, i) => i < 6)}
           />
         </div> */}
-
-        {/* === SECTION 11 === */}
-        {/* <div className="dark bg-neutral-900 dark:bg-black dark:bg-opacity-20 text-neutral-100">
+          {/* === SECTION 11 === */}
+          {/* <div className="dark bg-neutral-900 dark:bg-black dark:bg-opacity-20 text-neutral-100">
           <div className="relative container">
             <SectionGridPosts
               className="py-16 lg:py-28"
@@ -119,14 +115,12 @@ const PageHome = () => {
             />
           </div>
         </div> */}
-
-        {/* <div className="container "> */}
+          {/* <div className="container "> */}
           {/* === SECTION 9 === */}
           {/* <SectionMagazine8
             className="py-16 lg:py-28"
             posts={DEMO_POSTS_AUDIO.filter((_, i) => i < 6)}
           /> */}
-
           {/* === SECTION 9 === */}
           {/* <div className="relative py-16">
             <BackgroundSection />
@@ -134,19 +128,16 @@ const PageHome = () => {
               posts={DEMO_POSTS_AUDIO.filter((_, i) => i >= 6 && i < 16)}
             />
           </div> */}
-
           {/* === SECTION 5 === */}
           {/* <SectionGridAuthorBox
             className="py-16 lg:py-28"
             authors={DEMO_AUTHORS.filter((_, i) => i < 10)}
           /> */}
-
           {/* === SECTION 8 === */}
           {/* <div className="relative py-16">
             <BackgroundSection />
             <SectionBecomeAnAuthor />
           </div> */}
-
           {/* === SECTION 11 === */}
           {/* <SectionMagazine4
             className="py-16 lg:py-28"
@@ -154,7 +145,6 @@ const PageHome = () => {
             posts={MAGAZINE2_POSTS}
             tabs={MAGAZINE1_TABS}
           /> */}
-
           {/* === SECTION 12 === */}
           {/* <div className="relative py-16">
             <BackgroundSection />
@@ -168,13 +158,10 @@ const PageHome = () => {
               sliderStype="style2"
             />
           </div> */}
-
           {/* === SECTION 14 === */}
           {/* <SectionSubscribe2 className="pt-16 lg:pt-28" /> */}
-
           {/* === SECTION 15 === */}
           {/* <SectionVideos className="py-16 lg:py-28" /> */}
-
           {/* === SECTION 17 === */}
           {/* <SectionLatestPosts
             className="pb-16 lg:pb-28"
@@ -186,7 +173,7 @@ const PageHome = () => {
         </div>
         {/* ======= END CONTAINER ============= */}
       </div>
-      </div>
+    </div>
   );
 };
 

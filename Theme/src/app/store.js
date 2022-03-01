@@ -12,6 +12,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import logger from "redux-logger";
 import rootReducers from "./rootReducers"
+// import {api} from "../components/Test/Api"
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -35,6 +36,10 @@ export const store = configureStore({
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
         }).concat(middlewareLogger),
+
+        // reducer:{
+        // [api.reducerPath]:api.reducer},
+    
 });
 
 export let persistor = persistStore(store);

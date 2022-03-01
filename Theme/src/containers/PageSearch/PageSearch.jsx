@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import ModalCategories from "./ModalCategories";
+// import Run from "../../components/Test/Run"
 import { DEMO_CATEGORIES, DEMO_TAGS } from "../../data/taxonomies";
 import ModalTags from "./ModalTags";
 import Nav from "../../components/Nav/Nav";
@@ -145,10 +146,10 @@ const PageSearch = ({ className = "" }) => {
      
   if(loading){console.log("Data is loading")}
 
-  if(!loading){console.log(data.results.hits.items[0].fields.twitter_shares)}
+  // if(!loading){console.log(data.results.hits.items[0].fields.twitter_shares)}
 
 
-  //console.log(data.results)
+  // console.log(data)
 
 
   
@@ -158,10 +159,9 @@ const PageSearch = ({ className = "" }) => {
       <Helmet>
         <title>Nc || Search Page Template</title>
       </Helmet>
-              
-              
+
       <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
-      {/* <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
+        {/* <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
         <div className="rounded-3xl relative aspect-w-16 aspect-h-16 sm:aspect-h-9 lg:aspect-h-5 overflow-hidden ">
           <NcImage
             containerClassName="absolute inset-0"
@@ -173,10 +173,10 @@ const PageSearch = ({ className = "" }) => {
         {/* <div className="relative container -mt-20 lg:-mt-48">
           <div className=" bg-white dark:bg-neutral-900 dark:border dark:border-neutral-700 p-5 lg:p-16 rounded-[40px] shadow-2xl flex items-center">
             <header className="w-full max-w-3xl mx-auto text-center flex flex-col items-center"> */}
-              
-              <AutoCompleteSearch/>
-              
-              {/* <h2 className="text-2xl sm:text-4xl font-semibold">{s}</h2>
+
+        <AutoCompleteSearch />
+
+        {/* <h2 className="text-2xl sm:text-4xl font-semibold">{s}</h2>
               <span className="block text-xs sm:text-sm mt-4 text-neutral-500 dark:text-neutral-300">
                 We found{" "}
                 <strong className="font-medium text-neutral-800 dark:text-neutral-100">
@@ -223,64 +223,55 @@ const PageSearch = ({ className = "" }) => {
                   </span>
                 </label>
               </form> */}
-              {/* <div className="w-full text-sm text-left mt-4 text-neutral-500 dark:text-neutral-300">
+        {/* <div className="w-full text-sm text-left mt-4 text-neutral-500 dark:text-neutral-300">
                 <div className="inline-block"> */}
-                <div className="margin">
-                  <span className="mr-2.5">Related:</span>
-                  <NcLink className="mr-2.5 inline-block font-normal" to="/#">
-                    Design
-                  </NcLink>
-                  <NcLink className="mr-2.5 inline-block font-normal" to="/#">
-                    Photo
-                  </NcLink>
-                  <NcLink className="mr-2.5 inline-block font-normal" to="/#">
-                    Vector
-                  </NcLink>
-                  <NcLink className="mr-2.5 inline-block font-normal" to="/#">
-                    Frontend
-                  </NcLink>
-                {/* </div>
+        <div className="margin">
+          <span className="mr-2.5">Related:</span>
+          <NcLink className="mr-2.5 inline-block font-normal" to="/#">
+            Design
+          </NcLink>
+          <NcLink className="mr-2.5 inline-block font-normal" to="/#">
+            Photo
+          </NcLink>
+          <NcLink className="mr-2.5 inline-block font-normal" to="/#">
+            Vector
+          </NcLink>
+          <NcLink className="mr-2.5 inline-block font-normal" to="/#">
+            Frontend
+          </NcLink>
+          {/* </div>
               </div> */}
-              </div></div>
-            {/* </header>
+        </div>
+      </div>
+      {/* </header>
           // </div>
         </div> */}
       {/* </div> */}
       {/* ====================== END HEADER ====================== */}
-
+      {/* <Run /> */}
       <div className="container py-16 lg:py-28 space-y-16 lg:space-y-28">
         <main>
           {/* TABS FILTER */}
-         
 
-       {/* Here i applied Models */}
+          {/* Here i applied Models */}
 
           <div className="flex flex-col sm:items-center sm:justify-between sm:flex-row">
             <div className="flex space-x-2.5">
-
               <ModalCategories categories={DEMO_CATEGORIES} />
 
               <ModalTags tags={DEMO_TAGS} />
-           
             </div>
             <div className="block my-4 border-b w-full border-neutral-100 sm:hidden"></div>
             <div className="flex justify-end">
-            
-            <DateRangeCalender/>
-
-          <DateRangeDropDown />    &nbsp;
- 
+              <DateRangeCalender />
+              <DateRangeDropDown /> &nbsp;
               <ArchiveFilterListBox lists={FILTERS} />
-              
             </div>
-            
           </div>
 
-          
+          {/* passing our data in Card11 through map */}
 
-               {/* passing our data in Card11 through map */}
-
-          {!loading ? 
+          {/* {!loading ? 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-8 mt-8 lg:mt-10">
 
               {data.results? data.results.hits.items.map((value , index) => {
@@ -297,13 +288,15 @@ const PageSearch = ({ className = "" }) => {
               ) : <h1>Error in Debugging</h1>}
               
             </div>
-          : <h1>Loading</h1>}
+          : <h1>Loading</h1>} */}
 
-<div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
+          <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
             <Pagination />
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Show more</button>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Show more
+            </button>
           </div>
-</main>
+        </main>
 
         <SectionSubscribe2 />
       </div>
