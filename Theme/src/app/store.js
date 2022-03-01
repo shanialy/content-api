@@ -12,6 +12,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import logger from "redux-logger";
 import rootReducers from "./rootReducers"
+
 import { contentApi } from "./Api/contentApi";
 
 const isDev = process.env.NODE_ENV === "development";
@@ -38,6 +39,7 @@ export const store = configureStore({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
+
         }).concat([middlewareLogger, contentApi.middleware]),
 });
 
