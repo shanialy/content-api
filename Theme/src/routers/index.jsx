@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 // import Page404 from "containers/Page404/Page404";
 // import PageArchive from "containers/PageArchive/PageArchive";
 // import PageAuthor from "containers/PageAuthor/PageAuthor";
-
+import SingleCard from '../components/Card11/SingleCard'
 import CategoryCardShow from "../components/CategoryCardShow/CategoryCardShow";
 // import PageSingle from "containers/PageSingle/PageSingle";
 // import PageSingleHasSidebar from "containers/PageSingle/PageSingleHasSidebar";
@@ -42,7 +42,7 @@ import PageSearchV2 from "../containers/PageSearch/PageSearchV2";
 import MainNav1 from "../components/Header/MainNav1"
 import PageContentFeed from "../containers/PageContentFeed/PageContentFeed"
 import PageHome from "../containers/PageHome/PageHome";
-import TopicsPage from "../containers/TopicsPage/TopicsPage" 
+
 
 // export const pages = [
 //   { path: "/", exact: true, component: PageHome },
@@ -132,7 +132,10 @@ const Routes = () => {
       <Route path={"/search-v2"} component={PageSearchV2} />
       <Route path={"/content-feed"} component={PageContentFeed} />
       <Route path={"/category/:label"} component={CategoryCardShow}/>
-      <Route path={"/topics"} component={TopicsPage}/>
+
+      <Route path={"/:id"} component={SingleCard} />
+
+      {/* <Route path={"/:id"} component={SingleCard}/> */}
         {/* {pages.map(({ component, path, exact }) => {
           return (
             <Route

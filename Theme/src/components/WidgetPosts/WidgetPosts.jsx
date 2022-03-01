@@ -1,10 +1,15 @@
-import Card3Small from "../../components/Card3Small/Card3Small";
-import WidgetHeading1 from "../../components/WidgetHeading1/WidgetHeading1";
-// import { PostDataType } from "data/types";
+
+import Card3Small from "../Card3Small/Card3Small";
+import WidgetHeading1 from "../WidgetHeading1/WidgetHeading1";
+import { PostDataType } from "data/types";
 import React, { FC } from "react";
 
+export const WidgetPostsProps = {
+  className: String,
+  posts: PostDataType,
+}
 
-const WidgetPosts = ({
+const WidgetPosts= ({
   className = "bg-neutral-100 dark:bg-neutral-800",
   posts,
 }) => {

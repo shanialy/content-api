@@ -288,6 +288,7 @@ const SectionSliderNewCategories = ({
       </Heading>
 
       {!loading ? (
+        // <div className="nc-CardAuthorBox2 flex flex-col overflow-hidden [ nc-box-has-hover ] [ nc-dark-box-bg-has-hover ]">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
           {data.results.facets.map((items) => {
             if (items.identifier == "category") {
@@ -300,6 +301,7 @@ const SectionSliderNewCategories = ({
               });
             }
           })}
+          {/* </div> */}
         </div>
       ) : (
         <h1>loading..</h1>

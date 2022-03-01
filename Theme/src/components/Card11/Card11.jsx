@@ -7,8 +7,9 @@ import PostCardLikeAndComment from "../../components/PostCardLikeAndComment/Post
 import PostCardMeta from "../../components/PostCardMeta/PostCardMeta";
 import PostFeaturedMedia from "../../components/PostFeaturedMedia/PostFeaturedMedia";
 import moment from 'moment'
+import SingleCard from './SingleCard'
 import dateFormat from 'dateformat';
-
+import { Provider ,useDispatch } from 'react-redux'
 
 
 const Card11 = ({
@@ -20,8 +21,17 @@ const Card11 = ({
 }) => {
 
 //getting id from Page search
-  console.log(cardvalue)
+const dispatch = useDispatch()
+
+dispatch({
+  type :"addCardValue",
+  payload : cardvalue
+})
+
+////////////////////////////////
+  
  const{id} = cardvalue
+ console.log(cardvalue , "card11")
   
   //destructuring the post that  we are getting form  PageSearch component
 
@@ -66,35 +76,14 @@ const Card11 = ({
 
       <Link to={href} className="absolute inset-0">
              <PostFeaturedMedia post={post} isHover={isHover} />
+             
       </Link>
+    
         
       </div>
       
 
-      {/* COMMENTING THE BADGE COMPONENT  */}
-
-      
-      {/* <span className="absolute top-3 inset-x-3">
-        <CategoryBadgeList categories={category} />
-      </span> */}
-
-     {/* USING THE FOLLOWING INSTEAD OF BADGE  */}
-
-      {/* <div className="text-neutral-500 dark:text-neutral-400 font-normal"
-        style={{
-          height: "18px",
-          width: "240px",
-          backgroundColor: "#f2b346",
-          position: "absolute",
-          top: "15px",
-          borderRadius: "3px",
-          opacity: "0.8",
-        }}
-      >
-        <p style={{ fontSize: "12px" ,paddingLeft :"10px"  }}>{source_domain} . {relativeTime(date_download)} </p>
-      </div> */}
-
-      
+  
    
       {/* Passing the post props in PostCardMeta component  */}
 

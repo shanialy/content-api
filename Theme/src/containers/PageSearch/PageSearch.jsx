@@ -28,6 +28,10 @@ import CardCategory2 from "../../components/CardCategory2/CardCategory2";
 import Tag from "../../components/Tag/Tag";
 import CardAuthorBox2 from "../../components/CardAuthorBox2/CardAuthorBox2";
 import AutoCompleteSearch from "./autoCompleteSearch";
+import DateRangeCalender from "../../components/DateRangeCalender/DateRangeCalender";
+import DateRangeDropDown from "../../components/DateRangeCalender/DateRangeDropDown";
+import "./autoCompleteSearch.css"
+import Pagination from "../../components/Pagination/Pagination";
 
 export const PageSearchProps = {
   className: String,
@@ -68,35 +72,43 @@ const query = gql`
         query
         __typename
       }
-      hits(page: $page, sortBy: $sortBy) {
-        page {
-          total
-          totalPages
-          pageNumber
-          from
-          size
-          __typename
-        }
-        sortedBy
 
-        items {
-          ... on ResultHit {
-            id
-            fields {
-              article_length
-              category
-              authors
-              date_download
-              language
-              image_url
-              source_domain
-              facebook_shares
-              twitter_shares
-              maintext
-              source_domain
-              title
-              __typename
-            }
+      sortOptions {
+        id
+        label
+        __typename
+      }
+      query
+      __typename
+    }
+    hits(page: $page, sortBy: $sortBy) {
+      page {
+        total
+        totalPages
+        pageNumber
+        from
+        size
+        __typename
+      }
+      sortedBy
+
+      items {
+        ... on ResultHit {
+          id
+          fields {
+  article_length
+  category
+  authors
+  date_download
+  language
+  image_url
+  source_domain
+  facebook_shares
+  twitter_shares
+  maintext
+  sentiment
+  source_domain
+  title
             __typename
           }
           __typename
@@ -120,12 +132,7 @@ const query = gql`
   }
 `;
 
-// const posts = DEMO_POSTS.filter((_, i) => i < 12);
-// const cats = DEMO_CATEGORIES.filter((_, i) => i < 15);
-// const tags = DEMO_CATEGORIES.filter((_, i) => i < 32);
-// const authors = DEMO_AUTHORS.filter((_, i) => i < 12);
 
-///////////////////////////////////////////////////////Sorting
 
 //////////////////////////////////////////////
 const FILTERS = [
@@ -158,30 +165,15 @@ const PageSearch = ({ className = "" }) => {
     console.log(data.results.hits.items[0].fields.twitter_shares);
   }
 
-  console.log(data);
 
-  // const dataSet = data.results.hits.items
-  /////////////////////////////////////////////////////////////////////
-
-  ////////////////////////////////////////////////creating a render function /////////////////////////
-
-  // const renderCard=(item ,index)=>{
-  //   return(
-  //     console.log(item.fie)
-  //     //<Card11 key={item.id} post={item} />
-  //   )
-  // }
-
-  let s = "Technology";
-
-  // Tag and category have same data type - we will use one demo data
 
   return (
     <div className={`nc-PageSearch ${className}`} data-nc-id="PageSearch">
       <Helmet>
         <title>Nc || Search Page Template</title>
-      </Helmet>
-
+      </Helmet> 
+              
+      <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
       {/* <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
         <div className="rounded-3xl relative aspect-w-16 aspect-h-16 sm:aspect-h-9 lg:aspect-h-5 overflow-hidden ">
           <NcImage
@@ -244,25 +236,28 @@ const PageSearch = ({ className = "" }) => {
                   </span>
                 </label>
               </form> */}
-      <div className="w-full text-sm text-left mt-4 text-neutral-500 dark:text-neutral-300">
-        <div className="inline-block">
-          <span className="mr-2.5">Related:</span>
-          <NcLink className="mr-2.5 inline-block font-normal" to="/#">
-            Design
-          </NcLink>
-          <NcLink className="mr-2.5 inline-block font-normal" to="/#">
-            Photo
-          </NcLink>
-          <NcLink className="mr-2.5 inline-block font-normal" to="/#">
-            Vector
-          </NcLink>
-          <NcLink className="mr-2.5 inline-block font-normal" to="/#">
-            Frontend
-          </NcLink>
-        </div>
-      </div>
-      {/* </header>
-          </div>
+
+              {/* <div className="w-full text-sm text-left mt-4 text-neutral-500 dark:text-neutral-300">
+                <div className="inline-block"> */}
+                <div className="margin">
+                  <span className="mr-2.5">Related:</span>
+                  <NcLink className="mr-2.5 inline-block font-normal" to="/#">
+                    Design
+                  </NcLink>
+                  <NcLink className="mr-2.5 inline-block font-normal" to="/#">
+                    Photo
+                  </NcLink>
+                  <NcLink className="mr-2.5 inline-block font-normal" to="/#">
+                    Vector
+                  </NcLink>
+                  <NcLink className="mr-2.5 inline-block font-normal" to="/#">
+                    Frontend
+                  </NcLink>
+                {/* </div>
+              </div> */}
+              </div></div>
+            {/* </header>
+          // </div>
         </div> */}
       {/* </div> */}
       {/* ====================== END HEADER ====================== */}
@@ -281,28 +276,44 @@ const PageSearch = ({ className = "" }) => {
             </div>
             <div className="block my-4 border-b w-full border-neutral-100 sm:hidden"></div>
             <div className="flex justify-end">
+            
+            <DateRangeCalender/>
+
+          <DateRangeDropDown />    &nbsp;
+ 
               <ArchiveFilterListBox lists={FILTERS} />
+              
             </div>
+            
           </div>
 
           {/* passing our data in Card11 through map */}
 
           {!loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {data.results ? (
-                data.results.hits.items.map((value, index) => {
-                  return (
-                    <Card11 key={index} post={value.fields} cardvalue={value} />
-                  );
-                })
-              ) : (
-                <h1>Error in Debugging</h1>
-              )}
+
+
+              {data.results? data.results.hits.items.map((value , index) => {
+        
+                  return(
+                  
+         
+                      <Card11 key={index} post={value.fields} cardvalue={value} />
+                  
+                 )
+                }
+          
+
+              ) : <h1>Error in Debugging</h1>}
+              
             </div>
-          ) : (
-            <h1>There occured an error on line 309 in PageSearch</h1>
-          )}
-        </main>
+          : <h1>Loading</h1>}
+
+<div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
+            <Pagination />
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Show more</button>
+          </div>
+</main>
 
         <SectionSubscribe2 />
       </div>

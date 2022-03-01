@@ -1,5 +1,5 @@
 
-import {withRouter} from 'react-router-dom'
+//import {withRouter} from 'react-router-dom'
 import PageSingle from '../../containers/PageSingle/PageSingle'
 import PageSingleHasSidebar from '../../containers/PageSingle/PageSingleHasSidebar'
 import SingleContent from '../../containers/PageSingle/SingleContent'
@@ -12,10 +12,16 @@ import PageSingleTemp3Sidebar from '../../containers/PageSingle/PageSingleTemp3S
 import PageSingleTemp3 from '../../containers/PageSingle/PageSingleTemp3'
 import PageSingleTemp2 from '../../containers/PageSingle/PageSingleTemp2'
 import PageSingleTemp2Sidebar from '../../containers/PageSingle/PageSingleTemp2Sidebar'
+import store from './store'
+import { Provider ,useSelector} from 'react-redux'
 
 
+const SingleCard = ()=>{
 
-const SingleCard = (props)=>{
+    
+   const cvalue =  useSelector(state => state.cvalue)
+//   //  const {id , titile}  = singlecard
+     console.log(cvalue)
      {/* I will use SingleContent ///content in center */}
             {/* <SingleContent/>  */}
             {/* //we will useSingle MetaAction as it has 4 icons and look good */}
@@ -37,13 +43,15 @@ const SingleCard = (props)=>{
             {/* <PageSingleTemp2Sidebar/> */}
             {/* Can be used it has data in center side with different imag
             <PageSingleTemp2/> */}
-    console.log(props)
     return(
         <>
+        <Provider store={store}>
+         <PageSingleTemp3/>
+        </Provider>
             {/* PErfect to use  it has data in center*/}
-            <PageSingleTemp3/>
+            
         </>
     )
 }
 
-export default withRouter(SingleCard)
+export default SingleCard
