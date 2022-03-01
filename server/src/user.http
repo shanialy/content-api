@@ -3,8 +3,8 @@ post http://localhost:7777/api/user/register
 Content-Type: application/json
 
 {
-    "email":"saad_idrees@gmail.com",
-    "password":"saad_idrees",
+    "email":"saad1@gmail.com",
+    "password":"saad01",
     "firstName":"Saad", 
     "lastName":"Idrees",
     "title":"Mr"
@@ -18,7 +18,7 @@ POST http://localhost:7777/api/user/verify-email
 Content-Type:  application/json
 
 {
-    "token": "5aa2f21b7641ad0260dae6911b135a0af7eb7299a03c8fce0470c81403777434058f2d6ea38fcc21"
+    "token": "52b22005cf615a6706f7551781fd45d2b998002c17968799fe62fb647b0d2a4649c752edc6eb3e44"
 }
 
 ###
@@ -34,7 +34,7 @@ Content-Type:  application/json
 }
 
 ###
-# revoking token
+# revoking token/ log-out
 post http://localhost:7777/api/user/revoke-token
 Content-Type:  application/json
 
@@ -77,14 +77,14 @@ Content-Type: application/json
 ###
 
 # Update user data first need to be authenticated
-put http://localhost:7777/api/user/619df47da46e8177b22e17ad
+put http://localhost:7777/api/user/621c99bc0beb76ccd0966e6f
 Content-Type:  application/json
 
 {
     "email":"saad@gmail22.com",
     "password":"saad01",
     "firstName": "Shaikh Muhammad",
-    "lastName": "Sad",
+    "lastName": "Saad",
     "title": " hello im Saad"
 }
 
@@ -94,17 +94,6 @@ Content-Type:  application/json
 # delete user first need to be authenticated
 delete http://localhost:7777/api/user/619df47da46e8177b22e17ad
 Content-Type:  application/json
-
-{
-    
-}
-
-
-
-###
-# get Favourites Folder
-get http://localhost:7777/api/favouritesFolder/
-Content-Type: application/json
 
 {
     

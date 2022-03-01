@@ -90,7 +90,6 @@ const PageDashboard = ({ className = "" }) => {
 
           <div className="flex-shrink-0 max-w-xl xl:w-70 xl:pr-8">
             <ul className="text-base space-y-1 text-neutral-6000 dark:text-neutral-400">
-            <h1>curated</h1>
 
               {subPages.map(({ sPath, pageName, emoij }, index) => {
                 return (

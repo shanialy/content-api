@@ -12,7 +12,8 @@ import {
 import storage from "redux-persist/lib/storage";
 import logger from "redux-logger";
 import rootReducers from "./rootReducers"
-// import {api} from "../components/Test/Api"
+
+import { contentApi } from "./Api/contentApi";
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -21,28 +22,28 @@ const persistConfig = {
     version: 1,
     storage,
     whitelist: ["darkmode"],
-  };
+};
 
 const rootReducer = combineReducers(rootReducers);
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const middlewareLogger = !!isDev ? logger : [];
 
 export const store = configureStore({
-    reducer: persistedReducer,
+    reducer: {
+        [contentApi.reducerPath]: contentApi.reducer,
+        persistedReducer
+    },
 
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
-        }).concat(middlewareLogger),
 
-        // reducer:{
-        // [api.reducerPath]:api.reducer},
-    
+        }).concat([middlewareLogger, contentApi.middleware]),
 });
 
 export let persistor = persistStore(store);
 
-export const  RootState = store.getState;
-export  const AppDispatch =  store.dispatch;
+export const RootState = store.getState;
+export const AppDispatch = store.dispatch;

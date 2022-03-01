@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import ModalCategories from "./ModalCategories";
 // import Run from "../../components/Test/Run"
 import { DEMO_CATEGORIES, DEMO_TAGS } from "../../data/taxonomies";
@@ -11,8 +11,13 @@ import { Helmet } from "react-helmet";
 import SectionSubscribe2 from "../../components/SectionSubscribe2/SectionSubscribe2";
 import NcImage from "../../components/NcImage/NcImage";
 import NcLink from "../../components/NcLink/NcLink";
-import { gql, useQuery } from '@apollo/client';
-import { useSearchkitVariables, useSearchkit, withSearchkit, withSearchkitRouting } from '@searchkit/client'
+import { gql, useQuery } from "@apollo/client";
+import {
+  useSearchkitVariables,
+  useSearchkit,
+  withSearchkit,
+  withSearchkitRouting,
+} from "@searchkit/client";
 //import SectionSliderNewAuthors from "../../components/SectionSliderNewAthors/SectionSliderNewAuthors";
 // import { DEMO_AUTHORS } from "../../data/authors";
 // import ButtonSecondary from "../../components/Button/ButtonSecondary";
@@ -29,35 +34,46 @@ import DateRangeDropDown from "../../components/DateRangeCalender/DateRangeDropD
 import "./autoCompleteSearch.css"
 import Pagination from "../../components/Pagination/Pagination";
 
-
-
-
 export const PageSearchProps = {
-  className: String
-}
+  className: String,
+};
 
 const query = gql`
-query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $sortBy: String) {
-  results(query: $query, filters: $filters) {
-    summary {
-      total
-      appliedFilters {
-        id
-        identifier
-        display
-        label
-        ... on DateRangeSelectedFilter {
-          dateMin
-          dateMax
-          __typename
-        }
+  query resultSet(
+    $query: String
+    $filters: [SKFiltersSet]
+    $page: SKPageInput
+    $sortBy: String
+  ) {
+    results(query: $query, filters: $filters) {
+      summary {
+        total
+        appliedFilters {
+          id
+          identifier
+          display
+          label
+          ... on DateRangeSelectedFilter {
+            dateMin
+            dateMax
+            __typename
+          }
 
-        ... on ValueSelectedFilter {
-          value
+          ... on ValueSelectedFilter {
+            value
+            __typename
+          }
           __typename
         }
+        sortOptions {
+          id
+          label
+          __typename
+        }
+        query
         __typename
       }
+
       sortOptions {
         id
         label
@@ -100,25 +116,22 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
         }
         __typename
       }
-      __typename
-    }
-    facets {
-      identifier
-      type
-      label
-      display
-      entries {
+      facets {
+        identifier
+        type
         label
-        count
+        display
+        entries {
+          label
+          count
+          __typename
+        }
         __typename
       }
       __typename
     }
-    __typename
   }
-}
-`
-
+`;
 
 
 
@@ -136,30 +149,34 @@ const TABS = ["Articles", "Categories", "Tags", "Authors"];
 //const posts = DEMO_POSTS.filter((_, i) => i < 16);
 
 const PageSearch = ({ className = "" }) => {
-
   ////////////////////////////////graph ql work////////////////////////////
 
-  const variables = useSearchkitVariables()
-  const { data, error ,loading } = useQuery(query, { variables })
+  const variables = useSearchkitVariables();
+  const { data, error, loading } = useQuery(query, { variables });
 
-  if(error){console.log("An error Occured" + error)}
-     
-  if(loading){console.log("Data is loading")}
-
-  // if(!loading){console.log(data.results.hits.items[0].fields.twitter_shares)}
+  if (error) {
+    console.log("An error Occured" + error);
+  }
 
 
-  // console.log(data)
+  if (loading) {
+    console.log("Data is loading");
+  }
+
+  if (!loading) {
+    console.log(data.results.hits.items[0].fields.twitter_shares);
+  }
 
 
-  
- 
+
+
   return (
     <div className={`nc-PageSearch ${className}`} data-nc-id="PageSearch">
       <Helmet>
         <title>Nc || Search Page Template</title>
-      </Helmet>
 
+      </Helmet> 
+              
       <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
         {/* <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
         <div className="rounded-3xl relative aspect-w-16 aspect-h-16 sm:aspect-h-9 lg:aspect-h-5 overflow-hidden ">
@@ -170,13 +187,14 @@ const PageSearch = ({ className = "" }) => {
           />
         </div>
         {/* CONTENT */}
-        {/* <div className="relative container -mt-20 lg:-mt-48">
+      {/* <div className="relative container -mt-20 lg:-mt-48">
           <div className=" bg-white dark:bg-neutral-900 dark:border dark:border-neutral-700 p-5 lg:p-16 rounded-[40px] shadow-2xl flex items-center">
             <header className="w-full max-w-3xl mx-auto text-center flex flex-col items-center"> */}
 
-        <AutoCompleteSearch />
 
-        {/* <h2 className="text-2xl sm:text-4xl font-semibold">{s}</h2>
+      <AutoCompleteSearch />
+
+      {/* <h2 className="text-2xl sm:text-4xl font-semibold">{s}</h2>
               <span className="block text-xs sm:text-sm mt-4 text-neutral-500 dark:text-neutral-300">
                 We found{" "}
                 <strong className="font-medium text-neutral-800 dark:text-neutral-100">
@@ -223,7 +241,9 @@ const PageSearch = ({ className = "" }) => {
                   </span>
                 </label>
               </form> */}
-        {/* <div className="w-full text-sm text-left mt-4 text-neutral-500 dark:text-neutral-300">
+
+
+              {/* <div className="w-full text-sm text-left mt-4 text-neutral-500 dark:text-neutral-300">
                 <div className="inline-block"> */}
         <div className="margin">
           <span className="mr-2.5">Related:</span>
@@ -271,8 +291,10 @@ const PageSearch = ({ className = "" }) => {
 
           {/* passing our data in Card11 through map */}
 
-          {/* {!loading ? 
+
+          {!loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-8 mt-8 lg:mt-10">
+
 
               {data.results? data.results.hits.items.map((value , index) => {
         
@@ -305,4 +327,3 @@ const PageSearch = ({ className = "" }) => {
 };
 
 export default PageSearch;
-
