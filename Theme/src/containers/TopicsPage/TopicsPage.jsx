@@ -8,6 +8,7 @@ import {
   useGetAllFoldersQuery,
   useGetAllFavouritePostsQuery,
 } from "../../app/Api/contentApi";
+import { useEffect } from "react";
 
 const TopicsPage = ({ className = "" }) => {
   const [folderID, setFolderID] = useState();
@@ -21,6 +22,7 @@ const TopicsPage = ({ className = "" }) => {
   const closeModal = () => setshowModal(false);
   const showModalOnClick = () => setshowModal(true);
 
+  
   return (
     <div className={`nc-PageDashboard ${className}`} data-nc-id="PageDashboard">
       <Helmet>

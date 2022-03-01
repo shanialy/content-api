@@ -35,7 +35,16 @@ const contentApi = createApi({
             })
         }),
 
+        //User Queries
 
+        // update user queries
+        updateUser: builder.mutation({
+            query: (params)=>({
+                url: `/api/user/${params.userId}`,
+                method:"PUT",
+                body: params.user
+            }),
+        })
     }),
 });
 
@@ -45,4 +54,5 @@ export const {
     useGetAllFoldersQuery,
     useGetAllFavouritePostsQuery,
     useCreateFolderMutation,
+    useUpdateUserMutation
 } = contentApi;

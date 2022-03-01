@@ -208,10 +208,11 @@ async function refreshToken({ token, ipAddress }) {
 
 async function update(id, params) {
     const user = await getUser(id);
+    
     // validate (if email was changed)
-    if (params.email && user.email !== params.email && await userModel.findOne({ email: params.email })) {
-        throw 'Email "' + params.email + '" is already taken';
-    }
+    // if (params.email && user.email !== params.email && await userModel.findOne({ email: params.email })) {
+    //     throw 'Email "' + params.email + '" is already taken';
+    // }
 
     // hash password if it was entered
     if (params.password) {

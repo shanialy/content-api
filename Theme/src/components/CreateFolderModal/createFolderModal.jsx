@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, } from "react";
+import {useHistory, withRouter} from "react-router-dom"
 import NcModal from "../NcModal/NcModal";
 import Textarea from "../Textarea/Textarea";
 import ButtonPrimary from "../Button/ButtonPrimary";
@@ -7,11 +8,11 @@ import { RadioGroup } from "@headlessui/react";
 import twFocusClass from "../../utils/twFocusClass";
 import { useCreateFolderMutation } from "../../app/Api/contentApi";
 
-const CreateFolderModal = ({ id, show, onCloseModalReportItem }) => {
+const CreateFolderModal = ({ id, show, onCloseModalReportItem, }) => {
   const textareaRef = useRef(null);
+  const history = useHistory();
   const [folderName, setFolderName] = useState();
   const [createFolder, createFolderObj] = useCreateFolderMutation();
-  console.log(folderName);
 
   useEffect(() => {
     if (show) {
@@ -24,8 +25,10 @@ const CreateFolderModal = ({ id, show, onCloseModalReportItem }) => {
     }
   }, [show]);
 
-  const handleClickSubmitForm = () => {
+  const handleClickSubmitForm = (e) => {
+    // e.preventDefault();
      createFolder({folderName: folderName});
+     history.push("/topics")
   };
 
   const renderContent = () => {
@@ -51,7 +54,7 @@ const CreateFolderModal = ({ id, show, onCloseModalReportItem }) => {
           />
         </div>
         <div className="mt-4 space-x-3">
-          <ButtonPrimary onClick={handleClickSubmitForm} type="submit">
+          <ButtonPrimary onClick={(e)=>handleClickSubmitForm(e)} type="submit">
             Create
           </ButtonPrimary>
           <ButtonSecondary type="button" onClick={onCloseModalReportItem}>
