@@ -31,7 +31,7 @@ import CardAuthorBox2 from "../../components/CardAuthorBox2/CardAuthorBox2";
 import AutoCompleteSearch from "./autoCompleteSearch";
 import DateRangeCalender from "../../components/DateRangeCalender/DateRangeCalender";
 import DateRangeDropDown from "../../components/DateRangeCalender/DateRangeDropDown";
-import "./autoCompleteSearch.css"
+import "./autoCompleteSearch.css";
 import Pagination from "../../components/Pagination/Pagination";
 
 export const PageSearchProps = {
@@ -97,19 +97,19 @@ const query = gql`
         ... on ResultHit {
           id
           fields {
-  article_length
-  category
-  authors
-  date_download
-  language
-  image_url
-  source_domain
-  facebook_shares
-  twitter_shares
-  maintext
-  sentiment
-  source_domain
-  title
+            article_length
+            category
+            authors
+            date_download
+            language
+            image_url
+            source_domain
+            facebook_shares
+            twitter_shares
+            maintext
+            sentiment
+            source_domain
+            title
             __typename
           }
           __typename
@@ -132,8 +132,6 @@ const query = gql`
     }
   }
 `;
-
-
 
 //////////////////////////////////////////////
 const FILTERS = [
@@ -158,25 +156,20 @@ const PageSearch = ({ className = "" }) => {
     console.log("An error Occured" + error);
   }
 
-
   if (loading) {
     console.log("Data is loading");
   }
 
   if (!loading) {
-    console.log(data.results.hits.items[0].fields.twitter_shares);
+    console.log(data?.results.hits.items[0].fields.twitter_shares);
   }
-
-
-
 
   return (
     <div className={`nc-PageSearch ${className}`} data-nc-id="PageSearch">
       <Helmet>
         <title>Nc || Search Page Template</title>
+      </Helmet>
 
-      </Helmet> 
-              
       <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
         {/* <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
         <div className="rounded-3xl relative aspect-w-16 aspect-h-16 sm:aspect-h-9 lg:aspect-h-5 overflow-hidden ">
@@ -187,14 +180,13 @@ const PageSearch = ({ className = "" }) => {
           />
         </div>
         {/* CONTENT */}
-      {/* <div className="relative container -mt-20 lg:-mt-48">
+        {/* <div className="relative container -mt-20 lg:-mt-48">
           <div className=" bg-white dark:bg-neutral-900 dark:border dark:border-neutral-700 p-5 lg:p-16 rounded-[40px] shadow-2xl flex items-center">
             <header className="w-full max-w-3xl mx-auto text-center flex flex-col items-center"> */}
 
+        <AutoCompleteSearch />
 
-      <AutoCompleteSearch />
-
-      {/* <h2 className="text-2xl sm:text-4xl font-semibold">{s}</h2>
+        {/* <h2 className="text-2xl sm:text-4xl font-semibold">{s}</h2>
               <span className="block text-xs sm:text-sm mt-4 text-neutral-500 dark:text-neutral-300">
                 We found{" "}
                 <strong className="font-medium text-neutral-800 dark:text-neutral-100">
@@ -242,8 +234,7 @@ const PageSearch = ({ className = "" }) => {
                 </label>
               </form> */}
 
-
-              {/* <div className="w-full text-sm text-left mt-4 text-neutral-500 dark:text-neutral-300">
+        {/* <div className="w-full text-sm text-left mt-4 text-neutral-500 dark:text-neutral-300">
                 <div className="inline-block"> */}
         <div className="margin">
           <span className="mr-2.5">Related:</span>
@@ -291,26 +282,21 @@ const PageSearch = ({ className = "" }) => {
 
           {/* passing our data in Card11 through map */}
 
-
           {!loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-8 mt-8 lg:mt-10">
-
-
-              {data.results? data.results.hits.items.map((value , index) => {
-        
-                  return(
-                  
-         
-                      <Card11 key={index} post={value.fields} cardvalue={value} />
-                  
-                 )
-                }
-          
-
-              ) : <h1>Error in Debugging</h1>}
-              
+              {data?.results ? (
+                data.results.hits.items.map((value, index) => {
+                  return (
+                    <Card11 key={index} post={value.fields} cardvalue={value} />
+                  );
+                })
+              ) : (
+                <h1>Error in Debugging</h1>
+              )}
             </div>
-          : <h1>Loading</h1>} */}
+          ) : (
+            <h1>Loading</h1>
+          )}
 
           <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
             <Pagination />

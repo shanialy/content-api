@@ -58,12 +58,12 @@ const subPages = [
   //   emoij: "✈",
   //   pageName: "Billing address",
   // },
-  {
-    sPath: "/submit-post",
-    component: DashboardSubmitPost,
-    emoij: "✍",
-    pageName: "Submit post",
-  },
+  // {
+  //   sPath: "/submit-post",
+  //   component: DashboardSubmitPost,
+  //   emoij: "✍",
+  //   pageName: "Submit post",
+  // },
   // {
   //   sPath: "/posts",
   //   component: DashboardPosts,

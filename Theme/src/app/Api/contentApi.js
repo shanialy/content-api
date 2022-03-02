@@ -7,7 +7,7 @@ const contentApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:7777" }),
     endpoints: (builder) => ({
 
-        // Favourites Folder Queries
+        // FAVOURITE FOLDER QUERIES
 
         // get all favourite folders
         getAllFolders: builder.query({
@@ -26,7 +26,7 @@ const contentApi = createApi({
         }),
 
 
-        //Favourite Posts Queries
+        //FAVOURITE POSTS QUERIES
 
         // get all favourite posts by folder id
         getAllFavouritePosts: builder.query({
@@ -35,7 +35,7 @@ const contentApi = createApi({
             })
         }),
 
-        //User Queries
+        //USER QUERIES
 
         // update user queries
         updateUser: builder.mutation({
