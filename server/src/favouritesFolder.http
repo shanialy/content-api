@@ -21,7 +21,7 @@ GET http://localhost:7777/api/favouritesFolder/
 
 
 # delete folder by folder id 
-DELETE http://localhost:7777/api/favouritesFolder/6218beb3aad0e01feeae46c2
+DELETE http://localhost:7777/api/favouritesFolder/6218c3df2b1f0257f330992b
 
 
 ###

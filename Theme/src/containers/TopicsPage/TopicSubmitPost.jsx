@@ -11,9 +11,7 @@ const widgetPostsDemo = DEMO_POSTS.filter((_, i) => i > 2 && i < 7);
 
 const TopicSubmitPost = () => {
   return (
-    <div
-      className="flex lg:flex-row flex-col gap-6 rounded-xl md:border md:border-neutral-100 dark:border-neutral-800 md:p-6"
-    >
+    <div className="flex lg:flex-row flex-col gap-6 rounded-xl md:border md:border-neutral-100 dark:border-neutral-800 md:p-6">
       {/* form container */}
       <form
         className="basis-2/3  grid md:grid-cols-2 gap-6"
@@ -21,28 +19,97 @@ const TopicSubmitPost = () => {
         method="post"
       >
         <label className="block md:col-span-2">
-          <Label>Post Title *</Label>
-
-          <Input type="text" className="mt-1" />
+          <Label className="font-bold text-lg">Topic Name</Label>
+          <Input
+            type="text"
+            className="mt-1 rounded"
+            placeholder="give a name to your such as, 'Digital Marketing'"
+          />
         </label>
+
         <label className="block md:col-span-2">
-          <Label>Post Excerpt</Label>
+          <Label className="font-bold text-lg">Build Your Query</Label>
+          <p className="mt-1 text-sm text-neutral-500 ">let's start by</p>
 
-          <Textarea className="mt-1" rows={4} />
-          <p className="mt-1 text-sm text-neutral-500">
-            Brief description for your article. URLs are hyperlinked.
+          <input type="radio" id="topics" className="w-3.5 h-3.5" />
+          <label className="text-sm ml-4 font-normal" htmlFor="topics">
+            Adding topics and keywords
+          </label>
+          <br />
+
+          <input type="radio" id="domians" className="w-3.5 h-3.5" />
+          <label className="text-sm ml-4 font-normal" htmlFor="domians">
+            Adding domins as sources
+          </label>
+          <br />
+
+          <p className="mt-5 text-base text-neutral-500 font-medium">
+            Each result must contain at least <b>ONE</b> one of these keywords
           </p>
+          <Input
+            className="mt-1 rounded"
+            placeholder="Enter your main keywords or phrases, e.g Social Media, Big Data..."
+          />
         </label>
-        <label className="block">
-          <Label>Category</Label>
 
-          <Select className="mt-1">
-            <option value="-1">– select –</option>
-            <option value="ha'apai">Category 1</option>
-            <option value="tongatapu">Category 2</option>
-            <option value="vava'u">Category 3</option>
-          </Select>
+        <label className="block md:col-span-2 mt-5">
+          <Label className="font-bold text-lg">Refine Your Query</Label><br/>
+          <p className="mt-2 text-base text-neutral-500 font-medium">
+            Each result <b>MUST ALSO</b> contain <b>ONE</b> one of these keywords
+          </p>
+          <Input
+            className="mt-1 rounded"
+            placeholder="Enter keywords or phrases, e.g tips, trends..."
+          />
         </label>
+
+        <label className="block md:col-span-2 mt-4">
+          <p className="mt-2 text-base text-neutral-500 font-medium">
+            Each result must <b>NOT</b> contain any one of these keywords
+          </p>
+          <Input
+            className="mt-1 rounded"
+            placeholder="Enter keywords that you think are giving irrelevant, eg. job, course..."
+          />
+        </label>
+
+        <label className="block md:col-span-2 mt-4">
+          <p className="mt-2 text-base text-neutral-500 font-medium">
+            <b>EXCLUDE</b> results from these domains
+          </p>
+          <Input
+            className="mt-1 rounded"
+            placeholder="Enter domains that you think are giving irrelevant, e.g job, course..."
+          />
+        </label>
+
+        <label className="block md:col-span-2 mt-4">
+          <p className="mt-2 text-base text-neutral-500 font-medium">
+            <b>LIMIT</b> results to these domais only
+          </p>
+          <Input
+            className="mt-1 rounded"
+            placeholder="Enter domains to see results from only these sites... e.g cnn.com, bbc.com"
+          />
+        </label>
+
+        <label className="block md:col-span-2 mt-5">
+          <Label className="font-bold text-lg">Set Default Filters</Label>
+        </label>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <label className="block">
           <Label>Tags</Label>
 
@@ -101,7 +168,7 @@ const TopicSubmitPost = () => {
       </form>
 
       {/* CONTENT FEED CONTAINER */}
-      <div className="basis-1/3	" >
+      <div className="basis-1/3	">
         <WidgetPosts posts={widgetPostsDemo} />
       </div>
     </div>
