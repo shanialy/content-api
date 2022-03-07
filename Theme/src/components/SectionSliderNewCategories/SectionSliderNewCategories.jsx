@@ -5,6 +5,7 @@ import { useSearchkitVariables, useSearchkit } from "@searchkit/client";
 import { withSearchkit, withSearchkitRouting } from "@searchkit/client";
 import CardCategory4 from "../CardCategory4/CardCategory4";
 import { CategoryImage } from "../../data/CategoryImages";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Removedot.css";
 
 const query = gql`
@@ -130,14 +131,14 @@ const SectionSliderNewCategories = ({
       <Heading desc={subHeading} hasNextPrev>
         {heading}
       </Heading>
-
+      {/* <FontAwesomeIcon icon="fa-solid fa-check" /> */}
       {!loading ? (
         // <div className="nc-CardAuthorBox2 flex flex-col overflow-hidden [ nc-box-has-hover ] [ nc-dark-box-bg-has-hover ]">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 md:gap-8 mt-8 lg:mt-10">
           {data.results.facets.map((items) => {
             if (items.identifier == "category") {
               return items.entries.map((entry, index) => {
-               return (
+                return (
                   <ul className="rem">
                     <li key={index}>{renderCard(entry, index)}</li>
                   </ul>

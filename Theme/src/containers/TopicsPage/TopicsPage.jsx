@@ -22,7 +22,6 @@ const TopicsPage = ({ className = "" }) => {
   const closeModal = () => setshowModal(false);
   const showModalOnClick = () => setshowModal(true);
 
-  
   return (
     <div className={`nc-PageDashboard ${className}`} data-nc-id="PageDashboard">
       <Helmet>
@@ -34,8 +33,6 @@ const TopicsPage = ({ className = "" }) => {
         heading="Dash board"
       >
         <div className="flex flex-col space-y-8 xl:space-y-0 xl:flex-row">
-          {/* SIDEBAR */}
-
           <div className="flex-shrink-0 max-w-xl xl:w-70 xl:pr-8">
             <ul className="text-base space-y-1 text-neutral-6000 dark:text-neutral-400">
               <li className="flex flex-row justify-start items-center">
@@ -44,7 +41,7 @@ const TopicsPage = ({ className = "" }) => {
                 </p>
                 <button
                   onClick={showModalOnClick}
-                  className="flex flex-row justify-center items-end rounded p-1 h-6 font-bold text-[25px] bg-gray-300 text-[#8c8c8c] hover:text-indigo-600"
+                  className="flex flex-row justify-center items-end rounded p-1 h-6 font-bold text-[25px] bg-gray-300 text-[#8c8c8c] hover:text-indigo-600 "
                 >
                   +
                 </button>
@@ -59,7 +56,7 @@ const TopicsPage = ({ className = "" }) => {
                       to={`/topics/${_id}`}
                       onClick={() => setFolderID(_id)}
                     >
-                      {/* <span className="w-8 mr-1">{emoij}</span> */}
+                      {/* <span className="w-8 mr-1">{emoij}</span>  */}
                       {folderName}
                     </NavLink>
                   </li>
@@ -75,7 +72,7 @@ const TopicsPage = ({ className = "" }) => {
                 //         to={`${url}${sPath}`}
                 //         activeClassName="bg-indigo-50 text-[#000000] dark:bg-neutral-800 dark:text-neutral-900"
                 //       >
-                //         {/* <span className="w-8 mr-1">{emoij}</span> */}
+                //         {/ <span className="w-8 mr-1">{emoij}</span> /}
                 //         {pageName}
                 //       </NavLink>
                 //     </li>
@@ -91,7 +88,6 @@ const TopicsPage = ({ className = "" }) => {
               onCloseModalReportItem={closeModal}
             />
 
-            {/* post data */}
             <p>{JSON.stringify(getAllFavouritePosts?.data)}</p>
 
             {/* <Switch>

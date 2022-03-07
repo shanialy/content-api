@@ -4,8 +4,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 // import Page404 from "containers/Page404/Page404";
 // import PageArchive from "containers/PageArchive/PageArchive";
 // import PageAuthor from "containers/PageAuthor/PageAuthor";
-import SingleCard from '../components/Card11/SingleCard'
-import CategoryCardShow from "../components/CategoryCardShow/CategoryCardShow";
+import SingleCard from "../components/Card11/SingleCard";
+// import CategoryCardShow from "../components/CategoryCardShow/CategoryCardShow";
 // import PageSingle from "containers/PageSingle/PageSingle";
 // import PageSingleHasSidebar from "containers/PageSingle/PageSingleHasSidebar";
 // import PageSingleTemplate2 from "containers/PageSingle/PageSingleTemp2";
@@ -39,9 +39,11 @@ import PageSignUp from "../containers/PageSignUp/PageSignUp";
 import PageForgotPass from "../containers/PageForgotPass/PageForgotPass";
 import PageDashboard from "../containers/PageDashboard/PageDashboard";
 import PageSearchV2 from "../containers/PageSearch/PageSearchV2";
-import MainNav1 from "../components/Header/MainNav1"
-import PageContentFeed from "../containers/PageContentFeed/PageContentFeed"
+import MainNav1 from "../components/Header/MainNav1";
+import PageContentFeed from "../containers/PageContentFeed/PageContentFeed";
 import PageHome from "../containers/PageHome/PageHome";
+import TopicPage from "../containers/TopicsPage/TopicsPage";
+import Analytics from "../containers/Analytics/Analytics";
 
 
 // export const pages = [
@@ -111,31 +113,30 @@ import PageHome from "../containers/PageHome/PageHome";
 const Routes = () => {
   return (
     <BrowserRouter
-      // basename={
-      //   process.env.REACT_APP_LRT_OR_RTL === "rtl" ? "/ncmaz-rtl" : "/ncmaz"
-      // }
+    // basename={
+    //   process.env.REACT_APP_LRT_OR_RTL === "rtl" ? "/ncmaz-rtl" : "/ncmaz"
+    // }
     >
-
       <ScrollToTop />
-      <MainNav1/>
+      <MainNav1 />
 
-      
-      
       {/* <HeaderContainer /> */}
-      <Switch>        
-      <Route exact path={"/"} component={PageHome}/>
-      <Route path={"/login"} component={PageLogin} /> 
-      <Route path={"/signup"} component={PageSignUp} /> 
-      <Route path={"/forgot-pass"} component={PageForgotPass} /> 
-      <Route path={"/dashboard"} component={PageDashboard} />
-      <Route path={"/search"} component={PageSearch} />
-      <Route path={"/search-v2"} component={PageSearchV2} />
-      <Route path={"/content-feed"} component={PageContentFeed} />
-      <Route path={"/category/:label"} component={CategoryCardShow}/>
+      <Switch>
+        <Route exact path={"/"} component={PageHome} />
+        <Route path={"/login"} component={PageLogin} />
+        <Route path={"/signup"} component={PageSignUp} />
+        <Route path={"/forgot-pass"} component={PageForgotPass} />
+        <Route path={"/dashboard"} component={PageDashboard} />
+        <Route path={"/search"} component={PageSearch} />
+        <Route path={"/search-v2"} component={PageSearchV2} />
+        <Route path={"/content-feed"} component={PageContentFeed} />
+        {/* <Route path={"/category/:label"} component={CategoryCardShow} /> */}
+        <Route path={"/topics"} component={TopicPage} />
+        <Route path={"/analytics"} component={Analytics} />
+        <Route path={"/search?label="} component={PageSearch} />
+        <Route path={"/:id"} component={SingleCard} />
 
-      <Route path={"/:id"} component={SingleCard} />
-
-      {/* <Route path={"/:id"} component={SingleCard}/> */}
+        {/* <Route path={"/:id"} component={SingleCard}/> */}
         {/* {pages.map(({ component, path, exact }) => {
           return (
             <Route

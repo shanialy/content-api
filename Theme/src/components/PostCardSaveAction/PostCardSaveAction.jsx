@@ -34,10 +34,10 @@ const PostCardSaveAction = ({
         <span>{readingTime} min read</span>
       )}
 
-      <BookmarkContainer
+      {/* <BookmarkContainer
         initBookmarked={bookmark.isBookmarked}
         containerClassName={classBgIcon}
-      />
+      /> */}
     </div>
   );
 };

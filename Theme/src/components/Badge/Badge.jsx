@@ -9,12 +9,7 @@ import { Link } from "react-router-dom";
 //   href?: string;
 // }
 
-const Badge = ({
-  className = "",
-  name,
-  color = "blue",
-  href,
-}) => {
+const Badge = ({ className = "", name, color = "blue", href }) => {
   const getColorClass = (hasHover = true) => {
     switch (color) {
       case "pink":
@@ -45,7 +40,7 @@ const Badge = ({
         }`;
       case "blue":
         return `text-blue-800 bg-blue-100 ${
-          hasHover ? "hover:bg-blue-800" : ""
+          hasHover ? "hover:bg-blue-500" : ""
         }`;
       default:
         return `text-pink-800 bg-pink-100 ${

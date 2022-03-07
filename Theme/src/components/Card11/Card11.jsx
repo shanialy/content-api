@@ -6,11 +6,10 @@ import CategoryBadgeList from "../../components/CategoryBadgeList/CategoryBadgeL
 import PostCardLikeAndComment from "../../components/PostCardLikeAndComment/PostCardLikeAndComment";
 import PostCardMeta from "../../components/PostCardMeta/PostCardMeta";
 import PostFeaturedMedia from "../../components/PostFeaturedMedia/PostFeaturedMedia";
-import moment from 'moment'
-import SingleCard from './SingleCard'
-import dateFormat from 'dateformat';
-import { Provider ,useDispatch } from 'react-redux'
-
+import moment from "moment";
+import SingleCard from "./SingleCard";
+import dateFormat from "dateformat";
+import { Provider, useDispatch } from "react-redux";
 
 const Card11 = ({
   className = "h-full",
@@ -19,27 +18,26 @@ const Card11 = ({
   hiddenAuthor = false,
   ratio = "aspect-w-4 aspect-h-3",
 }) => {
+  //getting id from Page search
+  const dispatch = useDispatch();
 
-//getting id from Page search
-const dispatch = useDispatch()
+  dispatch({
+    type: "addCardValue",
+    payload: cardvalue,
+  });
 
-dispatch({
-  type :"addCardValue",
-  payload : cardvalue
-})
+  ////////////////////////////////
 
-////////////////////////////////
-  
- const{id} = cardvalue
- console.log(cardvalue , "card11")
-  
+  const { id } = cardvalue;
+  console.log(cardvalue, "card11");
+
   //destructuring the post that  we are getting form  PageSearch component
 
-  const { title, date_download ,source_domain} = post;
+  const { title, date_download, source_domain } = post;
 
-  // Giving a static value to herf 
+  // Giving a static value to herf
 
-  const href = `/${id}`
+  const href = `/${id}`;
 
   // making a function on date_download so that we can get the time  (need to import moment and dateFormat if you want to perform the function) we also used this in NcImage component
 
@@ -56,13 +54,11 @@ dispatch({
   //   }
   // }
 
-  //useState hook from the theme  
+  //useState hook from the theme
   const [isHover, setIsHover] = useState(false);
-
 
   //returning of fuction starts here
   return (
-
     <div
       className={`nc-Card11 relative flex flex-col group [ nc-box-has-hover ] [ nc-dark-box-bg-has-hover ] ${className}`}
       data-nc-id="Card11"
@@ -73,22 +69,14 @@ dispatch({
       <div
         className={`block flex-shrink-0 relative w-full rounded-t-xl overflow-hidden ${ratio}`}
       >
-
-      <Link to={href} className="absolute inset-0">
-             <PostFeaturedMedia post={post} isHover={isHover} />
-             
-      </Link>
-    
-        
+        <Link to={href} className="absolute inset-0">
+          <PostFeaturedMedia post={post} isHover={isHover} />
+        </Link>
       </div>
-      
 
-  
-   
       {/* Passing the post props in PostCardMeta component  */}
 
       <div className="p-4 flex flex-col flex-grow space-y-3">
-
         {!hiddenAuthor ? (
           <PostCardMeta meta={post} />
         ) : (
@@ -96,18 +84,17 @@ dispatch({
         )}
 
         <h2 className="nc-card-title block text-base font-semibold text-neutral-900 dark:text-neutral-100 ">
-        {/* // putting &nbsp so that we can add somespace temporarely */}
+          {/* // putting &nbsp so that we can add somespace temporarely */}
 
           <Link to={href} className="line-clamp-2" title={title}>
-            {title} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-            
+            {title} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           </Link>
-
         </h2>
         <div className="flex items-end justify-between mt-auto">
-
           <PostCardLikeAndComment className="relative" postData={post} />
-          
+
           <PostCardSaveAction className="relative" postData={post} />
         </div>
       </div>

@@ -4,16 +4,10 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/solid";
 // import { ListBoxItemType } from "components/NcListBox/NcListBox";
 import ButtonDropdown from "../../components/ButtonDropdown/ButtonDropdown";
+import { useGetAllFoldersQuery } from "../../app/Api/contentApi";
 
-// export interface ArchiveFilterListBoxProps {
-//   className?: string;
-//   lists: ListBoxItemType[];
-// }
-
-const ArchiveFilterListBox = ({
-  className = "",
-  lists,
-}) => {
+const ArchiveFilterListBox = (className = "", lists) => {
+  const getAllFolders = useGetAllFoldersQuery();
   const [selected, setSelected] = useState(lists[0]);
   return (
     <div
@@ -23,7 +17,7 @@ const ArchiveFilterListBox = ({
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative md:min-w-[200px]">
           <Listbox.Button as={"div"}>
-            <ButtonDropdown>{selected.name}</ButtonDropdown>
+            <ButtonDropdown>{selected}</ButtonDropdown>
           </Listbox.Button>
           <Transition
             as={Fragment}
@@ -31,8 +25,9 @@ const ArchiveFilterListBox = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
+            {/* Data for the DropDown */}
             <Listbox.Options className="absolute right-0 z-20 w-52 py-1 mt-1 overflow-auto text-sm text-neutral-900 dark:text-neutral-200 bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-neutral-900 dark:ring-neutral-700">
-              {lists.map((item, index) => (
+              {getAllFolders.data?.map(({ folderName }, index) => (
                 <Listbox.Option
                   key={index}
                   className={({ active }) =>
@@ -42,7 +37,7 @@ const ArchiveFilterListBox = ({
                         : ""
                     } cursor-default select-none relative py-2 pl-10 pr-4`
                   }
-                  value={item}
+                  value={folderName}
                 >
                   {({ selected }) => (
                     <>
@@ -51,7 +46,7 @@ const ArchiveFilterListBox = ({
                           selected ? "font-medium" : "font-normal"
                         } block truncate`}
                       >
-                        {item.name}
+                        {folderName}
                       </span>
                       {selected ? (
                         <span className="text-primary-700 absolute inset-y-0 left-0 flex items-center pl-3 dark:text-neutral-200">
