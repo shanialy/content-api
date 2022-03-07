@@ -8,7 +8,9 @@ import { useLocation } from "react-router";
 //   data: SinglePageType
 // }
 
-const SingleContent= () => {
+const SingleContent= ({
+  data,
+}) => {
   //{ data }
   // const { tags, author, commentCount, comments } = data;
 
@@ -22,7 +24,7 @@ const SingleContent= () => {
       >
         {/* THIS IS THE DEMP CONTENT */}
         {/* IF YOUR DATA IS JSON, YOU CAN USE render with html-react-parser (https://www.npmjs.com/package/html-react-parser) */}
-        <SingleContentDemo />
+        <SingleContentDemo  data={data}/>
       </div>
 
      </div>

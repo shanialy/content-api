@@ -6,6 +6,8 @@ import { withSearchkit, withSearchkitRouting } from "@searchkit/client";
 import CardCategory4 from "../CardCategory4/CardCategory4";
 import { CategoryImage } from "../../data/CategoryImages";
 import "./Removedot.css";
+import LoadingVideo from "../LoadingVideo/LoadingVideo";
+
 
 const query = gql`
   query resultSet(
@@ -108,7 +110,7 @@ const SectionSliderNewCategories = ({
     console.log("Error " + error);
   }
   if (loading) {
-    console.log("Loading....");
+    <LoadingVideo/>
   }
 
   const renderCard = (entry, index) => {
@@ -147,7 +149,7 @@ const SectionSliderNewCategories = ({
           })}
         </div>
       ) : (
-        <h1>Loading...</h1>
+        <h1><LoadingVideo/></h1>
       )}
     </>
   );

@@ -19,6 +19,7 @@ import PostCardLikeAction, {
 
 const PostCardLikeContainer = ({
   twitter_shares,
+  topic_twitter
   // postId,
   // onClickLike,
   // ...args
@@ -34,6 +35,7 @@ const PostCardLikeContainer = ({
       // likeCount={getLikeCount()}
      // postId={postId}
      twitter_shares={twitter_shares}
+     topic_twitter={topic_twitter}
     />
   );
 };

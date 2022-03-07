@@ -1,15 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import ModalCategories from "./ModalCategories";
 import { DEMO_CATEGORIES, DEMO_TAGS } from "../../data/taxonomies";
 import LoadingVideo from "../../components/LoadingVideo/LoadingVideo";
 import ModalTags from "./ModalTags";
-import Nav from "../../components/Nav/Nav";
-import NavItem from "../../components/NavItem/NavItem";
 import ArchiveFilterListBox from "../../components/ArchiveFilterListBox/ArchiveFilterListBox";
-import Input from "../../components/Input/Input";
 import { Helmet } from "react-helmet";
-import SectionSubscribe2 from "../../components/SectionSubscribe2/SectionSubscribe2";
-import NcImage from "../../components/NcImage/NcImage";
 import NcLink from "../../components/NcLink/NcLink";
 import { gql, useQuery } from "@apollo/client";
 import {
@@ -19,13 +14,13 @@ import {
   withSearchkitRouting,
 } from "@searchkit/client";
 
+
 import Card11 from "../../components/Card11/Card11";
 import AutoCompleteSearch from "./autoCompleteSearch";
 import DateRangeCalender from "../../components/DateRangeCalender/DateRangeCalender";
 import DateRangeDropDown from "../../components/DateRangeCalender/DateRangeDropDown";
-import "./autoCompleteSearch.css"
 import Pagination from "../../components/Pagination/Pagination";
-
+import LoadingVideo from "../../components/LoadingVideo/LoadingVideo";
 export const PageSearchProps = {
   className: String,
 };
@@ -125,9 +120,9 @@ const FILTERS = [
 
 const TABS = ["Articles", "Categories", "Tags", "Authors"];
 
-//const posts = DEMO_POSTS.filter((_, i) => i < 16);
-
 const PageSearch = ({ className = "" }) => {
+ 
+
   ////////////////////////////////graph ql work////////////////////////////
 
   const variables = useSearchkitVariables();
@@ -137,8 +132,8 @@ const PageSearch = ({ className = "" }) => {
     console.log("An error Occured" + error);
   }
 
-
   if (loading) {
+
     console.log("Data is loading");
   }
 
@@ -206,7 +201,7 @@ const PageSearch = ({ className = "" }) => {
               <DateRangeDropDown /> &nbsp;
               <ArchiveFilterListBox lists={FILTERS} />
             </div>
-          </div>
+
 
        
       
@@ -241,9 +236,9 @@ const PageSearch = ({ className = "" }) => {
           </div>
         </main>
 
-        <SectionSubscribe2 />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

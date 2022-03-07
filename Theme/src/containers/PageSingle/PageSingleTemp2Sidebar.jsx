@@ -1,9 +1,7 @@
 import React, { FC, ReactNode, useEffect } from "react";
-//import { PostDataType, TaxonomyType } from "../../data/types";
 import NcImage from "../../components/NcImage/NcImage";
 import { SINGLE } from "../../data/single";
 import SingleContent from "./SingleContent";
-//import { CommentType } from "../../components/CommentCard/CommentCard";
 import { useAppDispatch } from "../../app/hooks";
 import { changeCurrentPage } from "../../app/pages/pages";
 import SingleHeader from "./SingleHeader";
@@ -12,11 +10,6 @@ export const PageSingleTemp2SidebarProps = {
   className: String
 }
 
-// export interface SinglePageType extends PostDataType {
-//   tags: TaxonomyType[];
-//   content: string | ReactNode;
-//   comments: CommentType[];
-// }
 
 const PageSingleTemp2Sidebar = ({
   className = "",

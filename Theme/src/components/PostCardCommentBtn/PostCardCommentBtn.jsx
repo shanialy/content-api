@@ -12,6 +12,7 @@ import twFocusClass from "../../utils/twFocusClass";
 const PostCardCommentBtn = ({
   className = "flex px-3 h-8 text-xs",
   facebook_shares,
+  topic_facebook
 }) => {
 
  //getting facebook_shares from  postCardlikeandComment
@@ -38,7 +39,7 @@ const PostCardCommentBtn = ({
 
 
       <span className="ml-1 text-neutral-900 dark:text-neutral-200">
-        {facebook_shares}
+        {!facebook_shares? topic_facebook : ""}
       </span>
     </button>
   );
