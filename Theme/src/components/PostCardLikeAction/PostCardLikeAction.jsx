@@ -15,6 +15,7 @@ const PostCardLikeAction = ({
   className = "px-3 h-8 text-xs",
   //id,
   twitter_shares,
+  topic_twitter
   //isLiked = true,
 //  onClickLike = () => {},
 }) => {
@@ -35,7 +36,7 @@ const PostCardLikeAction = ({
         className={`ml-1`}
       >
       
-        {convertNumbThousand(twitter_shares)}
+        {convertNumbThousand(!twitter_shares ? topic_twitter : "")}
       </span>
     </button>
   );

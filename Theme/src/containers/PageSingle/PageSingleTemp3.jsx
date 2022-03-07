@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useEffect } from "react";
+import React, { FC, ReactNode, useEffect , useState } from "react";
 //import { PostDataType, TaxonomyType } from "../../data/types";
 import { SINGLE } from "../../data/single";
 import SingleContent from "./SingleContent";
@@ -6,6 +6,7 @@ import SingleContent from "./SingleContent";
 import { useAppDispatch } from "../../app/hooks";
 import { changeCurrentPage } from "../../app/pages/pages";
 import SingleHeader from "./SingleHeader";
+import { useSelector } from "react-redux";
 
 export const PageSingleTemplate3Props = {
   className: String
@@ -20,15 +21,33 @@ export const PageSingleTemplate3Props = {
 const PageSingleTemplate3= ({
   className = "",
 }) => {
-  const dispatch = useAppDispatch();
 
-  // UPDATE CURRENTPAGE DATA IN PAGEREDUCERS
-  useEffect(() => {
-    dispatch(changeCurrentPage({ type: "/single/:slug", data: SINGLE }));
-    return () => {
-      dispatch(changeCurrentPage({ type: "/", data: {} }));
-    };
-  }, []);
+  
+    const cardData = useSelector(state => state.persistedReducer.card.cardData)
+
+    // const [cardState , setCardState] = useState()
+
+    // console.log(cardState)
+
+
+      useEffect(() => {
+
+        const response = localStorage.getItem("cardData")
+        if(response){JSON.parse(response)}
+   
+    },[]);
+
+    
+    useEffect(() => {
+
+      localStorage.setItem("cardData" , JSON.stringify(cardData))
+     
+    }, );
+    
+
+    
+    
+
 
   return (
     <>
@@ -43,7 +62,7 @@ const PageSingleTemplate3= ({
               <SingleHeader
                 hiddenDesc
                 metaActionStyle="style2"
-                pageData={SINGLE}
+                pageData={cardData}
               />
             </div>
           </div>
@@ -53,7 +72,7 @@ const PageSingleTemplate3= ({
             <div className="hidden md:block absolute top-0 left-0 bottom-0 w-1/5 from-neutral-900 dark:from-black bg-gradient-to-r"></div>
             <img
               className="block w-full h-full object-cover"
-              src="https://images.unsplash.com/photo-1554941068-a252680d25d9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80"
+              src={cardData?.fields?.image_url}
               alt=""
             />
           </div>
@@ -61,7 +80,7 @@ const PageSingleTemplate3= ({
 
         {/* SINGLE MAIN CONTENT */}
         <div className="container mt-10">
-          <SingleContent data={SINGLE} />
+          <SingleContent data={cardData} />
         </div>
 
         

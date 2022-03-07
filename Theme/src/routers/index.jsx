@@ -42,6 +42,7 @@ import PageSearchV2 from "../containers/PageSearch/PageSearchV2";
 import MainNav1 from "../components/Header/MainNav1"
 import PageContentFeed from "../containers/PageContentFeed/PageContentFeed"
 import PageHome from "../containers/PageHome/PageHome";
+import TopicsPage from "../containers/TopicsPage/TopicsPage";
 
 
 // export const pages = [
@@ -132,6 +133,7 @@ const Routes = () => {
       <Route path={"/search-v2"} component={PageSearchV2} />
       <Route path={"/content-feed"} component={PageContentFeed} />
       <Route path={"/category/:label"} component={CategoryCardShow}/>
+      <Route path={"/topics"} component={TopicsPage} />
 
       <Route path={"/:id"} component={SingleCard} />
 

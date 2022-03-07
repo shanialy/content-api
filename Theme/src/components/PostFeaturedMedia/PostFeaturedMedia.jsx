@@ -6,6 +6,7 @@ import MediaVideo from "./MediaVideo";
 import PostTypeFeaturedIcon from "../PostTypeFeaturedIcon/PostTypeFeaturedIcon";
 import MediaAudio from "./MediaAudio";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
+import LoadingVideo from "../LoadingVideo/LoadingVideo";
 
 // export interface PostFeaturedMediaProps {
 //   className?: string;
@@ -21,9 +22,16 @@ const PostFeaturedMedia = ({
   post,
   isHover = false,
 }) => {
-  //getting post from Cart11 component
+
   
-  const { source_domain ,date_download, facebook_shares  ,image_url} = post;
+  var { source_domain ,date_download, date ,date_publish, facebook,twitter,facebook_shares  ,image_url} = post;
+   
+
+  
+ 
+
+
+ 
 
   const videoRef = useRef(null);
 
@@ -44,6 +52,8 @@ const PostFeaturedMedia = ({
     (cardIntersectionObserver?.intersectionRatio || -1) > PREV_RATIO;
   PREV_RATIO = cardIntersectionObserver?.intersectionRatio || 0;
 
+  
+
 
 
   return (
@@ -53,7 +63,7 @@ const PostFeaturedMedia = ({
      // ref={videoRef}
     >
 
-      <NcImageCardSearch containerClassName="absolute inset-0" src={image_url} source_domain={source_domain} date_download={date_download} />
+      <NcImageCardSearch containerClassName="absolute inset-0" src={image_url} source_domain={source_domain} date_download={!date_download? date_publish : date } />
      {/* // {renderContent()} */}
     </div>
   );
