@@ -7,6 +7,7 @@ import Label from "../../components/Label/Label";
 import WidgetPosts from "../../components/WidgetPosts/WidgetPosts";
 import { DEMO_POSTS } from "../../data/posts";
 import Chip from "../../components/chip/chip";
+import { set } from "date-fns";
 
 const widgetPostsDemo = DEMO_POSTS.filter((_, i) => i > 2 && i < 7);
 
@@ -15,14 +16,18 @@ const TopicSubmitPost = () => {
 
   // selection
   const [domainORtopic, setDomainORtopic] = useState("topics"); // match_type
-  const [any_keywords_items, setAny_keywords_items] = useState([]); // any_keywords_items
+
+  const [any_keywords_list, setAny_keywords_list] = useState([]); // any_keywords_list
   const [any_keywords_value, setAny_keywords_value] = useState(""); // any_keywords_value
 
-  const [must_also_keywords_items, setMust_also_keywords_items] = useState([]); // must_also_keywords_items
+  const [must_also_keywords_list, setMust_also_keywords_list] = useState([]); // must_also_keywords_list
   const [must_also_keywords_value, setMust_also_keywords_value] = useState(""); // must_also_keywords_value
   
-  const [must_not_contains_keywords, setMust_not_contains_keywords] =
-    useState(null); // must_not_contains_keywords
+  const [must_not_contains_keywords_list, setMust_not_contains_keywords_list] =
+    useState([]); // must_not_contains_keywords_list
+  const [must_not_contains_keywords_value, setMust_not_contains_keywords_value] =
+    useState(""); // must_not_contains_keywords_value
+
   const [exclude_domains, setExclude_domains] = useState(null); // exclude_domains
   const [limit_domains_results, setLimit_domains_results] = useState(null); // limit_domains_results
 
@@ -47,50 +52,58 @@ const TopicSubmitPost = () => {
       match_type: domainORtopic,
       // any_keywords: any_keywords,
       // must_also_keywords: must_also_keywords,
-      must_not_contains_keywords: must_not_contains_keywords,
+      // must_not_contains_keywords: must_not_contains_keywords,
       exclude_domains: exclude_domains,
       limit_domains_results: limit_domains_results,
     },
   };
 
-  const arr = [
-    "saad",
-    "Numair",
-    "Shaikh Muhammad saad",
-    "Muhammad Saad",
-    "saad",
-    "Shaikh Muhammad saad",
-    "Muhammad Saad",
-    "saad",
-    "Muhammad Saad",
-    "Shaikh Muhammad saad",
-    "Muhammad Saad",
-  ];
-
   // event handlers
+  // any_keywords
   const any_keywords_addItem = (e) => {
     if (["Enter"].includes(e.key)) {
       e.preventDefault();
       let value = any_keywords_value.trim();
       if (value) {
-        setAny_keywords_items(any_keywords_items.concat(value));
+        setAny_keywords_list(any_keywords_list.concat(value));
         setAny_keywords_value("");
       }
     }
   };
   const any_keywords_deleteItem = (item)=>{
-    setAny_keywords_items(any_keywords_items.filter((i)=> i !== item))
+    setAny_keywords_list(any_keywords_list.filter((i)=> i !== item))
   };
+
+  // must_also_keywords
   const must_also_keywords_addItem = (e) => {
     if (["Enter"].includes(e.key)) {
       e.preventDefault();
       let value = must_also_keywords_value.trim();
       if (value) {
-        setMust_also_keywords_items(must_also_keywords_items.concat(value));
+        setMust_also_keywords_list(must_also_keywords_list.concat(value));
         setMust_also_keywords_value("");
       }
     }
   };
+  const must_also_keywords_deleteItem = (item)=>{
+    setMust_also_keywords_list(must_also_keywords_list.filter((i)=> i !== item))
+  };
+
+  // must_not_contains_keywords
+  const must_not_contains_keywords_addItem = (e) => {
+    if (["Enter"].includes(e.key)) {
+      e.preventDefault();
+      let value = must_not_contains_keywords_value.trim();
+      if (value) {
+        setMust_not_contains_keywords_list(must_not_contains_keywords_list.concat(value));
+        setMust_not_contains_keywords_value("");
+      }
+    }
+  };
+  const must_not_contains_keywords_deleteItem = (item)=>{
+    setMust_not_contains_keywords_list(must_not_contains_keywords_list.filter((i)=> i !== item))
+  };
+
 
   return (
     <div className="flex lg:flex-row flex-col gap-6 rounded-xl md:border md:border-neutral-100 dark:border-neutral-800 md:p-6">
@@ -152,7 +165,7 @@ const TopicSubmitPost = () => {
 
           {/* CHIPS */}
           <div className="flex flex-wrap mt-1.5">
-            {any_keywords_items.map((item, index) => {
+            {any_keywords_list.map((item, index) => {
               return (
                 <>
                   <div className="ml-1 mt-1" key={index}>
@@ -181,11 +194,11 @@ const TopicSubmitPost = () => {
 
           {/* CHIPS */}
           <div className="flex flex-wrap mt-1.5">
-            {must_also_keywords_items.map((val, index) => {
+            {must_also_keywords_list.map((val, index) => {
               return (
                 <>
                   <div className="ml-1 mt-1" key={index}>
-                    <Chip value={val} />
+                    <Chip value={val} _delete={must_also_keywords_deleteItem} />
                   </div>
                 </>
               );
@@ -200,8 +213,22 @@ const TopicSubmitPost = () => {
           <Input
             className="mt-1 rounded border-slate-300"
             placeholder="Enter keywords that you think are giving irrelevant, eg. job, course..."
-            onChange={(e) => setMust_not_contains_keywords(e.target.value)}
+            onChange={(e) => setMust_not_contains_keywords_value(e.target.value)}
+            onKeyDown={(e) => must_not_contains_keywords_addItem(e)}
+            value={must_not_contains_keywords_value}
           />
+          {/* CHIPS */}
+          <div className="flex flex-wrap mt-1.5">
+            {must_not_contains_keywords_list.map((val, index) => {
+              return (
+                <>
+                  <div className="ml-1 mt-1" key={index}>
+                    <Chip value={val} _delete={must_not_contains_keywords_deleteItem} />
+                  </div>
+                </>
+              );
+            })}
+          </div>
         </label>
 
         <label className="block md:col-span-2 mt-4">
