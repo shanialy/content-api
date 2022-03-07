@@ -16,37 +16,37 @@ const customTopicsSchema = new Schema({
 
     filters: {
 
-        type: {
+        type: {  // title or body. from radio buttons
+            type: String, 
+        },
+        sort: { // hardcode sort
             type: String,
         },
-        sort: {
-            type: String,
-        },
-        startdate: {
+        startdate: { // hardcode
             type: Date,
         },
-        enddate: {
+        enddate: { // hardcode
             type: Date,
         },
-        language: {
+        language: { // hardcode "english"
             type: String,
         },
-        engagement: {
+        engagement: { // hardcode "facebook"
             type: String
         }
     },
 
     selection: {
-        match_type: {
+        match_type: { // "topic" or "domain". from radio buttons
             type: String,
         },
         sources: {
             type: String,
         },
-        any_keywords: [String],
+        any_keywords: [String], //any atleast one
         must_also_keywords: [String],
         must_not_contains_keywords: [String],
-        include_domains: [String],
+        include_domains: [String], // empty
         exclude_domains: [String],
         limit_domains_results: [String],
     },

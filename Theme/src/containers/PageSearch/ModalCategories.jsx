@@ -127,7 +127,7 @@ const ModalCategories= () => {
 
   return (
     <div className="nc-ModalCategories">
-    {/* passing the renderContentfunction to NcModal */}
+    {/* {/ passing the renderContentfunction to NcModal /} */}
       <NcModal
         triggerText={
           <span>
