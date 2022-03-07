@@ -143,21 +143,21 @@ const otherPageChildMenus = [
     href: "/contact",
     name: "Contact us",
   },
-  {
-    id: ncNanoId(),
-    href: "/login",
-    name: "Login",
-  },
-  {
-    id: ncNanoId(),
-    href: "/signup",
-    name: "Signup",
-  },
-  {
-    id: ncNanoId(),
-    href: "/forgot-pass",
-    name: "Forgot Password",
-  },
+  // {
+  //   id: ncNanoId(),
+  //   href: "/login",
+  //   name: "Login",
+  // },
+  // {
+  //   id: ncNanoId(),
+  //   href: "/signup",
+  //   name: "Signup",
+  // },
+  // {
+  //   id: ncNanoId(),
+  //   href: "/forgot-pass",
+  //   name: "Forgot Password",
+  // },
   {
     id: ncNanoId(),
     href: "/dashboard",

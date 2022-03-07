@@ -46,11 +46,11 @@ const DashboardEditProfile = () => {
         </label>
         <label className="block">
           <Label>Current password</Label>
-          <Input placeholder="***" type="password" className="mt-1" />
+          <Input disabled placeholder="***" type="password" className="mt-1" />
         </label>
         <label className="block">
           <Label>New password</Label>
-          <Input
+          <Input 
             onChange={(e) => (userData.user.password = e.target.value)}
             type="password"
             className="mt-1"
