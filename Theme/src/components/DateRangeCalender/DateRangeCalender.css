@@ -19,7 +19,7 @@
 .calender-filter {
   position: absolute;
    right: 300px;
-  top: 342px; 
+  top: 210px; 
   width: 160px;
   height: 32px;
   background-color: white;
@@ -31,7 +31,7 @@
 .Datepicker {
   position: absolute;
   right: 299px;
-  top: 373px;
+  top: 250px;
   z-index: 20;
   background-color: white;
   border: 1px solid #c0b7e3;

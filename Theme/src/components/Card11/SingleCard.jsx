@@ -1,5 +1,7 @@
-import { cardStart,cardFailure, cardSuccess } from '../../app/cardValue/cardSlice'
+
+import { cardSuccess } from '../../app/cardValue/cardSlice'
 import PageSingleTemp3 from '../../containers/PageSingle/PageSingleTemp3'
+
 
 
 const SingleCard = ()=>{
