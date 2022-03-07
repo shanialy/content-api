@@ -250,7 +250,7 @@ const PageSearch = ({ className = "" }) => {
           </div>
         </main>
 
-        <SectionSubscribe2 />
+        {/* <SectionSubscribe2 /> */}
       </div>
     </div>
   );
