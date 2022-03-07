@@ -2,8 +2,7 @@ import React from "react";
 import { TaxonomyType } from "../../data/types";
 import CardCategory1 from "../../components/CardCategory1/CardCategory1";
 import NcModal from "../../components/NcModal/NcModal";
-import {  useQuery } from '@apollo/client';
-import query from "./Index";
+import { gql  ,  useQuery } from '@apollo/client';
 import { useSearchkitVariables, useSearchkit, withSearchkit, withSearchkitRouting } from '@searchkit/client'
 
 
@@ -11,6 +10,88 @@ export const ModalCategoriesProps = {
   categories: TaxonomyType
 }
 
+const query = gql`
+query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $sortBy: String) {
+  results(query: $query, filters: $filters) {
+    summary {
+      total
+      appliedFilters {
+        id
+        identifier
+        display
+        label
+        ... on DateRangeSelectedFilter {
+          dateMin
+          dateMax
+          __typename
+        }
+
+        ... on ValueSelectedFilter {
+          value
+          __typename
+        }
+        __typename
+      }
+      sortOptions {
+        id
+        label
+        __typename
+      }
+      query
+      __typename
+    }
+    hits(page: $page, sortBy: $sortBy) {
+      page {
+        total
+        totalPages
+        pageNumber
+        from
+        size
+        __typename
+      }
+      sortedBy
+
+      items {
+        ... on ResultHit {
+          id
+          fields {
+            article_length
+            category
+            authors
+            date_download
+            language
+            image_url
+            source_domain
+            facebook_shares
+            twitter_shares
+            maintext
+            sentiment
+            source_domain
+            title
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    facets {
+      identifier
+      type
+      label
+      display
+      entries {
+        label
+        count
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+`
 
 const ModalCategories= () => {
 
@@ -19,11 +100,15 @@ const ModalCategories= () => {
   const variables = useSearchkitVariables()
   const { data, error ,loading } = useQuery(query, { variables })
 
-  if(error){console.log("An error Occured" + error)}
+  
      
   if(loading ){console.log("Data is loading")}
+
+  if(!loading){console.log(data?.results)}
+
+  if(error){console.log("An error Occured" + error)}
   
-  // if(!loading){console.log(data.results)}
+  console.log(data)
   
  
 
@@ -31,7 +116,7 @@ const ModalCategories= () => {
     //passing Data to CardCategory1 throught map
     return (
       <div className="grid gap-6 sm:grid-cols-2 sm:py-2 md:gap-8 md:grid-cols-3 lg:grid-cols-4 xl:md:grid-cols-5">
-        {data ?  data.results.facets[0].entries.map((cat) => (
+        {data ?  data?.results.facets[0].entries.map((cat) => (
           <CardCategory1 key={cat.id} taxonomy={cat}  size="normal" />
           
         )) :"Result not found" }
@@ -42,7 +127,7 @@ const ModalCategories= () => {
 
   return (
     <div className="nc-ModalCategories">
-    {/* passing the renderContentfunction to NcModal */}
+    {/* {/ passing the renderContentfunction to NcModal /} */}
       <NcModal
         triggerText={
           <span>
