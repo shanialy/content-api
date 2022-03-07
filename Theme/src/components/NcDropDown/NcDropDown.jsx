@@ -1,24 +1,8 @@
 import { DotsHorizontalIcon } from "@heroicons/react/solid";
-import React, { FC, Fragment, ReactNode } from "react";
+import React  from "react";
 import { Menu, Transition } from "@headlessui/react";
-import twFocusClass from "utils/twFocusClass";
+import twFocusClass from "../../utils/twFocusClass";
 
-export const NcDropDownItem = {
-  id: String,
-  name: String,
-  icon: String,
-}
-
-export const NcDropDownProps = {
-  className: String,
-  panelMenusClass: String,
-  iconClass: String,
-  data: NcDropDownItem,
-//  renderTrigger: () => ReactNode,
-  renderItem: (item),
-  title: String,
-  onClick: (item),
-}
 
 const NcDropDown= ({
   className = `h-8 w-8 bg-neutral-100 dark:bg-neutral-800 rounded-full flex items-center justify-center ${twFocusClass()}`,
@@ -33,9 +17,7 @@ const NcDropDown= ({
   return (
     <Menu as="div" className="relative inline-block text-left">
       <Menu.Button className={className} title={title}>
-        {renderTrigger  (
-          renderTrigger()
-        )  (
+        {renderTrigger (
           <DotsHorizontalIcon
             className={iconClass}
             aria-hidden="true"
@@ -45,7 +27,11 @@ const NcDropDown= ({
         )}
       </Menu.Button>
       <Transition
-        as={Fragment}
+      as="..."
+          // renderTrigger ={renderTrigger}
+          //  renderItem={renderItem}
+          //  data={data}
+          //  onClick={onClick}
         enter="transition ease-out duration-100"
         enterFrom="transform opacity-0 scale-95"
         enterTo="transform opacity-100 scale-100"

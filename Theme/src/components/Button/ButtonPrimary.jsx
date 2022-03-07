@@ -1,4 +1,4 @@
-import Button, { ButtonProps } from "../Button/Button";
+import Button from "./Button";
 import React from "react";
 
 // export interface ButtonPrimaryProps extends ButtonProps {}

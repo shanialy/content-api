@@ -2,7 +2,7 @@ import React from "react";
 
 function CalenderFilter(props) {
   return (
-    <div>
+    <div className=" w-10 h-10">
       <button
         type="button"
         className="calender-filter"

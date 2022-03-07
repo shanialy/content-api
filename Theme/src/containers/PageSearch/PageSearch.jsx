@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import ModalCategories from "./ModalCategories";
 import { DEMO_CATEGORIES, DEMO_TAGS } from "../../data/taxonomies";
 import LoadingVideo from "../../components/LoadingVideo/LoadingVideo";
 import ModalTags from "./ModalTags";
 import ArchiveFilterListBox from "../../components/ArchiveFilterListBox/ArchiveFilterListBox";
 import { Helmet } from "react-helmet";
-import SectionSubscribe2 from "../../components/SectionSubscribe2/SectionSubscribe2";
+
 import NcLink from "../../components/NcLink/NcLink";
 import { gql, useQuery } from "@apollo/client";
 import {
@@ -21,9 +21,8 @@ import AutoCompleteSearch from "./autoCompleteSearch";
 import DateRangeCalender from "../../components/DateRangeCalender/DateRangeCalender";
 import DateRangeDropDown from "../../components/DateRangeCalender/DateRangeDropDown";
 import Pagination from "../../components/Pagination/Pagination";
-import AutoCompleteSearchBox from "../SearchBox/autoCompleteSearchbox";
-import queryString from "query-string";
-import { useLocation } from "react-router-dom";
+
+import LoadingVideo from "../../components/LoadingVideo/LoadingVideo";
 export const PageSearchProps = {
   className: String,
 };
@@ -126,9 +125,8 @@ const FILTERS = [
 const TABS = ["Articles", "Categories", "Tags", "Authors"];
 
 const PageSearch = ({ className = "" }) => {
-  //Get the label name from query
-  const { search } = useLocation();
-  const { label } = queryString.parse(search);
+
+ 
 
   ////////////////////////////////graph ql work////////////////////////////
 
@@ -140,6 +138,7 @@ const PageSearch = ({ className = "" }) => {
   }
 
   if (loading) {
+
     console.log("Data is loading");
   }
 
@@ -207,7 +206,7 @@ const PageSearch = ({ className = "" }) => {
               <DateRangeDropDown /> &nbsp;
               <ArchiveFilterListBox lists={FILTERS} />
             </div>
-          </div>
+
 
        
       
@@ -234,7 +233,15 @@ const PageSearch = ({ className = "" }) => {
             </div>)
           : <h1>Loading</h1> } 
 
-          <SectionSubscribe2 />
+
+          <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
+            <Pagination />
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Show more
+            </button>
+          </div>
+        </main>
+
         </div>
       </div>
     </>

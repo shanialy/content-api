@@ -104,7 +104,7 @@ const Footer = () => {
             <SocialsList1 className="flex items-center space-x-3 lg:space-x-0 lg:flex-col lg:space-y-2.5 lg:items-start" />
           </div>
         </div>
-        {widgetMenus.map(renderWidgetMenuItem)}
+        {/* {widgetMenus.map(renderWidgetMenuItem)} */}
       </div>
     </div>
   );

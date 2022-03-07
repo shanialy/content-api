@@ -7,6 +7,7 @@ import Tag from "../../components/Tag/Tag";
 //   tags: TaxonomyType
 // }
 
+
 const ModalTags = ({ tags }) => {
   const renderModalContent = () => {
     return (

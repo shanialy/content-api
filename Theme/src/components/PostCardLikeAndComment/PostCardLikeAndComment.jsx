@@ -21,7 +21,7 @@ const PostCardLikeAndComment = ({
 
   //getting postData from the Card11 component
 
-  const {twitter_shares ,facebook_shares } = postData
+  var {category ,twitter_shares ,facebook_shares , date , facebook , image_url  , date_publish, title ,source_domain ,twitter ,language} =  postData
 
   // setting href statically
 
@@ -35,12 +35,14 @@ const PostCardLikeAndComment = ({
       <PostCardLikeContainer
         className={itemClass}
         twitter_shares={twitter_shares}
+        topic_twitter={twitter}
         onClickLike={onClickLike}
         // postId={id}
       />
       <PostCardCommentBtn
         href={href}
         facebook_shares={facebook_shares}
+        topic_facebook={facebook}
         className={`${
           hiddenCommentOnMobile ? "hidden sm:flex" : "flex"
         }  ${itemClass}`}
