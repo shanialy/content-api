@@ -9,7 +9,7 @@ import {
   useGetAllFoldersQuery,
   useGetAllFavouritePostsQuery,
 } from "../../app/Api/contentApi";
-
+import Card12 from "../../components/Card11/Card12";
 
 const TopicsPage = ({ className = "" }) => {
   const history = useHistory();
@@ -23,7 +23,7 @@ const TopicsPage = ({ className = "" }) => {
   // handlers
   const closeModal = () => setshowModal(false);
   const showModalOnClick = () => setshowModal(true);
-
+  const cardData = useGetAllFavouritePostsQuery(folderID)
 
   return (
     
