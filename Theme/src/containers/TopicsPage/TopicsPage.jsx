@@ -9,6 +9,10 @@ import {
   useGetAllFoldersQuery,
   useGetAllFavouritePostsQuery,
 } from "../../app/Api/contentApi";
+<<<<<<< HEAD
+=======
+import Card12 from "../../components/Card11/Card12";
+>>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
 
 const TopicsPage = ({ className = "" }) => {
   const history = useHistory();
@@ -22,6 +26,7 @@ const TopicsPage = ({ className = "" }) => {
   // handlers
   const closeModal = () => setshowModal(false);
   const showModalOnClick = () => setshowModal(true);
+  const cardData = useGetAllFavouritePostsQuery(folderID)
 
   return (
     <div className={`nc-PageDashboard ${className}`} data-nc-id="PageDashboard">
@@ -34,6 +39,10 @@ const TopicsPage = ({ className = "" }) => {
         heading="Dash board"
       >
         <div className="flex flex-col space-y-8 xl:space-y-0 xl:flex-row">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
           {/* SIDEBAR */}
           <div className="flex-shrink-0 max-w-xl xl:w-70 xl:pr-8">
             {/* CUSTOM TOPICS */}
@@ -81,6 +90,11 @@ const TopicsPage = ({ className = "" }) => {
                   </li>
                 );
               })}
+<<<<<<< HEAD
+=======
+
+      
+>>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
             </ul>
           </div>
 
@@ -91,6 +105,10 @@ const TopicsPage = ({ className = "" }) => {
               onCloseModalReportItem={closeModal}
             />
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
             <Switch>
               {/* FAVOURITE POSTS ROUTE */}
               <Route

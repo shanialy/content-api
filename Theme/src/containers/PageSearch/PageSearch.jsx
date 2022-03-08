@@ -5,6 +5,10 @@ import { DEMO_CATEGORIES, DEMO_TAGS } from "../../data/taxonomies";
 import ModalTags from "./ModalTags";
 import ArchiveFilterListBox from "../../components/ArchiveFilterListBox/ArchiveFilterListBox";
 import { Helmet } from "react-helmet";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
 import NcLink from "../../components/NcLink/NcLink";
 import { gql, useQuery } from "@apollo/client";
 import {
@@ -15,11 +19,15 @@ import {
 } from "@searchkit/client";
 
 import Card11 from "../../components/Card11/Card11";
-import AutoCompleteSearch from "./autoCompleteSearch";
+import AutoCompleteSearch from "../SearchBox/autoCompleteSearchbox";
 import DateRangeCalender from "../../components/DateRangeCalender/DateRangeCalender";
 import DateRangeDropDown from "../../components/DateRangeCalender/DateRangeDropDown";
 import Pagination from "../../components/Pagination/Pagination";
+<<<<<<< HEAD
 import LoadingVideo from "../../components/LoadingVideo/LoadingVideo";
+=======
+
+>>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
 export const PageSearchProps = {
   className: String,
 };
@@ -51,6 +59,10 @@ const query = gql`
           }
           __typename
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
         sortOptions {
           id
           label
@@ -124,10 +136,13 @@ const FILTERS = [
 const TABS = ["Articles", "Categories", "Tags", "Authors"];
 
 const PageSearch = ({ className = "" }) => {
+<<<<<<< HEAD
   //Get the label name from query
   const { search } = useLocation();
   const { label } = queryString.parse(search);
 
+=======
+>>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
   ////////////////////////////////graph ql work////////////////////////////
 
   const variables = useSearchkitVariables();
@@ -138,7 +153,11 @@ const PageSearch = ({ className = "" }) => {
   }
 
   if (loading) {
+<<<<<<< HEAD
     console.log("Data is loading");
+=======
+    <LoadingVideo />;
+>>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
   }
 
   // if (!loading) {
@@ -191,7 +210,6 @@ const PageSearch = ({ className = "" }) => {
               <div className="block my-4 border-b w-full border-neutral-100 sm:hidden"></div>
               <div className="flex justify-end">
                 <DateRangeCalender />
-                <DateRangeDropDown /> &nbsp;
                 <ArchiveFilterListBox lists={FILTERS} />
               </div>
             </div>
@@ -215,7 +233,7 @@ const PageSearch = ({ className = "" }) => {
                 )}
               </div>
             ) : (
-              <h1>Loading</h1>
+              <LoadingVideo />
             )}
 
             <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">

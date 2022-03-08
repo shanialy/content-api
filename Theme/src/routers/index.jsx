@@ -42,10 +42,15 @@ import PageSearchV2 from "../containers/PageSearch/PageSearchV2";
 import MainNav1 from "../components/Header/MainNav1";
 import PageContentFeed from "../containers/PageContentFeed/PageContentFeed";
 import PageHome from "../containers/PageHome/PageHome";
+<<<<<<< HEAD
 // import TopicPage from "../containers/TopicsPage/TopicsPage";
 import Analytics from "../containers/Analytics/Analytics";
 
 import TopicsPage from "../containers/TopicsPage/TopicsPage";
+=======
+import Analytics from "../containers/Analytics/Analytics"
+import TopicsPage from "../containers/TopicsPage/TopicsPage"
+>>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
 
 // export const pages = [
 //   { path: "/", exact: true, component: PageHome },
@@ -123,6 +128,7 @@ const Routes = () => {
 
       {/* <HeaderContainer /> */}
 
+<<<<<<< HEAD
       <Switch>
         <Route exact path={"/"} component={PageHome} />
         <Route path={"/login"} component={PageLogin} />
@@ -135,19 +141,24 @@ const Routes = () => {
         <Route path={"/category/:label"} component={CategoryCardShow} />
         <Route path={"/topics"} component={TopicsPage} />
         <Route path={"/analytics"} component={Analytics} />
+=======
+      <Switch>        
+      <Route exact path={"/"} component={PageHome}/>
+      <Route path={"/login"} component={PageLogin} /> 
+      <Route path={"/signup"} component={PageSignUp} /> 
+      <Route path={"/forgot-pass"} component={PageForgotPass} /> 
+      <Route path={"/dashboard"} component={PageDashboard} />
+      <Route path={"/search"} component={PageSearch} />
+      <Route path={"/search-v2"} component={PageSearchV2} />
+      <Route path={"/content-feed"} component={PageContentFeed} />
+      <Route path={"/analytics"} component={Analytics} />
+      <Route path={"/:id"} component={SingleCard} />
+      {/* <Route path={"/category/:label"} component={CategoryCardShow}/> */}
+      <Route path={"/topics"} component={TopicsPage} />
+>>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
 
-        {/* <Route path={"/:id"} component={SingleCard}/> */}
-        {/* {pages.map(({ component, path, exact }) => {
-          return (
-            <Route
-              key={path}
-              component={component}
-              exact={!!exact}
-              path={path}
-            />
-          );
-        })}
-        <Route component={Page404} /> */}
+        
+        {/* <Route component={Page404} />  */}
       </Switch>
       <Footer />
       {/* MEDIA */}

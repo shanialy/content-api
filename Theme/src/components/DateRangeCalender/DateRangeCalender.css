@@ -9,7 +9,7 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
-  /* or 143% */
+  /* / or 143% / */
   display: flex;
   align-items: center;
   letter-spacing: 0.25px;
@@ -19,7 +19,7 @@
 .calender-filter {
   position: absolute;
    right: 300px;
-  top: 210px; 
+  top: 340px; 
   width: 160px;
   height: 32px;
   background-color: white;
@@ -31,7 +31,7 @@
 .Datepicker {
   position: absolute;
   right: 299px;
-  top: 250px;
+  top: 375px;
   z-index: 20;
   background-color: white;
   border: 1px solid #c0b7e3;
