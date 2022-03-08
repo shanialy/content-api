@@ -22,11 +22,13 @@ const TopicSubmitPost = () => {
 
   const [must_also_keywords_list, setMust_also_keywords_list] = useState([]); // must_also_keywords_list
   const [must_also_keywords_value, setMust_also_keywords_value] = useState(""); // must_also_keywords_value
-  
+
   const [must_not_contains_keywords_list, setMust_not_contains_keywords_list] =
     useState([]); // must_not_contains_keywords_list
-  const [must_not_contains_keywords_value, setMust_not_contains_keywords_value] =
-    useState(""); // must_not_contains_keywords_value
+  const [
+    must_not_contains_keywords_value,
+    setMust_not_contains_keywords_value,
+  ] = useState(""); // must_not_contains_keywords_value
 
   const [exclude_domains, setExclude_domains] = useState(null); // exclude_domains
   const [limit_domains_results, setLimit_domains_results] = useState(null); // limit_domains_results
@@ -70,8 +72,8 @@ const TopicSubmitPost = () => {
       }
     }
   };
-  const any_keywords_deleteItem = (item)=>{
-    setAny_keywords_list(any_keywords_list.filter((i)=> i !== item))
+  const any_keywords_deleteItem = (item) => {
+    setAny_keywords_list(any_keywords_list.filter((i) => i !== item));
   };
 
   // must_also_keywords
@@ -85,8 +87,10 @@ const TopicSubmitPost = () => {
       }
     }
   };
-  const must_also_keywords_deleteItem = (item)=>{
-    setMust_also_keywords_list(must_also_keywords_list.filter((i)=> i !== item))
+  const must_also_keywords_deleteItem = (item) => {
+    setMust_also_keywords_list(
+      must_also_keywords_list.filter((i) => i !== item)
+    );
   };
 
   // must_not_contains_keywords
@@ -95,15 +99,18 @@ const TopicSubmitPost = () => {
       e.preventDefault();
       let value = must_not_contains_keywords_value.trim();
       if (value) {
-        setMust_not_contains_keywords_list(must_not_contains_keywords_list.concat(value));
+        setMust_not_contains_keywords_list(
+          must_not_contains_keywords_list.concat(value)
+        );
         setMust_not_contains_keywords_value("");
       }
     }
   };
-  const must_not_contains_keywords_deleteItem = (item)=>{
-    setMust_not_contains_keywords_list(must_not_contains_keywords_list.filter((i)=> i !== item))
+  const must_not_contains_keywords_deleteItem = (item) => {
+    setMust_not_contains_keywords_list(
+      must_not_contains_keywords_list.filter((i) => i !== item)
+    );
   };
-
 
   return (
     <div className="flex lg:flex-row flex-col gap-6 rounded-xl md:border md:border-neutral-100 dark:border-neutral-800 md:p-6">
@@ -169,7 +176,7 @@ const TopicSubmitPost = () => {
               return (
                 <>
                   <div className="ml-1 mt-1" key={index}>
-                    <Chip value={item} _delete={any_keywords_deleteItem}/>
+                    <Chip value={item} _delete={any_keywords_deleteItem} />
                   </div>
                 </>
               );
@@ -213,7 +220,9 @@ const TopicSubmitPost = () => {
           <Input
             className="mt-1 rounded border-slate-300"
             placeholder="Enter keywords that you think are giving irrelevant, eg. job, course..."
-            onChange={(e) => setMust_not_contains_keywords_value(e.target.value)}
+            onChange={(e) =>
+              setMust_not_contains_keywords_value(e.target.value)
+            }
             onKeyDown={(e) => must_not_contains_keywords_addItem(e)}
             value={must_not_contains_keywords_value}
           />
@@ -223,7 +232,10 @@ const TopicSubmitPost = () => {
               return (
                 <>
                   <div className="ml-1 mt-1" key={index}>
-                    <Chip value={val} _delete={must_not_contains_keywords_deleteItem} />
+                    <Chip
+                      value={val}
+                      _delete={must_not_contains_keywords_deleteItem}
+                    />
                   </div>
                 </>
               );
