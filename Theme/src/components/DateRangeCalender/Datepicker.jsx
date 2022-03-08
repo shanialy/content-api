@@ -41,7 +41,6 @@ function DatePicker() {
     <DateRangePicker
       startDatePlaceholder="Start Date"
       endDatePlaceholder="End Date"
-    //  rangeColors={[theme.palette.primary.main]}
       ranges={ranges}
       onChange={(ranges) => setRanges([ranges.rollup])}
       staticRanges={staticRanges}

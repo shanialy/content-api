@@ -9,6 +9,7 @@ import React, {
   import PlaceIcon from "./PlaceIcon";
   import moment from 'moment'
   import dateFormat from 'dateformat';
+import LoadingVideo from "../LoadingVideo/LoadingVideo";
   
   // export interface NcImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   //   containerClassName?: string;
@@ -69,7 +70,7 @@ import React, {
   
     const _imageOnViewPort = () => {
       if (!src) {
-        _handleImageLoaded();
+           <LoadingVideo/>
         return true;
       }
       _imageEl = new Image();
@@ -100,7 +101,7 @@ import React, {
           className={`${className} flex items-center justify-center bg-neutral-200 dark:bg-neutral-6000 text-neutral-100 dark:text-neutral-500`}
         >
           <div className="h-2/4 max-w-[50%]">
-            <PlaceIcon />
+            <LoadingVideo/>
           </div>
         </div>
       );

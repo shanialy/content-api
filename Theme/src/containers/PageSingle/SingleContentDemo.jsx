@@ -1,26 +1,19 @@
 import React from "react";
 
-const SingleContentDemo = () => {
+const SingleContentDemo = ({
+  className="",
+  data
+}) => {
+
+  const {maintext} = data.fields
   return (
     <>
       {/* THIS IS THE DEMP CONTENT */}
       {/* IF YOUR DATA IS JSON, YOU CAN USE render with html-react-parser (https://www.npmjs.com/package/html-react-parser) */}
       <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure vel
-        officiis ipsum placeat itaque neque dolorem modi perspiciatis dolor
-        distinctio veritatis sapiente, minima corrupti dolores necessitatibus
-        suscipit accusantium dignissimos culpa cumque.
+        {maintext}
       </p>
-      <p>
-        It is a long established fact that a <strong>reader</strong> will be
-        distracted by the readable content of a page when looking at its{" "}
-        <strong>layout</strong>. The point of using Lorem Ipsum is that it has a
-        more-or-less normal{" "}
-        <a href="/#" target="_blank" rel="noopener noreferrer">
-          distribution of letters.
-        </a>{" "}
-      </p>
-      <ol>
+      {/* <ol>
         <li>We want everything to look good out of the box.</li>
         <li>
           Really just the first reason, that's the whole point of the plugin.
@@ -91,7 +84,7 @@ const SingleContentDemo = () => {
 } `}
         </code>
       </pre> */}
-      <p>Hopefully that looks good enough to you.</p>
+      {/* <p>Hopefully that looks good enough to you.</p>
       <h3>We still need to think about stacked headings though.</h3>
       <h4>
         Let's make sure we don't screw that up with <code>h4</code> elements,
@@ -110,7 +103,7 @@ const SingleContentDemo = () => {
       <p>
         What I've written here is probably long enough, but adding this final
         sentence can't hurt.
-      </p>
+      </p> */}
     </>
   );
 };

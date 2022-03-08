@@ -2,14 +2,11 @@ import React, { FC, useState } from "react";
 import PostCardSaveAction from "../../components/PostCardSaveAction/PostCardSaveAction";
 // import { PostDataType } from "data/types";
 import { Link } from "react-router-dom";
-import CategoryBadgeList from "../../components/CategoryBadgeList/CategoryBadgeList";
 import PostCardLikeAndComment from "../../components/PostCardLikeAndComment/PostCardLikeAndComment";
 import PostCardMeta from "../../components/PostCardMeta/PostCardMeta";
 import PostFeaturedMedia from "../../components/PostFeaturedMedia/PostFeaturedMedia";
-import moment from "moment";
-import SingleCard from "./SingleCard";
-import dateFormat from "dateformat";
-import { Provider, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+// import { cardLoadingData } from "./SingleCard";
 
 const Card11 = ({
   className = "h-full",
@@ -26,9 +23,16 @@ const Card11 = ({
     payload: cardvalue,
   });
 
+  //getting id from Page search
+
+  // const dispatch = useDispatch();
+
+  // cardLoadingData(dispatch , cardvalue)
+
   ////////////////////////////////
 
   const { id } = cardvalue;
+
   console.log(cardvalue, "card11");
 
   //destructuring the post that  we are getting form  PageSearch component
@@ -38,21 +42,6 @@ const Card11 = ({
   // Giving a static value to herf
 
   const href = `/${id}`;
-
-  // making a function on date_download so that we can get the time  (need to import moment and dateFormat if you want to perform the function) we also used this in NcImage component
-
-  // function relativeTime(date_download) {
-  //   try {
-  //     let ddate = dateFormat(date_download, "isoDateTime");
-  //     ddate = ddate.split("T");
-  //     let datePart = ddate[0];
-  //     let timePart = ddate[1].split("+")[0];
-
-  //     return moment(datePart + " " + timePart).fromNow();
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
 
   //useState hook from the theme
   const [isHover, setIsHover] = useState(false);

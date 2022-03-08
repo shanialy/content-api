@@ -1,0 +1,43 @@
+.calender-btn-text {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 8px;
+  bottom: 8px;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  /* or 143% */
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.25px;
+  color: #333333;
+}
+
+.calender-filter {
+  position: absolute;
+   right: 300px;
+  top: 210px; 
+  width: 160px;
+  height: 32px;
+  background-color: white;
+  border: 1px solid #c0b7e3;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.Datepicker {
+  position: absolute;
+  right: 299px;
+  top: 250px;
+  z-index: 20;
+  background-color: white;
+  border: 1px solid #c0b7e3;
+}
+
+.rdrDateRangePickerWrapper{
+  width: 432px;
+
+}

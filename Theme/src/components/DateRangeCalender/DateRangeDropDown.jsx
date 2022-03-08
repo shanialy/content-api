@@ -5,7 +5,7 @@ import { CheckIcon } from "@heroicons/react/solid";
 // import { ListBoxItemType } from "components/NcListBox/NcListBox";
 import DateRangeCalender from "./DateRangeCalender";
 import ButtonDropdown from "../../components/ButtonDropdown/ButtonDropdown";
-
+import "./DateRangeCalender.css"
 // export interface ArchiveFilterListBoxProps {
 //   className?: string;
 //   lists: ListBoxItemType[];

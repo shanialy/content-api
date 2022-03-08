@@ -19,8 +19,7 @@ const PostCardMeta = ({
 
   //getting meta from the card  component written on line 97
 
-  var { category, date_download  ,image_url ,sentiment} = meta;
-
+  var {category , date , date_download  , facebook , image_url  , date_publish,sentiment, title ,source_domain ,twitter ,language} = meta
 
   /// formating the date into (February 11th, 2022) fromat by using dateformat library
   
@@ -106,7 +105,7 @@ const PostCardMeta = ({
         </span>
         <span className="text-neutral-500 dark:text-neutral-400 font-normal" style={{padding: "0px 0px 0px 15px"}}>
         {/* the date which we formated on top is called here */}
-          {res}
+          {!res ? date_publish : date}
         </span>
       </>
     </div>

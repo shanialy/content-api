@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import ModalCategories from "./ModalCategories";
 import { DEMO_CATEGORIES, DEMO_TAGS } from "../../data/taxonomies";
+// import LoadingVideo from "../../components/LoadingVideo/LoadingVideo";
 import ModalTags from "./ModalTags";
 import ArchiveFilterListBox from "../../components/ArchiveFilterListBox/ArchiveFilterListBox";
 import { Helmet } from "react-helmet";
-import SectionSubscribe2 from "../../components/SectionSubscribe2/SectionSubscribe2";
 import NcLink from "../../components/NcLink/NcLink";
 import { gql, useQuery } from "@apollo/client";
 import {
@@ -13,13 +13,13 @@ import {
   withSearchkit,
   withSearchkitRouting,
 } from "@searchkit/client";
+
 import Card11 from "../../components/Card11/Card11";
+import AutoCompleteSearch from "./autoCompleteSearch";
 import DateRangeCalender from "../../components/DateRangeCalender/DateRangeCalender";
 import DateRangeDropDown from "../../components/DateRangeCalender/DateRangeDropDown";
 import Pagination from "../../components/Pagination/Pagination";
-import AutoCompleteSearchBox from "../SearchBox/autoCompleteSearchbox";
-import queryString from "query-string";
-import { useLocation } from "react-router-dom";
+import LoadingVideo from "../../components/LoadingVideo/LoadingVideo";
 export const PageSearchProps = {
   className: String,
 };
@@ -79,9 +79,12 @@ const query = gql`
               authors
               date_download
               language
+              image_url
+              source_domain
               facebook_shares
               twitter_shares
               maintext
+              sentiment
               source_domain
               title
               __typename
@@ -137,24 +140,25 @@ const PageSearch = ({ className = "" }) => {
   if (loading) {
     console.log("Data is loading");
   }
+
+  // if (!loading) {
+  //   console.log(data.results?.hits.items[0].fields.twitter_shares);
+  // }
+
   console.log(data);
 
   return (
     <>
-      {/* Display the label Get From Query */}
-      <h1>
-        <b>{label}</b>
-      </h1>
       <div className={`nc-PageSearch ${className}`} data-nc-id="PageSearch">
         <Helmet>
           <title>Nc || Search Page Template</title>
         </Helmet>
 
         <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
-          {/* 
-        For Auto Complete Search Box */}
-          <AutoCompleteSearchBox />
+          <AutoCompleteSearch />
 
+          {/* <div className="w-full text-sm text-left mt-4 text-neutral-500 dark:text-neutral-300">
+                <div className="inline-block"> */}
           <div className="margin">
             <span className="mr-2.5">Related:</span>
             <NcLink className="mr-2.5 inline-block font-normal" to="/#">
@@ -169,9 +173,13 @@ const PageSearch = ({ className = "" }) => {
             <NcLink className="mr-2.5 inline-block font-normal" to="/#">
               Frontend
             </NcLink>
+            {/* </div>
+              </div> */}
           </div>
         </div>
-
+        {/* </header>
+          // </div>
+        </div> */}
         <div className="container py-16 lg:py-28 space-y-16 lg:space-y-28">
           <main>
             <div className="flex flex-col sm:items-center sm:justify-between sm:flex-row">
@@ -188,12 +196,12 @@ const PageSearch = ({ className = "" }) => {
               </div>
             </div>
 
-            {/* passing our data in Card11 through map */}
-
             {!loading ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-8 mt-8 lg:mt-10">
-                {data.results ? (
-                  data.results.hits.items.map((value, index) => {
+                {data ? (
+                  data.results?.hits.items.map((value, index) => {
+                    console.log(value);
+
                     return (
                       <Card11
                         key={index}
@@ -217,8 +225,6 @@ const PageSearch = ({ className = "" }) => {
               </button>
             </div>
           </main>
-
-          <SectionSubscribe2 />
         </div>
       </div>
     </>

@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import checkInViewIntersectionObserver from "../../utils/isInViewPortIntersectionObserver";
 import PlaceIcon from "./PlaceIcon";
+import LoadingVideo from "../LoadingVideo/LoadingVideo";
 
 
 // export interface NcImageProps extends ImgHTMLAttributes<HTMLImageElement> {
@@ -69,8 +70,7 @@ const NcImage = ({
 
   const _imageOnViewPort = () => {
     if (!src) {
-      _handleImageLoaded();
-      return true;
+      <LoadingVideo/>
     }
     _imageEl = new Image();
     if (_imageEl) {
@@ -100,7 +100,7 @@ const NcImage = ({
         className={`${className} flex items-center justify-center bg-neutral-200 dark:bg-neutral-6000 text-neutral-100 dark:text-neutral-500`}
       >
         <div className="h-2/4 max-w-[50%]">
-          <PlaceIcon />
+          <LoadingVideo />
         </div>
       </div>
     );
