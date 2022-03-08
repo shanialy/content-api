@@ -143,16 +143,15 @@ const PageSearch = ({ className = "" }) => {
   //   console.log(data.results?.hits.items[0].fields.twitter_shares);
   // }
 
-  console.log(data);
 
   return (
-    <>
-      <div className={`nc-PageSearch ${className}`} data-nc-id="PageSearch">
+    < >
+      <div  className={`nc-PageSearch ${className}`} data-nc-id="PageSearch">
         <Helmet>
           <title>Nc || Search Page Template</title>
         </Helmet>
 
-        <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
+        <div  className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
           <AutoCompleteSearch />
 
           {/* <div className="w-full text-sm text-left mt-4 text-neutral-500 dark:text-neutral-300">
@@ -204,7 +203,7 @@ const PageSearch = ({ className = "" }) => {
                         key={index}
                         post={value.fields}
                         cardvalue={value}
-                      />
+                        />
                     );
                   })
                 ) : (

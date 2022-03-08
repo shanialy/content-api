@@ -10,7 +10,6 @@ import PostFeaturedMedia from "../../components/PostFeaturedMedia/PostFeaturedMe
 import { useDispatch } from "react-redux";
 import { cardLoadingData } from "./SingleCard";
 
-
 const Card11 = ({
   className = "h-full",
   post,
@@ -18,39 +17,31 @@ const Card11 = ({
   hiddenAuthor = false,
   ratio = "aspect-w-4 aspect-h-3",
 }) => {
+  //getting id from Page search
 
-//getting id from Page search
+  const dispatch = useDispatch();
 
-const dispatch = useDispatch();
+  cardLoadingData(dispatch, cardvalue);
 
-cardLoadingData(dispatch , cardvalue)
+  ////////////////////////////////
 
+  const { id } = cardvalue;
 
-////////////////////////////////
-  
- const{ id } = cardvalue
+  console.log(cardvalue, "card11");
 
- console.log(cardvalue , "card11")
-  
   //destructuring the post that  we are getting form  PageSearch component
 
-  const { title, date_download ,source_domain} = post;
-  
+  const { title, date_download, source_domain } = post;
 
+  // Giving a static value to herf
 
-  // Giving a static value to herf 
+  const href = `/${id}`;
 
-  const href = `/${id}`
-
-
-
-  //useState hook from the theme  
+  //useState hook from the theme
   const [isHover, setIsHover] = useState(false);
-
 
   //returning of fuction starts here
   return (
-
     <div
       className={`nc-Card11 relative flex flex-col group [ nc-box-has-hover ] [ nc-dark-box-bg-has-hover ] ${className}`}
       data-nc-id="Card11"
@@ -61,41 +52,33 @@ cardLoadingData(dispatch , cardvalue)
       <div
         className={`block flex-shrink-0 relative w-full rounded-t-xl overflow-hidden ${ratio}`}
       >
-
-      <Link to={href} className="absolute inset-0">
-             <PostFeaturedMedia post={post} isHover={isHover}  />
-             
-      </Link>
-    
-        
+        <Link to={href} className="absolute inset-0">
+          <PostFeaturedMedia post={post} isHover={isHover} />
+        </Link>
       </div>
-      
 
-  
-   
       {/* {/ Passing the post props in PostCardMeta component  /} */}
 
       <div className="p-4 flex flex-col flex-grow space-y-3">
-
         {!hiddenAuthor ? (
-          <PostCardMeta meta={post}  />
+          <PostCardMeta meta={post} />
         ) : (
           <span className="text-xs text-neutral-500">{date_download}</span>
         )}
 
         <h2 className="nc-card-title block text-base font-semibold text-neutral-900 dark:text-neutral-100 ">
-        {/* {/ // putting &nbsp so that we can add somespace temporarely /} */}
+          {/* {/ // putting &nbsp so that we can add somespace temporarely /} */}
 
-          <Link to={href} className="line-clamp-2" title={title} >
-            {title} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-            
+          <Link to={href} className="line-clamp-2" title={title}>
+            {title} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           </Link>
         </h2>
         <div className="flex items-end justify-between mt-auto">
+            <PostCardLikeAndComment className="relative" postData={post} />
 
-          <PostCardLikeAndComment className="relative" postData={post}  />
-          
-          <PostCardSaveAction className="relative" postData={post} />
+            <PostCardSaveAction className="relative" postData={post} />
         </div>
       </div>
     </div>
