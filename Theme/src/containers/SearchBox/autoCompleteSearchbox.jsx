@@ -4,9 +4,13 @@ import { autocomplete } from "@algolia/autocomplete-js";
 import "@algolia/autocomplete-theme-classic";
 import { render } from "react-dom";
 import createSuggestionsPlugin from "@appbaseio/autocomplete-suggestions-plugin";
-import {JSONTree} from "react-json-tree";
-import { getIcon, jsonTreeTheme, renderResults } from "../../utils/autoCompleteSearch";
-import "./autoCompleteSearch.css";
+import { JSONTree } from "react-json-tree";
+import {
+  getIcon,
+  jsonTreeTheme,
+  renderResults,
+} from "../../utils/autoCompleteSearch";
+import "./autoCompleteSearchBox.css";
 
 // appbase client config object
 const appbaseClientConfig = {
@@ -61,6 +65,8 @@ function AutoCompleteSearch() {
       },
       {
         onItemSelect: (props) => {
+          console.log(props)
+          console.log(props.item.label);
           const {
             item: { label },
             setQuery,
@@ -78,6 +84,7 @@ function AutoCompleteSearch() {
             },
           }).then((item) => {
             setstate(item);
+            console.log(item);
           });
           refresh();
         },
@@ -151,6 +158,7 @@ function AutoCompleteSearch() {
           );
         },
         onItemSelect: (props) => {
+          // console.log(props.item);
           const { item, setQuery, refresh } = props;
           const { label } = item;
           if (item?._source?.image) {
@@ -168,11 +176,13 @@ function AutoCompleteSearch() {
               },
             }).then((item) => {
               setstate(item);
+              
             });
             refresh();
           }
         },
         renderHeader: (props) => {
+          
           return (
             <h4>
               Products Listing <hr style={{ borderColor: "#d7d5f5" }} />
@@ -196,7 +206,7 @@ function AutoCompleteSearch() {
     // initiate autocomplete-js
     autocomplete({
       container: "#autocomplete",
-      placeholder: "Search for Products",
+      placeholder: "Search Here...",
       openOnFocus: true,
       // debug: true,
       plugins: [defaultUsagePlugin, advancedUsagePlugin],
@@ -210,9 +220,8 @@ function AutoCompleteSearch() {
   return (
     <div className="App">
       <div id="autocomplete">
-        <div >
-          <div className="InputWrapper">
-          </div>
+        <div>
+          <div className="InputWrapper"></div>
         </div>
       </div>
       {!!state?.hits?.total.value && !!state?.took ? (

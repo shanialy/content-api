@@ -5,6 +5,7 @@ import LoadingVideo from "../../components/LoadingVideo/LoadingVideo";
 import ModalTags from "./ModalTags";
 import ArchiveFilterListBox from "../../components/ArchiveFilterListBox/ArchiveFilterListBox";
 import { Helmet } from "react-helmet";
+
 import NcLink from "../../components/NcLink/NcLink";
 import { gql, useQuery } from "@apollo/client";
 import {
@@ -20,6 +21,7 @@ import AutoCompleteSearch from "./autoCompleteSearch";
 import DateRangeCalender from "../../components/DateRangeCalender/DateRangeCalender";
 import DateRangeDropDown from "../../components/DateRangeCalender/DateRangeDropDown";
 import Pagination from "../../components/Pagination/Pagination";
+
 import LoadingVideo from "../../components/LoadingVideo/LoadingVideo";
 export const PageSearchProps = {
   className: String,
@@ -47,6 +49,7 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
         }
         __typename
       }
+
       sortOptions {
         id
         label
@@ -105,6 +108,7 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
     }
     __typename
   }
+
 }
 `
 
@@ -121,6 +125,7 @@ const FILTERS = [
 const TABS = ["Articles", "Categories", "Tags", "Authors"];
 
 const PageSearch = ({ className = "" }) => {
+
  
 
   ////////////////////////////////graph ql work////////////////////////////
@@ -227,6 +232,7 @@ const PageSearch = ({ className = "" }) => {
               
             </div>)
           : <h1>Loading</h1> } 
+
 
           <div className="flex flex-col mt-12 lg:mt-16 space-y-5 sm:space-y-0 sm:space-x-3 sm:flex-row sm:justify-between sm:items-center">
             <Pagination />

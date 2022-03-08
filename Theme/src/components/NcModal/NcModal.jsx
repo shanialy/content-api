@@ -1,4 +1,4 @@
-import React, {  Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import ButtonDropdown from "../../components/ButtonDropdown/ButtonDropdown";
 import ButtonClose from "../../components/ButtonClose/ButtonClose";
@@ -23,10 +23,9 @@ const NcModal = ({
   modalTitle = "Modal title",
   isOpenProp,
   onCloseModal,
+  className,
 }) => {
-
   //getting modalTitle , triggerText and renderContent from ModalCategories line 47
-
 
   let [isOpen, setIsOpen] = useState(!!isOpenProp);
 
@@ -61,7 +60,7 @@ const NcModal = ({
           className="fixed inset-0 z-50 overflow-y-auto"
           onClose={closeModal}
         >
-          <div className="min-h-screen px-1 text-center md:px-4">
+          <div className="min-h-screen px-1 text-center md:px-4 ">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-75"
@@ -91,7 +90,8 @@ const NcModal = ({
               leaveTo="opacity-0 scale-95"
             >
               <div
-                className={`inline-block w-full my-5 overflow-hidden text-left align-middle transition-all transform bg-white border border-black border-opacity-5 shadow-xl rounded-2xl sm:my-8 dark:bg-neutral-800 dark:border-neutral-700 text-neutral-900 dark:text-neutral-300 ${contentExtraClass}`}
+              
+                className={`inline-block w-full my-5 overflow-hidden text-left align-middle transition-all transform bg-white border border-black border-opacity-5 shadow-xl rounded-2xl sm:my-8 dark:bg-neutral-800 dark:border-neutral-700 text-neutral-900 dark:text-neutral-300  ${contentExtraClass}`}
               >
                 <div className="py-4 px-6 text-center relative border-b border-neutral-100 dark:border-neutral-700 md:py-5">
                   <ButtonClose
@@ -118,4 +118,3 @@ const NcModal = ({
 };
 
 export default NcModal;
- 

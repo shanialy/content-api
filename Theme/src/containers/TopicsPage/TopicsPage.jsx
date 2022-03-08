@@ -37,6 +37,7 @@ const TopicsPage = ({ className = "" }) => {
         heading="Dash board"
       >
         <div className="flex flex-col space-y-8 xl:space-y-0 xl:flex-row">
+
           {/* SIDEBAR */}
           <div className="flex-shrink-0 max-w-xl xl:w-70 xl:pr-8">
             {/* CUSTOM TOPICS */}
@@ -62,7 +63,7 @@ const TopicsPage = ({ className = "" }) => {
                 </p>
                 <button
                   onClick={showModalOnClick}
-                  className="flex flex-row justify-center items-end rounded p-1 h-6 font-bold text-[25px] bg-gray-300 text-[#8c8c8c] hover:text-indigo-600"
+                  className="flex flex-row justify-center items-end rounded p-1 h-6 font-bold text-[25px] bg-gray-300 text-[#8c8c8c] hover:text-indigo-600 "
                 >
                   +
                 </button>
@@ -81,7 +82,7 @@ const TopicsPage = ({ className = "" }) => {
                       to={`${url}/favourite-posts/${_id}`}
                       onClick={() => setFolderID(_id)}
                     >
-                      {/* <span className="w-8 mr-1">{emoij}</span> */}
+                      {/* <span className="w-8 mr-1">{emoij}</span>  */}
                       {folderName}
                     </NavLink>
                   </li>

@@ -6,6 +6,7 @@ import CategoryBadgeList from "../../components/CategoryBadgeList/CategoryBadgeL
 import PostCardLikeAndComment from "../../components/PostCardLikeAndComment/PostCardLikeAndComment";
 import PostCardMeta from "../../components/PostCardMeta/PostCardMeta";
 import PostFeaturedMedia from "../../components/PostFeaturedMedia/PostFeaturedMedia";
+
 // import { useAppDispatch } from "../../app/hooks";
 import { useDispatch } from "react-redux";
 import { cardLoadingData } from "./SingleCard";
@@ -18,6 +19,14 @@ const Card11 = ({
   hiddenAuthor = false,
   ratio = "aspect-w-4 aspect-h-3",
 }) => {
+  //getting id from Page search
+  const dispatch = useDispatch();
+
+  dispatch({
+    type: "addCardValue",
+    payload: cardvalue,
+  });
+
 
 //getting id from Page search
 
@@ -38,19 +47,17 @@ cardLoadingData(dispatch , cardvalue)
   
 
 
-  // Giving a static value to herf 
+  // Giving a static value to herf
 
-  const href = `/${id}`
+  const href = `/${id}`;
 
 
 
-  //useState hook from the theme  
+  //useState hook from the theme
   const [isHover, setIsHover] = useState(false);
-
 
   //returning of fuction starts here
   return (
-
     <div
       className={`nc-Card11 relative flex flex-col group [ nc-box-has-hover ] [ nc-dark-box-bg-has-hover ] ${className}`}
       data-nc-id="Card11"
@@ -62,6 +69,7 @@ cardLoadingData(dispatch , cardvalue)
         className={`block flex-shrink-0 relative w-full rounded-t-xl overflow-hidden ${ratio}`}
       >
 
+
       <Link to={href} className="absolute inset-0">
              <PostFeaturedMedia post={post} isHover={isHover}  />
              
@@ -69,14 +77,10 @@ cardLoadingData(dispatch , cardvalue)
     
         
       </div>
-      
 
-  
-   
       {/* Passing the post props in PostCardMeta component  */}
 
       <div className="p-4 flex flex-col flex-grow space-y-3">
-
         {!hiddenAuthor ? (
           <PostCardMeta meta={post}  />
         ) : (
@@ -84,7 +88,8 @@ cardLoadingData(dispatch , cardvalue)
         )}
 
         <h2 className="nc-card-title block text-base font-semibold text-neutral-900 dark:text-neutral-100 ">
-        {/* // putting &nbsp so that we can add somespace temporarely */}
+          {/* // putting &nbsp so that we can add somespace temporarely */}
+
 
           <Link to={href} className="line-clamp-2" title={title} >
             {title} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 

@@ -343,8 +343,12 @@ const discoveryDropdwonItems = [
     href: "/topics",
     name: "Topics",
   },
+  {
+    id: ncNanoId(),
+    href: "/analytics",
+    name: "Analytics",
+  },
 ];
-
 
 export const NAVIGATION_DEMO = [
   {
