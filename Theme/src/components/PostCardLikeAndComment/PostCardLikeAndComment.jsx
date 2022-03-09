@@ -27,7 +27,7 @@ const PostCardLikeAndComment = ({
   // setting href statically
 
   const href = "/"
-
+ const isLiked =  false
   return (
     <div
     // space-x-2
@@ -52,6 +52,8 @@ const PostCardLikeAndComment = ({
       />
 
       <PostCardAddtoFavouritesFolderBtn/>
+
+      
     </div>
   );
 };

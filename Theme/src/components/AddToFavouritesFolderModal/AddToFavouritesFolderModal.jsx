@@ -9,14 +9,14 @@ import twFocusClass from "../../utils/twFocusClass";
 import { useCreateFolderMutation } from "../../app/Api/contentApi";
 import ArchiveFilterListBox from "../ArchiveFilterListBox/ArchiveFilterListBox";
 import Input from "../Input/Input";
-import ScrollableSelectBox from "../ScrollableSelectBox/ScrollableSelectBox"
+import ScrollableSelectBox from "../ScrollableSelectBox/ScrollableSelectBox";
 
 const AddToFavouritesFolderModal = ({ id, show, onCloseModalReportItem }) => {
   const textareaRef = useRef(null);
   const history = useHistory();
   const [folderName, setFolderName] = useState();
   const [createFolder, createFolderObj] = useCreateFolderMutation();
-
+  const [showAddFolder, setShowAddFolder] = useState(false);
   useEffect(() => {
     if (show) {
       setTimeout(() => {
@@ -28,50 +28,60 @@ const AddToFavouritesFolderModal = ({ id, show, onCloseModalReportItem }) => {
     }
   }, [show]);
 
+  // handlers
   const handleClickSubmitForm = (e) => {
-    alert("hi");
+    setShowAddFolder(false);
     // e.preventDefault();
     // createFolder({ folderName: folderName });
     // history.push("/topics");
   };
+
+  const handelShowAddFolder = (e) => {
+    e.preventDefault();
+    setShowAddFolder(true);
+  };
+
   const renderContent = () => {
     return (
       <form action="#">
         {/* TEXAREA MESSAGER */}
 
-        <div className="mt-1">
-          {/* <ArchiveFilterListBox /> */}
-          <ScrollableSelectBox/>
+        <ScrollableSelectBox />
 
-          <h6 className="text-xs text-neutral-700 dark:text-neutral-200">
-            Folder Name
-          </h6>
-          
-          <Input
-            type="text"
-            placeholder="Enter Folder Name"
-            className="mt-1 rounded"
-            required={true}
-            id="report-message"
-            onChange={(e) => setFolderName(e.target.value)}
-          />
-        </div>
-        <div className="mt-4 space-x-6">
+        {!showAddFolder ? (
           <ButtonPrimary
-            // className="w-10 h-10 bg-primary-000"
-            onClick={(e) => handleClickSubmitForm(e)}
-            type="submit"
+            onClick={(e) => handelShowAddFolder(e)}
+            className="bg-green-500 hover:bg-green-600 rounded-lg h-11 mt-3"
           >
-            Create
+            Add Folder
           </ButtonPrimary>
-          <ButtonSecondary
-            // className="w-10 h-10"
-            type="button"
-            onClick={onCloseModalReportItem}
-          >
-            Cancel
-          </ButtonSecondary>
-        </div>
+        ) : (
+          <>
+            <div className="mt-4">
+              <h6 className="text-md text-neutral-700">Folder Name</h6>
+
+              <Input
+                type="text"
+                placeholder="Enter Folder Name"
+                className="mt-1 rounded-lg border-slate-300"
+                required={true}
+                id="report-message"
+                onChange={(e) => setFolderName(e.target.value)}
+              />
+            </div>
+            <div className="mt-4 space-x-6">
+              <ButtonPrimary
+                onClick={(e) => handleClickSubmitForm(e)}
+                type="submit"
+              >
+                Create
+              </ButtonPrimary>
+              <ButtonSecondary type="button" onClick={onCloseModalReportItem}>
+                Cancel
+              </ButtonSecondary>
+            </div>
+          </>
+        )}
       </form>
     );
   };
@@ -85,10 +95,10 @@ const AddToFavouritesFolderModal = ({ id, show, onCloseModalReportItem }) => {
       className="h-140 w-80 my-5 overflow-visible text-left align-middle transition-all transform bg-white border border-black border-opacity-5 shadow-xl rounded-2xl sm:my-8 dark:bg-neutral-800 dark:border-neutral-700 text-neutral-900 dark:text-neutral-300"
       isOpenProp={show}
       onCloseModal={onCloseModalReportItem}
-      contentExtraClass="h-[32rem] w-1/3"
+      contentExtraClass="h-[30rem] w-[85%] sm:w-96"
       renderContent={renderContent}
       renderTrigger={renderTrigger}
-      modalTitle="Create Folder"
+      modalTitle="Add To Favourites"
     />
   );
 };
