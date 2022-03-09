@@ -9,6 +9,7 @@ import twFocusClass from "../../utils/twFocusClass";
 import { useCreateFolderMutation } from "../../app/Api/contentApi";
 import ArchiveFilterListBox from "../ArchiveFilterListBox/ArchiveFilterListBox";
 import Input from "../Input/Input";
+import ScrollableSelectBox from "../ScrollableSelectBox/ScrollableSelectBox"
 
 const AddToFavouritesFolderModal = ({ id, show, onCloseModalReportItem }) => {
   const textareaRef = useRef(null);
@@ -28,9 +29,10 @@ const AddToFavouritesFolderModal = ({ id, show, onCloseModalReportItem }) => {
   }, [show]);
 
   const handleClickSubmitForm = (e) => {
+    alert("hi");
     // e.preventDefault();
-    createFolder({ folderName: folderName });
-    history.push("/topics");
+    // createFolder({ folderName: folderName });
+    // history.push("/topics");
   };
   const renderContent = () => {
     return (
@@ -38,34 +40,23 @@ const AddToFavouritesFolderModal = ({ id, show, onCloseModalReportItem }) => {
         {/* TEXAREA MESSAGER */}
 
         <div className="mt-1">
-          <ArchiveFilterListBox />
+          {/* <ArchiveFilterListBox /> */}
+          <ScrollableSelectBox/>
 
           <h6 className="text-xs text-neutral-700 dark:text-neutral-200">
             Folder Name
           </h6>
-          {/* <span className="text-sm text-neutral-6000 dark:text-neutral-400">
-            Please provide any additional information or context that will help
-            us understand and handle the situation.
-          </span> */}
-          {/* <Textarea
-            placeholder="enter folder name"
-            className="mt-3"
-            ref={textareaRef}
-            required={true}
-            rows={4}
-            id="report-message"
-            onChange={(e) => setFolderName(e.target.value)}
-          /> */}
+          
           <Input
             type="text"
             placeholder="Enter Folder Name"
-            className="mt-1"
+            className="mt-1 rounded"
             required={true}
             id="report-message"
             onChange={(e) => setFolderName(e.target.value)}
           />
         </div>
-        <div className="mt-3 space-x-6">
+        <div className="mt-4 space-x-6">
           <ButtonPrimary
             // className="w-10 h-10 bg-primary-000"
             onClick={(e) => handleClickSubmitForm(e)}
@@ -91,10 +82,10 @@ const AddToFavouritesFolderModal = ({ id, show, onCloseModalReportItem }) => {
 
   return (
     <NcModal
-      // className="h-140 w-80 my-5 overflow-hidden text-left align-middle transition-all transform bg-white border border-black border-opacity-5 shadow-xl rounded-2xl sm:my-8 dark:bg-neutral-800 dark:border-neutral-700 text-neutral-900 dark:text-neutral-300"
+      className="h-140 w-80 my-5 overflow-visible text-left align-middle transition-all transform bg-white border border-black border-opacity-5 shadow-xl rounded-2xl sm:my-8 dark:bg-neutral-800 dark:border-neutral-700 text-neutral-900 dark:text-neutral-300"
       isOpenProp={show}
       onCloseModal={onCloseModalReportItem}
-      contentExtraClass="max-w-screen-sm h-140 w-80"
+      contentExtraClass="h-[32rem] w-1/3"
       renderContent={renderContent}
       renderTrigger={renderTrigger}
       modalTitle="Create Folder"

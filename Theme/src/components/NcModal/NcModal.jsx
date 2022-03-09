@@ -60,7 +60,7 @@ const NcModal = ({
           className="fixed inset-0 z-50 overflow-y-auto"
           onClose={closeModal}
         >
-          <div className="min-h-screen px-1 text-center md:px-4 ">
+          <div className="min-h-screen px-1 text-center md:px-4">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-75"
@@ -89,8 +89,8 @@ const NcModal = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
+              {/* dialog body */}
               <div
-              
                 className={`inline-block w-full my-5 overflow-hidden text-left align-middle transition-all transform bg-white border border-black border-opacity-5 shadow-xl rounded-2xl sm:my-8 dark:bg-neutral-800 dark:border-neutral-700 text-neutral-900 dark:text-neutral-300  ${contentExtraClass}`}
               >
                 <div className="py-4 px-6 text-center relative border-b border-neutral-100 dark:border-neutral-700 md:py-5">
