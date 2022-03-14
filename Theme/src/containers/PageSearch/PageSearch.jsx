@@ -20,7 +20,8 @@ import AutoCompleteSearch from "../SearchBox/autoCompleteSearchbox";
 import DateRangeCalender from "../../components/DateRangeCalender/DateRangeCalender";
 import DateRangeDropDown from "../../components/DateRangeCalender/DateRangeDropDown";
 import Pagination from "../../components/Pagination/Pagination";
-
+import { useDispatch, useSelector } from "react-redux";
+import { addpost, removePost } from "../../app/posts/posts";
 export const PageSearchProps = {
   className: String,
 };
@@ -76,19 +77,21 @@ const query = gql`
           ... on ResultHit {
             id
             fields {
-              article_length
-              category
-              authors
-              date_download
-              language
-              image_url
-              source_domain
-              facebook_shares
-              twitter_shares
-              maintext
-              sentiment
-              source_domain
-              title
+            article_length
+            authors
+            category
+            date_download
+            facebook_shares
+            twitter_shares
+            date_publish
+            image_url
+            language
+            maintext
+            readtime
+            source_domain
+            title
+            url
+            sentiment
               __typename
             }
             __typename
@@ -127,7 +130,6 @@ const TABS = ["Articles", "Categories", "Tags", "Authors"];
 
 const PageSearch = ({ className = "" }) => {
   ////////////////////////////////graph ql work////////////////////////////
-
   const variables = useSearchkitVariables();
   const { data, error, loading } = useQuery(query, { variables });
 
@@ -143,15 +145,14 @@ const PageSearch = ({ className = "" }) => {
   //   console.log(data.results?.hits.items[0].fields.twitter_shares);
   // }
 
-
   return (
-    < >
-      <div  className={`nc-PageSearch ${className}`} data-nc-id="PageSearch">
+    <>
+      <div className={`nc-PageSearch ${className}`} data-nc-id="PageSearch">
         <Helmet>
           <title>Nc || Search Page Template</title>
         </Helmet>
 
-        <div  className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
+        <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
           <AutoCompleteSearch />
 
           {/* <div className="w-full text-sm text-left mt-4 text-neutral-500 dark:text-neutral-300">
@@ -196,14 +197,12 @@ const PageSearch = ({ className = "" }) => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-8 mt-8 lg:mt-10">
                 {data ? (
                   data.results?.hits.items.map((value, index) => {
-                    console.log(value);
-
                     return (
                       <Card11
                         key={index}
                         post={value.fields}
                         cardvalue={value}
-                        />
+                      />
                     );
                   })
                 ) : (

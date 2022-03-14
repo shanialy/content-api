@@ -5,6 +5,7 @@ import darkmodeReducer from "./darkmode/darkmode";
 import pagesReducer from "./pages/pages";
 import mediaRunningReducer from "./mediaRunning/mediaRunning";
 import cardSlice from "./cardValue/cardSlice";
+import postsReducer from "./posts/posts"
 
 const rootReducers = {
   bookmark: bookmarkReducer,
@@ -13,7 +14,8 @@ const rootReducers = {
   commentLikes: commentLikesReducer,
   pages: pagesReducer,
   mediaRunning: mediaRunningReducer,
-  card : cardSlice
+  card : cardSlice,
+  // posts: postsReducer,
 };
 
 export default rootReducers;

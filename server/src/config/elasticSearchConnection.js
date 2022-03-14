@@ -4,7 +4,11 @@ import elasticsearch from "elasticsearch";
 export const index = "content_system_v1";
 const type = "_doc";
 
-const host = "http://43.251.253.107:1200";
+// const host = "http://43.251.253.107:1200";
+
+
+const host = "https://s0oskhnou6:l7y6497d4v@contentgizmo-9661164665.us-east-1.bonsaisearch.net:443";
+
 export const client = new elasticsearch.Client({
   host: host,
 });

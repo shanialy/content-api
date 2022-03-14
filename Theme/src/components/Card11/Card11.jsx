@@ -7,8 +7,10 @@ import PostCardLikeAndComment from "../../components/PostCardLikeAndComment/Post
 import PostCardMeta from "../../components/PostCardMeta/PostCardMeta";
 import PostFeaturedMedia from "../../components/PostFeaturedMedia/PostFeaturedMedia";
 // import { useAppDispatch } from "../../app/hooks";
-import { useDispatch } from "react-redux";
 import { cardLoadingData } from "./SingleCard";
+import { addpost } from "../../app/posts/posts";
+import { useDispatch } from "react-redux";
+import { add } from "date-fns";
 
 const Card11 = ({
   className = "h-full",
@@ -17,9 +19,9 @@ const Card11 = ({
   hiddenAuthor = false,
   ratio = "aspect-w-4 aspect-h-3",
 }) => {
-  //getting id from Page search
-
   const dispatch = useDispatch();
+
+  //getting id from Page search
 
   cardLoadingData(dispatch, cardvalue);
 
@@ -39,6 +41,16 @@ const Card11 = ({
 
   //useState hook from the theme
   const [isHover, setIsHover] = useState(false);
+
+  // handler
+  const setPostToRedux = (e) => {
+    try {
+      e.preventDefault();
+      dispatch(addpost({ id, ...post }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   //returning of fuction starts here
   return (
@@ -75,10 +87,17 @@ const Card11 = ({
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           </Link>
         </h2>
-        <div className="flex items-end justify-between mt-auto">
-            <PostCardLikeAndComment className="relative" postData={post} />
+        <div
+          style={{ border: "5px solid green" }}
+          className="flex items-end justify-between mt-auto"
+        >
+          <PostCardLikeAndComment
+            className="relative"
+            setPostToRedux={setPostToRedux}
+            postData={post}
+          />
 
-            <PostCardSaveAction className="relative" postData={post} />
+          <PostCardSaveAction className="relative" postData={post} />
         </div>
       </div>
     </div>

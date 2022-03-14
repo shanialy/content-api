@@ -17,6 +17,7 @@ const PostCardLikeAndComment = ({
   itemClass = "px-3 h-8 text-xs",
   hiddenCommentOnMobile = true,
   postData,
+  setPostToRedux,
   onClickLike = () => {},
 }) => {
 
@@ -51,7 +52,7 @@ const PostCardLikeAndComment = ({
         }  ${itemClass}`}
       />
 
-      <PostCardAddtoFavouritesFolderBtn/>
+      <PostCardAddtoFavouritesFolderBtn setPostToRedux={setPostToRedux}/>
 
       
     </div>

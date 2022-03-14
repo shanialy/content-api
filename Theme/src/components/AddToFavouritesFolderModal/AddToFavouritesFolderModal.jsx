@@ -6,27 +6,26 @@ import ButtonPrimary from "../Button/ButtonPrimary";
 import ButtonSecondary from "../Button/ButtonSecondary";
 import { RadioGroup } from "@headlessui/react";
 import twFocusClass from "../../utils/twFocusClass";
-import { useCreateFolderMutation } from "../../app/Api/contentApi";
-import ArchiveFilterListBox from "../ArchiveFilterListBox/ArchiveFilterListBox";
+import {
+  useCreateFolderMutation,
+  useGetAllFoldersQuery,
+} from "../../app/Api/contentApi";
 import Input from "../Input/Input";
 import ScrollableSelectBox from "../ScrollableSelectBox/ScrollableSelectBox";
+import { useSelector } from "react-redux";
 
 const AddToFavouritesFolderModal = ({ id, show, onCloseModalReportItem }) => {
+  // local/global states
   const textareaRef = useRef(null);
-  const history = useHistory();
   const [folderName, setFolderName] = useState();
-  const [createFolder, createFolderObj] = useCreateFolderMutation();
+  const [folderId, setFolderId] = useState();
   const [showAddFolder, setShowAddFolder] = useState(false);
-  useEffect(() => {
-    if (show) {
-      setTimeout(() => {
-        const element = textareaRef.current;
-        if (element) {
-          element.focus();
-        }
-      }, 400);
-    }
-  }, [show]);
+  const selectedPost = useSelector((state)=> state.posts.post);
+
+  // RTK query
+  const [createFolder, createFolderObj] = useCreateFolderMutation();
+  const getAllFolders = useGetAllFoldersQuery();
+
 
   // handlers
   const handleClickSubmitForm = (e) => {
@@ -41,17 +40,37 @@ const AddToFavouritesFolderModal = ({ id, show, onCloseModalReportItem }) => {
     setShowAddFolder(true);
   };
 
+// useEffects
+  useEffect(() => {
+    if (show) {
+      setTimeout(() => {
+        const element = textareaRef.current;
+        if (element) {
+          element.focus();
+        }
+      }, 400);
+    }
+  }, [show]);
+
+  useEffect(()=>{
+// RTK query code to add post to favouritesFolder
+  },[folderId]);
+
+  console.log(folderId);
+  console.log(selectedPost);
+
   const renderContent = () => {
     return (
       <form action="#">
-        {/* TEXAREA MESSAGER */}
-
-        <ScrollableSelectBox />
+        <ScrollableSelectBox
+          foldersList={getAllFolders?.data}
+          setFolderId={setFolderId}
+        />
 
         {!showAddFolder ? (
           <ButtonPrimary
             onClick={(e) => handelShowAddFolder(e)}
-            className="bg-green-500 hover:bg-green-600 rounded-lg h-11 mt-3"
+            className="bg-green-400 hover:bg-green-500 rounded-sm h-11 mt-3"
           >
             Add Folder
           </ButtonPrimary>
@@ -63,7 +82,7 @@ const AddToFavouritesFolderModal = ({ id, show, onCloseModalReportItem }) => {
               <Input
                 type="text"
                 placeholder="Enter Folder Name"
-                className="mt-1 rounded-lg border-slate-300"
+                className="mt-1 rounded-md border-slate-400"
                 required={true}
                 id="report-message"
                 onChange={(e) => setFolderName(e.target.value)}
