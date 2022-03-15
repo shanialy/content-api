@@ -5,14 +5,31 @@ import { CheckIcon } from "@heroicons/react/solid";
 import ButtonDropdown from "../../components/ButtonDropdown/ButtonDropdown";
 import { useSearchkit } from "@searchkit/client";
 
-const ArchiveFilterListBox = ({ className = "", lists }) => {
+const LanguagesFilterBox = ({ className = "", lists }) => {
+  console.log("lists", lists);
   const api = useSearchkit();
   const [selected, setSelected] = useState(lists[0]);
   useEffect(() => {
-    api.setSortBy(selected.id);
-    api.setPage({ size: 10, from: 0 });
+    api.toggleFilter({
+      identifier: selected.identifier,
+      value: selected.label,
+    });
+    api.setPage({ size: 20, from: 0 });
     api.search();
   }, [selected]);
+  //   if (selected.label == "All Languages") {
+  //     console.log("...");
+  //   } else {
+  //     console.log(selected.label, selected.identifier);
+  //     api.toggleFilter({
+  //       identifier: selected.identifier,
+  //       value: selected.label,
+  //     });
+  //     api.setPage({ size: 20, from: 0 });
+  //     api.search();
+  //   }
+  // }, [selected]);
+
   return (
     <div
       className={`nc-ArchiveFilterListBox ${className}`}
@@ -68,4 +85,4 @@ const ArchiveFilterListBox = ({ className = "", lists }) => {
   );
 };
 
-export default ArchiveFilterListBox;
+export default LanguagesFilterBox;

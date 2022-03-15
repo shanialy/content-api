@@ -6,6 +6,8 @@ import Label from "../../components/Label/Label";
 import WidgetPosts from "../../components/WidgetPosts/WidgetPosts";
 import { DEMO_POSTS } from "../../data/posts";
 import Chip from "../../components/chip/chip";
+import { set } from "date-fns";
+// import InputAutoComplete from "../../components/InputAutoComplete/InputAutoComplete";
 
 const widgetPostsDemo = DEMO_POSTS.filter((_, i) => i > 2 && i < 7);
 
@@ -186,14 +188,8 @@ const TopicSubmitPost = () => {
             Each result <b>MUST ALSO</b> contain <b>ONE</b> one of these
             keywords
           </p>
-          <Input
-            className="mt-1 rounded border-slate-300"
-            placeholder="Enter keywords or phrases, e.g tips, trends..."
-            onChange={(e) => setMust_also_keywords_value(e.target.value)}
-            onKeyDown={(e) => must_also_keywords_addItem(e)}
-            value={must_also_keywords_value}
-          />
-{/* 
+
+
           {/ CHIPS /} */}
           <div className="flex flex-wrap mt-1.5">
             {must_also_keywords_list.map((val, index) => {
@@ -221,7 +217,7 @@ const TopicSubmitPost = () => {
             onKeyDown={(e) => must_not_contains_keywords_addItem(e)}
             value={must_not_contains_keywords_value}
           />
-          {/* {/ CHIPS /} */}
+
           <div className="flex flex-wrap mt-1.5">
             {must_not_contains_keywords_list.map((val, index) => {
               return (
@@ -242,6 +238,7 @@ const TopicSubmitPost = () => {
           <p className="mt-2 text-base text-neutral-500 font-medium">
             <b>EXCLUDE</b> results from these domains
           </p>
+
           <Input
             className="mt-1 rounded border-slate-300"
             placeholder="Enter domains that you think are giving irrelevant, e.g job, course..."
@@ -253,6 +250,7 @@ const TopicSubmitPost = () => {
           <p className="mt-2 text-base text-neutral-500 font-medium">
             <b>LIMIT</b> results to these domais only
           </p>
+
           <Input
             className="mt-1 rounded border-slate-300"
             placeholder="Enter domains to see results from only these sites... e.g cnn.com, bbc.com"

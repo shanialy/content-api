@@ -23,6 +23,7 @@ const PostCardMeta = ({
 
 
 
+
  function relativeTime(date_download) {
     try {
       let ddate = dateFormat(date_download, "isoDateTime");
@@ -35,9 +36,6 @@ const PostCardMeta = ({
       console.log(err);
     }
   }
-
- 
-
 
 
  var [emoji , setEmoji] = useState(sentiment)

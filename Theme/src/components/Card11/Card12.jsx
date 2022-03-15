@@ -54,7 +54,7 @@ const Card12 = ({
 
   
    
-      {/* {/ Passing the post props in PostCardMeta component  /} */}
+
 
       <div className="p-4 flex flex-col flex-grow space-y-3">
 

@@ -9,6 +9,7 @@ import {
   useGetAllFoldersQuery,
   useGetAllFavouritePostsQuery,
 } from "../../app/Api/contentApi";
+
 import Card12 from "../../components/Card11/Card12"
 
 const TopicsPage = ({ className = "" }) => {
@@ -23,10 +24,10 @@ const TopicsPage = ({ className = "" }) => {
   // handlers
   const closeModal = () => setshowModal(false);
   const showModalOnClick = () => setshowModal(true);
+  const cardData = useGetAllFavouritePostsQuery(folderID);
 
 
   return (
-    
     <div className={`nc-PageDashboard ${className}`} data-nc-id="PageDashboard">
       <Helmet>
         <title>Curated Topics</title>
@@ -37,6 +38,7 @@ const TopicsPage = ({ className = "" }) => {
         heading="Dash board"
       >
         <div className="flex flex-col space-y-8 xl:space-y-0 xl:flex-row">
+
 
           {/* {/ SIDEBAR /} */}
           <div className="flex-shrink-0 max-w-xl xl:w-70 xl:pr-8">
@@ -55,7 +57,7 @@ const TopicsPage = ({ className = "" }) => {
               </li>
             </ul>
 
-            {/* {/ FAVOURITE FOLDERS SECTION /} */}
+
             <ul className="text-base space-y-1 text-neutral-6000 dark:text-neutral-400">
               <li className="flex flex-row justify-start items-center">
                 <p className="flex px-6 py-2.5 font-medium rounded-lg text-[#666666]">
@@ -69,10 +71,7 @@ const TopicsPage = ({ className = "" }) => {
                 </button>
               </li>
 
-              
-
               {getAllFolders.data?.map(({ folderName, _id }, index) => {
-                
                 return (
                   <li key={index}>
                     <NavLink
@@ -82,18 +81,14 @@ const TopicsPage = ({ className = "" }) => {
                       to={`${url}/favourite-posts/${_id}`}
                       onClick={() => setFolderID(_id)}
                     >
-                      {/* {/ <span className="w-8 mr-1">{emoij}</span>  /} */}
+
                       {folderName}
                     </NavLink>
                   </li>
                 );
               })}
-
-      
             </ul>
           </div>
-          
-          
 
           <div className="border border-neutral-100 dark:border-neutral-800 md:hidden"></div>
           <div className="flex-grow">
@@ -102,10 +97,8 @@ const TopicsPage = ({ className = "" }) => {
               onCloseModalReportItem={closeModal}
             />
 
-
             <Switch>
 
-              
               <Route
                 path={`${path}/favourite-posts/:id`}
                 render={() => {
@@ -113,7 +106,7 @@ const TopicsPage = ({ className = "" }) => {
                 }}
               />
 
-              {/* {/ SUBMIT POST PAGE ROUTE /} */}
+
               <Route
                 exact
                 path={`${path}/submit-post`}
@@ -123,26 +116,18 @@ const TopicsPage = ({ className = "" }) => {
             </Switch>
 
             <div className="grid grid-cols-2 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-8 mt-8 lg:mt-10">
-           {
-             cardData?.data?.map((value ,index)=>{
-               console.log(value)
-               return(
-                 <>
-                 <Card12 key={index} cardItems={value}/>
-                 </>
-               )  
-           })
-           }
-           </div>
-         
-
-        
+              {cardData?.data?.map((value, index) => {
+                console.log(value);
+                return (
+                  <>
+                    <Card12 key={index} cardItems={value} />
+                  </>
+                );
+              })}
+            </div>
           </div>
         </div>
-
       </LayoutPage>
-      
-      
     </div>
   );
 };

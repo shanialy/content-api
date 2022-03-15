@@ -1,10 +1,11 @@
 import React from "react";
-import ModalCategories from "./ModalCategories";
 import { DEMO_CATEGORIES, DEMO_TAGS } from "../../data/taxonomies";
 import LoadingVideo from "../../components/LoadingVideo/LoadingVideo";
 import ModalTags from "./ModalTags";
 import ArchiveFilterListBox from "../../components/ArchiveFilterListBox/ArchiveFilterListBox";
+import LanguagesFilterBox from "../../components/LanguagesFilterBox/LanguagesFilterBox";
 import { Helmet } from "react-helmet";
+
 import NcLink from "../../components/NcLink/NcLink";
 import { gql, useQuery } from "@apollo/client";
 import { useSearchkitVariables, useSearchkit } from '@searchkit/client'
@@ -13,6 +14,12 @@ import {
 } from '@searchkit/client'
 
 import Card11 from "../../components/Card11/Card11";
+
+import DateRangeCalender from "../../components/DateRangeCalender/DateRangeCalender";
+import Pagination from "../../components/Pagination/Pagination";
+import { useLocation } from "react-router-dom";
+import SearchBoxMain from "../../components/SearchBoxMain/SearchBoxMain";
+
 import AutoCompleteSearch from "../SearchBox/autoCompleteSearchbox";
 import DateRangeDropDown from "../../components/DateRangeCalender/DateRangeDropDown";
 import CustomPagination from "../../components/Pagination/CustomPagination.jsx";
@@ -39,6 +46,9 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
           dateMax
           __typename
         }
+        sortOptions {
+          id
+          label
 
         ... on ValueSelectedFilter {
           value
@@ -62,6 +72,7 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
           ... on ResultHit {
             id
             fields {
+
             article_length
             authors
             category
@@ -105,14 +116,18 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
 `
 
 const FILTERS = [
-  { name: "Most Recent" },
-  { name: "Curated by Admin" },
-  { name: "Most Appreciated" },
-  { name: "Most Discussed" },
-  { name: "Most Viewed" },
+  { label: "Relevance", id: "relevance" },
+  { label: "Facebook Shares", id: "facebook_shares" },
+  { label: "Twitter Shares", id: "twitter_shares" },
+  { label: "Date Download", id: "date_download" },
 ];
 
 
+
+const PageSearch = ({ className = "" }, data1) => {
+  // cardCategory data from searchPage
+  const location = useLocation();
+  var labelfromcatCard = location.state;
 
 const PageSearch = ({ className = "" }) => {
 
@@ -131,6 +146,30 @@ const PageSearch = ({ className = "" }) => {
   if (loading) {
    <div style={{display : "flex", alignItems : "center"}}> <LoadingVideo /></div> ;
   }
+  console.log(data);
+  if (data) {
+    var languageslist = [];
+    {
+      data?.results?.facets.map((items) => {
+        if (items.identifier == "language") {
+          languageslist = items?.entries?.map((item) => ({
+            label: item.label,
+            identifier: "language",
+            id: item.label,
+          }));
+        }
+        languageslist = [
+          ...languageslist,
+          {
+            label: "All Languages",
+            identifier: "language",
+            id: "All Languages",
+          },
+        ];
+      });
+    }
+  }
+
 
   return (
     <>
@@ -141,6 +180,9 @@ const PageSearch = ({ className = "" }) => {
         <Helmet>
           <title>Nc || Search Page Template</title>
         </Helmet>
+        {/* AutoCompleteSearchBox */}
+        <SearchBoxMain />
+
 
         <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
           <AutoCompleteSearch />
@@ -167,7 +209,13 @@ const PageSearch = ({ className = "" }) => {
           <main>
             <div className="flex flex-col sm:items-center sm:justify-between sm:flex-row">
               <div className="flex space-x-2.5">
-                <ModalCategories categories={DEMO_CATEGORIES} />
+                {/* Languages */}
+
+                {languageslist && languageslist.length > 0 ? (
+                  <LanguagesFilterBox lists={languageslist} />
+                ) : (
+                  ""
+                )}
 
                 <ModalTags tags={DEMO_TAGS} />
 

@@ -4,15 +4,12 @@ import SocialsShare from "../../components/SocialsShare/SocialsShare";
 import BookmarkContainer from "../BookmarkContainer/BookmarkContainer";
 import { PostDataType } from "../../data/types";
 
-export const SingleMetaActionProps =  {
+export const SingleMetaActionProps = {
   className: String,
-  meta: PostDataType
-}
+  meta: PostDataType,
+};
 
-const SingleMetaAction = ({
-  className = "mt-5 sm:mt-8",
-  meta,
-}) => {
+const SingleMetaAction = ({ className = "mt-5 sm:mt-8", meta }) => {
   const { id } = meta;
 
   return (
@@ -24,7 +21,7 @@ const SingleMetaAction = ({
           <SocialsShare
           cardData={meta}
             className="flex space-x-2"
-          
+
             itemClass="w-9 h-9 bg-neutral-100 text-lg hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-300"
           />
           <div className="border-l border-neutral-300 dark:border-neutral-700 h-6"></div>

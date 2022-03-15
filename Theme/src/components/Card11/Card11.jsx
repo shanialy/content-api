@@ -30,6 +30,7 @@ var { path } = useRouteMatch();
  const{ id } = cardvalue
  const history = useHistory()
 
+
   const { title, date_download , url } = cardvalue.fields;
   
 
@@ -100,7 +101,7 @@ var { path } = useRouteMatch();
         </Link>
       </div>
 
-      {/* {/ Passing the post props in PostCardMeta component  /} */}
+
 
       <div className="p-4 flex flex-col flex-grow space-y-3">
         {!hiddenAuthor ? (
@@ -110,6 +111,7 @@ var { path } = useRouteMatch();
         )}
 
         <h2 className="nc-card-title block text-base font-semibold text-neutral-900 dark:text-neutral-100 ">
+
 
           {/* {/ // putting &nbsp so that we can add somespace temporarely /} */}
 
