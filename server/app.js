@@ -25,7 +25,7 @@ app.use(cors({ origin: (origin, callback) => callback(null, true), credentials: 
 
 // database connections
 connectDatabase();
-checkConnection();
+// checkConnection();
 
 // api routes
 app.use(express.json());

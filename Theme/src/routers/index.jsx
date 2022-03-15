@@ -131,7 +131,6 @@ const Routes = () => {
       <Route path={"/search-v2"} component={PageSearchV2} />
       <Route path={"/content-feed"} component={PageContentFeed} />
       <Route path={"/analytics"} component={Analytics} />
-      <Route path={"/:id"} component={SingleCard} />
       {/* <Route path={"/category/:label"} component={CategoryCardShow}/> */}
       <Route path={"/topics"} component={TopicsPage} />
 

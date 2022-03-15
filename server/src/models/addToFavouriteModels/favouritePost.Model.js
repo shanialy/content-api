@@ -6,6 +6,11 @@ const favouritePostsSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "favouritesFolderModel"
     },
+    
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: "userModel"
+    },
 
     index: {
         type: String,
