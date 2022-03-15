@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 // import Page404 from "containers/Page404/Page404";
 // import PageArchive from "containers/PageArchive/PageArchive";
 // import PageAuthor from "containers/PageAuthor/PageAuthor";
-import SingleCard from "../components/Card11/SingleCard";
+// import SingleCard from "../components/Card11/SingleCard";
 // import CategoryCardShow from "../components/CategoryCardShow/CategoryCardShow";
 // import PageSingle from "containers/PageSingle/PageSingle";
 // import PageSingleHasSidebar from "containers/PageSingle/PageSingleHasSidebar";
@@ -44,6 +44,7 @@ import PageContentFeed from "../containers/PageContentFeed/PageContentFeed";
 import PageHome from "../containers/PageHome/PageHome";
 import Analytics from "../containers/Analytics/Analytics"
 import TopicsPage from "../containers/TopicsPage/TopicsPage"
+import PageSingleTemplate3 from "../containers/PageSingle/PageSingleTemp3";
 
 // export const pages = [
 //   { path: "/", exact: true, component: PageHome },
@@ -123,17 +124,17 @@ const Routes = () => {
 
       <Switch>        
       <Route exact path={"/"} component={PageHome}/>
-      <Route path={"/login"} component={PageLogin} /> 
-      <Route path={"/signup"} component={PageSignUp} /> 
-      <Route path={"/forgot-pass"} component={PageForgotPass} /> 
-      <Route path={"/dashboard"} component={PageDashboard} />
-      <Route path={"/search"} component={PageSearch} />
-      <Route path={"/search-v2"} component={PageSearchV2} />
-      <Route path={"/content-feed"} component={PageContentFeed} />
-      <Route path={"/analytics"} component={Analytics} />
-      <Route path={"/:id"} component={SingleCard} />
+      <Route exact path={"/login"} component={PageLogin} /> 
+      <Route exact path={"/signup"} component={PageSignUp} /> 
+      <Route exact path={"/forgot-pass"} component={PageForgotPass} /> 
+      <Route exact path={"/dashboard"} component={PageDashboard} />
+      <Route exact path={"/search"} component={PageSearch} />
+      <Route exact path={"/search-v2"} component={PageSearchV2} />
+      <Route exact path={"/content-feed"} component={PageContentFeed} />
+      <Route exact path={"/analytics"} component={Analytics} />
+      <Route exact path={"/search/mainpostpage/:id"} component={PageSingleTemplate3} />
       {/* <Route path={"/category/:label"} component={CategoryCardShow}/> */}
-      <Route path={"/topics"} component={TopicsPage} />
+      <Route  exact path={"/topics"} component={TopicsPage} />
 
         
         {/* <Route component={Page404} />  */}

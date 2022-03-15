@@ -3,7 +3,7 @@ const redisPort = process.env.REDIS_PORT || 6379;
 
 const esRedisGlobalKey = "ES_Global";
 
-const url = `redis://43.251.253.107:1500`;
+const url = `redis://Cognilium:Pta!23456@redis-10167.c265.us-east-1-2.ec2.cloud.redislabs.com:10167`;
 
 const client = redis.createClient({
   url,

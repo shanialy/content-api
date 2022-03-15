@@ -1,14 +1,6 @@
-import React, { FC } from "react";
-import PostActionDropdown from "../../components/PostActionDropdown/PostActionDropdown";
-import PostCardLikeAndComment from "../../components/PostCardLikeAndComment/PostCardLikeAndComment";
+import React from "react";
 import { SOCIALS_DATA } from "../../components/SocialsShare/SocialsShare";
-import BookmarkContainer from "../BookmarkContainer/BookmarkContainer";
 import NcDropDown from "../../components/NcDropDown/NcDropDown";
-
-// export interface SingleMetaAction2Props {
-//   className?: string;
-//   meta: PostDataType;
-// }
 
 const SingleMetaAction2= ({
   className = "",

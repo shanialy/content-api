@@ -1,0 +1,47 @@
+
+  .react-pagination-js-bootstrap .is-active {
+      border-radius: 75px;
+      padding: 0px 10;
+      background-color: #4e46e3;
+  }
+
+  .react-pagination-js-bootstrap .is-active a{
+    border-radius: 75px;
+    padding: 0px 10;
+    background-color: #4e46e3;
+    color: white;
+}
+
+  a {
+    color: black;
+  }
+
+  .react-pagination-js-bootstrap .page {
+      border-radius: 75px;
+      padding: -1px 8px;
+      background-color: white;
+      margin-right: 4px;
+      font-size: medium;
+      font-weight: 600;
+  }
+
+
+
+  .react-pagination-js-bootstrap .pageElli{
+      border-radius: 70px;
+      padding: 0 9px;
+      background-color: white;
+      margin-right: 4px;
+      font-size: medium;
+      font-weight: 600;
+  }
+
+  .react-pagination-js-bootstrap .page:first-child{
+    border-radius: 42px;
+    margin-right: 15px;
+  }
+
+  .react-pagination-js-bootstrap .page:last-child{
+    border-radius: 42px;
+    margin-left: 15px;
+  }

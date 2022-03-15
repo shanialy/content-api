@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/solid";
-// import { ListBoxItemType } from "components/NcListBox/NcListBox";
 import ButtonDropdown from "../../components/ButtonDropdown/ButtonDropdown";
 import { useGetAllFoldersQuery } from "../../app/Api/contentApi";
 

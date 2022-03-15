@@ -55,19 +55,16 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
         ... on ResultHit {
           id
           fields {
-            article_length
-            category
-            authors
-            date_download
-            language
-            image_url
-            source_domain
-            facebook_shares
-            twitter_shares
-            maintext
-            sentiment
-            source_domain
-            title
+  article_length
+  category
+  authors
+  date_download
+  language
+  facebook_shares
+  twitter_shares
+  maintext
+  source_domain
+  title
             __typename
           }
           __typename
@@ -108,7 +105,7 @@ const ModalCategories= () => {
 
   if(error){console.log("An error Occured" + error)}
   
-  console.log(data)
+
   
  
 
@@ -127,7 +124,7 @@ const ModalCategories= () => {
 
   return (
     <div className="nc-ModalCategories">
-    {/* {/ passing the renderContentfunction to NcModal /} */}
+    
       <NcModal
         triggerText={
           <span>
