@@ -1,4 +1,4 @@
-import react from "react";
+import react, { useState } from "react";
 const PageContentFeed = () => {
   return (
     <center>
@@ -8,3 +8,4 @@ const PageContentFeed = () => {
 };
 
 export default PageContentFeed;
+

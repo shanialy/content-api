@@ -14,6 +14,7 @@ import logger from "redux-logger";
 import rootReducers from "./rootReducers"
 
 import { contentApi } from "./Api/contentApi";
+import postsReducer from "./posts/posts"
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -30,6 +31,7 @@ const middlewareLogger = !!isDev ? logger : [];
 
 export const store = configureStore({
     reducer: {
+        posts:postsReducer,
         [contentApi.reducerPath]: contentApi.reducer,
         persistedReducer
     },

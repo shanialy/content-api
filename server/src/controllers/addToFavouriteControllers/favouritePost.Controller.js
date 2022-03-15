@@ -14,10 +14,12 @@ const postFavouritePost = async (req, res) => {
     try {
         const post = new favouritePostsModel(req.body);
         post.folderId = req.params.id;
+        //  post.userId = req.user.id;
+        post.userId = "622a0c7b24abda1ef66718c7";
         await post.save();
         return res.status(201).json({ successMsg: "Added to favourite folder" }); //201 for created
     } catch (err) {
-        res.status(500).json({ errorMsg: "Server Error" }); //409 for conflict
+        res.status(500).json({ errorMsg: "Server Error" }); //500 for server error
         console.log("ERROR OCCOURED WHILE ADDING POST TO FAVOURITES FOLDER", err);
     }
 
@@ -67,6 +69,28 @@ const getAllPosts = async (req, res,) => {
     }
 };
 
+// route:  GET /api/favouritePosts/all_posts
+// desc:   reading all posts from favourite-posts model by User-id
+// access: PROTECTED
+const getAllPostsByUserId = async (req, res) => {
+    try {
+        //  const userId = req.user.id;
+        const userId = "622a0c7b24abda1ef66718c7";
+        const posts = await favouritePostsModel.find({ userId: userId });
+
+        if (!posts) {
+            return res.status(404).json({ errorMsg: "Posts does not exist" })
+        }
+
+        return res.status(200).json(posts)
+
+    } catch (err) {
+        res.status(500).json({ errorMsg: "Server error" }) //500 for server error
+        console.log("ERROR OCCOURED WHILE GETTING POSTs", err);
+    }
+
+};
+
 
 // route:  DELETE /api/favouritePosts/post/:id
 // desc:   Deleting a post by post id
@@ -113,8 +137,8 @@ const updatePost = async (req, res) => {
         return res.status(400).json(validationErrors.array()[0]) // 400 for bad request
     }
 
-    const postId = req.params.id;
     try {
+        const postId = req.params.id;
         await favouritePostsModel.updateOne({ _id: postId }, { $set: req.body });
         return res.status(200).json({ successMsg: "Post updated successfully" });
 
@@ -132,5 +156,6 @@ export {
     getAllPosts,
     deleteSinglePost,
     deleteAllPosts,
-    updatePost
+    updatePost,
+    getAllPostsByUserId
 };

@@ -89,15 +89,10 @@ const SectionSliderNewCategories = ({
           })}
         </div>
       ) : (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <LoadingVideo />
-        </div>
+
+        <div style={{ display: "flex",
+  justifyContent: "center",
+  alignItems: "center"}}> <LoadingVideo /></div> 
       )}
     </>
   );

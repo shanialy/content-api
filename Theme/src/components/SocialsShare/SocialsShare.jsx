@@ -1,10 +1,23 @@
 import React, { FC } from "react";
-// import {
-//   FacebookShareButton,
-//   LinkedinShareButton,
-//   TwitterShareButton,
-// } from "react-share";
-// import { useSelector } from "react-redux";
+
+import {
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+} from "react-share";
+
+// export interface SocialsShareProps {
+//   className?: string;
+//   itemClass?: string;
+// }
+
+// export interface SocialType {
+//   id: string;
+//   name: string;
+//   icon: string;
+//   href: string;
+// }
+
 
 const SocialsShare = () =>{
   return(
@@ -21,13 +34,14 @@ const socials = [
 
 export const SOCIALS_DATA = socials;
 
-// const SocialsShare = ({
-//   className = "grid gap-[6px]",
-//   itemClass = "w-7 h-7 text-base hover:bg-neutral-100",
-// }) => {
-//   const cardData = useSelector((state) => state.persistedReducer.card.cardData);
 
-//   let socialurl = cardData.fields.url;
+const SocialsShare = ({
+  cardData,
+  className = "grid gap-[6px]",
+  itemClass = "w-7 h-7 text-base hover:bg-neutral-100",
+}) => {
+
+let socialurl = cardData.fields.url
 
 //   const renderItem = () => {
 //     return (

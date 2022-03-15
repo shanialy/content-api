@@ -1,20 +1,8 @@
-import React, { FC, useRef } from "react";
+import React, { useRef } from "react";
 import NcImageCardSearch from "../NcImage/NcImageCardSearch";
-// import { PostDataType } from "data/types";
-import GallerySlider from "./GallerySlider";
-import MediaVideo from "./MediaVideo";
-import PostTypeFeaturedIcon from "../PostTypeFeaturedIcon/PostTypeFeaturedIcon";
-import MediaAudio from "./MediaAudio";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
-import LoadingVideo from "../LoadingVideo/LoadingVideo";
 
-// export interface PostFeaturedMediaProps {
-//   className?: string;
-//   post: PostDataType;
-//   isHover?: boolean;
-// }
 
-// CHECK FOR VIDEO CARD ON VIEW
 let PREV_RATIO = 0.0;
 
 const PostFeaturedMedia = ({
@@ -60,11 +48,11 @@ const PostFeaturedMedia = ({
     <div
       className={`nc-PostFeaturedMedia relative ${className}`}
       data-nc-id="PostFeaturedMedia"
-     // ref={videoRef}
+ 
     >
 
       <NcImageCardSearch containerClassName="absolute inset-0" src={image_url} source_domain={source_domain} date_download={!date_download? date_publish : date } />
-     {/* // {renderContent()} */}
+    
     </div>
   );
 };

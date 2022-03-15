@@ -3,7 +3,7 @@ post http://localhost:7777/api/favouritesFolder/
 Content-Type: application/json
 
 {
-    "folderName": "Articles"
+    "folderName": "Pakistan"
 }
 
 ###

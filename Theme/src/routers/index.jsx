@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import SingleCard from "../components/Card11/SingleCard";
+
 import PageSearch from "../containers/PageSearch/PageSearch";
 import ScrollToTop from "./ScrollToTop";
 import Footer from "../components/Footer/Footer";
@@ -43,6 +44,7 @@ const Routes = () => {
         <Route path={"/topics"} component={TopicsPage} />
       </Switch>
       <Footer />
+
     </BrowserRouter>
   );
 };

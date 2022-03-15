@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import PostCardCommentBtn from "../../components/PostCardCommentBtn/PostCardCommentBtn";
 import PostCardLikeContainer from "../../containers/PostCardLikeContainer/PostCardLikeContainer";
+import PostCardAddtoFavouritesFolderBtn from "../PostCardAddtoFavouritesFolderBtn/PostCardAddtoFavouritesFolderBtn"
 // import { PostDataType } from "data/types";
-
 // export interface PostCardLikeAndCommentProps {
 //   className?: string;
 //   itemClass?: string;
@@ -11,11 +11,13 @@ import PostCardLikeContainer from "../../containers/PostCardLikeContainer/PostCa
 //   onClickLike?: (id: PostDataType["id"]) => void;
 // }
 
+
 const PostCardLikeAndComment = ({
   className = "",
   itemClass = "px-3 h-8 text-xs",
   hiddenCommentOnMobile = true,
   postData,
+  setPostToRedux,
   onClickLike = () => {},
 }) => {
 
@@ -26,10 +28,11 @@ const PostCardLikeAndComment = ({
   // setting href statically
 
   const href = "/"
-
+ const isLiked =  false
   return (
     <div
-      className={`nc-PostCardLikeAndComment flex items-center space-x-2 ${className}`}
+    // space-x-2
+      className={`nc-PostCardLikeAndComment flex justify-center items-center   ${className}`}
       data-nc-id="PostCardLikeAndComment"
     >
       <PostCardLikeContainer
@@ -39,6 +42,7 @@ const PostCardLikeAndComment = ({
         onClickLike={onClickLike}
         // postId={id}
       />
+    
       <PostCardCommentBtn
         href={href}
         facebook_shares={facebook_shares}
@@ -47,6 +51,10 @@ const PostCardLikeAndComment = ({
           hiddenCommentOnMobile ? "hidden sm:flex" : "flex"
         }  ${itemClass}`}
       />
+
+      <PostCardAddtoFavouritesFolderBtn setPostToRedux={setPostToRedux}/>
+
+      
     </div>
   );
 };

@@ -5,8 +5,9 @@ import PostMeta2 from "../../components/PostMeta2/PostMeta2";
 import SingleMetaAction2 from "./SingleMetaAction2";
 import { Helmet } from "react-helmet";
 import CategoryBadgeList from "../../components/CategoryBadgeList/CategoryBadgeList";
-//import SingleMetaAction from './SingleMetaAction'
-export const SingleHeaderProps = {
+
+import SingleMetaAction from './SingleMetaAction'
+export const SingleHeaderProps =  {
   pageData: SinglePageType,
   hiddenDesc: Boolean,
   metaActionStyle: "style1" | "style2",
@@ -48,7 +49,7 @@ const SingleHeader = ({
               hiddenCategories
               avatarRounded="rounded-full shadow-inner"
             />
-            {/* <SingleMetaAction2 meta={pageData} /> */}
+            {/* <SingleMetaAction meta={pageData} /> */}
             <SingleMetaAction2 meta={pageData} />
           </div>
         </div>

@@ -1,11 +1,7 @@
 import React from "react";
 import NcModal from "../../components/NcModal/NcModal";
 import Tag from "../../components/Tag/Tag";
-// import { TaxonomyType } from "../../data/types";
 
-// export const ModalTagsProps = {
-//   tags: TaxonomyType
-// }
 
 
 const ModalTags = ({ tags }) => {

@@ -1,13 +1,6 @@
 import { avatarColors } from "../../contains/contants";
-import React, { FC } from "react";
+import React from "react";
 
-// export interface AvatarProps {
-//   containerClassName?: string;
-//   sizeClass?: string;
-//   radius?: string;
-//   imgUrl?: string;
-//   userName?: string;
-// }
 
 const Avatar = ({
   containerClassName = "ring-1 ring-white dark:ring-neutral-900",

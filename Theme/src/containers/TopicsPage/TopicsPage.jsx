@@ -9,8 +9,8 @@ import {
   useGetAllFoldersQuery,
   useGetAllFavouritePostsQuery,
 } from "../../app/Api/contentApi";
-import Card12 from "../../components/Card11/Card12";
-// import InputAutoComplete from "../../components/InputAutoComplete/InputAutoComplete";
+
+import Card12 from "../../components/Card11/Card12"
 
 const TopicsPage = ({ className = "" }) => {
   const history = useHistory();
@@ -20,11 +20,12 @@ const TopicsPage = ({ className = "" }) => {
   let { path, url } = useRouteMatch();
   const getAllFolders = useGetAllFoldersQuery();
   const getAllFavouritePosts = useGetAllFavouritePostsQuery(folderID);
-
+  const cardData = useGetAllFavouritePostsQuery(folderID);
   // handlers
   const closeModal = () => setshowModal(false);
   const showModalOnClick = () => setshowModal(true);
   const cardData = useGetAllFavouritePostsQuery(folderID);
+
 
   return (
     <div className={`nc-PageDashboard ${className}`} data-nc-id="PageDashboard">
@@ -37,7 +38,11 @@ const TopicsPage = ({ className = "" }) => {
         heading="Dash board"
       >
         <div className="flex flex-col space-y-8 xl:space-y-0 xl:flex-row">
+
+
+          {/* {/ SIDEBAR /} */}
           <div className="flex-shrink-0 max-w-xl xl:w-70 xl:pr-8">
+            {/* {/ CUSTOM TOPICS /} */}
             <ul className="text-base space-y-1 text-neutral-6000 dark:text-neutral-400">
               <li className="flex flex-row justify-start items-center">
                 <p className="flex px-6 py-2.5 font-medium rounded-lg text-[#666666]">
@@ -51,6 +56,7 @@ const TopicsPage = ({ className = "" }) => {
                 </button>
               </li>
             </ul>
+
 
             <ul className="text-base space-y-1 text-neutral-6000 dark:text-neutral-400">
               <li className="flex flex-row justify-start items-center">
@@ -75,6 +81,7 @@ const TopicsPage = ({ className = "" }) => {
                       to={`${url}/favourite-posts/${_id}`}
                       onClick={() => setFolderID(_id)}
                     >
+
                       {folderName}
                     </NavLink>
                   </li>
@@ -91,12 +98,14 @@ const TopicsPage = ({ className = "" }) => {
             />
 
             <Switch>
+
               <Route
                 path={`${path}/favourite-posts/:id`}
                 render={() => {
                   return <p>{JSON.stringify(getAllFavouritePosts?.data)}</p>;
                 }}
               />
+
 
               <Route
                 exact

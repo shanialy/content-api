@@ -29,7 +29,7 @@ app.use(
 
 // database connections
 connectDatabase();
-checkConnection();
+// checkConnection();
 
 // api routes
 app.use(express.json());
