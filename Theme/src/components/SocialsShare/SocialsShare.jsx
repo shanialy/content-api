@@ -4,7 +4,7 @@ import {
   LinkedinShareButton,
   TwitterShareButton,
 } from "react-share";
-import { useSelector } from "react-redux";
+
 // export interface SocialsShareProps {
 //   className?: string;
 //   itemClass?: string;
@@ -29,12 +29,10 @@ const socials = [
 export const SOCIALS_DATA = socials;
 
 const SocialsShare = ({
+  cardData,
   className = "grid gap-[6px]",
   itemClass = "w-7 h-7 text-base hover:bg-neutral-100",
 }) => {
-
-  
-  const cardData = useSelector(state => state.persistedReducer.card.cardData)
 
 let socialurl = cardData.fields.url
 

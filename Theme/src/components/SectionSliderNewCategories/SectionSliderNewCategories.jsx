@@ -150,7 +150,9 @@ const SectionSliderNewCategories = ({
           })}
         </div>
       ) : (
-        <h1><LoadingVideo/></h1>
+        <div style={{ display: "flex",
+  justifyContent: "center",
+  alignItems: "center"}}> <LoadingVideo /></div> 
       )}
     </>
   );

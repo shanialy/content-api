@@ -1,11 +1,13 @@
-import React, { FC, useState } from "react";
+import React, { useState } from "react";
 import PostCardSaveAction from "../../components/PostCardSaveAction/PostCardSaveAction";
-// import { PostDataType } from "data/types";
 import { Link } from "react-router-dom";
-import CategoryBadgeList from "../../components/CategoryBadgeList/CategoryBadgeList";
+import { useRouteMatch} from "react-router";
 import PostCardLikeAndComment from "../../components/PostCardLikeAndComment/PostCardLikeAndComment";
 import PostCardMeta from "../../components/PostCardMeta/PostCardMeta";
 import PostFeaturedMedia from "../../components/PostFeaturedMedia/PostFeaturedMedia";
+import { useHistory } from "react-router-dom";
+
+
 // import { useAppDispatch } from "../../app/hooks";
 import { cardLoadingData } from "./SingleCard";
 import { addpost } from "../../app/posts/posts";
@@ -14,12 +16,31 @@ import { add } from "date-fns";
 
 const Card11 = ({
   className = "h-full",
-  post,
   cardvalue,
   hiddenAuthor = false,
   ratio = "aspect-w-4 aspect-h-3",
 }) => {
   const dispatch = useDispatch();
+
+
+var { path } = useRouteMatch();
+
+
+  
+ const{ id } = cardvalue
+ const history = useHistory()
+
+  const { title, date_download , url } = cardvalue.fields;
+  
+
+  const externalUrl = ()=>{
+
+
+    history.push(window.location.href = url )
+
+  }
+
+  const href = `search/mainpostpage/${id}`
 
   //getting id from Page search
 
@@ -41,6 +62,15 @@ const Card11 = ({
 
   //useState hook from the theme
   const [isHover, setIsHover] = useState(false);
+
+  
+
+  const pushData = ()=>{
+
+    history.push(`${path}/mainpostpage/${id}` , cardvalue )
+
+   console.log("data tranfered")
+  }
 
   // handler
   const setPostToRedux = (e) => {
@@ -64,6 +94,7 @@ const Card11 = ({
       <div
         className={`block flex-shrink-0 relative w-full rounded-t-xl overflow-hidden ${ratio}`}
       >
+
         <Link to={href} className="absolute inset-0">
           <PostFeaturedMedia post={post} isHover={isHover} />
         </Link>
@@ -79,6 +110,7 @@ const Card11 = ({
         )}
 
         <h2 className="nc-card-title block text-base font-semibold text-neutral-900 dark:text-neutral-100 ">
+
           {/* {/ // putting &nbsp so that we can add somespace temporarely /} */}
 
           <Link to={href} className="line-clamp-2" title={title}>
@@ -99,7 +131,7 @@ const Card11 = ({
 
           <PostCardSaveAction className="relative" postData={post} />
         </div>
-      </div>
+      </div> 
     </div>
   );
 };

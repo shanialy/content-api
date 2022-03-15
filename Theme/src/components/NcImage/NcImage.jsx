@@ -1,6 +1,4 @@
 import React, {
-  FC,
-  ImgHTMLAttributes,
   useEffect,
   useRef,
   useState,
@@ -8,11 +6,6 @@ import React, {
 import checkInViewIntersectionObserver from "../../utils/isInViewPortIntersectionObserver";
 import PlaceIcon from "./PlaceIcon";
 import LoadingVideo from "../LoadingVideo/LoadingVideo";
-
-
-// export interface NcImageProps extends ImgHTMLAttributes<HTMLImageElement> {
-//   containerClassName?: string;
-// }
 
 const NcImage = ({
   containerClassName = "",
@@ -32,30 +25,11 @@ const NcImage = ({
   let _imageEl = null;
 
 
-  // making a function on date_download so that we can get the time  (need to import moment and dateFormat if you want to perform the function) we also used this in Card11 component
-
-//  function relativeTime(date_download) {
-//     try {
-//       let ddate = dateFormat(date_download, "isoDateTime");
-//       ddate = ddate.split("T");
-//       let datePart = ddate[0];
-//       let timePart = ddate[1].split("+")[0];
-
-//       return moment(datePart + " " + timePart).fromNow();
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   }
-
-  //console.log(relativeTime())
-
-  // const darkmodeState = useAppSelector(selectDarkmodeState);
 
   const [__src, set__src] = useState("");
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const _initActions = async () => {
-    // set__src(placeholderImage);
     _checkInViewPort();
   };
 
@@ -94,6 +68,25 @@ const NcImage = ({
     };
   }, [src]);
 
+  const _renderPlayingBtn = () => {
+
+    return (
+      <>
+
+
+      <div
+      className={`${className} flex items-center justify-center bg-neutral-200 dark:bg-neutral-6000 text-neutral-100 dark:text-neutral-500` }  style={{backgroundColor : "purple"}}
+    >
+      <div className="h-2/4 max-w-[50%]">
+    
+      <PlaceIcon/>
+     
+      </div>
+    </div>
+    </>
+    );
+  };
+
   const renderLoadingPlaceholder = () => {
     return (
       <div
@@ -113,25 +106,9 @@ const NcImage = ({
       ref={_containerRef}
 
     >
-
-    {/* ///Rendring source_domain and time  */}
-        {/* <span 
-        className="text-neutral-500 dark:text-neutral-400 font-normal"
-        style={{
-          height: "18px",
-          width: "100%",
-          backgroundColor: "#4f4f4f",
-          position: "absolute",
-          bottom: "1px",
-          opacity: "0.8",
-        }}
-      >
-        <p style={{fontSize: "12px" , paddingLeft :"10px", color : "#d2d2d2" }}>{source_domain} . {relativeTime(date_download)} </p>
-      </span> */}
-
       
       {__src && imageLoaded ? (
-        <img src={__src} className={className} alt={alt} {...args} />
+         <img src={__src} className={className} alt={alt} {...args}  />      
       ) : (
         renderLoadingPlaceholder()
       )}
