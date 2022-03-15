@@ -24,7 +24,7 @@ const PostCardMeta = ({
   /// formating the date into (February 11th, 2022) fromat by using dateformat library
   
  const res =  dateFormat(date_download, "mmmm dS, yyyy") 
- console.log(res)
+
 
  // making function so we can get seconds
 
@@ -41,7 +41,6 @@ const PostCardMeta = ({
     }
   }
 
-  console.log(relativeTime())
 
 
 

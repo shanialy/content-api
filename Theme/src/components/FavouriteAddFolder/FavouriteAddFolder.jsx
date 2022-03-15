@@ -31,6 +31,7 @@ const FavouriteAddFolder = () => {
         className="absolute transform top-1/2 -translate-y-1/2 right-7"
       >
         <i className="las la-check text-green-700"></i>
+        
       </ButtonCircle>
     </form>
   );

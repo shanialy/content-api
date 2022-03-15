@@ -1,15 +1,10 @@
 import React from "react";
-import ModalCategories from "./ModalCategories";
 import { DEMO_CATEGORIES, DEMO_TAGS } from "../../data/taxonomies";
-// import LoadingVideo from "../../components/LoadingVideo/LoadingVideo";
+import LoadingVideo from "../../components/LoadingVideo/LoadingVideo";
 import ModalTags from "./ModalTags";
 import ArchiveFilterListBox from "../../components/ArchiveFilterListBox/ArchiveFilterListBox";
+import LanguagesFilterBox from "../../components/LanguagesFilterBox/LanguagesFilterBox";
 import { Helmet } from "react-helmet";
-<<<<<<< HEAD
-=======
-
->>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
-import NcLink from "../../components/NcLink/NcLink";
 import { gql, useQuery } from "@apollo/client";
 import {
   useSearchkitVariables,
@@ -19,15 +14,11 @@ import {
 } from "@searchkit/client";
 
 import Card11 from "../../components/Card11/Card11";
-import AutoCompleteSearch from "../SearchBox/autoCompleteSearchbox";
 import DateRangeCalender from "../../components/DateRangeCalender/DateRangeCalender";
-import DateRangeDropDown from "../../components/DateRangeCalender/DateRangeDropDown";
 import Pagination from "../../components/Pagination/Pagination";
-<<<<<<< HEAD
-import LoadingVideo from "../../components/LoadingVideo/LoadingVideo";
-=======
+import { useLocation } from "react-router-dom";
+import SearchBoxMain from "../../components/SearchBoxMain/SearchBoxMain";
 
->>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
 export const PageSearchProps = {
   className: String,
 };
@@ -59,10 +50,6 @@ const query = gql`
           }
           __typename
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
         sortOptions {
           id
           label
@@ -91,12 +78,10 @@ const query = gql`
               authors
               date_download
               language
-              image_url
-              source_domain
               facebook_shares
+              image_url
               twitter_shares
               maintext
-              sentiment
               source_domain
               title
               __typename
@@ -124,26 +109,19 @@ const query = gql`
   }
 `;
 
-//////////////////////////////////////////////
 const FILTERS = [
-  { name: "Most Recent" },
-  { name: "Curated by Admin" },
-  { name: "Most Appreciated" },
-  { name: "Most Discussed" },
-  { name: "Most Viewed" },
+  { label: "Relevance", id: "relevance" },
+  { label: "Facebook Shares", id: "facebook_shares" },
+  { label: "Twitter Shares", id: "twitter_shares" },
+  { label: "Date Download", id: "date_download" },
 ];
 
 const TABS = ["Articles", "Categories", "Tags", "Authors"];
 
-const PageSearch = ({ className = "" }) => {
-<<<<<<< HEAD
-  //Get the label name from query
-  const { search } = useLocation();
-  const { label } = queryString.parse(search);
-
-=======
->>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
-  ////////////////////////////////graph ql work////////////////////////////
+const PageSearch = ({ className = "" }, data1) => {
+  // cardCategory data from searchPage
+  const location = useLocation();
+  var labelfromcatCard = location.state;
 
   const variables = useSearchkitVariables();
   const { data, error, loading } = useQuery(query, { variables });
@@ -153,57 +131,53 @@ const PageSearch = ({ className = "" }) => {
   }
 
   if (loading) {
-<<<<<<< HEAD
-    console.log("Data is loading");
-=======
     <LoadingVideo />;
->>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
   }
-
-  // if (!loading) {
-  //   console.log(data.results?.hits.items[0].fields.twitter_shares);
-  // }
-
   console.log(data);
+  if (data) {
+    var languageslist = [];
+    {
+      data?.results?.facets.map((items) => {
+        if (items.identifier == "language") {
+          languageslist = items?.entries?.map((item) => ({
+            label: item.label,
+            identifier: "language",
+            id: item.label,
+          }));
+        }
+        languageslist = [
+          ...languageslist,
+          {
+            label: "All Languages",
+            identifier: "language",
+            id: "All Languages",
+          },
+        ];
+      });
+    }
+  }
 
   return (
     <>
+      <h1>{!labelfromcatCard ? "" : labelfromcatCard}</h1>
       <div className={`nc-PageSearch ${className}`} data-nc-id="PageSearch">
         <Helmet>
           <title>Nc || Search Page Template</title>
         </Helmet>
+        {/* AutoCompleteSearchBox */}
+        <SearchBoxMain />
 
-        <div className="w-screen px-2 xl:max-w-screen-2xl mx-auto">
-          <AutoCompleteSearch />
-
-          {/* <div className="w-full text-sm text-left mt-4 text-neutral-500 dark:text-neutral-300">
-                <div className="inline-block"> */}
-          <div className="margin">
-            <span className="mr-2.5">Related:</span>
-            <NcLink className="mr-2.5 inline-block font-normal" to="/#">
-              Design
-            </NcLink>
-            <NcLink className="mr-2.5 inline-block font-normal" to="/#">
-              Photo
-            </NcLink>
-            <NcLink className="mr-2.5 inline-block font-normal" to="/#">
-              Vector
-            </NcLink>
-            <NcLink className="mr-2.5 inline-block font-normal" to="/#">
-              Frontend
-            </NcLink>
-            {/* </div>
-              </div> */}
-          </div>
-        </div>
-        {/* </header>
-          // </div>
-        </div> */}
         <div className="container py-16 lg:py-28 space-y-16 lg:space-y-28">
           <main>
             <div className="flex flex-col sm:items-center sm:justify-between sm:flex-row">
               <div className="flex space-x-2.5">
-                <ModalCategories categories={DEMO_CATEGORIES} />
+                {/* Languages */}
+
+                {languageslist && languageslist.length > 0 ? (
+                  <LanguagesFilterBox lists={languageslist} />
+                ) : (
+                  ""
+                )}
 
                 <ModalTags tags={DEMO_TAGS} />
               </div>
@@ -218,8 +192,6 @@ const PageSearch = ({ className = "" }) => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-8 mt-8 lg:mt-10">
                 {data ? (
                   data.results?.hits.items.map((value, index) => {
-                    console.log(value);
-
                     return (
                       <Card11
                         key={index}
@@ -249,4 +221,4 @@ const PageSearch = ({ className = "" }) => {
   );
 };
 
-export default PageSearch;
+export default withSearchkit(withSearchkitRouting(PageSearch));

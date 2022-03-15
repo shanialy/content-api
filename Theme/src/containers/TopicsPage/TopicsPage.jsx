@@ -9,10 +9,8 @@ import {
   useGetAllFoldersQuery,
   useGetAllFavouritePostsQuery,
 } from "../../app/Api/contentApi";
-<<<<<<< HEAD
-=======
 import Card12 from "../../components/Card11/Card12";
->>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
+// import InputAutoComplete from "../../components/InputAutoComplete/InputAutoComplete";
 
 const TopicsPage = ({ className = "" }) => {
   const history = useHistory();
@@ -26,7 +24,7 @@ const TopicsPage = ({ className = "" }) => {
   // handlers
   const closeModal = () => setshowModal(false);
   const showModalOnClick = () => setshowModal(true);
-  const cardData = useGetAllFavouritePostsQuery(folderID)
+  const cardData = useGetAllFavouritePostsQuery(folderID);
 
   return (
     <div className={`nc-PageDashboard ${className}`} data-nc-id="PageDashboard">
@@ -39,13 +37,7 @@ const TopicsPage = ({ className = "" }) => {
         heading="Dash board"
       >
         <div className="flex flex-col space-y-8 xl:space-y-0 xl:flex-row">
-<<<<<<< HEAD
-=======
-
->>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
-          {/* SIDEBAR */}
           <div className="flex-shrink-0 max-w-xl xl:w-70 xl:pr-8">
-            {/* CUSTOM TOPICS */}
             <ul className="text-base space-y-1 text-neutral-6000 dark:text-neutral-400">
               <li className="flex flex-row justify-start items-center">
                 <p className="flex px-6 py-2.5 font-medium rounded-lg text-[#666666]">
@@ -60,7 +52,6 @@ const TopicsPage = ({ className = "" }) => {
               </li>
             </ul>
 
-            {/* FAVOURITE FOLDERS SECTION */}
             <ul className="text-base space-y-1 text-neutral-6000 dark:text-neutral-400">
               <li className="flex flex-row justify-start items-center">
                 <p className="flex px-6 py-2.5 font-medium rounded-lg text-[#666666]">
@@ -84,17 +75,11 @@ const TopicsPage = ({ className = "" }) => {
                       to={`${url}/favourite-posts/${_id}`}
                       onClick={() => setFolderID(_id)}
                     >
-                      {/* <span className="w-8 mr-1">{emoij}</span>  */}
                       {folderName}
                     </NavLink>
                   </li>
                 );
               })}
-<<<<<<< HEAD
-=======
-
-      
->>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
             </ul>
           </div>
 
@@ -105,12 +90,7 @@ const TopicsPage = ({ className = "" }) => {
               onCloseModalReportItem={closeModal}
             />
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 51a1746535931e9fa803506f8e3102cadd6f63b1
             <Switch>
-              {/* FAVOURITE POSTS ROUTE */}
               <Route
                 path={`${path}/favourite-posts/:id`}
                 render={() => {
@@ -118,7 +98,6 @@ const TopicsPage = ({ className = "" }) => {
                 }}
               />
 
-              {/* SUBMIT POST PAGE ROUTE */}
               <Route
                 exact
                 path={`${path}/submit-post`}

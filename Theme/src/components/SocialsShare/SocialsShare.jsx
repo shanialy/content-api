@@ -1,23 +1,16 @@
 import React, { FC } from "react";
-import {
-  FacebookShareButton,
-  LinkedinShareButton,
-  TwitterShareButton,
-} from "react-share";
-import { useSelector } from "react-redux";
-// export interface SocialsShareProps {
-//   className?: string;
-//   itemClass?: string;
-// }
+// import {
+//   FacebookShareButton,
+//   LinkedinShareButton,
+//   TwitterShareButton,
+// } from "react-share";
+// import { useSelector } from "react-redux";
 
-// export interface SocialType {
-//   id: string;
-//   name: string;
-//   icon: string;
-//   href: string;
-// }
-
-
+const SocialsShare = () =>{
+  return(
+    <h1></h1>
+  )
+}
 
 const socials = [
   { id: "Facebook", name: "Facebook", icon: "lab la-facebook-f", href: "#" },
@@ -28,52 +21,50 @@ const socials = [
 
 export const SOCIALS_DATA = socials;
 
-const SocialsShare = ({
-  className = "grid gap-[6px]",
-  itemClass = "w-7 h-7 text-base hover:bg-neutral-100",
-}) => {
+// const SocialsShare = ({
+//   className = "grid gap-[6px]",
+//   itemClass = "w-7 h-7 text-base hover:bg-neutral-100",
+// }) => {
+//   const cardData = useSelector((state) => state.persistedReducer.card.cardData);
 
-  
-  const cardData = useSelector(state => state.persistedReducer.card.cardData)
+//   let socialurl = cardData.fields.url;
 
-let socialurl = cardData.fields.url
+//   const renderItem = () => {
+//     return (
+//       <>
+//         <FacebookShareButton
+//           url={socialurl}
+//           className={`rounded-full leading-none flex items-center justify-center bg-white text-neutral-6000 ${itemClass}`}
+//           style={{ backgroundColor: "lightgrey", color: "#4a4ace" }}
+//           title={`Share on Facebook`}
+//         >
+//           <i className="lab la-facebook-f"></i>
+//         </FacebookShareButton>
+//         <TwitterShareButton
+//           url={socialurl}
+//           className={`rounded-full leading-none flex items-center justify-center bg-white text-neutral-6000 ${itemClass}`}
+//           style={{ backgroundColor: "lightgrey", color: "#4a4ace" }}
+//           title={`Share on Twitter`}
+//         >
+//           <i className="lab la-twitter"></i>
+//         </TwitterShareButton>
+//         <LinkedinShareButton
+//           url={socialurl}
+//           className={`rounded-full leading-none flex items-center justify-center bg-white text-neutral-6000 ${itemClass}`}
+//           style={{ backgroundColor: "lightgrey", color: "#4a4ace" }}
+//           title={`Share on Linkedin`}
+//         >
+//           <i className="lab la-linkedin-in"></i>
+//         </LinkedinShareButton>
+//       </>
+//     );
+//   };
 
-  const renderItem = () => {
-    return (
-      <>
-      <FacebookShareButton
-        url={socialurl}
-        className={`rounded-full leading-none flex items-center justify-center bg-white text-neutral-6000 ${itemClass}`}
-        style={{backgroundColor : "lightgrey" , color : "#4a4ace"}}
-        title={`Share on Facebook`}
-      >
-        <i className="lab la-facebook-f"></i>
-      </FacebookShareButton>
-      <TwitterShareButton
-        url={socialurl}
-        className={`rounded-full leading-none flex items-center justify-center bg-white text-neutral-6000 ${itemClass}`}
-        style={{backgroundColor : "lightgrey" , color : "#4a4ace"}}
-        title={`Share on Twitter`}
-      >
-        <i className="lab la-twitter"></i>
-      </TwitterShareButton>
-      <LinkedinShareButton
-        url={socialurl}
-        className={`rounded-full leading-none flex items-center justify-center bg-white text-neutral-6000 ${itemClass}`}
-        style={{backgroundColor : "lightgrey" , color : "#4a4ace"}}
-        title={`Share on Linkedin`}
-      >
-        <i className="lab la-linkedin-in"></i>
-      </LinkedinShareButton>
-      </>
-    );
-  };
-
-  return (
-    <div className={`nc-SocialsShare ${className}`} data-nc-id="SocialsShare">
-      {renderItem()}
-    </div>
-  );
-};
+//   return (
+//     <div className={`nc-SocialsShare ${className}`} data-nc-id="SocialsShare">
+//       {renderItem()}
+//     </div>
+//   );
+// };
 
 export default SocialsShare;

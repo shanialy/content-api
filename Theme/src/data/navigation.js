@@ -335,8 +335,28 @@ const templateChilds = [
 const discoveryDropdwonItems = [
   {
     id: ncNanoId(),
-    href: "/search",
+    href: "/discover/discover_content",
     name: "Search",
+  },
+  // {
+  //   id: ncNanoId(),
+  //   href: "/topics",
+  //   name: "Topics",
+  // },
+  // {
+  //   id: ncNanoId(),
+  //   href: "/discover/dicover_insights",
+  //   name: "Analytics",
+  // },
+];
+
+export const NAVIGATION_DEMO = [
+  {
+    id: ncNanoId(),
+    href: "/discover/discover_search",
+    name: "Search",
+    // type: "dropdown",
+    // children: demoChildMenus,
   },
   {
     id: ncNanoId(),
@@ -345,19 +365,10 @@ const discoveryDropdwonItems = [
   },
   {
     id: ncNanoId(),
-    href: "/analytics",
+    href: "/discover/dicover_insights",
     name: "Analytics",
   },
-];
 
-export const NAVIGATION_DEMO = [
-  {
-    id: ncNanoId(),
-    href: "/",
-    name: "Home",
-    // type: "dropdown",
-    // children: demoChildMenus,
-  },
   // {
   //   id: ncNanoId(),
   //   href: "#",
@@ -373,13 +384,13 @@ export const NAVIGATION_DEMO = [
   //   type: "megaMenu",
   //   megaMenu: megaMenu3ItemDemo,
   // },
-  {
-    id: ncNanoId(),
-    href: "#",
-    name: "Templates",
-    type: "dropdown",
-    children: templateChilds,
-  },
+  // {
+  //   id: ncNanoId(),
+  //   href: "#",
+  //   name: "Templates",
+  //   type: "dropdown",
+  //   children: templateChilds,
+  // },
   {
     id: ncNanoId(),
     href: "#",

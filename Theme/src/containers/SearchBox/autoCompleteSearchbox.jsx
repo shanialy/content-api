@@ -11,6 +11,8 @@ import {
   renderResults,
 } from "../../utils/autoCompleteSearch";
 import "./autoCompleteSearchBox.css";
+import { Link, Route, useHistory } from "react-router-dom";
+import PageSearch from "../PageSearch/PageSearch";
 
 // appbase client config object
 const appbaseClientConfig = {
@@ -54,9 +56,13 @@ const rsApiConfig = {
 };
 
 function AutoCompleteSearch() {
+  const history = useHistory();
   const [state, setstate] = useState({});
+  const [data, setData] = useState();
 
   useEffect(() => {
+    // alert(state);
+
     // default usage: plugin to fetch suggestions
     const defaultUsagePlugin = createSuggestionsPlugin(
       appbaseClientConfig,
@@ -65,8 +71,11 @@ function AutoCompleteSearch() {
       },
       {
         onItemSelect: (props) => {
-          console.log(props)
+          const data1 = props.item.label;
+          // console.log(props);
+          sendData(data1);
           console.log(props.item.label);
+          // alert(props.item.label);
           const {
             item: { label },
             setQuery,
@@ -84,7 +93,6 @@ function AutoCompleteSearch() {
             },
           }).then((item) => {
             setstate(item);
-            console.log(item);
           });
           refresh();
         },
@@ -108,6 +116,7 @@ function AutoCompleteSearch() {
       },
       {
         renderItem: (props) => {
+          // console.log(props);
           const { item, setQuery, refresh } = props;
           if (item.type === "index") {
             return (
@@ -158,7 +167,7 @@ function AutoCompleteSearch() {
           );
         },
         onItemSelect: (props) => {
-          // console.log(props.item);
+          // console.log(props);
           const { item, setQuery, refresh } = props;
           const { label } = item;
           if (item?._source?.image) {
@@ -176,13 +185,13 @@ function AutoCompleteSearch() {
               },
             }).then((item) => {
               setstate(item);
-              
             });
             refresh();
           }
         },
         renderHeader: (props) => {
-          
+          // console.log(props);
+
           return (
             <h4>
               Products Listing <hr style={{ borderColor: "#d7d5f5" }} />
@@ -193,6 +202,7 @@ function AutoCompleteSearch() {
           return <hr style={{ borderColor: "#d7d5f5" }} />;
         },
         renderNoResults: (props) => {
+          // console.log(props);
           if (props.state.query === "") {
             return (
               <p>Search for something to get direct product suggestions!</p>
@@ -203,12 +213,26 @@ function AutoCompleteSearch() {
         },
       }
     );
-    // initiate autocomplete-js
-    autocomplete({
+    const {
+      setActiveItemId,
+      setQuery,
+      setCollections,
+      setIsOpen,
+      setStatus,
+      setContext,
+      refresh,
+      update,
+      destroy,
+    } = autocomplete({
       container: "#autocomplete",
       placeholder: "Search Here...",
       openOnFocus: true,
-      // debug: true,
+      initialState: {
+        query: "ahsan",
+      },
+      onStateChange({ state }) {
+        // console.log(state);
+      },
       plugins: [defaultUsagePlugin, advancedUsagePlugin],
       detachedMediaQuery: "none",
       renderer: { createElement, Fragment },
@@ -216,7 +240,15 @@ function AutoCompleteSearch() {
         render(children, root);
       },
     });
+    // console.log(state);
   }, []);
+
+  const sendData = (data1) => {
+    console.log(data1 + "sendData function");
+    setData(data1);
+    history.push({ pathname: "/discover/discover_content", state: data1 });
+  };
+
   return (
     <div className="App">
       <div id="autocomplete">
@@ -229,6 +261,8 @@ function AutoCompleteSearch() {
           {`Displaying ${state?.hits?.hits.length} results, of ${state?.hits?.total?.value} results found in ${state?.took} ms`}
         </span>
       ) : null}
+      {/* {console.log("Outer")}
+      {console.log(state)} */}
       {/* {state?.hits?.hits && Object.keys(state?.hits?.hits).length ? (
         <div className="response-json">
           <JSONTree
