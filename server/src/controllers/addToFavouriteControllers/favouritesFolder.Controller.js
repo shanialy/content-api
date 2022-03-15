@@ -14,7 +14,7 @@ const postFavouriteFolder = async (req, res) => {
     }
 
     const folderName = req.body.folderName;
-    const userId = "6213bf62597993895ebb1666";
+    const userId = "622a0c7b24abda1ef66718c7";
     // const userId = req.user.id;
 
     try {
@@ -61,7 +61,7 @@ const getSingleFavouriteFolder = async (req, res) => {
 // access: PROTECTED
 const getAllFavouriteFolder = async (req, res) => {
     try {
-        const userId = "6213bf62597993895ebb1666";
+        const userId = "622a0c7b24abda1ef66718c7";
         // const userId = req.user.id;
         
         const allFolders = await favouritesFolderModel.find({ userId: userId });

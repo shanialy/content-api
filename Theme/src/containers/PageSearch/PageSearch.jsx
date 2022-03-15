@@ -17,6 +17,9 @@ import AutoCompleteSearch from "../SearchBox/autoCompleteSearchbox";
 import DateRangeDropDown from "../../components/DateRangeCalender/DateRangeDropDown";
 import CustomPagination from "../../components/Pagination/CustomPagination.jsx";
 
+import Pagination from "../../components/Pagination/Pagination";
+import { useDispatch, useSelector } from "react-redux";
+import { addpost, removePost } from "../../app/posts/posts";
 export const PageSearchProps = {
   className: String,
 };
@@ -43,45 +46,39 @@ query resultSet($query: String, $filters: [SKFiltersSet], $page: SKPageInput, $s
         }
         __typename
       }
-      sortOptions {
-        id
-        label
-        __typename
-      }
-      query
-      __typename
-    }
-    hits(page: $page, sortBy: $sortBy) {
-      page {
-        total
-        totalPages
-        pageNumber
-        from
-        size
-        __typename
-      }
-      sortedBy
 
-      items {
-        ... on ResultHit {
-          id
-          fields {
-  article_length
-  category
-  authors
-  date_download
-  language
-  facebook_shares
-  twitter_shares
-  readtime
-  url
-  date_modify
-  date_publish
-  maintext
-  source_domain
-  sentiment
-  image_url
-  title
+      hits(page: $page, sortBy: $sortBy) {
+        page {
+          total
+          totalPages
+          pageNumber
+          from
+          size
+          __typename
+        }
+        sortedBy
+
+        items {
+          ... on ResultHit {
+            id
+            fields {
+            article_length
+            authors
+            category
+            date_download
+            facebook_shares
+            twitter_shares
+            date_publish
+            image_url
+            language
+            maintext
+            readtime
+            source_domain
+            title
+            url
+            sentiment
+              __typename
+            }
             __typename
           }
           __typename
@@ -118,7 +115,6 @@ const FILTERS = [
 
 
 const PageSearch = ({ className = "" }) => {
-  
 
   const variables = useSearchkitVariables();
   if (variables?.page.size) {
@@ -135,10 +131,6 @@ const PageSearch = ({ className = "" }) => {
   if (loading) {
    <div style={{display : "flex", alignItems : "center"}}> <LoadingVideo /></div> ;
   }
-
-
-  
-console.log(data)
 
   return (
     <>

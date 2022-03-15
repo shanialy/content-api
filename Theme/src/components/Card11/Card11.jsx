@@ -8,6 +8,11 @@ import PostFeaturedMedia from "../../components/PostFeaturedMedia/PostFeaturedMe
 import { useHistory } from "react-router-dom";
 
 
+// import { useAppDispatch } from "../../app/hooks";
+import { cardLoadingData } from "./SingleCard";
+import { addpost } from "../../app/posts/posts";
+import { useDispatch } from "react-redux";
+import { add } from "date-fns";
 
 const Card11 = ({
   className = "h-full",
@@ -15,11 +20,12 @@ const Card11 = ({
   hiddenAuthor = false,
   ratio = "aspect-w-4 aspect-h-3",
 }) => {
+  const dispatch = useDispatch();
 
 
 var { path } = useRouteMatch();
 
-////////////////////////////////
+
   
  const{ id } = cardvalue
  const history = useHistory()
@@ -36,9 +42,25 @@ var { path } = useRouteMatch();
 
   const href = `search/mainpostpage/${id}`
 
+  //getting id from Page search
 
+  cardLoadingData(dispatch, cardvalue);
 
-  //useState hook from the theme  
+  ////////////////////////////////
+
+  const { id } = cardvalue;
+
+  console.log(cardvalue, "card11");
+
+  //destructuring the post that  we are getting form  PageSearch component
+
+  const { title, date_download, source_domain } = post;
+
+  // Giving a static value to herf
+
+  const href = `/${id}`;
+
+  //useState hook from the theme
   const [isHover, setIsHover] = useState(false);
 
   
@@ -50,10 +72,18 @@ var { path } = useRouteMatch();
    console.log("data tranfered")
   }
 
+  // handler
+  const setPostToRedux = (e) => {
+    try {
+      e.preventDefault();
+      dispatch(addpost({ id, ...post }));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   //returning of fuction starts here
   return (
-
     <div
       className={`nc-Card11 relative flex flex-col group [ nc-box-has-hover ] [ nc-dark-box-bg-has-hover ] ${className}`}
       data-nc-id="Card11"
@@ -65,37 +95,41 @@ var { path } = useRouteMatch();
         className={`block flex-shrink-0 relative w-full rounded-t-xl overflow-hidden ${ratio}`}
       >
 
-      <div className="absolute inset-0" onClick={pushData}>
-             <PostFeaturedMedia post={cardvalue.fields} isHover={isHover}  />
-             
+        <Link to={href} className="absolute inset-0">
+          <PostFeaturedMedia post={post} isHover={isHover} />
+        </Link>
       </div>
-    
-      
-      </div>  
-   
-      
 
-       <div className="p-4 flex flex-col flex-grow space-y-3">
+      {/* {/ Passing the post props in PostCardMeta component  /} */}
 
+      <div className="p-4 flex flex-col flex-grow space-y-3">
         {!hiddenAuthor ? (
-          <PostCardMeta meta={cardvalue.fields}  />
+          <PostCardMeta meta={post} />
         ) : (
           <span className="text-xs text-neutral-500">{date_download}</span>
         )}
 
         <h2 className="nc-card-title block text-base font-semibold text-neutral-900 dark:text-neutral-100 ">
-       
 
-          <span onClick={()=>externalUrl()}  style={{cursor : "pointer"}} className="line-clamp-2" title={title} >
-            {title} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-            
-          </span>
+          {/* {/ // putting &nbsp so that we can add somespace temporarely /} */}
+
+          <Link to={href} className="line-clamp-2" title={title}>
+            {title} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          </Link>
         </h2>
-        <div className="flex items-end justify-between mt-auto">
+        <div
+          style={{ border: "5px solid green" }}
+          className="flex items-end justify-between mt-auto"
+        >
+          <PostCardLikeAndComment
+            className="relative"
+            setPostToRedux={setPostToRedux}
+            postData={post}
+          />
 
-          <PostCardLikeAndComment className="relative" postData={cardvalue.fields}  />
-          
-          <PostCardSaveAction className="relative" postData={cardvalue.fields} />
+          <PostCardSaveAction className="relative" postData={post} />
         </div>
       </div> 
     </div>

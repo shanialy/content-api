@@ -35,13 +35,23 @@ const contentApi = createApi({
             })
         }),
 
+        //add a post to favouritesFolder
+        addPostToFavouritesFolder: builder.mutation({
+            query: (params) => ({
+                url: `/api/favouritePosts/${params.folderId}`,
+                method:"POST",
+                body: params.selectedPost
+            })
+        }),
+
+
         //USER QUERIES
 
         // update user queries
         updateUser: builder.mutation({
-            query: (params)=>({
+            query: (params) => ({
                 url: `/api/user/${params.userId}`,
-                method:"PUT",
+                method: "PUT",
                 body: params.user
             }),
         })
@@ -54,5 +64,6 @@ export const {
     useGetAllFoldersQuery,
     useGetAllFavouritePostsQuery,
     useCreateFolderMutation,
-    useUpdateUserMutation
+    useUpdateUserMutation,
+    useAddPostToFavouritesFolderMutation,
 } = contentApi;
