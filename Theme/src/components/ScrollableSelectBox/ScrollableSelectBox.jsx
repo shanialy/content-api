@@ -54,7 +54,6 @@ function classNames(...classes) {
 
 export default function ScrollableSelectBox({ foldersList, setFolderId }) {
   const [selected, setSelected] = useState(foldersList[0]);
-  // console.log(selected);
 
   useEffect(() => {
     setFolderId(selected._id);

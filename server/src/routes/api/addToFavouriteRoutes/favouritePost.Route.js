@@ -55,6 +55,6 @@ router.delete("/all_posts/:id", authorize(), deleteAllPosts);
 // route:  PATCH /api/favouritePosts/:id
 // desc:   Updating a post by post id
 // access: PROTECTED
-router.patch("/:id", authorize(), updateValidation , updatePost);
+router.patch("/:id", authorize() , updatePost);
 
 export default router;

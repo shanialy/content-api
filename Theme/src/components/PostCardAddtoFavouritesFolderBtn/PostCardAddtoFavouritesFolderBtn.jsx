@@ -27,10 +27,12 @@ const PostCardAddtoFavouritesFolderBtn = ({ setPostToRedux }) => {
         {/* <HeartSolid className="w-5 h-5 ml-6 text-red-600"/> */}
       </button>
 
-      <AddToFavouritesFolderModal
-        show={showModal}
-        onCloseModalReportItem={closeModal}
-      />
+      {showModal ? (
+        <AddToFavouritesFolderModal
+          show={showModal}
+          onCloseModalReportItem={closeModal}
+        />
+      ) : null}
     </>
   );
 };

@@ -4,28 +4,28 @@ import NcModal from "../NcModal/NcModal";
 import Textarea from "../Textarea/Textarea";
 import ButtonPrimary from "../Button/ButtonPrimary";
 import ButtonSecondary from "../Button/ButtonSecondary";
-import { RadioGroup } from "@headlessui/react";
-import twFocusClass from "../../utils/twFocusClass";
 import {
   useCreateFolderMutation,
   useGetAllFoldersQuery,
+  useAddPostToFavouritesFolderMutation,
 } from "../../app/Api/contentApi";
 import Input from "../Input/Input";
 import ScrollableSelectBox from "../ScrollableSelectBox/ScrollableSelectBox";
 import { useSelector } from "react-redux";
 
-const AddToFavouritesFolderModal = ({ id, show, onCloseModalReportItem }) => {
+const AddToFavouritesFolderModal = ({ show, onCloseModalReportItem }) => {
   // local/global states
   const textareaRef = useRef(null);
   const [folderName, setFolderName] = useState();
   const [folderId, setFolderId] = useState();
   const [showAddFolder, setShowAddFolder] = useState(false);
-  const selectedPost = useSelector((state)=> state.posts.post);
+  const selectedPost = useSelector((state) => state.posts.post);
 
   // RTK query
   const [createFolder, createFolderObj] = useCreateFolderMutation();
   const getAllFolders = useGetAllFoldersQuery();
-
+  const [addPostToFavFolder, addPostToFavFolderObj] =
+    useAddPostToFavouritesFolderMutation();
 
   // handlers
   const handleClickSubmitForm = (e) => {
@@ -40,7 +40,22 @@ const AddToFavouritesFolderModal = ({ id, show, onCloseModalReportItem }) => {
     setShowAddFolder(true);
   };
 
-// useEffects
+  const handelAddPostToFavFolder = (e) => {
+    e.preventDefault();
+    try {
+      if (folderId !== undefined && selectedPost !== null) {
+        addPostToFavFolder({ folderId, selectedPost });
+      }
+      if (addPostToFavFolderObj.error) {
+        console.log("ERROR WHILE SENDING DATA", addPostToFavFolderObj.error);
+      }
+    } catch (err) {
+      console.log("ERROR WHILE SENDING DATA", err);
+      console.log("ERROR WHILE SENDING DATA", addPostToFavFolderObj.error);
+    }
+  };
+
+  // useEffects
   useEffect(() => {
     if (show) {
       setTimeout(() => {
@@ -52,9 +67,14 @@ const AddToFavouritesFolderModal = ({ id, show, onCloseModalReportItem }) => {
     }
   }, [show]);
 
-  useEffect(()=>{
-// RTK query code to add post to favouritesFolder
-  },[folderId]);
+  // useEffect(() => {
+  //   // RTK query code to add post to favouritesFolder
+  //   if (folderId !== undefined && selectedPost !== null) {
+  //     addPostToFavFolder({ folderId, selectedPost });
+  //     console.log("POST ADDED xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+  //   }
+  //   console.log("ERROR WHILE SENDING DATA", addPostToFavFolderObj.error);
+  // }, [folderId]);
 
   console.log(folderId);
   console.log(selectedPost);
@@ -66,13 +86,20 @@ const AddToFavouritesFolderModal = ({ id, show, onCloseModalReportItem }) => {
           foldersList={getAllFolders?.data}
           setFolderId={setFolderId}
         />
+        <ButtonPrimary
+          className="mt-3 mb-2 bg-green-400"
+          onClick={(e) => handelAddPostToFavFolder(e)}
+        >
+          Add To Folder
+        </ButtonPrimary>
+        <br />
 
         {!showAddFolder ? (
           <ButtonPrimary
             onClick={(e) => handelShowAddFolder(e)}
-            className="bg-green-400 hover:bg-green-500 rounded-sm h-11 mt-3"
+            className="bg-green-300 hover:bg-green-400 rounded-sm h-11 mt-3"
           >
-            Add Folder
+            Create New Folder
           </ButtonPrimary>
         ) : (
           <>
@@ -114,7 +141,7 @@ const AddToFavouritesFolderModal = ({ id, show, onCloseModalReportItem }) => {
       className="h-140 w-80 my-5 overflow-visible text-left align-middle transition-all transform bg-white border border-black border-opacity-5 shadow-xl rounded-2xl sm:my-8 dark:bg-neutral-800 dark:border-neutral-700 text-neutral-900 dark:text-neutral-300"
       isOpenProp={show}
       onCloseModal={onCloseModalReportItem}
-      contentExtraClass="h-[30rem] w-[85%] sm:w-96"
+      contentExtraClass="h-[30rem] w-[80%] sm:w-96"
       renderContent={renderContent}
       renderTrigger={renderTrigger}
       modalTitle="Add To Favourites"
