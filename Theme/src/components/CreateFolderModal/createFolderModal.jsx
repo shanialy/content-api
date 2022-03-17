@@ -38,7 +38,7 @@ const CreateFolderModal = ({ id, show, onCloseModalReportItem }) => {
         {/* TEXAREA MESSAGER */}
 
         <div className="mt-1">
-          <ArchiveFilterListBox />
+          {/* <ArchiveFilterListBox /> */}
 
           <h6 className="text-xs text-neutral-700 dark:text-neutral-200">
             Folder Name

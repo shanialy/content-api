@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import SingleCard from "../components/Card11/SingleCard";
 
 import PageSearch from "../containers/PageSearch/PageSearch";
 import ScrollToTop from "./ScrollToTop";
@@ -9,7 +8,6 @@ import PageLogin from "../containers/PageLogin/PageLogin";
 import PageSignUp from "../containers/PageSignUp/PageSignUp";
 import PageForgotPass from "../containers/PageForgotPass/PageForgotPass";
 import PageDashboard from "../containers/PageDashboard/PageDashboard";
-import PageSearchV2 from "../containers/PageSearch/PageSearchV2";
 import MainNav1 from "../components/Header/MainNav1";
 import PageContentFeed from "../containers/PageContentFeed/PageContentFeed";
 import PageHome from "../containers/PageHome/PageHome";

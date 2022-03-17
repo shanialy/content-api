@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../components/Input/Input";
 import ButtonPrimary from "../../components/Button/ButtonPrimary";
 import Select from "../../components/Select/Select";
+import Textarea from "../../components/Textarea/Textarea";
 import Label from "../../components/Label/Label";
 import WidgetPosts from "../../components/WidgetPosts/WidgetPosts";
 import { DEMO_POSTS } from "../../data/posts";
 import Chip from "../../components/chip/chip";
 import { set } from "date-fns";
-// import InputAutoComplete from "../../components/InputAutoComplete/InputAutoComplete";
 
 const widgetPostsDemo = DEMO_POSTS.filter((_, i) => i > 2 && i < 7);
 
@@ -52,6 +52,9 @@ const TopicSubmitPost = () => {
     },
     selection: {
       match_type: domainORtopic,
+      // any_keywords: any_keywords,
+      // must_also_keywords: must_also_keywords,
+      // must_not_contains_keywords: must_not_contains_keywords,
       exclude_domains: exclude_domains,
       limit_domains_results: limit_domains_results,
     },
@@ -111,7 +114,7 @@ const TopicSubmitPost = () => {
 
   return (
     <div className="flex lg:flex-row flex-col gap-6 rounded-xl md:border md:border-neutral-100 dark:border-neutral-800 md:p-6">
-      {/* {/ form container /} */}
+      {/* form container */}
       <form className="basis-2/3  grid md:grid-cols-2 gap-6">
         <label className="block md:col-span-2">
           <Label className="font-bold text-lg">Topic Name</Label>
@@ -167,7 +170,7 @@ const TopicSubmitPost = () => {
             value={any_keywords_value}
           />
 
-          {/* {/ CHIPS /} */}
+          {/* CHIPS */}
           <div className="flex flex-wrap mt-1.5">
             {any_keywords_list.map((item, index) => {
               return (
@@ -188,9 +191,15 @@ const TopicSubmitPost = () => {
             Each result <b>MUST ALSO</b> contain <b>ONE</b> one of these
             keywords
           </p>
+          <Input
+            className="mt-1 rounded border-slate-300"
+            placeholder="Enter keywords or phrases, e.g tips, trends..."
+            onChange={(e) => setMust_also_keywords_value(e.target.value)}
+            onKeyDown={(e) => must_also_keywords_addItem(e)}
+            value={must_also_keywords_value}
+          />
 
-
-          {/ CHIPS /} */}
+          {/* CHIPS */}
           <div className="flex flex-wrap mt-1.5">
             {must_also_keywords_list.map((val, index) => {
               return (
@@ -217,7 +226,7 @@ const TopicSubmitPost = () => {
             onKeyDown={(e) => must_not_contains_keywords_addItem(e)}
             value={must_not_contains_keywords_value}
           />
-
+          {/* CHIPS */}
           <div className="flex flex-wrap mt-1.5">
             {must_not_contains_keywords_list.map((val, index) => {
               return (
@@ -238,7 +247,6 @@ const TopicSubmitPost = () => {
           <p className="mt-2 text-base text-neutral-500 font-medium">
             <b>EXCLUDE</b> results from these domains
           </p>
-
           <Input
             className="mt-1 rounded border-slate-300"
             placeholder="Enter domains that you think are giving irrelevant, e.g job, course..."
@@ -250,7 +258,6 @@ const TopicSubmitPost = () => {
           <p className="mt-2 text-base text-neutral-500 font-medium">
             <b>LIMIT</b> results to these domais only
           </p>
-
           <Input
             className="mt-1 rounded border-slate-300"
             placeholder="Enter domains to see results from only these sites... e.g cnn.com, bbc.com"
@@ -264,7 +271,8 @@ const TopicSubmitPost = () => {
 
         <div className="grid grid-cols-12 md:col-span-2 gap-2">
           <label className="col-span-6 sm:col-span-4 md:col-span-3">
-         
+            {/* <Label>Set start date</Label> */}
+
             <Select
               onChange={(e) => setStartDate(e.target.value)}
               className="mt-1 rounded bg-gray-100 border-slate-300"
@@ -277,7 +285,7 @@ const TopicSubmitPost = () => {
           </label>
 
           <label className="col-span-6 sm:col-span-4 md:col-span-3">
-           
+            {/* <Label>Set end date</Label> */}
 
             <Select
               onChange={(e) => setEndDate(e.target.value)}
@@ -292,7 +300,7 @@ const TopicSubmitPost = () => {
           </label>
 
           <label className="col-span-6 sm:col-span-4 md:col-span-3">
-         
+            {/* <Label>Select Language</Label> */}
 
             <Select
               onChange={(e) => setlanguage(e.target.value)}
@@ -306,7 +314,7 @@ const TopicSubmitPost = () => {
           </label>
 
           <label className="col-span-6 sm:col-span-4 md:col-span-3">
-            
+            {/* <Label>Select Engagement</Label> */}
 
             <Select
               onChange={(e) => setEngagement(e.target.value)}
@@ -361,7 +369,7 @@ const TopicSubmitPost = () => {
         </ButtonPrimary>
       </form>
 
-
+      {/* CONTENT FEED CONTAINER */}
       <div className="basis-1/3	">
         <WidgetPosts posts={widgetPostsDemo} />
       </div>

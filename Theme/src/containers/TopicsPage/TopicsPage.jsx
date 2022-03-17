@@ -18,13 +18,15 @@ const TopicsPage = ({ className = "" }) => {
   const [showModal, setshowModal] = useState(false);
 
   let { path, url } = useRouteMatch();
+  
+  // RTK query 
   const getAllFolders = useGetAllFoldersQuery();
   const getAllFavouritePosts = useGetAllFavouritePostsQuery(folderID);
   const cardData = useGetAllFavouritePostsQuery(folderID);
+  
   // handlers
   const closeModal = () => setshowModal(false);
   const showModalOnClick = () => setshowModal(true);
-  const cardData = useGetAllFavouritePostsQuery(folderID);
 
 
   return (
@@ -48,7 +50,7 @@ const TopicsPage = ({ className = "" }) => {
                 <p className="flex px-6 py-2.5 font-medium rounded-lg text-[#666666]">
                   CUSTOM TOPICS
                 </p>
-                <button
+                <button 
                   onClick={() => history.push(`${url}/submit-post`)}
                   className="flex flex-row justify-center items-end rounded p-1 h-6 font-bold text-[25px] bg-gray-300 text-[#8c8c8c] hover:text-indigo-600"
                 >
