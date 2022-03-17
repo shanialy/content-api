@@ -18,15 +18,13 @@ const TopicsPage = ({ className = "" }) => {
   const [showModal, setshowModal] = useState(false);
 
   let { path, url } = useRouteMatch();
-  
-  // RTK query 
   const getAllFolders = useGetAllFoldersQuery();
   const getAllFavouritePosts = useGetAllFavouritePostsQuery(folderID);
   const cardData = useGetAllFavouritePostsQuery(folderID);
-  
   // handlers
   const closeModal = () => setshowModal(false);
   const showModalOnClick = () => setshowModal(true);
+
 
 
   return (
@@ -42,15 +40,15 @@ const TopicsPage = ({ className = "" }) => {
         <div className="flex flex-col space-y-8 xl:space-y-0 xl:flex-row">
 
 
-          {/* {/ SIDEBAR /} */}
+           {/* SIDEBAR  */}
           <div className="flex-shrink-0 max-w-xl xl:w-70 xl:pr-8">
-            {/* {/ CUSTOM TOPICS /} */}
+           {/* CUSTOM TOPICS */}
             <ul className="text-base space-y-1 text-neutral-6000 dark:text-neutral-400">
               <li className="flex flex-row justify-start items-center">
                 <p className="flex px-6 py-2.5 font-medium rounded-lg text-[#666666]">
                   CUSTOM TOPICS
                 </p>
-                <button 
+                <button
                   onClick={() => history.push(`${url}/submit-post`)}
                   className="flex flex-row justify-center items-end rounded p-1 h-6 font-bold text-[25px] bg-gray-300 text-[#8c8c8c] hover:text-indigo-600"
                 >
@@ -89,6 +87,8 @@ const TopicsPage = ({ className = "" }) => {
                   </li>
                 );
               })}
+
+            
             </ul>
           </div>
 
@@ -104,7 +104,16 @@ const TopicsPage = ({ className = "" }) => {
               <Route
                 path={`${path}/favourite-posts/:id`}
                 render={() => {
-                  return <p>{JSON.stringify(getAllFavouritePosts?.data)}</p>;
+                  return   <div className="grid grid-cols-2 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-8 mt-8 lg:mt-10">
+              {cardData?.data?.map((value, index) => {
+                console.log(value);
+                return (
+                  <>
+                    <Card12 key={index} cardItems={value} />
+                  </>
+                );
+              })}
+            </div>;
                 }}
               />
 
@@ -117,16 +126,7 @@ const TopicsPage = ({ className = "" }) => {
               <Redirect to={"/topics"} />
             </Switch>
 
-            <div className="grid grid-cols-2 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {cardData?.data?.map((value, index) => {
-                console.log(value);
-                return (
-                  <>
-                    <Card12 key={index} cardItems={value} />
-                  </>
-                );
-              })}
-            </div>
+           
           </div>
         </div>
       </LayoutPage>
