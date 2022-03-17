@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 
 
 // import { useAppDispatch } from "../../app/hooks";
-import { cardLoadingData } from "./SingleCard";
+// import { cardLoadingData } from "./SingleCard";
 import { addpost } from "../../app/posts/posts";
 import { useDispatch } from "react-redux";
 import { add } from "date-fns";
@@ -41,25 +41,21 @@ var { path } = useRouteMatch();
 
   }
 
-  const href = `search/mainpostpage/${id}`
-
+  // const href = `search/mainpostpage/${id}`
+  const href = `/discover/discover_content/mainpostpage/${id}`
   //getting id from Page search
 
-  cardLoadingData(dispatch, cardvalue);
+  // cardLoadingData(dispatch, cardvalue);
 
   ////////////////////////////////
 
-  const { id } = cardvalue;
-
-  console.log(cardvalue, "card11");
-
   //destructuring the post that  we are getting form  PageSearch component
 
-  const { title, date_download, source_domain } = post;
+  // const { title, date_download, source_domain } = post;
 
   // Giving a static value to herf
 
-  const href = `/${id}`;
+  // const href = `/${id}`;
 
   //useState hook from the theme
   const [isHover, setIsHover] = useState(false);
@@ -77,7 +73,7 @@ var { path } = useRouteMatch();
   const setPostToRedux = (e) => {
     try {
       e.preventDefault();
-      dispatch(addpost({ id, ...post }));
+      dispatch(addpost({ id, ...cardvalue.fields }));
     } catch (err) {
       console.log(err);
     }
@@ -97,7 +93,7 @@ var { path } = useRouteMatch();
       >
 
         <Link to={href} className="absolute inset-0">
-          <PostFeaturedMedia post={post} isHover={isHover} />
+          <PostFeaturedMedia post={cardvalue.fields} isHover={isHover} />
         </Link>
       </div>
 
@@ -105,7 +101,7 @@ var { path } = useRouteMatch();
 
       <div className="p-4 flex flex-col flex-grow space-y-3">
         {!hiddenAuthor ? (
-          <PostCardMeta meta={post} />
+          <PostCardMeta meta={cardvalue.fields} />
         ) : (
           <span className="text-xs text-neutral-500">{date_download}</span>
         )}
@@ -128,10 +124,10 @@ var { path } = useRouteMatch();
           <PostCardLikeAndComment
             className="relative"
             setPostToRedux={setPostToRedux}
-            postData={post}
+            postData={cardvalue.fields}
           />
 
-          <PostCardSaveAction className="relative" postData={post} />
+          <PostCardSaveAction className="relative" postData={cardvalue.fields} />
         </div>
       </div> 
     </div>

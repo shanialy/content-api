@@ -12,16 +12,35 @@ const postValidation = [
         .notEmpty().withMessage("Match type field can not be empty"),
 
     body("any_keywords")
-        .trim()
-        .isLength({ max: 100 }).withMessage("Any keyword field must be smaller then 100 characters"),
+    .custom((value)=>{
+        value.forEach(element => {
+            if (element.length > 100) {
+                throw new Error(element + "Any keywords must be smaller than 100 characters");
+            }
+        });
+        return true;
+    }),
 
     body("must_also_keywords")
-        .trim()
-        .isLength({ max: 100 }).withMessage("Must also keyword field must be smaller then 100 characters"),
+    .custom((value)=>{
+        value.forEach(element => {
+            if (element.length > 100) {
+                throw new Error(element + "Must also keywords must be smaller than 100 characters");
+            }
+        });
+        return true;
+    }),
 
     body("must_not_contains_keywords")
-        .trim()
-        .isLength({ max: 100 }).withMessage("Must not contain keywords field must be smaller then 100 characters"),
+        .custom((value)=>{
+            value.forEach(element => {
+                if (element.length > 100) {
+                    throw new Error(element + "Must not contain keywords must be smaller than 100 characters");
+                }
+            });
+            return true;
+
+        }),
 
     body("exclude_domains")
         .custom((value) => {
