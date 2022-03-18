@@ -7,7 +7,8 @@ import WidgetPosts from "../../components/WidgetPosts/WidgetPosts";
 import { DEMO_POSTS } from "../../data/posts";
 import Chip from "../../components/chip/chip";
 import { set } from "date-fns";
-// import InputAutoComplete from "../../components/InputAutoComplete/InputAutoComplete";
+import ExcludeResultInputField from "../../components/ExcludeResultInputField/ExcludeResultInputField";
+import LimitResultInputField from "../../components/LimitResultInputField/LimitResultInputField";
 
 const widgetPostsDemo = DEMO_POSTS.filter((_, i) => i > 2 && i < 7);
 
@@ -189,8 +190,6 @@ const TopicSubmitPost = () => {
             keywords
           </p>
 
-
-          {/ CHIPS /} */}
           <div className="flex flex-wrap mt-1.5">
             {must_also_keywords_list.map((val, index) => {
               return (
@@ -238,24 +237,24 @@ const TopicSubmitPost = () => {
           <p className="mt-2 text-base text-neutral-500 font-medium">
             <b>EXCLUDE</b> results from these domains
           </p>
-
-          <Input
+          <ExcludeResultInputField />
+          {/* <Input
             className="mt-1 rounded border-slate-300"
             placeholder="Enter domains that you think are giving irrelevant, e.g job, course..."
             onChange={(e) => setExclude_domains(e.target.value)}
-          />
+          /> */}
         </label>
 
         <label className="block md:col-span-2 mt-4">
           <p className="mt-2 text-base text-neutral-500 font-medium">
             <b>LIMIT</b> results to these domais only
           </p>
-
-          <Input
+          <LimitResultInputField />
+          {/* <Input
             className="mt-1 rounded border-slate-300"
             placeholder="Enter domains to see results from only these sites... e.g cnn.com, bbc.com"
             onChange={(e) => setLimit_domains_results(e.target.value)}
-          />
+          /> */}
         </label>
 
         <label className="block md:col-span-2 mt-5">
@@ -264,7 +263,6 @@ const TopicSubmitPost = () => {
 
         <div className="grid grid-cols-12 md:col-span-2 gap-2">
           <label className="col-span-6 sm:col-span-4 md:col-span-3">
-         
             <Select
               onChange={(e) => setStartDate(e.target.value)}
               className="mt-1 rounded bg-gray-100 border-slate-300"
@@ -277,8 +275,6 @@ const TopicSubmitPost = () => {
           </label>
 
           <label className="col-span-6 sm:col-span-4 md:col-span-3">
-           
-
             <Select
               onChange={(e) => setEndDate(e.target.value)}
               className="mt-1 rounded bg-gray-100 border-slate-300"
@@ -292,8 +288,6 @@ const TopicSubmitPost = () => {
           </label>
 
           <label className="col-span-6 sm:col-span-4 md:col-span-3">
-         
-
             <Select
               onChange={(e) => setlanguage(e.target.value)}
               className="mt-1 rounded bg-gray-100 border-slate-300"
@@ -306,8 +300,6 @@ const TopicSubmitPost = () => {
           </label>
 
           <label className="col-span-6 sm:col-span-4 md:col-span-3">
-            
-
             <Select
               onChange={(e) => setEngagement(e.target.value)}
               className="mt-1 rounded bg-gray-100 border-slate-300"
@@ -360,7 +352,6 @@ const TopicSubmitPost = () => {
           Save
         </ButtonPrimary>
       </form>
-
 
       <div className="basis-1/3	">
         <WidgetPosts posts={widgetPostsDemo} />

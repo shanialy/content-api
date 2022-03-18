@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import PostCardSaveAction from "../../components/PostCardSaveAction/PostCardSaveAction";
 import { Link } from "react-router-dom";
-import { useRouteMatch} from "react-router";
+import { useRouteMatch } from "react-router";
 import PostCardLikeAndComment from "../../components/PostCardLikeAndComment/PostCardLikeAndComment";
 import PostCardMeta from "../../components/PostCardMeta/PostCardMeta";
 import PostFeaturedMedia from "../../components/PostFeaturedMedia/PostFeaturedMedia";
 import { useHistory } from "react-router-dom";
-
-
 // import { useAppDispatch } from "../../app/hooks";
-import { cardLoadingData } from "./SingleCard";
 import { addpost } from "../../app/posts/posts";
 import { useDispatch } from "react-redux";
 import { add } from "date-fns";
@@ -17,61 +14,35 @@ import { add } from "date-fns";
 const Card11 = ({
   className = "h-full",
   cardvalue,
+  post,
   hiddenAuthor = false,
   ratio = "aspect-w-4 aspect-h-3",
 }) => {
   const dispatch = useDispatch();
 
-
-var { path } = useRouteMatch();
-
-
-  
- const{ id } = cardvalue
- const history = useHistory()
-
-
-  const { title, date_download , url } = cardvalue.fields;
-  
-
-  const externalUrl = ()=>{
-
-
-    history.push(window.location.href = url )
-
-  }
-
-  const href = `search/mainpostpage/${id}`
-
-  //getting id from Page search
-
-  cardLoadingData(dispatch, cardvalue);
-
-  ////////////////////////////////
+  var { path } = useRouteMatch();
 
   const { id } = cardvalue;
+  const history = useHistory();
 
-  console.log(cardvalue, "card11");
+  const { title, date_download, url } = cardvalue.fields;
 
-  //destructuring the post that  we are getting form  PageSearch component
+  const externalUrl = () => {
+    history.push((window.location.href = url));
+  };
 
-  const { title, date_download, source_domain } = post;
+  const href = `search/mainpostpage/${id}`;
 
-  // Giving a static value to herf
-
-  const href = `/${id}`;
+  //getting id from Page search
 
   //useState hook from the theme
   const [isHover, setIsHover] = useState(false);
 
-  
+  const pushData = () => {
+    history.push(`${path}/mainpostpage/${id}`, cardvalue);
 
-  const pushData = ()=>{
-
-    history.push(`${path}/mainpostpage/${id}` , cardvalue )
-
-   console.log("data tranfered")
-  }
+    console.log("data tranfered");
+  };
 
   // handler
   const setPostToRedux = (e) => {
@@ -95,45 +66,42 @@ var { path } = useRouteMatch();
       <div
         className={`block flex-shrink-0 relative w-full rounded-t-xl overflow-hidden ${ratio}`}
       >
-
-        <Link to={href} className="absolute inset-0">
-          <PostFeaturedMedia post={post} isHover={isHover} />
-        </Link>
+        <div className="absolute inset-0" onClick={pushData}>
+          <PostFeaturedMedia post={cardvalue.fields} isHover={isHover} />
+        </div>
       </div>
-
-
 
       <div className="p-4 flex flex-col flex-grow space-y-3">
         {!hiddenAuthor ? (
-          <PostCardMeta meta={post} />
+          <PostCardMeta meta={cardvalue.fields} />
         ) : (
           <span className="text-xs text-neutral-500">{date_download}</span>
         )}
 
         <h2 className="nc-card-title block text-base font-semibold text-neutral-900 dark:text-neutral-100 ">
-
-
-          {/* {/ // putting &nbsp so that we can add somespace temporarely /} */}
-
-          <Link to={href} className="line-clamp-2" title={title}>
+          <span
+            onClick={() => externalUrl()}
+            style={{ cursor: "pointer" }}
+            className="line-clamp-2"
+            title={title}
+          >
             {title} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          </Link>
+          </span>
         </h2>
-        <div
-          style={{ border: "5px solid green" }}
-          className="flex items-end justify-between mt-auto"
-        >
+        <div className="flex items-end justify-between mt-auto">
           <PostCardLikeAndComment
             className="relative"
-            setPostToRedux={setPostToRedux}
-            postData={post}
+            postData={cardvalue.fields}
           />
 
-          <PostCardSaveAction className="relative" postData={post} />
+          <PostCardSaveAction
+            className="relative"
+            postData={cardvalue.fields}
+          />
         </div>
-      </div> 
+      </div>
     </div>
   );
 };

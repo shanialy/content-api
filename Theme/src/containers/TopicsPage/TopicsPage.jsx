@@ -8,9 +8,10 @@ import CreateFolderModal from "../../components/CreateFolderModal/createFolderMo
 import {
   useGetAllFoldersQuery,
   useGetAllFavouritePostsQuery,
+  useGetAllCustomTopicsQuery,
 } from "../../app/Api/contentApi";
 
-import Card12 from "../../components/Card11/Card12"
+import Card12 from "../../components/Card11/Card12";
 
 const TopicsPage = ({ className = "" }) => {
   const history = useHistory();
@@ -24,8 +25,8 @@ const TopicsPage = ({ className = "" }) => {
   // handlers
   const closeModal = () => setshowModal(false);
   const showModalOnClick = () => setshowModal(true);
-  const cardData = useGetAllFavouritePostsQuery(folderID);
-
+  const getAllCustomTopics = useGetAllCustomTopicsQuery();
+  console.log(getAllCustomTopics, "Data");
 
   return (
     <div className={`nc-PageDashboard ${className}`} data-nc-id="PageDashboard">
@@ -38,11 +39,7 @@ const TopicsPage = ({ className = "" }) => {
         heading="Dash board"
       >
         <div className="flex flex-col space-y-8 xl:space-y-0 xl:flex-row">
-
-
-          {/* {/ SIDEBAR /} */}
           <div className="flex-shrink-0 max-w-xl xl:w-70 xl:pr-8">
-            {/* {/ CUSTOM TOPICS /} */}
             <ul className="text-base space-y-1 text-neutral-6000 dark:text-neutral-400">
               <li className="flex flex-row justify-start items-center">
                 <p className="flex px-6 py-2.5 font-medium rounded-lg text-[#666666]">
@@ -56,7 +53,6 @@ const TopicsPage = ({ className = "" }) => {
                 </button>
               </li>
             </ul>
-
 
             <ul className="text-base space-y-1 text-neutral-6000 dark:text-neutral-400">
               <li className="flex flex-row justify-start items-center">
@@ -81,7 +77,6 @@ const TopicsPage = ({ className = "" }) => {
                       to={`${url}/favourite-posts/${_id}`}
                       onClick={() => setFolderID(_id)}
                     >
-
                       {folderName}
                     </NavLink>
                   </li>
@@ -98,14 +93,23 @@ const TopicsPage = ({ className = "" }) => {
             />
 
             <Switch>
-
               <Route
                 path={`${path}/favourite-posts/:id`}
                 render={() => {
-                  return <p>{JSON.stringify(getAllFavouritePosts?.data)}</p>;
+                  return (
+                    <div className="grid grid-cols-2 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-8 mt-8 lg:mt-10">
+                      {cardData?.data?.map((value, index) => {
+                        console.log(value);
+                        return (
+                          <>
+                            <Card12 key={index} cardItems={value} />
+                          </>
+                        );
+                      })}
+                    </div>
+                  );
                 }}
               />
-
 
               <Route
                 exact
@@ -114,17 +118,6 @@ const TopicsPage = ({ className = "" }) => {
               />
               <Redirect to={"/topics"} />
             </Switch>
-
-            <div className="grid grid-cols-2 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-8 mt-8 lg:mt-10">
-              {cardData?.data?.map((value, index) => {
-                console.log(value);
-                return (
-                  <>
-                    <Card12 key={index} cardItems={value} />
-                  </>
-                );
-              })}
-            </div>
           </div>
         </div>
       </LayoutPage>

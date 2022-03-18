@@ -5,13 +5,13 @@ import SearchBoxMain from "../../components/SearchBoxMain/SearchBoxMain";
 
 const PageHome = () => {
   return (
-    <div className="nc-PageHome relative">
+    <div className="nc-PageHome relative ">
       <Helmet>
         <title>Home || Blog Magazine React Template</title>
       </Helmet>
       {/* Call the  Auto Complete Search Box */}
       <SearchBoxMain />
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden pt-6">
         <div className="container relative">
           {/* Category Cards */}
           <SectionSliderNewCategories
