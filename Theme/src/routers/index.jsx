@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+
 import PageSearch from "../containers/PageSearch/PageSearch";
 import ScrollToTop from "./ScrollToTop";
 import Footer from "../components/Footer/Footer";
@@ -7,7 +8,6 @@ import PageLogin from "../containers/PageLogin/PageLogin";
 import PageSignUp from "../containers/PageSignUp/PageSignUp";
 import PageForgotPass from "../containers/PageForgotPass/PageForgotPass";
 import PageDashboard from "../containers/PageDashboard/PageDashboard";
-
 import MainNav1 from "../components/Header/MainNav1";
 import PageContentFeed from "../containers/PageContentFeed/PageContentFeed";
 import PageHome from "../containers/PageHome/PageHome";
@@ -40,15 +40,14 @@ const Routes = () => {
         <Route path={"/signup"} component={PageSignUp} />
         <Route path={"/forgot-pass"} component={PageForgotPass} />
         <Route path={"/dashboard"} component={PageDashboard} />
-         <Route path={"/search"} component={PageSearch} /> 
-        
+        <Route path={"/search"} component={PageSearch} />
+
         <Route path={"/content-feed"} component={PageContentFeed} />
         <Route path={"/discover/dicover_insights"} component={Analytics} />
-        
+
         <Route path={"/topics"} component={TopicsPage} />
       </Switch>
       <Footer />
-
     </BrowserRouter>
   );
 };

@@ -7,6 +7,9 @@ import PostCardMeta from "../../components/PostCardMeta/PostCardMeta";
 import PostFeaturedMedia from "../../components/PostFeaturedMedia/PostFeaturedMedia";
 import { useHistory } from "react-router-dom";
 // import { useAppDispatch } from "../../app/hooks";
+
+// import { cardLoadingData } from "./SingleCard";
+
 import { addpost } from "../../app/posts/posts";
 import { useDispatch } from "react-redux";
 import { add } from "date-fns";
@@ -31,9 +34,21 @@ const Card11 = ({
     history.push((window.location.href = url));
   };
 
-  const href = `search/mainpostpage/${id}`;
+  // const href = `search/mainpostpage/${id}`
 
   //getting id from Page search
+
+  // cardLoadingData(dispatch, cardvalue);
+
+  ////////////////////////////////
+
+  //destructuring the post that  we are getting form  PageSearch component
+
+  // const { title, date_download, source_domain } = post;
+
+  const href = `search/mainpostpage/${id}`;
+
+  // const href = `/${id}`;
 
   //useState hook from the theme
   const [isHover, setIsHover] = useState(false);
@@ -48,7 +63,7 @@ const Card11 = ({
   const setPostToRedux = (e) => {
     try {
       e.preventDefault();
-      dispatch(addpost({ id, ...post }));
+      dispatch(addpost({ id, ...cardvalue.fields }));
     } catch (err) {
       console.log(err);
     }
@@ -66,9 +81,9 @@ const Card11 = ({
       <div
         className={`block flex-shrink-0 relative w-full rounded-t-xl overflow-hidden ${ratio}`}
       >
-        <div className="absolute inset-0" onClick={pushData}>
+        <Link to={href} className="absolute inset-0">
           <PostFeaturedMedia post={cardvalue.fields} isHover={isHover} />
-        </div>
+        </Link>
       </div>
 
       <div className="p-4 flex flex-col flex-grow space-y-3">
@@ -93,6 +108,7 @@ const Card11 = ({
         <div className="flex items-end justify-between mt-auto">
           <PostCardLikeAndComment
             className="relative"
+            setPostToRedux={setPostToRedux}
             postData={cardvalue.fields}
           />
 

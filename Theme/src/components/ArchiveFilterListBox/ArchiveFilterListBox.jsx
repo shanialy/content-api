@@ -7,7 +7,7 @@ import { useSearchkit } from "@searchkit/client";
 
 const ArchiveFilterListBox = ({ className = "", lists }) => {
   const api = useSearchkit();
-  const [selected, setSelected] = useState(lists[0]);
+  const [selected, setSelected] = useState(lists? lists[0]: null);
   useEffect(() => {
     api.setSortBy(selected.id);
     api.setPage({ size: 10, from: 0 });

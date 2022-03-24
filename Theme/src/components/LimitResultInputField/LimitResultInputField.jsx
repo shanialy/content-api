@@ -134,8 +134,10 @@ export class InputFieldAutoComplete extends Component {
             //     // use the value with other js code
             //     }
             // }
-            onValueSelected={function (value, cause, source) {
-              console.log("current value: ", value);
+
+            onValueSelected={(value, cause, source) => {
+              // console.log("current value: ", value);
+              this.props.getSelectedvalve(value);
             }}
             // onQueryChange={
             //     function(prevQuery, nextQuery) {

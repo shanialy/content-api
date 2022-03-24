@@ -3,6 +3,9 @@ import LoadingVideo from "../../components/LoadingVideo/LoadingVideo";
 import ArchiveFilterListBox from "../../components/ArchiveFilterListBox/ArchiveFilterListBox";
 import LanguagesFilterBox from "../../components/LanguagesFilterBox/LanguagesFilterBox";
 import { Helmet } from "react-helmet";
+
+import NcLink from "../../components/NcLink/NcLink";
+
 import { gql, useQuery } from "@apollo/client";
 import { useSearchkitVariables, useSearchkit } from "@searchkit/client";
 import {
@@ -10,18 +13,17 @@ import {
   withSearchkitRouting,
   useSearchkitQueryValue,
 } from "@searchkit/client";
-
 import Card11 from "../../components/Card11/Card11";
 
-// import DateRangeCalender from "../../components/DateRangeCalender/DateRangeCalender";
 import { useLocation } from "react-router-dom";
 import SearchBoxMain from "../../components/SearchBoxMain/SearchBoxMain";
 import DateRangeDropDown from "../../components/DateRangeCalender/DateRangeDropDown";
 import CustomPagination from "../../components/Pagination/CustomPagination.jsx";
 
-// import Pagination from "../../components/Pagination/Pagination";
-// import { useDispatch, useSelector } from "react-redux";
-// import { addpost, removePost } from "../../app/posts/posts";
+import { useDispatch, useSelector } from "react-redux";
+import { addpost, removePost } from "../../app/posts/posts";
+import { useGetAllFavouritePostsbyUserQuery } from "../../app/Api/contentApi";
+
 export const PageSearchProps = {
   className: String,
 };
@@ -82,9 +84,9 @@ const query = gql`
               date_download
               language
               facebook_shares
+              readtime
               sentiment
               url
-              readtime
               image_url
               twitter_shares
               maintext
@@ -123,10 +125,14 @@ const FILTERS = [
 ];
 
 const PageSearch = ({ className = "" }) => {
+  const RtkData = useGetAllFavouritePostsbyUserQuery();
+  // RtkData?.data?.map((item) => {
+  //   console.log(item.post_id);
+  // });
   // cardCategory data from searchPage
   const location = useLocation();
-  console.log("Topic se aaya  ", location.state.topic);
-  console.log("Query se aaya  ", location.state.query);
+  // console.log("Topic se aaya  ", location.state.topic);
+  // console.log("Query se aaya  ", location.state.query);
 
   const api = useSearchkit();
 
@@ -153,11 +159,27 @@ const PageSearch = ({ className = "" }) => {
 
   const { data, loading, error } = useQuery(query, { variables });
 
-  if (data && flag) {
-    console.log(variables);
-  }
-  if (data) {
-    console.log("data", variables);
+  // if (data && flag) {
+  //   console.log(variables);
+  // }
+  // if (data) {
+  //   // console.log("data", variables);
+  // }
+
+  if (data && RtkData.isFetching == false) {
+    console.log(data);
+    console.log(RtkData);
+    data?.results?.hits?.items?.map(({ id }) => {
+      if (RtkData) {
+        return RtkData?.data?.map((item) => {
+          if (item.post_id == undefined || id == undefined) {
+          }
+          if (id == item.post_id) {
+            console.log(id, item.post_id);
+          }
+        });
+      }
+    });
   }
 
   if (error) {
@@ -171,28 +193,30 @@ const PageSearch = ({ className = "" }) => {
     </div>;
   }
 
-  if (data) {
-    var languageslist = [];
-    {
-      data?.results?.facets.map((items) => {
-        if (items.identifier == "language") {
-          languageslist = items?.entries?.map((item) => ({
-            label: item.label,
-            identifier: "language",
-            id: item.label,
-          }));
-        }
-        languageslist = [
-          ...languageslist,
-          {
-            label: "All Languages",
-            identifier: "language",
-            id: "All Languages",
-          },
-        ];
-      });
-    }
-  }
+  // console.log(data);
+
+  // if (data) {
+  //   var languageslist = [];
+  //   {
+  //     data?.results?.facets.map((items) => {
+  //       if (items.identifier == "language") {
+  //         languageslist = items?.entries?.map((item) => ({
+  //           label: item.label,
+  //           identifier: "language",
+  //           id: item.label,
+  //         }));
+  //       }
+  //       languageslist = [
+  //         ...languageslist,
+  //         {
+  //           label: "All Languages",
+  //           identifier: "language",
+  //           id: "All Languages",
+  //         },
+  //       ];
+  //     });
+  //   }
+  // }
 
   return (
     <>
@@ -201,7 +225,6 @@ const PageSearch = ({ className = "" }) => {
         <Helmet>
           <title>Nc || Search Page Template</title>
         </Helmet>
-        {/* AutoCompleteSearchBox */}
         <SearchBoxMain />
       </div>
 

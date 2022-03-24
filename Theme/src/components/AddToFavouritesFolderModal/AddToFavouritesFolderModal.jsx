@@ -26,6 +26,7 @@ const AddToFavouritesFolderModal = ({ show, onCloseModalReportItem }) => {
   const getAllFolders = useGetAllFoldersQuery();
   const [addPostToFavFolder, addPostToFavFolderObj] =
     useAddPostToFavouritesFolderMutation();
+  console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", getAllFolders);
 
   // handlers
   const handleClickSubmitForm = (e) => {

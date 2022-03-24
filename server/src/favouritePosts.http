@@ -27,9 +27,9 @@ GET http://localhost:7777/api/favouritePosts/post/6213c510ff186a7dd45cf011
 
 ###
 #  all favourite posts with  favourites folder id
-GET http://localhost:7777/api/favouritePosts/all_posts/622a0d5c3cdb9ce27860b56d
+GET http://localhost:7777/api/favouritePosts/all_posts/622a0d523cdb9ce27860b56b
 
 
 ###
 #  get all fav post in favouritePosts model by user-id
-GET http://localhost:7777/api/favouritePosts/all_posts
+GET http://localhost:7777/api/favouritePosts/all_posts/6218c3df2b1f0257f330992b

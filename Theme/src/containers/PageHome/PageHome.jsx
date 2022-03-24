@@ -2,8 +2,11 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import SectionSliderNewCategories from "../../components/SectionSliderNewCategories/SectionSliderNewCategories";
 import SearchBoxMain from "../../components/SearchBoxMain/SearchBoxMain";
+// import { useGetAllFavouritePostsbyUserQuery } from "../../app/Api/contentApi";
 
 const PageHome = () => {
+  // const { data, error, loading } = useGetAllFavouritePostsbyUserQuery();
+  // console.log(data);
   return (
     <div className="nc-PageHome relative ">
       <Helmet>

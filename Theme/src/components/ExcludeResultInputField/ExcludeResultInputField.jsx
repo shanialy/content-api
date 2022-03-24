@@ -41,6 +41,8 @@ export class InputAutoBox extends Component {
               },
               {
                 label: "Musicians",
+
+                value: "Musicians",
               },
             ]}
             enablePopularSuggestions={true}
@@ -61,22 +63,6 @@ export class InputAutoBox extends Component {
             showClear={true}
             addonBefore={false}
             showIcon={false}
-            // icon={
-            //   <img
-            //     src="https://img.icons8.com/ios/50/000000/search--v1.png"
-            //     height="20px"
-            //     width="20px"
-            //     fill="#0000ff"
-            //     color="blue"
-            //   />
-            // }
-            // addonBefore={
-            //   <img
-            //     src="https://img.icons8.com/ios/50/000000/search--v1.png"
-            //     height="10px"
-            //     width="10px"
-            //   />
-            // }
             clearIcon={
               <img
                 src="https://img.icons8.com/material-two-tone/24/000000/delete-sign.png"
@@ -102,49 +88,18 @@ export class InputAutoBox extends Component {
                 weight: 3,
               },
             ]}
-            // value={this.state.text}
-            // onChange={(value, e) => {
-
-            //   this.setState({
-            //     text: value,
-            //   });
-            // }}
-            //...
             style={{
               paddingTop: "10px",
               paddingBottom: "10px",
               width: "100%",
               marginLeft: "0%",
-              borderColor:"blue"
+
+              borderColor: "blue",
             }}
-            // beforeValueChange={
-            //     function(value) {
-            //     // called before the value is set
-            //     // returns a promise
-            //     return new Promise((resolve, reject) => {
-            //         // update state or component props
-            //         resolve()
-            //         // or reject()
-            //     })
-            //     }
-            // }
-            // onValueChange={
-            //     function(value) {
-            //     console.log("current value: ", value)
-            //     // set the state
-            //     // use the value with other js code
-            //     }
-            // }
-            onValueSelected={function (value, cause, source) {
-              console.log("current value: ", value);
+            onValueSelected={(value, cause, source) => {
+              // console.log("current value: ", value);
+              this.props.getSelectedvalve(value);
             }}
-            // onQueryChange={
-            //     function(prevQuery, nextQuery) {
-            //     // use the query with other js code
-            //     console.log('prevQuery', prevQuery);
-            //     console.log('nextQuery', nextQuery);
-            //     }
-            // }
           />
           <SearchComponent
             id="result-component"
@@ -156,7 +111,6 @@ export class InputAutoBox extends Component {
             }}
           >
             {({ results, loading, size, setValue, setFrom }) => {
-              // console.log(this.state.text)
               return (
                 <div className="result-list-container">
                   {loading ? (
@@ -168,17 +122,7 @@ export class InputAutoBox extends Component {
                         alignItems: "center",
                         justifyContent: "center",
                       }}
-                    >
-                      {/* {!results.data.length ? (
-                        <div>No results found {this.state.text}</div>
-                      ) : (
-                        <p>
-                          {results.numberOfResults} results found in{" "}
-                          {results.time}
-                          ms
-                        </p>
-                      )} */}
-                    </div>
+                    ></div>
                   )}
                 </div>
               );
